@@ -390,9 +390,9 @@ on ui.userid=g.userid
  
  select *
 			from (select rownum rnum, b.*
-					from (select ui.userid, gender, email, area_name,group_name,cnt
+					from (select ui.userid, gender, email, area_name,group_name,catename, cnt
 from user_info ui
-inner join (select group_no, group_name, userid,  cnt 
+inner join (select group_no, group_name, userid,catename,  cnt 
 	  from group_info gi join 
 	  					(select group_no as user_groupno, count(*) cnt
 						 from group_user_role
@@ -401,10 +401,28 @@ inner join (select group_no, group_name, userid,  cnt
 						 ,group_no asc)--회원 수 같은 경우 먼저 생성된 모임 우선 출력
 						 on gi.group_no = user_groupno) g
 on ui.userid=g.userid) b 
-					where rownum <=10
+					where rownum <=3
 					)
-					where rnum>=1 and rnum<=10
-					and userid like '%3%'
+					where rnum>=1 and rnum<=3
+					and userid like '%1%'
+
+select *
+			from (select rownum rnum, b.*
+					from (select ui.userid, gender, email, area_name,group_name,catename, cnt
+from user_info ui
+inner join (select group_no, group_name, userid,catename,  cnt 
+	  from group_info gi join 
+	  					(select group_no as user_groupno, count(*) cnt
+						 from group_user_role
+						 group by group_no
+						 order by cnt desc
+						 ,group_no asc)--회원 수 같은 경우 먼저 생성된 모임 우선 출력
+						 on gi.group_no = user_groupno
+						 where userid like '%1%') g
+on ui.userid=g.userid) b 
+					where rownum <=3
+					)
+					where rnum>=1 and rnum<=3
 					
  RNUM USERID GENDER EMAIL           AREA_NAME GROUP_NAME CNT
  ---- ------ ------ --------------- --------- ---------- ---
@@ -481,7 +499,6 @@ select *
 					where rownum <=10 --&lt;= #{end}
 					)
 					where rnum >=1 and rnum<=10--&gt;= #{start} and rnum &lt;= #{end} 
-
 
 
 select * from USER_INFO

@@ -11,13 +11,14 @@ a{text-decoration:none; color:black}
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.js"></script>
 <script>
 $(document).ready(function() { 
 	
 	var selectedValue='${search_field}'
 	if(selectedValue !='-1')
 		$("#viewcount").val(selectedValue);
-	
+	console.log(selectedValue)	
 	$(".search").click(function(){
 		if($('#search').val()==''){
 			alert("검색어를 입력하세요");
@@ -30,8 +31,8 @@ $(document).ready(function() {
 	$("#viewcount").change(function(){
 		selectedValue=$(this).val();
 		$("input").val('');
-		message=["아이디", "지역", "여 또는 남"]
-		$("input").attr("placeholder", message[selectedValue]+"을 입력하세요")
+		message=["아이디", "카테고리", "여 또는 남"]
+		$("input").attr("placeholder", message[selectedValue]+" 입력")
 	})
 	
 	});
@@ -112,11 +113,10 @@ footer{
 		<div class="row align-items-center justify-content-center">
 			<div class="col-sm-9 ">
 				<br>
-
 				<table class="table table-bordered">
 					<thead>
 						<tr class="table-active">
-							<th>번호</th>
+							<th>순위</th>
 							<th>아이디</th>
 							<th>지역</th>
 							<th>성별</th>
@@ -204,7 +204,7 @@ footer{
 					<div class="input-group">
 						<select id="viewcount" name="search_field">
 							<option value="0" selected>아이디</option>
-							<option value="1">지역</option>
+							<option value="1">카테고리</option>
 							<option value="2">성별</option>
 						</select>
 						 <input id="search" name="search_word" type="text"  placeholder="아이디를 입력하세요" value="${search_word }">
@@ -224,7 +224,7 @@ footer{
 	</c:if> 
 	 <c:if test="${listcount==0 }"> 
 		<section class="py-5">
- 		<font size=5>회원이 존재하지 않습니다.</font><br><br>
+ 		<font size=5>검색결과가 존재하지 않습니다.</font><br><br>
  		<a href="main.net"><button type="button" class="btn btn-secondary float-left back">메인으로</button></a>
  		</section>
   </c:if> 
