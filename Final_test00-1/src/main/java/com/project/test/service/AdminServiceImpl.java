@@ -87,7 +87,7 @@ public class AdminServiceImpl implements AdminService{
 	public int getGroupSearchListCount(int index, String search_word) {
 		Map<String, String> map = new HashMap<String, String>();
 		if(index!=-1) {
-			String[] search_field = new String[] {"userid", "area_name", "gender"};
+			String[] search_field = new String[] {"userid", "catename", "gender"};
 			map.put("search_field", search_field[index]);
 			map.put("search_word", "%"+ search_word+"%");
 		}
@@ -97,7 +97,7 @@ public class AdminServiceImpl implements AdminService{
 	public List<Member> getGroupSearchList(int index, String search_word, int page, int limit) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if(index!=-1) {
-			String[] search_field = new String[] {"userid", "area_name", "gender"};
+			String[] search_field = new String[] {"userid", "catename", "gender"};
 			map.put("search_field", search_field[index]);
 			map.put("search_word", "%"+ search_word+"%");
 		}

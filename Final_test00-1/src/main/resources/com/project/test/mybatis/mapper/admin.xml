@@ -95,7 +95,7 @@
 		where 
 		<choose>
 			<when test="search_field=='userid'">userid</when>
-			<when test="search_field=='group_name'">area_name</when>
+			<when test="search_field=='catename'">catename</when>
 			<when test="search_field=='gender'">gender</when>
 		</choose>
 		like #{search_word}
@@ -106,21 +106,29 @@
 		 select *
 			from (select rownum rnum, b.*
 					from (select ui.userid, gender, email, area_name,group_name,catename,cnt
-		from user_info ui
-		inner join (select group_no, group_name, userid,catename,  cnt 
-	 	 from group_info gi join 
+from user_info ui
+inner join (select group_no, group_name, userid, catename,  cnt 
+	  from group_info gi join 
 	  					(select group_no as user_groupno, count(*) cnt
 						 from group_user_role
 						 group by group_no
 						 order by cnt desc
 						 ,group_no asc)
-						 on gi.group_no = user_groupno) g
-		on ui.userid=g.userid) b 
+						 on gi.group_no = user_groupno
+					<if test='search_field !=null'>
+				where 
+				<choose>
+					<when test="search_field=='userid'">userid</when>
+					<when test="search_field=='catename'">catename</when>
+					<when test="search_field=='gender'">gender</when>
+				</choose> 
+				like #{search_word}
+				</if>
+						 ) g
+on ui.userid=g.userid) b 
 					where rownum &lt;= #{end}
 					)
 					where rnum&gt;= #{start} and rnum&lt;= #{end}
-					<include refid="search_"/>
-	
 	</select>
 	
 	<sql id="search_">
