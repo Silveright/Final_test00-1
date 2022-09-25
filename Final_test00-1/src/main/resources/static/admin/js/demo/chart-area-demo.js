@@ -58,9 +58,9 @@ $.ajax({
 		}
 		
 		var users=[];
-		for(var i=0; i<data.chartusers.length; i++) {
+		for(var i=0; i<data.chartdate.length; i++) {
 			//console.log(data.chartdate[i].date)
-			users[i]=data.chartusers[i].cnt
+			users[i]=data.chartdate[i].cnt
 					console.log(users)
 		}
 		/*$(data.chartdate).each(function(){

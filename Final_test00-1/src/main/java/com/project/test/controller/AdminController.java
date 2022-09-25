@@ -55,10 +55,8 @@ public class AdminController {
 	public Map<String, Object> AreaChart(){
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<AdminChartAreaDate> chartdate = adminService.getChartareaDate();
-		List<AdminChartAreaUsers> chartusers = adminService.getChartareausers();
 		
 		map.put("chartdate", chartdate);
-		map.put("chartusers", chartusers);
 		return map;
 	}
 
