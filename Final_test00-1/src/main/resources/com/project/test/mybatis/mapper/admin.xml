@@ -31,10 +31,17 @@
 	</select>
 	
 	<select id="getChartareadate" resultType="AdminChartAreaDate">
-		select to_char(joindate, 'yyyy-mm-dd') as "date"
-		from user_info 
-		WHERE joindate >= TO_CHAR(SYSDATE-7,'YYYY-MM-DD')
-		group by to_char(joindate, 'yyyy-mm-dd')
+		select dt as "date", nvl(cnt,0) as cnt
+from (SELECT TO_CHAR(TO_DATE(SYSDATE-6,'YY/MM/DD') + LEVEL - 1, 'YY/MM/DD') AS dt
+      FROM dual 
+      CONNECT BY LEVEL &lt;= (TO_DATE(sysdate,'YY/MM/DD')         
+                          - TO_DATE(SYSDATE-6,'YY/MM/DD') + 1))  
+left outer join (select count(*) cnt, to_Char(joindate, 'yy/mm/dd') as dt1
+							from user_info 
+							WHERE joindate &gt;= to_Char(SYSDATE-7,'YY/MM/DD')
+							group by to_Char(joindate, 'yy/mm/dd'))
+on dt = dt1
+order by dt
 	</select>
 	<select id="getChartareausers" resultType="AdminChartAreaUsers">
 		select count(*) cnt

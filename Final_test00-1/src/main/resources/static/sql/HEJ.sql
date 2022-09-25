@@ -240,7 +240,7 @@ WHERE joindate >= TO_CHAR(SYSDATE-7,'YYYY-MM-DD')
  user2  2022-09-21
  user3  2022-09-21
 
-
+select TO_CHAR(SYSDATE-6,'YYYY-MM-DD') from dual
 
 --2. 날짜별 가입한 회원 수
 --2-1) 날짜만 출력
@@ -248,25 +248,106 @@ select to_char(joindate, 'yyyy-mm-dd') as "date"
 from user_info 
 WHERE joindate >= TO_CHAR(SYSDATE-7,'YYYY-MM-DD')
 group by to_char(joindate, 'yyyy-mm-dd')
+
+select count(*) cnt from user_info
+where joindate between TO_CHAR(SYSDATE-6,'YYYY-MM-DD') and TO_CHAR(SYSDATE,'YYYY-MM-DD')
+group by to_char(joindate, 'yyyy-mm-dd')
 --2-2) 날짜별 가입 회원 수
 select count(*) cnt--, to_char(joindate, 'yyyy-mm-dd') as "date"
 from user_info 
 WHERE joindate >= TO_CHAR(SYSDATE-7,'YYYY-MM-DD')
 group by to_char(joindate, 'yyyy-mm-dd')
 --3)한 꺼번에
-select count(*) cnt, to_char(joindate, 'yyyy-mm-dd') as "date"
+select count(*) cnt, to_date(joindate, 'yyyy-mm-dd') as "date"
 from user_info 
-WHERE joindate >= TO_CHAR(SYSDATE-7,'YYYY-MM-DD')
-group by to_char(joindate, 'yyyy-mm-dd')
+WHERE joindate >= TO_date(SYSDATE-7,'YYYY-MM-DD')
+group by to_date(joindate, 'yyyy-mm-dd')
  
  CNT date
  --- ----------
    1 2022-09-20
    2 2022-09-21
+
    
+=>문제점 : 테이블에 존재하지 않는 날짜의 경우 출력되지 않음
+
+SELECT TO_CHAR(TO_DATE(SYSDATE-6,'YY/MM/DD') + LEVEL - 1, 'YY/MM/DD') AS dt
+      FROM dual 
+      CONNECT BY LEVEL <= (TO_DATE(sysdate,'YY/MM/DD')         
+                                     - TO_DATE(SYSDATE-6,'YY/MM/DD') + 1)  
+
+select count(*) cnt, to_Char(joindate, 'yy/mm/dd') as dt1
+from user_info 
+WHERE joindate >= to_Char(SYSDATE-7,'YY/MM/DD')
+group by to_Char(joindate, 'yy/mm/dd')                                     
+
+select *
+from (select count(*) cnt, to_Char(joindate, 'yymmdd') as dt1
+from user_info 
+WHERE joindate >= to_Char(SYSDATE-7,'YYMMDD')
+group by to_Char(joindate, 'yymmdd')) a, 
+(SELECT TO_CHAR(TO_DATE(SYSDATE-6,'YY-MM-DD') + LEVEL - 1, 'YYMMDD') AS dt
+ FROM dual 
+ CONNECT BY LEVEL <= (TO_DATE(sysdate,'YY-MM-DD')         
+  - TO_DATE(SYSDATE-6,'YY-MM-DD') + 1)) b
+  where a.dt1 = b.dt
+  
+
+select *
+from (select count(*) cnt, to_Char(joindate, 'yymmdd') as dt1
+from user_info 
+WHERE joindate >= to_Char(SYSDATE-7,'YYMMDD')
+group by to_Char(joindate, 'yymmdd')) a 
+left outer join
+(SELECT TO_CHAR(TO_DATE(SYSDATE-6,'YY-MM-DD') + LEVEL - 1, 'YYMMDD') AS dt
+ FROM dual 
+ CONNECT BY LEVEL <= (TO_DATE(sysdate,'YY-MM-DD')         
+  - TO_DATE(SYSDATE-6,'YY-MM-DD') + 1)) b
+  on a.dt1 = b.dt
+  
+--1.date별 회원 수
+select count(*) cnt, to_Char(joindate, 'yymmdd') as dt1
+from user_info 
+WHERE joindate >= to_Char(SYSDATE-7,'YYMMDD')
+group by to_Char(joindate, 'yymmdd')
+  
+   CNT DT1
+ --- ------
+   3 220922
+   1 220920
+   2 220921
+--2. dual
+SELECT TO_CHAR(TO_DATE(SYSDATE-6,'YY-MM-DD') + LEVEL - 1, 'YYMMDD') AS dt
+      FROM dual 
+      CONNECT BY LEVEL <= (TO_DATE(sysdate,'YY-MM-DD')         
+                          - TO_DATE(SYSDATE-6,'YY-MM-DD') + 1)  
+
+select board_num, board_subject, cnt
+from board left outer join (select comment_board_num,count(*) cnt
+							from comm
+							group by comment_board_num)
+on board_num = comment_board_num
+
+
+---최종 (최근 일주일 간 가입자 수 추세)
+select dt  as "date", nvl(cnt,0) as cnt
+from (SELECT TO_CHAR(TO_DATE(SYSDATE-6,'YY/MM/DD') + LEVEL - 1, 'YY/MM/DD') AS dt
+      FROM dual 
+      CONNECT BY LEVEL <= (TO_DATE(sysdate,'YY/MM/DD')         
+                          - TO_DATE(SYSDATE-6,'YY/MM/DD') + 1))  
+left outer join (select count(*) cnt, to_Char(joindate, 'yy/mm/dd') as dt1
+							from user_info 
+							WHERE joindate >= to_Char(SYSDATE-7,'YY/MM/DD')
+							group by to_Char(joindate, 'yy/mm/dd'))
+on dt = dt1
+order by dt
+
+
+
+
+
 
 --모임 카테고리 별 회원 수
-
 --카테고리별 생성된 모임 수..   
 select count(*) cnt, catename
 from group_info
