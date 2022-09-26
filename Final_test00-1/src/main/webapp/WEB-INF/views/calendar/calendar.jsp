@@ -228,7 +228,9 @@
           $('#subject').val('');
           /* $('#diarySubmit').hide(); */ //확인버튼숨김
           var calendar_no = event.event.extendedProps.calendar_no//클릭한 이벤트의 스케쥴넘버(DB)
+          var id = event.event.id//클릭한 이벤트의 아이디
           console.log("캘린더 번호:"+calendar_no)
+          console.log("아이디:"+id)
           //ajax로 해당 스케줄의 정보 가져와서 출력
           $.ajax({
               url: "detail",
@@ -245,6 +247,7 @@
             	  output += '<button type="button" class="btn btn-primary" id="delete">삭제</button>'
             	  output += '<button type="button" class="btn btn-primary" id="modify">수정</button>'
             	  output += "<input type='hidden' value='"+ response.calendar_no+"'>"
+            	  output += "<input type='hidden' value='"+ id+"'>"
             	 $(".modal-footer").append(output);
             	  /* console.log(response);
                   console.log("날짜"+response.startdate); */
@@ -381,15 +384,20 @@
                },
                success: function (response) {
                    alert( '일정이 추가되었습니다!')
-                   calendar.refetchEvents();
-                   calendar.render();
+                   //calendar.refetchEvents();
+                   //calendar.render();
                    $('.btn-close').click();
                    document.location.href = document.location.href;
+                   //calendar.destroy();
                    //loadingEvents();
-                   //calendar.refetchEvents();
+                   /* calendar.refetchEvents();
+                   calendar.render(); */
                   //$("#calendar").load("../calendar/view",{group_no: group_no})
                }
-               ,
+              /*  , complete : function() {
+            	   calendar.render();
+            	   loadingEvents();
+            	           } */,
                error: function (Http, status, error) {
                    console.log(error);
                }
@@ -400,7 +408,7 @@
    
  //deltet.png 클릭 시
 	$(".modal-footer").on('click', '#delete',function(){
-		var calendar_no = $(this).next().next().val();//댓글번호
+		var calendar_no = $(this).next().next().val();
 		console.log(calendar_no)
 		if(!confirm('정말 삭제하시겠습니까?')) {
 			return;
@@ -415,8 +423,9 @@
 				if(result==1) {
 					alert( '일정이 삭제되었습니다!')
 					 //event.remove()
-					document.location.href = document.location.href;//다시 load하는 방법..?
-					//$('.btn-close').click();
+					$('.btn-close').click();
+					calendar.getEventById(calendar_no).remove();
+					//document.location.href = document.location.href;//다시 load하는 방법..?
 					//loadingEvents();//삭제 후 해당 페이지의 내용을 보여준다.
 				}
 			}

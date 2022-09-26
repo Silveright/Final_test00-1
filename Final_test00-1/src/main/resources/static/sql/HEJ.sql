@@ -20,8 +20,21 @@ CREATE TABLE group_schedule (
 	xcoord	varchar(100)	NULL,
 	ycoord	varchar(100)	NULL
 );
-
-
+--0926 캘린더 id 컬럼
+drop table group_schedule purge;
+CREATE TABLE group_schedule (
+	calendar_no	VARCHAR(255)	NOT NULL primary key,
+	group_no	number	NOT NULL,
+	title	varchar2(100)	NOT NULL,
+	subject	varchar2(100)	NOT NULL,
+	content	varchar2(1000)	NOT NULL,
+	startdate	date	NOT NULL,
+	location	varchar2(100)	NOT NULL,
+	xcoord	varchar(100)	NULL,
+	ycoord	varchar(100)	NULL,
+	id varchar
+);
+select calendar_no as id, group_no, title, subject, content, startdate, location, xcoord,ycoord, calendar_no from group_schedule
 --임의 데이터 삽입 테스트
 create sequence calendar_seq
 insert into calendar
