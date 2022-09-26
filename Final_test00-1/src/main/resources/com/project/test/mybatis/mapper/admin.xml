@@ -43,12 +43,6 @@ left outer join (select count(*) cnt, to_Char(joindate, 'yy/mm/dd') as dt1
 on dt = dt1
 order by dt
 	</select>
-	<select id="getChartareausers" resultType="AdminChartAreaUsers">
-		select count(*) cnt
-		from user_info 
-		WHERE joindate >= TO_CHAR(SYSDATE-7,'YYYY-MM-DD')
-		group by to_char(joindate, 'yyyy-mm-dd')
-	</select>
 	<select id="getPieChart" resultType="AdminChartCategory">
 		select catename, sum(cnt) as users from (select group_no, group_name, catename,  cnt 
 	  from group_info gi join 

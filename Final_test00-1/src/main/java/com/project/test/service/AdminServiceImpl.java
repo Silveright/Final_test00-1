@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.test.domain.AdminChartAreaDate;
-import com.project.test.domain.AdminChartAreaUsers;
 import com.project.test.domain.AdminChartCategory;
 import com.project.test.domain.Member;
 import com.project.test.mybatis.mapper.AdminMapper;
@@ -47,11 +46,6 @@ public class AdminServiceImpl implements AdminService{
 	public List<AdminChartAreaDate> getChartareaDate() {
 		// TODO Auto-generated method stub
 		return dao.getChartareadate();
-	}
-	@Override
-	public List<AdminChartAreaUsers> getChartareausers() {
-		// TODO Auto-generated method stub
-		return dao.getChartareausers();
 	}
 	@Override
 	public List<AdminChartCategory> getPieChart() {

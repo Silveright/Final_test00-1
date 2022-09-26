@@ -6,7 +6,6 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.project.test.domain.AdminChartAreaDate;
-import com.project.test.domain.AdminChartAreaUsers;
 import com.project.test.domain.AdminChartCategory;
 import com.project.test.domain.Member;
 
@@ -23,7 +22,6 @@ public interface AdminMapper {
 
 	List<AdminChartAreaDate> getChartareadate();
 
-	List<AdminChartAreaUsers> getChartareausers();
 
 	List<AdminChartCategory> getPieChart();
 
