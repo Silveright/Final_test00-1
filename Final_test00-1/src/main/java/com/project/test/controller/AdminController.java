@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.test.domain.AdminChartAreaDate;
-import com.project.test.domain.AdminChartAreaUsers;
 import com.project.test.domain.AdminChartCategory;
 import com.project.test.domain.Member;
 import com.project.test.service.AdminService;

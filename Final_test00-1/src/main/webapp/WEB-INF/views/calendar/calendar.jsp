@@ -201,6 +201,7 @@
         right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
       },
       editable: true,
+      eventDurationEditable: false,//이벤트 기간은 하루만
       droppable: true, // this allows things to be dropped onto the calendar
       events:
     	  /* [
@@ -299,9 +300,13 @@
           var year = (info.event._instance.range.start.getFullYear()); //옮긴 달력의 날짜
           var month = info.event._instance.range.start.getMonth() + 1; //옮긴 달력의 날짜
           var day = info.event._instance.range.start.getDate(); //옮긴 달력의 날짜
-
-
-          var modifyDate = year + '-' + month + '-' + day;
+		  var fulldate = info.event._instance.range.start.getTime();
+          console.log(info.event._instance.range.start);
+		  console.log(info.event._instance.range.start.getTime());
+		  var date =new Date(fulldate)
+          console.log(date);
+		  
+		  var modifyDate = year + '-' + month + '-' + day;
           console.log(modifyDate)
           var calendar_no = info.event._def.extendedProps.calendar_no;// 옮긴이벤트번호
           console.log(modifyDate)
@@ -409,9 +414,10 @@
 			success:function(result){
 				if(result==1) {
 					alert( '일정이 삭제되었습니다!')
+					 //event.remove()
 					document.location.href = document.location.href;//다시 load하는 방법..?
-					$('.btn-close').click();
-					loadingEvents();//삭제 후 해당 페이지의 내용을 보여준다.
+					//$('.btn-close').click();
+					//loadingEvents();//삭제 후 해당 페이지의 내용을 보여준다.
 				}
 			}
 		})
@@ -439,8 +445,10 @@
 			success:function(result){
 				if(result==1) {
 					alert( '일정이 수정되었습니다!')
-					document.location.href = document.location.href;//다시 load하는 방법..?
-					//$('.btn-close').click();
+					calendar.refetchEvents();
+					//document.location.href = document.location.href;//다시 load하는 방법..?
+					
+							//$('.btn-close').click();
 					//loadingEvents();//삭제 후 해당 페이지의 내용을 보여준다.
 				}
 			}

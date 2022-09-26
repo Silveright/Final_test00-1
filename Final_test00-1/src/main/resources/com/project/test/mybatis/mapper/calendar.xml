@@ -23,7 +23,8 @@
 	<update id="CalendarModify" parameterType="calendar">
 		update group_schedule  set title=#{title},
 		subject=  #{subject}, 
-		content= #{content}, 
+		content= #{content},
+		location= #{location}, 
 		startdate = #{startdate}
 		where calendar_no = #{calendar_no}
 	</update>

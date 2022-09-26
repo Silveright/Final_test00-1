@@ -103,7 +103,7 @@ footer{
     list-style: none;
 }
 </style>
-<title>리뷰 게시판</title>
+<title>회원 정보</title>
 </head>
 <body>
 <br>
