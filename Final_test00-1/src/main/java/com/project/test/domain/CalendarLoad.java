@@ -6,9 +6,15 @@ public class CalendarLoad {
     private int calendar_no;
     private String title;
     private String start;
+    private String id;
 
-
-	 public int getCalendar_no() { return calendar_no; } public void
+	 public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public int getCalendar_no() { return calendar_no; } public void
 	 setCalendar_no(int calendar_no) { this.calendar_no = calendar_no; }
 	 
 	public String getTitle() {
