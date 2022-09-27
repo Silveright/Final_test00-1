@@ -1,3 +1,6 @@
+select * from group_user_role
+where id='user6'
+
 drop table group_schedule purge
 drop sequence calendar_seq
 --select * from calendar
@@ -9,6 +12,7 @@ drop sequence calendar_seq
 --	content varchar2(1000),
 --	startdate date --start는 예약어로 사용할 수 없음..
 --)
+select * from user_info
 CREATE TABLE group_schedule (
 	calendar_no	VARCHAR(255)	NOT NULL primary key,
 	group_no	number	NOT NULL,

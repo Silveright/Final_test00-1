@@ -271,7 +271,8 @@
 
           myModal.show();
       },
-      drop: function(info,revertFunc) {
+      drop: function(info,revertFunc,resourceObj) {
+    	  
     	   myModal.show();//일정 등록 폼 띄우기
     	   $('.btn-close').hide();
     	   $('.modal-footer>button').remove();
@@ -292,7 +293,13 @@
          
         //drop하고 정보 기입 안하고 close를 누를 경우 이벤트 사라지도록?? 적용 안됨
        $('#close').click(function(){
+    	   //console.log(resourceObj.id)
         	alert("일정 적용이 취소됩니다.")
+        	 $('.btn-close').click();
+        	/* calendar.destroy();
+        	calendar.refetchEvents();
+        	calendar.render(); */
+            //calendar.render();
         	document.location.href = document.location.href;
     	   //$("[data-date='"+info.dateStr+"']").find('a:eq(1)').remove()
         });

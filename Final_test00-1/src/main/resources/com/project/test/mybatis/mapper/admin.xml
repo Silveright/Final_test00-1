@@ -3,6 +3,11 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.project.test.mybatis.mapper.AdminMapper">
+	<delete id="delete">
+		delete from user_info
+		where userid=#{userid}
+	</delete>
+	
 	<select id="getTotaluser" resultType="int">
 		select count(*)
 		from user_info

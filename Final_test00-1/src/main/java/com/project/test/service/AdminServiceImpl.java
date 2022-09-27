@@ -102,5 +102,10 @@ public class AdminServiceImpl implements AdminService{
 		return dao.getGroupSearchList(map);
 
 	}
+	@Override
+	public void delete(String userid) {
+		dao.delete(userid);
+		
+	}
 
 }
