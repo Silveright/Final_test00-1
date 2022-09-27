@@ -29,4 +29,6 @@ public interface AdminService {
 
 	List<Member> getGroupSearchList(int index, String search_word, int page, int limit);
 
+	void delete(String userid);
+
 }

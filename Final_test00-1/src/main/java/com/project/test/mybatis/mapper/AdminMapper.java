@@ -33,4 +33,6 @@ public interface AdminMapper {
 
 	List<Member> getGroupSearchList(Map<String, Object> map);
 
+	void delete(String userid);
+
 }
