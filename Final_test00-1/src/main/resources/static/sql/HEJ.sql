@@ -1,3 +1,6 @@
+select * from group_user_role
+where id='user6'
+
 drop table group_schedule purge
 drop sequence calendar_seq
 --select * from calendar
@@ -9,6 +12,7 @@ drop sequence calendar_seq
 --	content varchar2(1000),
 --	startdate date --start는 예약어로 사용할 수 없음..
 --)
+select * from user_info
 CREATE TABLE group_schedule (
 	calendar_no	VARCHAR(255)	NOT NULL primary key,
 	group_no	number	NOT NULL,
@@ -20,7 +24,21 @@ CREATE TABLE group_schedule (
 	xcoord	varchar(100)	NULL,
 	ycoord	varchar(100)	NULL
 );
-
+--0926 캘린더 id 컬럼
+drop table group_schedule purge;
+CREATE TABLE group_schedule (
+	calendar_no	VARCHAR(255)	NOT NULL primary key,
+	group_no	number	NOT NULL,
+	title	varchar2(100)	NOT NULL,
+	subject	varchar2(100)	NOT NULL,
+	content	varchar2(1000)	NOT NULL,
+	startdate	date	NOT NULL,
+	location	varchar2(100)	NOT NULL,
+	xcoord	varchar(100)	NULL,
+	ycoord	varchar(100)	NULL,
+	id varchar
+);
+select calendar_no as id, group_no, title, subject, content, startdate, location, xcoord,ycoord, calendar_no from group_schedule
 --임의 데이터 삽입 테스트
 create sequence calendar_seq
 insert into calendar
@@ -38,7 +56,8 @@ CREATE TABLE user_info (
 	gender	varchar2(5)	NOT NULL,
 	email	varchar2(100)	NOT NULL,
 	area_name	varchar2(100)	NOT NULL,
-	joindate	date	NOT NULL
+	joindate	date	NOT NULL,
+	auth varchar2(50) not null
 );
 --데이터 임의 삽입
 insert into user_info values ('user1', '여', 'user1@kakao.com', '서울', sysdate)
@@ -328,7 +347,6 @@ from board left outer join (select comment_board_num,count(*) cnt
 							group by comment_board_num)
 on board_num = comment_board_num
 
-
 ---최종 (최근 일주일 간 가입자 수 추세)
 select dt  as "date", nvl(cnt,0) as cnt
 from (SELECT TO_CHAR(TO_DATE(SYSDATE-6,'YY/MM/DD') + LEVEL - 1, 'YY/MM/DD') AS dt
@@ -581,6 +599,54 @@ select *
 					)
 					where rnum >=1 and rnum<=10--&gt;= #{start} and rnum &lt;= #{end} 
 
+---------------------------------------------------------------------					
+CREATE TABLE notice (
+	notice_no	number	NOT NULL,
+	subject	varchar2(100)	NOT NULL,
+	content	varchar2(1000)	NOT NULL,
+	writedate	date	NOT NULL,
+	notice_file_original	varchar2(100)	NULL,
+	notice_file	varchar2(100)	NULL,
+	userid	varchar2(100)	NOT NULL,
+	group_no	number	NOT NULL
+);
+
+drop table notice purge
+
+select * from notice
+drop table notice purge
+CREATE TABLE community (
+	community_no	number	NOT NULL,
+	community_subject	varchar2(100)	NOT NULL,
+	community_content	varchar2(1000)	NOT NULL,
+	community_original	varchar2(100)	NULL,
+	community_file	varchar2(100)	NULL,
+	writedate	varchar2(100)	NOT NULL,
+	userid	varchar2(100)	NOT NULL
+);					
+					
+CREATE TABLE post_group (
+	post_no	number	NOT NULL,
+	group_no	number	NOT NULL,
+	subject	varchar2(100)	NOT NULL,
+	content	varchar2(1000)	NOT NULL,
+	userid	varchar2(100)	NOT NULL,
+	writedate	date	NOT NULL
+);		
+
+CREATE TABLE post_reply (
+	reply_no	number	NOT NULL,
+	content	varchar2(1000)	NOT NULL,
+	writedate	date	NOT NULL,
+	userid	varchar2(100)	NOT NULL,
+	post_no	number	NOT NULL
+);
+
+CREATE TABLE group_join_request (
+	group_join_no	number	NOT NULL,
+	userid	varchar2(100)	NOT NULL,
+	group_no	number	NOT NULL
+);
 
 select * from USER_INFO
 drop table user_info purge

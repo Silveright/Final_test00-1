@@ -4,8 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,8 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.test.domain.AdminChartAreaDate;
-import com.project.test.domain.AdminChartAreaUsers;
 import com.project.test.domain.AdminChartCategory;
+import com.project.test.domain.Calendar;
 import com.project.test.domain.Member;
 import com.project.test.service.AdminService;
 
@@ -23,6 +26,8 @@ import com.project.test.service.AdminService;
 @RequestMapping(value="/admin")
 public class AdminController {
 	private AdminService adminService;
+	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
+	
 	
 	@Autowired
 	public AdminController(AdminService adminService) {
@@ -34,7 +39,15 @@ public class AdminController {
 		mv.setViewName("admin/admin");
 		return mv;
 	}
-	
+	@ResponseBody
+	@GetMapping(value="/map")
+	public Map<String, Object> Map(){
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<Calendar> chart = adminService.getChartSchedule();
+		
+		map.put("chart", chart);
+		return map;
+	}
 	@ResponseBody
 	@PostMapping(value="/total")
 	public Map<String, Object> Total(){
@@ -65,6 +78,16 @@ public class AdminController {
 	public Map<String, Object> PieChart(){
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<AdminChartCategory> piechart = adminService.getPieChart();
+		
+		map.put("piechart", piechart);
+		return map;
+	}
+
+	@ResponseBody
+	@PostMapping(value="/piechart2")
+	public Map<String, Object> PieChart2(){
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<AdminChartCategory> piechart = adminService.getPieChart2();
 		
 		map.put("piechart", piechart);
 		return map;
@@ -156,5 +179,12 @@ public class AdminController {
 	public ModelAndView Inquiry(ModelAndView mv) {
 		mv.setViewName("admin/inquerylist");
 		return mv;
+	}
+	
+	@GetMapping(value="/delete")
+	public String Delete(String userid) {
+		logger.info("userid="+userid);
+		adminService.delete(userid);
+		return "redirect:memberinfo";
 	}
 }
