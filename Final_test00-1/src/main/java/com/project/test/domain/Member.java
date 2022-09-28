@@ -10,6 +10,7 @@ package com.project.test.domain;
 		private String group_name;
 		private String cnt;
 		private String catename;
+		
 		public String getCatename() {
 			return catename;
 		}
