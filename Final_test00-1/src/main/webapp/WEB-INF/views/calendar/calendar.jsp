@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.js"></script>
 <link href='${pageContext.request.contextPath}/resources/fullcalendar/main.css' rel='stylesheet' />
     <script src='${pageContext.request.contextPath}/resources/fullcalendar/main.js'></script>
     <script src='${pageContext.request.contextPath}/resources/fullcalendar/lib/locales/ko.js'></script>
