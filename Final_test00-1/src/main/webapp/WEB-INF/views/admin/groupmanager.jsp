@@ -104,7 +104,7 @@ footer{
     list-style: none;
 }
 </style>
-<title>리뷰 게시판</title>
+<title>모임장</title>
 </head>
 <body>
 <br>

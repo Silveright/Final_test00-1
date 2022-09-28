@@ -11,6 +11,7 @@ a{text-decoration:none; color:black}
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.js"></script>
 <script>
 $(document).ready(function() { 
 	
@@ -30,10 +31,18 @@ $(document).ready(function() {
 	$("#viewcount").change(function(){
 		selectedValue=$(this).val();
 		$("input").val('');
-		message=["아이디", "지역", "여 또는 남"]
-		$("input").attr("placeholder", message[selectedValue]+"을 입력하세요")
+		message=["아이디를", "지역을", "여 또는 남을"]
+		$("input").attr("placeholder", message[selectedValue]+" 입력하세요")
 	})
 	
+	//body > div > div > div > table > tbody > tr:nth-child(2) > td:nth-child(6) > button
+	$("tr>td:nth-child(6)>a").click(function(event){
+		var answer = confirm("정말 삭제하시겠습니까?");
+		console.log(answer);
+		if(!answer){
+			event.preventDefault();
+		}
+	})
 	});
 </script>
 </head>
@@ -103,7 +112,7 @@ footer{
     list-style: none;
 }
 </style>
-<title>리뷰 게시판</title>
+<title>회원 정보</title>
 </head>
 <body>
 <br>
@@ -135,7 +144,8 @@ footer{
 							<td>${m.area_name }</td>
 							<td>${m.gender }</td>
 							<td>${m.email }</td>
-							<td><input type="button" class="btn btn-secondary btn-sm" value="회원 삭제"><%-- ${r.review_readcount } --%></td>
+							<td><a href="delete?userid=${m.userid }"><button type="button" class="btn btn-secondary btn-sm">회원삭제</button></a>
+							</td>
 						</tr>
 						</c:forEach>
 					</tbody>

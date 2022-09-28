@@ -3,8 +3,8 @@ package com.project.test.service;
 import java.util.List;
 
 import com.project.test.domain.AdminChartAreaDate;
-import com.project.test.domain.AdminChartAreaUsers;
 import com.project.test.domain.AdminChartCategory;
+import com.project.test.domain.Calendar;
 import com.project.test.domain.Member;
 
 public interface AdminService {
@@ -19,7 +19,6 @@ public interface AdminService {
 
 	List<AdminChartAreaDate> getChartareaDate();
 
-	List<AdminChartAreaUsers> getChartareausers();
 
 	List<AdminChartCategory> getPieChart();
 
@@ -30,5 +29,11 @@ public interface AdminService {
 	int getGroupSearchListCount(int index, String search_word);
 
 	List<Member> getGroupSearchList(int index, String search_word, int page, int limit);
+
+	void delete(String userid);
+
+	List<Calendar> getChartSchedule();
+
+	List<AdminChartCategory> getPieChart2();
 
 }
