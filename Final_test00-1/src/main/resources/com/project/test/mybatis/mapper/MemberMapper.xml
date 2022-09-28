@@ -4,27 +4,27 @@
 
 <mapper namespace="com.project.test.mybatis.mapper.MemberMapper">
 
-	<select id="isId" resultType="member" parameterType="String">
-		select * from member where id = #{id}
+	<select id="isId" resultType="member_pj" parameterType="String">
+		select * from member_pj where id = #{id}
 	</select>
 
-	<insert id="insert" parameterType="member">
-		insert into member
+	<insert id="insert" parameterType="member_pj">
+		insert into member_pj
 		VALUES(#{id}, #{password}, #{name}, #{age}, #{gender}, #{email}, #{auth})
 	</insert>
 
-	<update id="update" parameterType="member">
-		update member
+	<update id="update" parameterType="member_pj">
+		update member_pj
 		set name=#{name}, age=#{age}, 
 		gender=#{gender}, email=#{email}
 		where id=#{id} 
 	</update>
 	
-	<select id="getSearchList" parameterType="map" resultType="member">
+	<select id="getSearchList" parameterType="map" resultType="member_pj">
 	  select * 
 	  from ( select rownum rnum, b.*
 	          from  (select * 
-	                 from member  
+	                 from member_pj  
 	                 where id != 'admin'
 	                   <!-- <if test="search_field!=null">
 	                         and	           
@@ -46,7 +46,7 @@
 	
 	<select id="getSearchListCount" parameterType="map" resultType="int">
 	   select count(*) 
-	   from member 
+	   from member_pj 
 	   where id != 'admin'
 	 <include refid ="search_"/>
 	</select>
@@ -65,7 +65,7 @@
 	</sql>
 
 	<delete id="delete" parameterType="String">
-		delete from member
+		delete from member_pj
 		where id=#{id}
 	</delete>
 	

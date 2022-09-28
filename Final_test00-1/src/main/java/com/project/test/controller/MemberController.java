@@ -91,6 +91,7 @@ public class MemberController {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.print(result);
+		logger.info("회원가입 성공");
 	}
 	
 	//회원가입 처리
