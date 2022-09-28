@@ -8,6 +8,7 @@
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e0bcd3b3132ff2c2897199023d1833c7&libraries=services"></script>
  <style>
 
   body {
@@ -140,16 +141,18 @@
           </div>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label" >장소</label>
-            <input type="text" class="form-control" id="location" name="location">
+            <input type="text" onkeyup=searchMap() class="form-control" id="location" name="location">
           </div>
           <div class="mb-3">
             <label for="message-text" class="col-form-label">내용</label>
             <textarea class="form-control" id="content" name="content"></textarea>
           </div>
-          <div class="mb-3">
-            <div class="fakeimg"></div>
-          </div>
+          <input type="hidden" name="xcoord" id="xcoord" value="126.99224354616133"/>
+          <input type="hidden" name="ycoord" id="ycoord" value="37.57295805285539"/>
         </form>
+          <div class="mb-3">
+            <div id="map" style="width: 465px; height: 300px;"></div>
+          </div>
       </div>
       <div class="modal-footer">
         <!-- <button type="button" class="btn btn-secondary" id="close" data-bs-dismiss="modal">Close</button> -->
@@ -161,6 +164,7 @@
    <script>
    var group_no=1;//더미용
    console.log(group_no);
+   console.log($("#xcoord").val())
    var myModal = new bootstrap.Modal(document.getElementById('exampleModal'))
 
     var containerEl = document.getElementById('external-events-list');
@@ -201,7 +205,6 @@
         right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
       },
       editable: true,
-      eventDurationEditable: false,//이벤트 기간은 하루만
       droppable: true, // this allows things to be dropped onto the calendar
       events:
     	  /* [
@@ -214,6 +217,7 @@
     	 loadingEvents()//처음 일정 페이지
       ,
       eventClick: function (event) {//세부 일정 확인
+          $('#map').empty();
     	  $('.btn-close').show();
           //$('#ModalLabel').text('일정을 확인하세요!'); //이벤트 클릭시에는 일정확인 메세지로 변경
           //클릭시에는 이미있는 이벤트를 삭제할수있는 삭제버튼이 생성됨
@@ -228,9 +232,7 @@
           $('#subject').val('');
           /* $('#diarySubmit').hide(); */ //확인버튼숨김
           var calendar_no = event.event.extendedProps.calendar_no//클릭한 이벤트의 스케쥴넘버(DB)
-          var id = event.event.id//클릭한 이벤트의 아이디
           console.log("캘린더 번호:"+calendar_no)
-          console.log("아이디:"+id)
           //ajax로 해당 스케줄의 정보 가져와서 출력
           $.ajax({
               url: "detail",
@@ -247,7 +249,6 @@
             	  output += '<button type="button" class="btn btn-primary" id="delete">삭제</button>'
             	  output += '<button type="button" class="btn btn-primary" id="modify">수정</button>'
             	  output += "<input type='hidden' value='"+ response.calendar_no+"'>"
-            	  output += "<input type='hidden' value='"+ id+"'>"
             	 $(".modal-footer").append(output);
             	  /* console.log(response);
                   console.log("날짜"+response.startdate); */
@@ -262,6 +263,10 @@
                   $('#content').val(response.content);
                   $('#subject').val(response.subject);
                   $('#location').val(response.location);
+                  $('#xcoord').val(response.xcoord);
+                  $('#ycoord').val(response.ycoord);
+                  console.log(response.xcoord)
+                  makeMap();
                  // $('#calendar_no').val(response.calendar_no);
               },
               error: function (Http, status, error) {
@@ -271,9 +276,11 @@
 
           myModal.show();
       },
-      drop: function(info,revertFunc,resourceObj) {
-    	  
+      drop: function(info,revertFunc) {
     	   myModal.show();//일정 등록 폼 띄우기
+    	   $('#map').empty();
+
+    	   
     	   $('.btn-close').hide();
     	   $('.modal-footer>button').remove();
      	  output='';
@@ -285,6 +292,9 @@
            $('#location').val('');
     	  $('#title').val(info.draggedEl.innerText);//input tag-모임 유형 입력
           $('#date').val(info.dateStr); //input tag-모임 날짜 입력
+          $('#xcoord').val('126.99224354616133');
+          $('#ycoord').val('37.57295805285539');
+           makeMap();
         // is the "remove after drop" checkbox checked?
         if (document.getElementById('drop-remove').checked) {
           // if so, remove the element from the "Draggable Events" list
@@ -293,13 +303,7 @@
          
         //drop하고 정보 기입 안하고 close를 누를 경우 이벤트 사라지도록?? 적용 안됨
        $('#close').click(function(){
-    	   //console.log(resourceObj.id)
         	alert("일정 적용이 취소됩니다.")
-        	 $('.btn-close').click();
-        	/* calendar.destroy();
-        	calendar.refetchEvents();
-        	calendar.render(); */
-            //calendar.render();
         	document.location.href = document.location.href;
     	   //$("[data-date='"+info.dateStr+"']").find('a:eq(1)').remove()
         });
@@ -310,13 +314,9 @@
           var year = (info.event._instance.range.start.getFullYear()); //옮긴 달력의 날짜
           var month = info.event._instance.range.start.getMonth() + 1; //옮긴 달력의 날짜
           var day = info.event._instance.range.start.getDate(); //옮긴 달력의 날짜
-		  var fulldate = info.event._instance.range.start.getTime();
-          console.log(info.event._instance.range.start);
-		  console.log(info.event._instance.range.start.getTime());
-		  var date =new Date(fulldate)
-          console.log(date);
-		  
-		  var modifyDate = year + '-' + month + '-' + day;
+
+
+          var modifyDate = year + '-' + month + '-' + day;
           console.log(modifyDate)
           var calendar_no = info.event._def.extendedProps.calendar_no;// 옮긴이벤트번호
           console.log(modifyDate)
@@ -369,6 +369,7 @@
    //일정 만들기 확인 클릭
    $(".modal-footer").on('click', '#save', function (e) {
 	   console.log( $('#title').val())
+	   console.log($('#xcoord').val())
        if ($("#subject").val() == "") {
            alert('일정 제목을 입력해주세요 !')
            return;
@@ -387,24 +388,21 @@
                    startdate: $('#date').val(),
                    subject: $('#subject').val(),
                    content: $('#content').val(),
-                   location: $('#location').val()
+                   location: $('#location').val(),
+                   xcoord: $('#xcoord').val(),
+                   ycoord: $('#ycoord').val()
                },
                success: function (response) {
                    alert( '일정이 추가되었습니다!')
                    //calendar.refetchEvents();
                    //calendar.render();
-                   $('.btn-close').click();
+                   //$('.btn-close').click();
                    document.location.href = document.location.href;
-                   //calendar.destroy();
                    //loadingEvents();
-                   /* calendar.refetchEvents();
-                   calendar.render(); */
+                   //calendar.refetchEvents();
                   //$("#calendar").load("../calendar/view",{group_no: group_no})
                }
-              /*  , complete : function() {
-            	   calendar.render();
-            	   loadingEvents();
-            	           } */,
+               ,
                error: function (Http, status, error) {
                    console.log(error);
                }
@@ -415,7 +413,7 @@
    
  //deltet.png 클릭 시
 	$(".modal-footer").on('click', '#delete',function(){
-		var calendar_no = $(this).next().next().val();
+		var calendar_no = $(this).next().next().val();//댓글번호
 		console.log(calendar_no)
 		if(!confirm('정말 삭제하시겠습니까?')) {
 			return;
@@ -429,11 +427,9 @@
 			success:function(result){
 				if(result==1) {
 					alert( '일정이 삭제되었습니다!')
-					 //event.remove()
+					document.location.href = document.location.href;//다시 load하는 방법..?
 					$('.btn-close').click();
-					calendar.getEventById(calendar_no).remove();
-					//document.location.href = document.location.href;//다시 load하는 방법..?
-					//loadingEvents();//삭제 후 해당 페이지의 내용을 보여준다.
+					loadingEvents();//삭제 후 해당 페이지의 내용을 보여준다.
 				}
 			}
 		})
@@ -461,16 +457,135 @@
 			success:function(result){
 				if(result==1) {
 					alert( '일정이 수정되었습니다!')
-					calendar.refetchEvents();
-					//document.location.href = document.location.href;//다시 load하는 방법..?
-					
-							//$('.btn-close').click();
+					document.location.href = document.location.href;//다시 load하는 방법..?
+					//$('.btn-close').click();
 					//loadingEvents();//삭제 후 해당 페이지의 내용을 보여준다.
 				}
 			}
 		})
 	})
 	
+function makeMap() { //지도만들기
+        $('#map').empty();
+
+        var xcoord = $('#xcoord').val(); //x축 좌표
+        var ycoord = $('#ycoord').val(); //y축 좌표
+        var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+        var options = { //지도를 생성할 때 필요한 기본 옵션
+            center: new kakao.maps.LatLng(ycoord, xcoord), //지도의 중심좌표.
+            level: 3 //지도의 레벨(확대, 축소 정도)
+        };
+
+        var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+
+
+        // 지도를 클릭한 위치에 표출할 마커입니다
+        var marker = new kakao.maps.Marker({
+            // 지도 중심좌표에 마커를 생성합니다
+            position: map.getCenter()
+        });
+        // 지도에 마커를 표시합니다
+        marker.setMap(map);
+
+        // 지도에 클릭 이벤트를 등록합니다
+        // 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
+        kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
+
+            // 클릭한 위도, 경도 정보를 가져옵니다
+            var latlng = mouseEvent.latLng;
+
+            // 마커 위치를 클릭한 위치로 옮깁니다
+            marker.setPosition(latlng);
+        });
+
+        //div 위치오류 수정 (display : none 이었던 속성때문에 카카오 api가 위치를 제대로 못찾기때문에 재설정을 해줘야한다)
+        setTimeout(function () {
+            map.relayout();
+            map.setCenter(new kakao.maps.LatLng(ycoord, xcoord));
+            // map.setLevel(2); 필요하면 레벨조정
+        }, 200);
+
+        var iwContent = '<div style="text-align: center; padding-left: 15px">모임장소' +
+            '<a href="https://map.kakao.com/link/map/' +
+            '모임장소' + ',' + ycoord + ',' + xcoord + '" style="color:#000000" target="_blank">&#129306;</a>' +
+            '<a href="https://map.kakao.com/link/to/' +
+            '모임장소' + ',' + ycoord + ',' + xcoord + '" style="color:#000000" target="_blank">📌</a></div>',
+
+
+            iwPosition = new kakao.maps.LatLng(ycoord, xcoord); //인포윈도우 표시 위치입니다
+
+
+        // 인포윈도우를 생성합니다
+        var infowindow = new kakao.maps.InfoWindow({
+            position: iwPosition,
+            content: iwContent
+        });
+
+        // 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+        infowindow.open(map, marker);
+
+    }
+	
+	
+function searchMap(){
+	
+//마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
+
+var infowindow = new kakao.maps.InfoWindow({zIndex:1});
+
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = {
+        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };  
+
+// 지도를 생성합니다    
+var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+// 장소 검색 객체를 생성합니다
+var ps = new kakao.maps.services.Places(); 
+
+// 키워드로 장소를 검색합니다
+ps.keywordSearch($('#location').val(), placesSearchCB); 
+
+// 키워드 검색 완료 시 호출되는 콜백함수 입니다
+function placesSearchCB (data, status, pagination) {
+    if (status === kakao.maps.services.Status.OK) {
+
+        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+        // LatLngBounds 객체에 좌표를 추가합니다
+        var bounds = new kakao.maps.LatLngBounds();
+
+        for (var i=0; i<data.length; i++) {
+            displayMarker(data[i]);    
+            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+        }       
+
+        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+        map.setBounds(bounds);
+    } 
+}
+
+// 지도에 마커를 표시하는 함수입니다
+function displayMarker(place) {
+    
+    // 마커를 생성하고 지도에 표시합니다
+    var marker = new kakao.maps.Marker({
+        map: map,
+        position: new kakao.maps.LatLng(place.y, place.x) 
+    });
+
+    // 마커에 클릭이벤트를 등록합니다
+    kakao.maps.event.addListener(marker, 'click', function() {
+        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+        infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
+        infowindow.open(map, marker);
+        $('#location').val(place.place_name);
+        $('#xcoord').val(place.x);
+        $('#ycoord').val(place.y);
+    });
+}
+}
 	//새로고침 방식  calendar.refetchEvents(); 으로 바꾸는 법 찾기
 </script>
 </body>

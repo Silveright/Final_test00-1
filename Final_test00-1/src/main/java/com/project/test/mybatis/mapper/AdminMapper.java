@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.project.test.domain.AdminChartAreaDate;
 import com.project.test.domain.AdminChartCategory;
+import com.project.test.domain.Calendar;
 import com.project.test.domain.Member;
 
 @Mapper
@@ -34,5 +35,9 @@ public interface AdminMapper {
 	List<Member> getGroupSearchList(Map<String, Object> map);
 
 	void delete(String userid);
+
+	List<Calendar> getChartSchedule();
+
+	List<AdminChartCategory> getChartGender();
 
 }

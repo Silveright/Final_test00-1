@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.test.domain.AdminChartAreaDate;
 import com.project.test.domain.AdminChartCategory;
+import com.project.test.domain.Calendar;
 import com.project.test.domain.Member;
 import com.project.test.mybatis.mapper.AdminMapper;
 @Service
@@ -106,6 +107,16 @@ public class AdminServiceImpl implements AdminService{
 	public void delete(String userid) {
 		dao.delete(userid);
 		
+	}
+	@Override
+	public List<Calendar> getChartSchedule() {
+		// TODO Auto-generated method stub
+		return dao.getChartSchedule();
+	}
+	@Override
+	public List<AdminChartCategory> getPieChart2() {
+		// TODO Auto-generated method stub
+		return dao.getChartGender();
 	}
 
 }

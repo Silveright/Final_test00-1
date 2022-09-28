@@ -15,4 +15,19 @@ public class AdminChartCategory {
 	public void setUsers(int users) {
 		this.users = users;
 	}
+	
+	private int male;
+	private int female;
+	public int getMale() {
+		return male;
+	}
+	public void setMale(int male) {
+		this.male = male;
+	}
+	public int getFemale() {
+		return female;
+	}
+	public void setFemale(int female) {
+		this.female = female;
+	}
 }

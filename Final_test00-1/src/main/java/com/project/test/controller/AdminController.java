@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.project.test.domain.AdminChartAreaDate;
 import com.project.test.domain.AdminChartCategory;
+import com.project.test.domain.Calendar;
 import com.project.test.domain.Member;
 import com.project.test.service.AdminService;
 
@@ -38,7 +39,15 @@ public class AdminController {
 		mv.setViewName("admin/admin");
 		return mv;
 	}
-	
+	@ResponseBody
+	@GetMapping(value="/map")
+	public Map<String, Object> Map(){
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<Calendar> chart = adminService.getChartSchedule();
+		
+		map.put("chart", chart);
+		return map;
+	}
 	@ResponseBody
 	@PostMapping(value="/total")
 	public Map<String, Object> Total(){
@@ -69,6 +78,16 @@ public class AdminController {
 	public Map<String, Object> PieChart(){
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<AdminChartCategory> piechart = adminService.getPieChart();
+		
+		map.put("piechart", piechart);
+		return map;
+	}
+
+	@ResponseBody
+	@PostMapping(value="/piechart2")
+	public Map<String, Object> PieChart2(){
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<AdminChartCategory> piechart = adminService.getPieChart2();
 		
 		map.put("piechart", piechart);
 		return map;
