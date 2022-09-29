@@ -179,7 +179,7 @@ b{font-size:0.9em}
 						</nav>
 					</div>
 				</div>
-				<form action="groupmanager" method="post">
+				<form action="groupmanager" method="get">
 					<div class="input-group">
 						<select id="viewcount" name="search_field">
 							<option value="0" selected>아이디</option>

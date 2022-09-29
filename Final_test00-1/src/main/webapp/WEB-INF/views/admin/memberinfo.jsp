@@ -188,7 +188,7 @@ b{font-size:0.9em}
 						</nav>
 					</div>
 				</div>
-				<form action="memberinfo" method="post">
+				<form action="memberinfo" method="get">
 					<div class="input-group">
 						<select id="viewcount" name="search_field">
 							<option value="0" selected>아이디</option>
