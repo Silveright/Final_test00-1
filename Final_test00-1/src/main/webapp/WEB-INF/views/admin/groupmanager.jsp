@@ -41,32 +41,10 @@ $(document).ready(function() {
 <style>
 input{border:1px solid black}
 b{font-size:0.9em}
-footer{
-			bottom:0px; 
-			height:3rem;
-			background:#ccc;
-			width:100%; 
-			text-align:center;
-			}
-			.table-active {
-    --bs-table-accent-bg: #776bcc59;
-    color: #000000;
+.table-active1 {
+    --bs-table-accent-bg: #443dd529;
+    color: var(--bs-table-active-color);
 }
-.btn-secondary {
-    --bs-btn-color: #fff;
-    --bs-btn-bg: #776bcc;
-    --bs-btn-border-color: #776bcc;
-    --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg: #5646c9;
-    --bs-btn-hover-border-color: #776bcc;
-    --bs-btn-focus-shadow-rgb: 49,132,253;
-    --bs-btn-active-color: #fff;
-    --bs-btn-active-bg: #776bcc;
-    --bs-btn-active-border-color: #776bcc;
-    --bs-btn-active-shadow: inset 0 3px 5pxrgba(0, 0, 0, 0.125);
-    --bs-btn-disabled-color: #fff;
-    --bs-btn-disabled-bg: #776bcc;
-    --bs-btn-disabled-border-color: ##776bcc;}
     .page-link {
     position: relative;
     display: block;
@@ -107,6 +85,7 @@ footer{
 <title>모임장</title>
 </head>
 <body>
+<jsp:include page="../include/header.jsp"/>
 <br>
 	<div class="container">
 	<c:if test="${listcount > 0 }">
@@ -115,7 +94,7 @@ footer{
 				<br>
 				<table class="table table-bordered">
 					<thead>
-						<tr class="table-active">
+						<tr class="table-active1">
 							<th>순위</th>
 							<th>아이디</th>
 							<th>지역</th>
@@ -208,7 +187,7 @@ footer{
 							<option value="2">성별</option>
 						</select>
 						 <input id="search" name="search_word" type="text"  placeholder="아이디를 입력하세요" value="${search_word }">
-						<button class="btn btn-secondary" class="search" type="submit">검색</button>
+						<button class="btn btn-secondary" class="search" style="background:#4C489D; color:white" type="submit">검색</button>
 					</div>
 				</form>
 <br>
@@ -229,5 +208,6 @@ footer{
  		</section>
   </c:if> 
 	</div>
+	<jsp:include page="../include/footer.jsp"></jsp:include>
 </body>
 </html>
