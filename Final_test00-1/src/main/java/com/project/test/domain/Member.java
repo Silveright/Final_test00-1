@@ -9,10 +9,57 @@ package com.project.test.domain;
 		private int age;
 		private String gender;
 		private String email;
+
 		private String auth="ROLE_MEMBER";
 		
 		public String getAuth() {
 			return auth;
+
+		private String joindate;
+		private int rnum;
+		private String group_name;
+		private String cnt;
+		private String catename;
+		
+		public String getCatename() {
+			return catename;
+		}
+
+		public void setCatename(String catename) {
+			this.catename = catename;
+		}
+
+		public String getGroup_name() {
+			return group_name;
+		}
+
+		public void setGroup_name(String group_name) {
+			this.group_name = group_name;
+		}
+
+		public String getCnt() {
+			return cnt;
+		}
+
+		public void setCnt(String cnt) {
+			this.cnt = cnt;
+		}
+
+		public int getRnum() {
+			return rnum;
+		}
+
+		public void setRnum(int rnum) {
+			this.rnum = rnum;
+		}
+
+		public String getUserid() {
+			return userid;
+		}
+
+		public void setUserid(String userid) {
+			this.userid = userid;
+
 		}
 		public void setAuth(String auth) {
 			this.auth = auth;

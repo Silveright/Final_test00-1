@@ -20,8 +20,8 @@ public class MainController {
 	 */
 	
 	@RequestMapping(value="/list", method=RequestMethod.GET)
-	public ModelAndView grouplist(ModelAndView mv) {
-		mv.setViewName("main/grouplist");
+	public ModelAndView main(ModelAndView mv) {
+		mv.setViewName("main/main");
 		return mv;
 		
 	}
