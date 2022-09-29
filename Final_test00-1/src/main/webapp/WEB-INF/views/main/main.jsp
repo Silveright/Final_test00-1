@@ -241,7 +241,8 @@
 				<p class="light-300">원하는 모임이 없으신가요??</p>
 			</div>
 			<div class="col-lg-3 col-12 pt-4">
-				<a href="#" class="btn btn-success rounded-pill btn-block shadow px-4 py-2">모임 만들러 가기 => </a>
+				<a href="${pageContext.request.contextPath}/group/groupmake" 
+				   class="btn btn-success rounded-pill btn-block shadow px-4 py-2">모임 만들러 가기 => </a>
 			</div>
 		</div>
 	</div>
