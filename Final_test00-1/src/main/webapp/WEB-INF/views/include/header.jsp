@@ -60,6 +60,7 @@
 			<c:when test="${empty id}">
 				<a class="btn" href="login" role="button" style="background:#4C489D; color:white">Login</a>
 				<a class="btn" href="join" role="button" style="background:#4C489D; color:white">Join</a>
+				<a class="btn" href="${pageContext.request.contextPath}/admin/dashboard" role="button" style="background:#4C489D; color:white">Admin</a>
 			</c:when>	
 			<c:when test="${id == 'admin'}">
 				<a class="btn" href="admin" role="button" style="background:#4C489D; color:white">Admin</a>
