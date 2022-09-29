@@ -30,7 +30,7 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 // Area Chart Example 주소/areachart
 $.ajax({
 	url: "../admin/areachart",
-	type:"post",
+	//type:"post",
     dataType: "json",
     success: function (data){
 		

@@ -241,7 +241,7 @@
           //ajax로 해당 스케줄의 정보 가져와서 출력
           $.ajax({
               url: "detail",
-              type: 'POST',
+              //type: 'POST',
               dataType: 'JSON',
               async: false,
               data: {
@@ -334,7 +334,7 @@
 
           $.ajax({
               url: "modifydate",
-              type: 'post',
+              //type: 'post',
               async: false,
               data: {
             	  startdate: modifyDate,
@@ -362,7 +362,7 @@
 	   var header = $("meta[name='_csrf_header']").attr("content");
 	   var return_value = null;
        $.ajax({
-           type: 'POST',
+           //type: 'POST',
            url: 'loadevent',
            async: false,
            data: {
@@ -394,7 +394,7 @@
 
            $.ajax({
                url: "add",
-               type: "post",
+               //type: "post",
                async: false,
                data: {
                    group_no: group_no,
@@ -435,7 +435,7 @@
 			return;
 		}
 		$.ajax({
-			type: "post",
+			//type: "post",
 			url:"delete",
 			data : {
 				"calendar_no":calendar_no
@@ -462,7 +462,7 @@
 			return;
 		}
 		$.ajax({
-			type: "post",
+			//type: "post",
 			url:"modify",
 			data : {
 				group_no: group_no,
