@@ -1,15 +1,10 @@
 package com.project.test.service;
 
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletResponse;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import com.project.test.mybatis.mapper.MemberMapper;
 import com.project.test.domain.Member;
-import com.project.test.mybatis.mapper.*;
 
 @Service
 public class MemberServiceImpl implements MemberService {

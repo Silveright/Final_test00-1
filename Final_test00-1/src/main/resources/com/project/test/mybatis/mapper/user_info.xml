@@ -9,7 +9,7 @@
 	
 	<insert id="insert" parameterType="member">
 		insert into user_info values(
-		#{userid}, #{password}, #{name}, #{age}, #{gender}, #{email}, #{auth}
+		#{userid}, #{name}, #{gender},#{age},#{password}, #{email}, #{area_name},sysdate, #{auth}
 		)
 	</insert>
 	
@@ -25,7 +25,7 @@
 		<if test='search_field !=null'>
 		and 
 		<choose>
-			<when test="search_field=='useruserid'">useruserid</when>
+			<when test="search_field=='userid'">userid</when>
 			<when test="search_field=='name'">name</when>
 			<when test="search_field=='age'">age</when>
 			<when test="search_field=='gender'">gender</when>
