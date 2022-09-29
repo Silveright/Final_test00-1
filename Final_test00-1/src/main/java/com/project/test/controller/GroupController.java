@@ -36,9 +36,10 @@ public class GroupController {
 	 this.mysavefolder = mysavefolder; 
 	 }
 
-	@Autowired 
-	public GroupController(GroupService groupservice) {
-	this.groupservice = groupservice; }
+		/*
+		 * @Autowired public GroupController(GroupService groupservice) {
+		 * this.groupservice = groupservice; }
+		 */
 
 	 
 	
