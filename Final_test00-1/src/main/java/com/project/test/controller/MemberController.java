@@ -23,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.test.domain.MailVO;
 import com.project.test.domain.Member;
+import com.project.test.domain.Member;
 import com.project.test.service.MemberService;
 import com.project.test.task.SendMail;
 
@@ -139,7 +140,7 @@ public class MemberController {
 			if(result == 1) {
 				MailVO vo = new MailVO();
 				vo.setTo(member.getEmail());
-				vo.setContent(member.getId() + "님 회원가입을 축하드립니다.");
+				vo.setContent(member.getUserid() + "님 회원가입을 축하드립니다.");
 				sendMail.sendMail(vo);
 				
 				rattr.addFlashAttribute("result", "joinSuccess");

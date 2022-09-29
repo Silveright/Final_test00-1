@@ -18,8 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.project.test.domain.AdminChartAreaDate;
 import com.project.test.domain.AdminChartCategory;
+import com.project.test.domain.AdminMember;
 import com.project.test.domain.Calendar;
-import com.project.test.domain.Member;
 import com.project.test.service.AdminService;
 
 @Controller
@@ -126,7 +126,7 @@ public class AdminController {
 									@RequestParam(value="search_word", defaultValue="", required=false) String search_word) {
 		
 		int listcount=adminService.getSearchListCount(index, search_word);//총 리스트 수를 받아옴
-		List<Member> list = adminService.getSearchList(index, search_word, page, limit);
+		List<AdminMember> list = adminService.getSearchList(index, search_word, page, limit);
 		
 		int maxpage = (listcount + limit -1)/limit;
 		int startpage = ((page-1)/10) *10 +1;
@@ -155,7 +155,7 @@ public class AdminController {
 			@RequestParam(value="search_word", defaultValue="", required=false) String search_word) {
 			
 			int listcount=adminService.getGroupSearchListCount(index, search_word);//총 리스트 수를 받아옴
-			List<Member> list = adminService.getGroupSearchList(index, search_word, page, limit);
+			List<AdminMember> list = adminService.getGroupSearchList(index, search_word, page, limit);
 			
 			int maxpage = (listcount + limit -1)/limit;
 			int startpage = ((page-1)/10) *10 +1;
