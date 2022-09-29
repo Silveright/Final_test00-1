@@ -22,14 +22,14 @@
 <!-- Header -->
 <nav id="main_nav" class="navbar navbar-expand-lg navbar-light bg-white shadow">
 	<div class="container d-flex justify-content-between align-items-center">
-		<a class="navbar-brand h1" href="#">
+		<a class="navbar-brand h1" href="${pageContext.request.contextPath}/main/list">
 			<span class="fs-4"><img src="${pageContext.request.contextPath}/resources/img/final_logo.png" width="150px"></span>
 		</a>
-		
+		<!-- 검색 부분 -->
 		<div class="align-self-center collapse navbar-collapse flex-grow-1" id="navbar-toggler-success">
 			<div class="navbar flex-fill mx-xl-5 d-flex justify-content-center">
 				<div class="pe-lg-5" id="nav search">
-					<form class="form-inline" action="${pageContext.request.contextPath}/search.do" method="get">
+					<form class="form-inline" action="${pageContext.request.contextPath}/search" method="get">
 						<div class="input-group input-group-navbar justify-content-center" id="searchGroup">
 							<select name="category" class="form-control form-select-sm search" aria-label="Search"
                                     id="searchSelect">
@@ -60,18 +60,19 @@
 		<!-- 로그인 버튼 -->
 		<c:choose>
 			<c:when test="${empty id}">
-            <a class="btn" href="${pageContext.request.contextPath}/member/login" role="button" style="background:#4C489D; color:white">Login</a>
-            <a class="btn" href="${pageContext.request.contextPath}/member/join" role="button" style="background:#4C489D; color:white">Join</a>
-            <a class="btn" href="${pageContext.request.contextPath}/admin/dashboard" role="button" style="background:#4C489D; color:white">Admin</a>
-         </c:when>	
+				<a class="btn" href="${pageContext.request.contextPath}/member/login" role="button" style="background:#4C489D; color:white">Login</a>
+				<a class="btn" href="${pageContext.request.contextPath}/member/join" role="button" style="background:#4C489D; color:white">Join</a>
+				<a class="btn" href="${pageContext.request.contextPath}/admin/dashboard" role="button" style="background:#4C489D; color:white">Admin</a>
+			</c:when>	
+
 			<c:when test="${id == 'admin'}">
-				<a class="btn" href="admin" role="button" style="background:#4C489D; color:white">Admin</a>
-				<a class="btn" href="logout" role="button" style="background:#4C489D; color:white">Logout</a>
+				<a class="btn" href="${pageContext.request.contextPath}/admin/dashboard" role="button" style="background:#4C489D; color:white">Admin</a>
+				<a class="btn" href="${pageContext.request.contextPath}/logout" role="button" style="background:#4C489D; color:white">Logout</a>
 			</c:when>
 			<c:otherwise>
-				<a class="btn" href="admin" role="button" style="background:#4C489D; color:white">${id}님 </a>
-				<a class="btn" href="mypage" role="button" style="background:#4C489D; color:white">Mypage</a>
-				<a class="btn" href="logout" role="button" style="background:#4C489D; color:white">Logout</a>
+				<a class="btn" href="${pageContext.request.contextPath}/admin" role="button" style="background:#4C489D; color:white">${id}님 </a>
+				<a class="btn" href="${pageContext.request.contextPath}/mypage" role="button" style="background:#4C489D; color:white">Mypage</a>
+				<a class="btn" href="${pageContext.request.contextPath}/logout" role="button" style="background:#4C489D; color:white">Logout</a>
 			</c:otherwise>
 		</c:choose>
 	</div>		
