@@ -15,6 +15,8 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/templatemo.css">
 <!-- Custom CSS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/custom.css">
+<meta name="_csrf" content="${_csrf.token }">
+<meta name="_csrf_header" content="${_csrf.headerName }">
 </head>
 <body>
 <!-- Header -->
@@ -62,6 +64,7 @@
 				<a class="btn" href="${pageContext.request.contextPath}/member/join" role="button" style="background:#4C489D; color:white">Join</a>
 				<a class="btn" href="${pageContext.request.contextPath}/admin/dashboard" role="button" style="background:#4C489D; color:white">Admin</a>
 			</c:when>	
+
 			<c:when test="${id == 'admin'}">
 				<a class="btn" href="${pageContext.request.contextPath}/admin/dashboard" role="button" style="background:#4C489D; color:white">Admin</a>
 				<a class="btn" href="${pageContext.request.contextPath}/logout" role="button" style="background:#4C489D; color:white">Logout</a>
