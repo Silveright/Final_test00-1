@@ -1,27 +1,39 @@
 package com.project.test.controller;
 
+import java.io.File;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.project.test.domain.Group;
 import com.project.test.domain.Member;
 import com.project.test.service.GroupService;
+import com.project.test.service.MySaveFolder;
 
 @Controller
 @RequestMapping(value="/group")
 public class GroupController {
 	private static final Logger logger = LoggerFactory.getLogger(GroupController.class);
 	private GroupService groupservice;
+	private MySaveFolder mysavefolder;
 	
-	 @Autowired public GroupController(GroupService groupservice) {
-	 this.groupservice = groupservice; }
+	 @Autowired 
+	 public GroupController(GroupService groupservice, MySaveFolder mysavefolder) {
+	 this.groupservice = groupservice;
+	 this.mysavefolder = mysavefolder; 
+	 }
 	 
 	
 	//@RequestMapping(value="/list", method=RequestMethod.GET)
@@ -30,6 +42,41 @@ public class GroupController {
 		return mv;
 		
 	}
+	
+	@GetMapping(value="/groupmake")
+	public String groupmake () {
+		return "/group/groupmake";
+	}
+ /*
+	수정해야함	(모임 생성)
+	@PostMapping("/add")
+	public String add(Group group, HttpServletRequest request)
+			throws Exception{
+		
+		MultipartFile uploadfile = group.getUploadfile();
+		
+		if(!uploadfile.isEmpty()) {
+			String fileName = uploadfile.getOriginalFilename(); // 원래 파일명
+			group.setG(fileName);// 원래 파일명 저장
+			// String saveFolder = request.getSession().getServletContext().getRealPath("resources")
+			//		 + "/upload";
+			String saveFolder = mysavefolder.getSavefolder();
+
+			String fileDBName = fileDBName(fileName, saveFolder);
+			logger.info("fileDBName = " + fileDBName);
+			
+			// transferTo(File path) : 업로드한 파일을 매개변수의 경로에 저장합니다.
+			uploadfile.transferTo(new File(saveFolder + fileDBName));
+			logger.info("fileDBName = " + saveFolder + fileDBName);
+			//바뀐 파일명으로 저장
+			board.setBOARD_FILE(fileDBName);
+		}
+		
+		boardService.insertBoard(board); // 저장메서드 호출
+		logger.info(board.toString()); // selectKey로 정의한 BOARD_NUM 값 확인해 봅니다.
+		return "redirect:list";
+	}
+*/
 	
 //	@RequestMapping(value="/groupuserinfo")
 //	public ModelAndView memberList(@RequestParam(value="page", defaultValue="1",required=false) int page,
@@ -60,6 +107,7 @@ public class GroupController {
 //		return mv;
 //	}
 	
+
 	@RequestMapping(value="/groupjoinagree")
 	public String test() {
 		return "/group/groupjoinagree";
@@ -69,5 +117,6 @@ public class GroupController {
 	public String test2() {
 		return "/group/groupuserinfo";
 	}
+	
 
 }
