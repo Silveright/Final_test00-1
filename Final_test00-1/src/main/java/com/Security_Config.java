@@ -32,13 +32,13 @@ public class Security_Config extends WebSecurityConfigurerAdapter {
 				.antMatchers("/member/join").permitAll()
 				.antMatchers("/member/idcheck").permitAll()
 				.antMatchers("/member/joinProcess").permitAll()
-				.antMatchers("/member/list").access("hasRole('ROLE_ADMIN')")
-				.antMatchers("/member/info").access("hasRole('ROLE_ADMIN')");
+				.antMatchers("/main/list").access("hasRole('ROLE_ADMIN')")
+				.antMatchers("/main/info").access("hasRole('ROLE_ADMIN')");
 				//.antMatchers("/**").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')");
 
 		http.formLogin().loginPage("/member/login")
 		                .loginProcessingUrl("/member/loginProcess")
-		                .usernameParameter("id")
+		                .usernameParameter("userid")
 				        .passwordParameter("password")
 				        .successHandler(loginSuccessHandler())
 				        .failureHandler(loginFailHandler());

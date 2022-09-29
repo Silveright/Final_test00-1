@@ -1,6 +1,5 @@
 package com.project.test.domain;
 
-import javax.security.auth.message.config.AuthConfig;
 
 public class Member {
 	private String name;

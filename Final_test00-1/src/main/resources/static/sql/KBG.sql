@@ -35,7 +35,7 @@ create table user_info (
 	name			varchar2(50) not null,
 	gender			varchar2(5) not null,
 	age				number(2)	not null,
-	password 		varchar2(50) not null,
+	password 		varchar2(60) not null,
 	email			varchar2(100) not null,
 	area_name		varchar2(100) not null,
 	joindate		date not null,
@@ -43,12 +43,14 @@ create table user_info (
 	primary key(userid)
 );
 
+select * from USER_INFO
+
 
 update user_info
 set auth='ROLE_ADMIN'
 where userid = 'admin';
 insert into user_info values(
-		'admin' , '관리자' , '남', 32, 123,'ansd3073@naver.com','서울',sysdate,
+		'admin' , '관리자' , '남', 32, 1234,'ansd3073@naver.com','서울',sysdate,
 		'ROLE_MEMBER')
 select * from user_info;
 

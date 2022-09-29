@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -22,7 +23,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.test.domain.MailVO;
-import com.project.test.domain.Member;
 import com.project.test.domain.Member;
 import com.project.test.service.MemberService;
 import com.project.test.task.SendMail;
@@ -48,11 +48,14 @@ public class MemberController {
 	
 	private MemberService memberservice;
 	private SendMail sendMail;
+	private PasswordEncoder passwordEncoder;
 	
 	
 	@Autowired
-	public MemberController(MemberService memberservice) {
+	public MemberController(MemberService memberservice,SendMail sendMail, PasswordEncoder passwordEncoder) {
 		this.memberservice = memberservice;
+		this.sendMail = sendMail;
+		this.passwordEncoder = passwordEncoder;
 		
 	}
 	
@@ -123,7 +126,9 @@ public class MemberController {
 								  HttpServletRequest request) {
 
 			//비밀번호 암호화 추가
-			
+			String encPassword = passwordEncoder.encode(member.getPassword());
+		      logger.info(encPassword);
+		      member.setPassword(encPassword);
 		
 			
 			int result = memberservice.insert(member);
@@ -144,7 +149,7 @@ public class MemberController {
 				sendMail.sendMail(vo);
 				
 				rattr.addFlashAttribute("result", "joinSuccess");
-				return "redirect:login";
+				return "member/loginForm";
 			} else {
 				model.addAttribute("url", request.getRequestURL());
 				model.addAttribute("message", "회원 가입 실패");
