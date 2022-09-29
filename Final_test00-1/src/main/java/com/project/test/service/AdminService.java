@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.project.test.domain.AdminChartAreaDate;
 import com.project.test.domain.AdminChartCategory;
+import com.project.test.domain.AdminMember;
 import com.project.test.domain.Calendar;
 import com.project.test.domain.Member;
 
@@ -24,11 +25,11 @@ public interface AdminService {
 
 	int getSearchListCount(int index, String search_word);
 
-	List<Member> getSearchList(int index, String search_word, int page, int limit);
+	List<AdminMember> getSearchList(int index, String search_word, int page, int limit);
 
 	int getGroupSearchListCount(int index, String search_word);
 
-	List<Member> getGroupSearchList(int index, String search_word, int page, int limit);
+	List<AdminMember> getGroupSearchList(int index, String search_word, int page, int limit);
 
 	void delete(String userid);
 
