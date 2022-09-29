@@ -1,10 +1,20 @@
 package com.project.test.domain;
 //관리자 회원 조회용 DTO
 	public class Member {
-		private String userid;
-		private String area_name;
+		private String id;
+		
+		//member_joinForm.jsp에서 비밀번호 name속성 값을 확인해주세요
+		private String password;
+		private String name;
+		private int age;
 		private String gender;
 		private String email;
+
+		private String auth="ROLE_MEMBER";
+		
+		public String getAuth() {
+			return auth;
+
 		private String joindate;
 		private int rnum;
 		private String group_name;
@@ -49,33 +59,34 @@ package com.project.test.domain;
 
 		public void setUserid(String userid) {
 			this.userid = userid;
-		}
 
-		public String getArea_name() {
-			return area_name;
 		}
-
-		public void setArea_name(String area_name) {
-			this.area_name = area_name;
+		public void setAuth(String auth) {
+			this.auth = auth;
 		}
-
-		public String getJoindate() {
-			return joindate;
+		public String getId() {
+			return id;
 		}
-
-		public void setJoindate(String joindate) {
-			this.joindate = joindate;
+		public void setId(String id) {
+			this.id = id;
 		}
-
-		public Member() {
-			
+		public String getPassword() {
+			return password;
 		}
-		
+		public void setPassword(String password) {
+			this.password = password;
+		}
 		public String getName() {
-			return area_name;
+			return name;
 		}
 		public void setName(String name) {
-			this.area_name = name;
+			this.name = name;
+		}
+		public int getAge() {
+			return age;
+		}
+		public void setAge(int age) {
+			this.age = age;
 		}
 		public String getGender() {
 			return gender;
@@ -89,5 +100,4 @@ package com.project.test.domain;
 		public void setEmail(String email) {
 			this.email = email;
 		}
-		
 	}
