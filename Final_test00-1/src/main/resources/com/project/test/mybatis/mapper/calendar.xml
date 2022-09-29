@@ -25,7 +25,9 @@
 		subject=  #{subject}, 
 		content= #{content},
 		location= #{location}, 
-		startdate = #{startdate}
+		startdate = #{startdate},
+		xcoord=#{xcoord},
+		ycoord=#{ycoord}
 		where calendar_no = #{calendar_no}
 	</update>
 	<update id="CalendarModifyDate" parameterType="map">
