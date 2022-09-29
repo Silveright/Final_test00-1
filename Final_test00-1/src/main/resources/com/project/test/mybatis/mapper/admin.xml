@@ -87,7 +87,7 @@ order by dt
 		like #{search_word}
 		</if>
 	</select>
-	<select id="getSearchList" resultType="Member">
+	<select id="getSearchList" resultType="AdminMember">
 		select *
 			from (select rownum rnum , b.*
 					from (select userid, gender, area_name, email,  to_char(joindate, 'yy-mm-dd') joindate 
@@ -125,7 +125,7 @@ order by dt
 		</if>
 	</select>
 	
-	<select id="getGroupSearchList" resultType="Member">
+	<select id="getGroupSearchList" resultType="AdminMember">
 		 select *
 			from (select rownum rnum, b.*
 					from (select ui.userid, gender, email, area_name,group_name,catename,cnt
