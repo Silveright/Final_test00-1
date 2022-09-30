@@ -27,6 +27,8 @@ CREATE TABLE group_info (
 	userid	varchar2(100)		NOT NULL
 );
 
+select * from group_user_role
+
 CREATE TABLE post_group (
 	post_no	number		NOT NULL,
 	group_no	number		NOT NULL,

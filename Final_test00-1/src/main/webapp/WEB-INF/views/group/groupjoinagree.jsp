@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
+   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,43 +11,20 @@ a{text-decoration:none; color:black}
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
-<script>
-$(document).ready(function() { 
-	
-	var selectedValue='${search_field}'
-	if(selectedValue !='-1')
-		$("#viewcount").val(selectedValue);
-	
-	$(".search").click(function(){
-		if($('#search').val()==''){
-			alert("검색어를 입력하세요");
-			$('input').focus();
-			return false;
-		}
-	})
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.js"></script>
 
-	
-	$("#viewcount").change(function(){
-		selectedValue=$(this).val();
-		$("input").val('');
-		message=["아이디", "지역", "여 또는 남"]
-		$("input").attr("placeholder", message[selectedValue]+"을 입력하세요")
-	})
-	
-	});
-</script>
 </head>
 <style>
 input{border:1px solid black}
 b{font-size:0.9em}
 footer{
-			bottom:0px; 
-			height:3rem;
-			background:#ccc;
-			width:100%; 
-			text-align:center;
-			}
-			.table-active {
+         bottom:0px; 
+         height:3rem;
+         background:#ccc;
+         width:100%; 
+         text-align:center;
+         }
+         .table-active {
     --bs-table-accent-bg: #776bcc59;
     color: #000000;
 }
@@ -109,136 +87,109 @@ footer{
 <body>
 <br>
 
-	<div class="container">
-	
-		<div class="row align-items-center justify-content-center">
-		<div class="col-sm-2 text-center">
-				<aside>
-					<input type="hidden" id="active" value="${active }">
-					<jsp:include page="group_left.jsp" />
-				</aside>
-			</div>
-			<div class="col-sm-9 ">
-			<form action="memberinfocat" method="post" class="cat">				
-				
-				<input type="button" class="btn btn-secondary" value="회원 정보"
-					   onclick="location.href='groupuserinfo.jsp'">
-					   
-				<input type="button" class="btn btn-secondary" value="가입 승인"
-					   onclick="location.href='groupjoinagree.jsp'">	   
-				
-				<input type="button" class="btn btn-secondary" value="모임 해산"
-					   onclick="location.href='groupDisband.jsp'">
-			</form>
-			
-			
-			<br>
-			<br>
-			<c:if test="${listcount > 0 }">
-			
-				<br>
-				<legend style="text-align:center">가입 승인 게시판</legend>
-				<table class="table table-bordered text-center">
-					<thead>
-						<colgroup>
-							<col width="10%"/>
-							<col width="25%"/>
-							<col width="25%"/>
-							<col width="10%"/>
-							<col width="20%"/>
-							<col width="10%"/>
-						</colgroup>
-						
-						<tr class="table-active">
-							<th>번호</th>
-							<th>아이디</th>
-							<th>지역</th>
-							<th>성별</th>
-							<th>신청일</th>
-							<th>선택</th>
-						</tr>
-					</thead>
-					
-					<tbody>
-						<c:set var="num" value="${listcount-(page-1)*limit }"/>
-						<c:forEach var="m" items="${memberlist }">
-						<tr>
-							<td>
-								<c:out value="${m.rnum }"/>
-							</td>
-								<td><a href="info?id=${m.userid }">${m.userid }</a></td>
-							<td>${m.area_name}</td>
-							<td>${m.gender }</td>
-							<td>${m.groupjoindate}</td>
-							<td><input type="checkbox" name="item" value="선택"></td>
-						</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-				
-				<div class="col-sm-12 text-sm-end">
-					<input type="button" class="btn btn-secondary" value="가입 승인">			
-					<input type="button" class="btn btn-secondary" value="가입 거절">			
-				</div>	
-				
-				<div class="center-block">
-					<div class="container">
-						<nav aria-label="Page navigation example">
-							<ul class="pagination justify-content-center">
-							<c:if test="${page <=1 }">
-								<li class="page-item"><a class="page-link disabled"
-									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-								</a></li>
-							</c:if>
-							<c:if test="${page >1 }">
-								<li class="page-item"><a class="page-link" href="memberinfo?page=${page-1 }&search_field=${search_field}&search_word=${search_word}"
-									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-								</a></li>
-							</c:if>
-							
-							
-							
-							<c:forEach var="a" begin="${startpage }" end="${endpage }">
-								<c:if test="${a==page}">
-								<li class="page-item active">
-									<a class="page-link">${a }</a>
-								</li>
-								</c:if>
-								<c:if test="${a!=page}">
-									<c:url var="go" value="memberinfo">
-		 							<c:param name="search_field" value="${search_field}"/>
-		 							<c:param name="search_word" value="${search_word }"/>
-		 							<c:param name="page" value="${a }"/>
-		 							</c:url>
-								<li class="page-item">
-									<a href="${go}" 
-									class="page-link">${a }</a>
-								</li>
-								</c:if>
-							</c:forEach>
-								
-								<c:if test="${page >=maxpage}">
-								<li class="page-item">
-								<a class="page-link disabled"
-									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-								</a></li>
-								</c:if>
-								<c:if test="${page <maxpage}">
-								<c:url var ="next" value="memberinfo">
-				 					<c:param name="search_field" value="${search_field}"/>
-				 					<c:param name="search_word" value="${search_word }"/>
-				 					<c:param name="page" value="${page+1 }"/>
-				 				</c:url>
-								<li class="page-item">
-								<a class="page-link" href="${next}"
-									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-								</a></li>
-								</c:if>
-							</ul>
-						</nav>
-					</div>
-				</div>
-				
+   <div class="container">
+   
+      <div class="row align-items-center justify-content-center">
+      <div class="col-sm-2 text-center">
+            <aside>
+               <input type="hidden" id="active" value="${active }">
+               <jsp:include page="group_left.jsp" />
+            </aside>
+         </div>
+         <div class="col-sm-9 ">
+         <form action="memberinfocat" method="post" class="cat">            
+            
+            <input type="button" class="btn btn-secondary" value="회원 정보"
+                  onclick="location.href='groupuserinfo'">
+                  
+            <input type="button" class="btn btn-secondary" value="가입 승인"
+                  onclick="location.href='groupjoinagree'">      
+            
+            <input type="button" class="btn btn-secondary" value="모임 해산"
+                  onclick="location.href='groupDisband'">
+         </form>
+         
+         
+         <br>
+         <br>
+         
+            <br>
+            <legend style="text-align:center">가입 승인 게시판</legend>
+            <table class="table table-bordered text-center">
+               <thead>
+                  
+                  <tr class="table-active">
+                     <th>번호</th>
+                     <th>아이디</th>
+                     <th>성별</th>
+                     <th>가입일</th>
+                     <th>선택</th>
+                  </tr>
+               </thead>
+               
+               <%-- <tbody>
+                  <c:set var="num" value="${listcount-(page-1)*limit }"/>
+                  <c:forEach var="m" items="${memberlist }">
+                  <tr>
+                     <td>
+                        <c:out value="${m.rnum }"/>
+                     </td>
+                        <td><a href="info?id=${m.userid }">${m.userid }</a></td>
+                     <td>${m.gender }</td>
+                     <td>${m.joindate}</td>
+                     <td><input type="checkbox" name="selectAgreement" value="${m.userid }"></td>
+                  </tr>
+                  </c:forEach>
+               </tbody> --%>
+            </table>
+            
+            <div class="col-sm-12 text-sm-end">
+               <input type="button" class="btn btn-secondary agree" id="accept" value="가입 승인">         
+               <input type="button" class="btn btn-secondary agree" value="가입 거절">         
+            </div>   
+            
+            <div class="center-block">
+       <ul class="pagination justify-content-center">
+          <c:if test="${page <=1 }"> <!-- 현재 페이지가 1일때 -->
+             <li class="page-item">
+                <a class="page-link gray">이전&nbsp; </a>
+             </li>
+          </c:if>
+          <c:if test="${page > 1 }"> <!-- 현재 페이지가 1보다 클때 이전을 누르면 현재페이지-1 페이지로 이동 -->
+             <li class="page-item">
+                <a href="groupjoinagree?page=${page-1 }" 
+                class="page-link">이전&nbsp; </a>
+             </li>
+          </c:if>
+          
+          <c:forEach var="a" begin="${startpage }" end="${endpage }">
+             <c:if test="${a==page}"> 
+                <li class="page-item active">
+                   <a class="page-link">${a } </a>
+                </li>
+             </c:if>
+             <c:if test="${a!=page}"> 
+                <li class="page-item">
+                   <a href="groupjoinagree?page=${a}" 
+                   class="page-link">${a } </a>
+                </li>
+             </c:if>
+          </c:forEach>
+          
+             <c:if test="${page >=maxpage}"> 
+                <li class="page-item">
+                   <a class="page-link gray">&nbsp;다음 </a>
+                </li>
+             </c:if>
+             <c:if test="${page <maxpage}"> 
+                <li class="page-item">
+                   <a href ="groupjoinagree?page=${page+1}" 
+                   class="page-link">&nbsp;다음 </a>
+                </li>
+             </c:if>
+       </ul>
+    </div>
+            
 <br>
 <br>
 <br>
@@ -247,15 +198,148 @@ footer{
 <br>
 <br>
 <br>
-			</div>
-		</div>
-	</c:if> 
-	 <c:if test="${listcount==0 }"> 
-		<section class="py-5">
- 		<font size=5>회원이 존재하지 않습니다.</font><br><br>
- 		<a href="main.net"><button type="button" class="btn btn-secondary float-left back">메인으로</button></a>
- 		</section>
-  </c:if> 
-	</div>
+         </div>
+      </div>
+      <!-- <section class="py-5">
+       <font size=5>회원이 존재하지 않습니다.</font><br><br>
+       <a href="main.net"><button type="button" class="btn btn-secondary float-left back">메인으로</button></a>
+       </section> -->
+   </div>
+   <script>
+$(document).ready(function() { 
+   loadRequest(1);
+});
+   
+   function go(page){
+      var limit = $('#viewcount').val();
+      var data = "limit="+ limit + "&state=ajax&page=" + page;
+      ajax(data);
+   }
+
+
+   function setPaging(href, digit){
+      active ="";
+      gray="";
+      if(href==""){///href가 빈문자열인 경우
+         if(isNaN(digit)){//이전 또는 다음
+            gray=" gray";
+         }else{
+            active=" active";
+         }
+      }
+      var output = "<li class=' page-item" + active + "'>";
+      var anchor = "<a class='page-link" + gray + "'" + href +">" + digit + "</a></li>"
+      output += anchor;
+      return output;
+   }
+
+
+   function loadRequest(data){
+      /* var token = $("meta[name='_csrf']").attr("content");
+      var header = $("meta[name='_csrf_header']").attr("content"); */
+      $.ajax({
+         //type: "POST",
+         data: {page:data},
+         /* beforeSend: function(xhr){
+                  xhr.setRequestHeader(header, token);
+               }, */
+         url: "list_ajax",
+         dataType: "json",
+         cache: false,
+         success: function(data){
+            
+            if(data.listcount > 0){//총 개수가 0보다 큰 경우
+               $("tbody").remove();
+               var output = "<tbody>";
+               $(data.list).each(
+                  function(index, item){
+               var num = item.rnum;
+                     output += '<tr><td>' + num + '</td>'
+                     
+                     var userid = item.userid;
+                     
+                     output += '<td><div>'+ userid + '</div></td>'
+                     output += '<td><div>'+ item.gender+ '</div></td>'
+                     output += '<td><div>'+ item.joindate+ '</div></td>'
+                     output += '<td><input type="checkbox" name="selectAgreement" value="'+ userid + '"></td></tr>'
+                  })
+                  output += "</tbody>"
+                  $('table').append(output)//table
+                  
+                  $(".pagination").empty();
+                  output = "";
+                  
+                  digit = '이전&nbsp;'
+                  href="";
+                  if(data.page>1){
+                     href = 'href=javascript:loadRequest('+(data.page-1)+')';
+                  }
+                  output +=setPaging(href,digit);
+                  for(var i = data.startpage; i<=data.endpage; i++){
+                     digit=i;
+                     href="";
+                     if(i!=data.page){
+                        href='href=javascript:loadRequest('+i+')';
+                     }
+                     output += setPaging(href,digit);
+                  }
+                     digit="&nbsp;다음&nbsp;";
+                     href="";
+                     if(data.page<data.maxpage){
+                        href='href=javascript:loadRequest('+(data.page+1)+')';
+                     }
+                     output += setPaging(href,digit);
+                     $(".pagination").append(output)
+                  
+            }else{
+            	$("tbody").remove();
+            	$(".pagination").html("가입 신청 인원이 없습니다.");
+            	$(".agree").remove();
+            	
+            	
+            }
+         },
+         error: function(){
+            console.log('에러')
+         }
+      })
+   }
+
+
+      
+      
+   $('#accept').click(function (event) {
+      //$('tbody').children().remove();
+        event.preventDefault();
+        var requests = [];
+        $('input[name=selectAgreement]:checked').each(function () { //체크한 정보 담기
+            var chk = $(this).val();
+            requests.push(chk);
+        });
+        console.log(requests);
+        var answer = confirm("가입을 승인하시겠습니까?");
+      console.log(answer);
+      if(answer){
+         console.log("승인")
+       $.ajax({
+            url: "../group/joinAccept",
+            dataType: "json",
+            data: {
+                requestList: requests,
+                group_no: 1//임의로 값 넣었음 나중에 바꾸기
+            },
+            success: function (data) {
+               console.log("가입승인 성공")
+               loadRequest(1);//새로고침
+            },
+            error: function (request, status, error) {
+                console.log(error)
+            }
+        }) 
+      }
+   })
+   
+   
+</script>
 </body>
 </html>

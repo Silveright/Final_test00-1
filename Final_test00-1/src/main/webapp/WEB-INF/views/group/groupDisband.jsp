@@ -10,6 +10,7 @@ a{text-decoration:none; color:black}
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.js"></script>
 <script>
 $(document).ready(function() { 
 	
@@ -107,6 +108,8 @@ footer{
 <title>모임 해산 게시판</title>
 </head>
 <body>
+<!-- Header / <head> -->
+
 <br>
 
 	<div class="container">
@@ -122,13 +125,13 @@ footer{
 			<form action="memberinfocat" method="post" class="cat">				
 				
 				<input type="button" class="btn btn-secondary" value="회원 정보"
-					   onclick="location.href='groupuserinfo.jsp'">
+					   onclick="location.href='groupuserinfo'">
 					   
 				<input type="button" class="btn btn-secondary" value="가입 승인"
-					   onclick="location.href='groupjoinagree.jsp'">	   
+					   onclick="location.href='groupjoinagree'">	   
 				
 				<input type="button" class="btn btn-secondary" value="모임 해산"
-					   onclick="location.href='groupDisband.jsp'">
+					   onclick="location.href='groupDisband'">
 			</form>
 			
 			
@@ -171,4 +174,6 @@ footer{
 	 
 	</div>
 </body>
+<!-- Start Footer / Script -->
+
 </html>
