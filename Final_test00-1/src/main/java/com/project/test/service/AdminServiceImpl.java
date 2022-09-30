@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.project.test.domain.AdminChartAreaDate;
 import com.project.test.domain.AdminChartCategory;
+import com.project.test.domain.AdminMember;
 import com.project.test.domain.Calendar;
-import com.project.test.domain.Member;
 import com.project.test.mybatis.mapper.AdminMapper;
 @Service
 public class AdminServiceImpl implements AdminService{
@@ -64,7 +64,7 @@ public class AdminServiceImpl implements AdminService{
 		return dao.getSearchListCount(map);
 	}
 	@Override
-	public List<Member> getSearchList(int index, String search_word, int page, int limit) {
+	public List<AdminMember> getSearchList(int index, String search_word, int page, int limit) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if(index!=-1) {
 			String[] search_field = new String[] {"userid", "area_name", "gender"};
@@ -89,7 +89,7 @@ public class AdminServiceImpl implements AdminService{
 		return dao.getGroupSearchListCount(map);
 	}
 	@Override
-	public List<Member> getGroupSearchList(int index, String search_word, int page, int limit) {
+	public List<AdminMember> getGroupSearchList(int index, String search_word, int page, int limit) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if(index!=-1) {
 			String[] search_field = new String[] {"userid", "catename", "gender"};

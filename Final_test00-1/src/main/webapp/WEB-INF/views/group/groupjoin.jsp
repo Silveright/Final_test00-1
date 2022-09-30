@@ -62,7 +62,8 @@
 <div id="footerDiv" style="height: 300px"></div>
 <!-- Start Footer / Script -->
 <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
-<!-- End Footer / Script -->
+<!-- Start Footer / Script -->
+<jsp:include page="/WEB-INF/views/include/footer.jsp"/>
 </body>
 <script type="text/javascript">
 

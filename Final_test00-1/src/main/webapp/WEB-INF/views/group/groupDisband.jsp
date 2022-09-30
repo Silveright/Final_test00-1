@@ -107,6 +107,8 @@ footer{
 <title>모임 해산 게시판</title>
 </head>
 <body>
+<!-- Header / <head> -->
+<jsp:include page="/WEB-INF/views/include/header.jsp"/>
 <br>
 
 	<div class="container">
@@ -122,13 +124,13 @@ footer{
 			<form action="memberinfocat" method="post" class="cat">				
 				
 				<input type="button" class="btn btn-secondary" value="회원 정보"
-					   onclick="location.href='groupuserinfo.jsp'">
+					   onclick="location.href='groupuserinfo'">
 					   
 				<input type="button" class="btn btn-secondary" value="가입 승인"
-					   onclick="location.href='groupjoinagree.jsp'">	   
+					   onclick="location.href='groupjoinagree'">	   
 				
 				<input type="button" class="btn btn-secondary" value="모임 해산"
-					   onclick="location.href='groupDisband.jsp'">
+					   onclick="location.href='groupDisband'">
 			</form>
 			
 			
@@ -171,4 +173,6 @@ footer{
 	 
 	</div>
 </body>
+<!-- Start Footer / Script -->
+<jsp:include page="/WEB-INF/views/include/footer.jsp"/>	
 </html>

@@ -28,7 +28,7 @@
     </style>
 
 </head>
-
+<jsp:include page="/WEB-INF/views/include/header.jsp"/>
 <body id="page-top">
 
 <!-- 기능 구현용- 모임 기능 구현 뒤 그쪽으로 옮기기 -->

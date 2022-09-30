@@ -1,7 +1,7 @@
 package com.project.test.domain;
 
 public class MailVO {
-	private String from="ansd3073@naver.com"; //mail.properties에서 작성한 아이디에 해당하는 이메일 주소 작성합니다.
+	private String from="spyparty2@naver.com"; //mail.properties에서 작성한 아이디에 해당하는 이메일 주소 작성합니다.
 	private String to;
 	private String subject="회원 가입을 축하드립니다. - 제목";
 	private String content="회원 가입을 축하드립니다. - 내용";

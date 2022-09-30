@@ -51,7 +51,9 @@ img{width:20px}
 </style>
 <title>MVC 게시판</title>
 </head>
+
 <body>
+<jsp:include page="/WEB-INF/views/include/header.jsp"/>
 	<div class="container">
 	<form action="reviewaddaction.pg" method="post" enctype="multipart/form-data" name="reviewform">
 		<div class="row align-items-center justify-content-center">

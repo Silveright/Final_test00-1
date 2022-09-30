@@ -7,8 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.project.test.domain.AdminChartAreaDate;
 import com.project.test.domain.AdminChartCategory;
+import com.project.test.domain.AdminMember;
 import com.project.test.domain.Calendar;
-import com.project.test.domain.Member;
 
 @Mapper
 public interface AdminMapper {
@@ -28,11 +28,11 @@ public interface AdminMapper {
 
 	int getSearchListCount(Map<String, String> map);
 
-	List<Member> getSearchList(Map<String, Object> map);
+	List<AdminMember> getSearchList(Map<String, Object> map);
 
 	int getGroupSearchListCount(Map<String, String> map);
 
-	List<Member> getGroupSearchList(Map<String, Object> map);
+	List<AdminMember> getGroupSearchList(Map<String, Object> map);
 
 	void delete(String userid);
 
