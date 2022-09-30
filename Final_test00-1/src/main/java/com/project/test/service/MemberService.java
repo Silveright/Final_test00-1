@@ -22,4 +22,6 @@ public interface MemberService {
 									  int page, int limit);
 	
 	public int getSearchListCount(int index, String search_word);
+	
+	public String username(String id); 
 }
