@@ -26,4 +26,7 @@ public interface MemberMapper {
 
 	public List<Member> getSearchList(Map<String, Object> map) ;
 	
+	//채팅입장시 이름가져오기
+	public void username(String id);
+	
 }
