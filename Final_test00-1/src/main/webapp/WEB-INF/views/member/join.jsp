@@ -93,6 +93,8 @@ form[name="joinform"] {
     border: 1px solid lightgray;
     width: 600px; /* Could be more or less, depending on screen size */
     padding: 16px;
+    box-shadow: 0 20px 20px rgba(0, 0, 0, .5), 0px 0px 50px rgba(0, 0, 0, .5);
+  border-radius: 30px;
 }
 
 hr {
@@ -204,7 +206,7 @@ span{display:inline-block;margin-top:-20px;}
 		<h1 style="font-style:italic; color:#776BCC;">Sign Up</h1>
 		<hr>
 		<b style="font-style:italic; color:#776BCC;">ID</b>
-		<input type = "text" name = "id" placeholder="Enter id" required maxlength="12" style="margin-bottom:0px">
+		<input type = "text" name = "userid" placeholder="Enter id" required maxlength="12" style="margin-bottom:0px">
 		<span id="message" style="margin-bottom:0px"></span>
 		
 		<b style="font-style:italic; color:#776BCC;">Password</b>
@@ -216,8 +218,21 @@ span{display:inline-block;margin-top:-20px;}
 		<b style="font-style:italic; color:#776BCC;">Age</b>
 		<input type = "text" name = "age" maxlength="2" placeholder="Enter age" required>
 		
-		<b style="font-style:italic; color:#776BCC;">Gender</b>
+		 <div class="area">
+		 <b style="font-style:italic; color:#776BCC;">Area</b>
+            <select id="area" name="area_name">
+                <option selected disabled>지역을 선택하세요.</option>
+                <option>서울</option>
+                <option>인천</option>
+                <option>충청도</option>
+                <option>전라도</option>
+                <option>부산</option>
+                <option>경상도</option>
+            </select>
+            <div id="areaError" class="error"></div>
+        </div><br>
 		<div>
+		<b style="font-style:italic; color:#776BCC;">Gender</b>
 			<input type = "radio" name = "gender" value="Man" checked><span style="font-style:italic; color:#776BCC;">Man</span>
 			<input type = "radio" name = "gender" value="Woman"><span style="font-style:italic; color:#776BCC;">Woman</span>
 		</div>

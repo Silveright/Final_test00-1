@@ -454,7 +454,7 @@
 	    $.ajax({
 	        url: "total",
 	        dataType: "json",
-	        type: "post",
+	        //type: "post",
 	        success: function (data) {
 	            $('#total_user').text(data.totalUser);
 	            $('#total_group').text(data.totalGroup);

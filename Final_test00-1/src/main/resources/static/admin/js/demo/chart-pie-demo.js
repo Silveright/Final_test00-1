@@ -5,7 +5,7 @@ Chart.defaults.global.defaultFontColor = '#858796';
 // Pie Chart Example
 $.ajax({
 	url:"../admin/piechart",
-	type:"post",
+	//type:"post",
 	dataType:"json",
 	success: function(data){
 		$(".mr-1").remove();
@@ -78,7 +78,7 @@ $.ajax({
 
 $.ajax({
 	url:"../admin/piechart2",
-	type:"post",
+	//type:"post",
 	dataType:"json",
 	success: function(data){
 		

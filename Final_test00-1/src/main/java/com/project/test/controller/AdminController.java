@@ -49,7 +49,7 @@ public class AdminController {
 		return map;
 	}
 	@ResponseBody
-	@PostMapping(value="/total")
+	@GetMapping(value="/total")
 	public Map<String, Object> Total(){
 		Map<String, Object> map = new HashMap<String, Object>();
 		int totaluser = adminService.gettotaluser();
@@ -64,7 +64,7 @@ public class AdminController {
 	}
 
 	@ResponseBody
-	@PostMapping(value="/areachart")
+	@GetMapping(value="/areachart")
 	public Map<String, Object> AreaChart(){
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<AdminChartAreaDate> chartdate = adminService.getChartareaDate();
@@ -74,7 +74,7 @@ public class AdminController {
 	}
 
 	@ResponseBody
-	@PostMapping(value="/piechart")
+	@GetMapping(value="/piechart")
 	public Map<String, Object> PieChart(){
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<AdminChartCategory> piechart = adminService.getPieChart();
@@ -84,7 +84,7 @@ public class AdminController {
 	}
 
 	@ResponseBody
-	@PostMapping(value="/piechart2")
+	@GetMapping(value="/piechart2")
 	public Map<String, Object> PieChart2(){
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<AdminChartCategory> piechart = adminService.getPieChart2();

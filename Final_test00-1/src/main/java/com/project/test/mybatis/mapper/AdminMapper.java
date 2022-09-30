@@ -9,6 +9,7 @@ import com.project.test.domain.AdminChartAreaDate;
 import com.project.test.domain.AdminChartCategory;
 import com.project.test.domain.AdminMember;
 import com.project.test.domain.Calendar;
+import com.project.test.domain.Member;
 
 @Mapper
 public interface AdminMapper {

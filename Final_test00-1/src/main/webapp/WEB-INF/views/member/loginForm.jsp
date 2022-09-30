@@ -16,7 +16,6 @@
   padding: 0; 
   font-family: Raleway, sans-serif;
 }
-
 body {
   background: linear-gradient(90deg, #C7C5F4, #776BCC);   
 }
@@ -40,6 +39,7 @@ body {
   z-index: 1;
   position: relative; 
   height: 100%;
+  
 }
 
 .screen__background {   
@@ -267,14 +267,14 @@ $(function() {
   <div class="screen">
     <div class="screen__content">
     <img alt="2" src="${pageContext.request.contextPath}/resources/img/final_logo.png" style="width:100px; higth:50px;">
-      <form class="login">
+      <form class="login" action="loginProcess" method="post">
          <div class="login__field">
           <i class="login__icon fas fa-user"></i>
-          <input type="text" class="login__input" placeholder="User name / Email">
+          <input type="text" class="login__input" name="userid" placeholder="User name / Email">
         </div>
         <div class="login__field">
           <i class="login__icon fas fa-lock"></i>
-          <input type="password" class="login__input" placeholder="Password">
+          <input type="password" class="login__input" name="password" placeholder="Password">
           <button class="button login__submit">
           <span class="button__text"onclick="kakaoLogin();">kakao login</span>
           
@@ -291,11 +291,6 @@ $(function() {
       </form>
       <div class="social-login">
         <h3>3.3.5.5</h3>
-        <div class="social-icons">
-          <a href="#" class="social-login__icon fab fa-instagram"></a>
-          <a href="#" class="social-login__icon fab fa-facebook"></a>
-          <a href="#" class="social-login__icon fab fa-twitter"></a>
-        </div>
       </div>
     </div>
     <div class="screen__background">

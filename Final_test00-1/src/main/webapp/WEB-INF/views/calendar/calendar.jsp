@@ -125,8 +125,9 @@
         <h5 class="modal-title" id="exampleModalLabel">일정 정보</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
         <form>
+      <div class="modal-body">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
           <input type="hidden" name="calendar_no" id="calendar_no" value=""/>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label" >제목</label>
@@ -150,7 +151,6 @@
           </div>
           <input type="hidden" name="xcoord" id="xcoord" value="126.99224354616133"/>
           <input type="hidden" name="ycoord" id="ycoord" value="37.57295805285539"/>
-        </form>
           <div class="mb-3">
             <div id="map" style="width: 465px; height: 300px;"></div>
           </div>
@@ -159,6 +159,7 @@
         <!-- <button type="button" class="btn btn-secondary" id="close" data-bs-dismiss="modal">Close</button> -->
         <button type="button" class="btn btn-primary" id="save">Save</button>
       </div>
+        </form>
     </div>
   </div>
 </div>
@@ -218,6 +219,9 @@
     	 loadingEvents()//처음 일정 페이지
       ,
       eventClick: function (event) {//세부 일정 확인
+    	  var token = $("meta[name='_csrf']").attr("content");
+		  var header = $("meta[name='_csrf_header']").attr("content");
+    	  
           $('#map').empty();
     	  $('.btn-close').show();
           //$('#ModalLabel').text('일정을 확인하세요!'); //이벤트 클릭시에는 일정확인 메세지로 변경
@@ -237,7 +241,7 @@
           //ajax로 해당 스케줄의 정보 가져와서 출력
           $.ajax({
               url: "detail",
-              type: 'POST',
+              //type: 'POST',
               dataType: 'JSON',
               async: false,
               data: {
@@ -278,6 +282,9 @@
           myModal.show();
       },
       drop: function(info,revertFunc) {
+    	  var token = $("meta[name='_csrf']").attr("content");
+		  var header = $("meta[name='_csrf_header']").attr("content");
+    	  
     	   myModal.show();//일정 등록 폼 띄우기
     	   $('#map').empty();
 
@@ -312,7 +319,9 @@
           
       },
       eventDrop: function (info) { //이벤트를 옮겼을때 수정함
-          var year = (info.event._instance.range.start.getFullYear()); //옮긴 달력의 날짜
+    	  var token = $("meta[name='_csrf']").attr("content");
+		  var header = $("meta[name='_csrf_header']").attr("content");
+    	  var year = (info.event._instance.range.start.getFullYear()); //옮긴 달력의 날짜
           var month = info.event._instance.range.start.getMonth() + 1; //옮긴 달력의 날짜
           var day = info.event._instance.range.start.getDate(); //옮긴 달력의 날짜
 
@@ -325,7 +334,7 @@
 
           $.ajax({
               url: "modifydate",
-              type: 'post',
+              //type: 'post',
               async: false,
               data: {
             	  startdate: modifyDate,
@@ -349,9 +358,11 @@
    
    
    function loadingEvents() { //처음 페이지 로딩시 이벤트 불러오기, json형태로
-       var return_value = null;
+	   var token = $("meta[name='_csrf']").attr("content");
+	   var header = $("meta[name='_csrf_header']").attr("content");
+	   var return_value = null;
        $.ajax({
-           type: 'POST',
+           //type: 'POST',
            url: 'loadevent',
            async: false,
            data: {
@@ -369,6 +380,8 @@
    
    //일정 만들기 확인 클릭
    $(".modal-footer").on('click', '#save', function (e) {
+	   var token = $("meta[name='_csrf']").attr("content");
+		  var header = $("meta[name='_csrf_header']").attr("content");
 	   console.log( $('#title').val())
 	   console.log($('#xcoord').val())
        if ($("#subject").val() == "") {
@@ -381,7 +394,7 @@
 
            $.ajax({
                url: "add",
-               type: "post",
+               //type: "post",
                async: false,
                data: {
                    group_no: group_no,
@@ -414,13 +427,15 @@
    
  //deltet.png 클릭 시
 	$(".modal-footer").on('click', '#delete',function(){
+		var token = $("meta[name='_csrf']").attr("content");
+		  var header = $("meta[name='_csrf_header']").attr("content");
 		var calendar_no = $(this).next().next().val();//댓글번호
 		console.log(calendar_no)
 		if(!confirm('정말 삭제하시겠습니까?')) {
 			return;
 		}
 		$.ajax({
-			type: "post",
+			//type: "post",
 			url:"delete",
 			data : {
 				"calendar_no":calendar_no
@@ -438,13 +453,16 @@
    
    
 	$(".modal-footer").on('click', '#modify',function(){
+		var token = $("meta[name='_csrf']").attr("content");
+		  var header = $("meta[name='_csrf_header']").attr("content");
+		  
 		var calendar_no = $(this).next().val();//댓글번호
 		console.log(calendar_no)
 		if(!confirm('수정하시겠습니까?')) {
 			return;
 		}
 		$.ajax({
-			type: "post",
+			//type: "post",
 			url:"modify",
 			data : {
 				group_no: group_no,
@@ -453,6 +471,8 @@
                 subject: $('#subject').val(),
                 content: $('#content').val(),
                 location: $('#location').val(),
+                xcoord: $('#xcoord').val(),
+                ycoord: $('#ycoord').val(),
                 calendar_no : calendar_no
 			},
 			success:function(result){
@@ -467,6 +487,8 @@
 	})
 	
 function makeMap() { //지도만들기
+		var token = $("meta[name='_csrf']").attr("content");
+		  var header = $("meta[name='_csrf_header']").attr("content");
         $('#map').empty();
 
         var xcoord = $('#xcoord').val(); //x축 좌표
@@ -529,6 +551,8 @@ function makeMap() { //지도만들기
 	
 	
 function searchMap(){
+	var token = $("meta[name='_csrf']").attr("content");
+	var header = $("meta[name='_csrf_header']").attr("content");
 	
 //마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
 
@@ -569,6 +593,8 @@ function placesSearchCB (data, status, pagination) {
 
 // 지도에 마커를 표시하는 함수입니다
 function displayMarker(place) {
+	var token = $("meta[name='_csrf']").attr("content");
+	var header = $("meta[name='_csrf_header']").attr("content");
     
     // 마커를 생성하고 지도에 표시합니다
     var marker = new kakao.maps.Marker({

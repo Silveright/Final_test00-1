@@ -19,9 +19,9 @@
 </style>
 <body>
 <!-- Header / <head> -->
-<jsp:include page="/WEB-INF/views/include/header.jsp"/>
+
 <!-- Close Header / <head> -->
-<jsp:include page="/WEB-INF/views/group/group_management/groupAdminNavbar.jsp"/>
+
 
 <!-- Start Feature Work -->
 <section class="bg-light py-5 ">
@@ -60,10 +60,7 @@
 </section>
 <!-- End Feature Work -->
 <div id="footerDiv" style="height: 300px"></div>
-<!-- Start Footer / Script -->
-<jsp:include page="/WEB-INF/views/include/footer.jsp"/>
-<!-- Start Footer / Script -->
-<jsp:include page="/WEB-INF/views/include/footer.jsp"/>
+
 </body>
 <script type="text/javascript">
 

@@ -2,6 +2,7 @@ package com.project.test.domain;
 
 
 public class Member {
+
    private String name;
    
    //member_joinForm.jsp에서 비밀번호 name속성 값을 확인해주세요
@@ -73,3 +74,4 @@ public class Member {
    
    
 }
+
