@@ -65,24 +65,35 @@
   	background-color:#776bcc;
   	border-color:#776bcc
   } */
-  .fc-h-event{
-  	background-color:#776bcc;
-  	border-color:#776bcc
+  .fc-h-event3{
+  	background-color:#4c489d;
+  	border-color:#4c489d;
+  	color:#fff
+  }
+  .fc-h-event1{
+  	background-color:#847fe9  ;
+  	border-color:#847fe9  ;
+  	color:#fff
+  }
+  .fc-h-event2{
+  	background-color:#5851e9  ;
+  	border-color:#5851e9  ;
+  	color:#fff
   }
   a {
     color: #4232c2;
     text-decoration: none  !important;
 }
 .fc .fc-button-primary:hover,.fc .fc-button-primary, .fc .fc-button-primary:disabled {
-    color: #000 !important;
+    color: #fff !important;
     color: var(--fc-button-text-color, #fff);
-    background-color: #cac6e3ed;
+    background-color: #4c489d;
     border-color: #282636;
 }
 .fc .fc-button-primary:not(:disabled):active, .fc .fc-button-primary:not(:disabled).fc-button-active {
     color: #fff;
     color: var(--fc-button-text-color, #fff);
-    background-color: #776bcc;
+    background-color: #847fe9;
     border-color: #282636;
 }
 </style>
@@ -95,13 +106,13 @@
       <h4>Draggable Events</h4>
 
       <div id='external-events-list'>
-        <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
+        <div class='fc-event fc-h-event1 fc-daygrid-event fc-daygrid-block-event'>
           <div class='fc-event-main'>정모</div>
         </div>
-        <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
+        <div class='fc-event fc-h-event2 fc-daygrid-event fc-daygrid-block-event'>
           <div class='fc-event-main'>번개</div>
         </div>
-        <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
+        <div class='fc-event fc-h-event3 fc-daygrid-event fc-daygrid-block-event'>
           <div class='fc-event-main'>비대면</div>
         </div>
       </div>
@@ -164,9 +175,10 @@
   </div>
 </div>
    <script>
+   var click=0;
    var group_no=1;//더미용
-   console.log(group_no);
-   console.log($("#xcoord").val())
+  /*  console.log(group_no);
+   console.log($("#xcoord").val()) */
    var myModal = new bootstrap.Modal(document.getElementById('exampleModal'))
 
     var containerEl = document.getElementById('external-events-list');
@@ -178,22 +190,6 @@
         }
       }
     });
-
-    //// the individual way to do it
-    // var containerEl = document.getElementById('external-events-list');
-    // var eventEls = Array.prototype.slice.call(
-    //   containerEl.querySelectorAll('.fc-event')
-    // );
-    // eventEls.forEach(function(eventEl) {
-    //   new FullCalendar.Draggable(eventEl, {
-    //     eventData: {
-    //       title: eventEl.innerText.trim(),
-    //     }
-    //   });
-    // });
-
-    /* initialize the calendar
-    -----------------------------------------------------------------*/
 
     var calendarEl = document.getElementById('calendar');
     var calendar;
@@ -208,16 +204,37 @@
       },
       editable: true,
       droppable: true, // this allows things to be dropped onto the calendar
-      events:
-    	  /* [
-          {
-              "start":"2022-09-09",
-              "title":"바지"
-            }] */
-
- 
-    	 loadingEvents()//처음 일정 페이지
-      ,
+      eventSources: [{
+  		events: function(info, successCallback, failureCallback) {
+  			$.ajax({
+  				url: 'loadevent',
+  				//type: 'POST',
+  				dataType: 'json',
+  				data: {
+  					"group_no": "1"// group_no
+  				},
+  				success: function(data) {
+  					for(idx in data){
+  					    console.log(data[idx]);
+  					    console.log(data[idx].title);
+  					    if(data[idx].title=='번개'){
+  					    	data[idx].color='#5851e9';
+  					    }else if(data[idx].title=='정모'){
+  					    	data[idx].color='#847fe9';
+  					    }else{
+  					    	data[idx].color='#4c489d';
+  					    }
+  					};
+  					
+  					successCallback(data);
+  					console.log("이벤트 소스")
+  					console.log(data)
+  				}
+  			});
+  		}
+  	}]
+      /* , eventColor : '#5c6a96'  */,
+      
       eventClick: function (event) {//세부 일정 확인
     	  var token = $("meta[name='_csrf']").attr("content");
 		  var header = $("meta[name='_csrf_header']").attr("content");
@@ -315,7 +332,10 @@
         //drop하고 정보 기입 안하고 close를 누를 경우 이벤트 사라지도록?? 적용 안됨
        $('#close').click(function(){
         	alert("일정 적용이 취소됩니다.")
-        	document.location.href = document.location.href;
+        	 $('.btn-close').click();
+        	calendar.removeAllEvents();
+            calendar.refetchEvents();
+        	//document.location.href = document.location.href;
     	   //$("[data-date='"+info.dateStr+"']").find('a:eq(1)').remove()
         });
           
@@ -359,28 +379,6 @@
     calendar.render();
 
    
-   
-   function loadingEvents() { //처음 페이지 로딩시 이벤트 불러오기, json형태로
-	   var token = $("meta[name='_csrf']").attr("content");
-	   var header = $("meta[name='_csrf_header']").attr("content");
-	   var return_value = null;
-       $.ajax({
-           //type: 'POST',
-           url: 'loadevent',
-           async: false,
-           data: {
-               "group_no": group_no //group_no를 통해 해당그룹의 이벤트정보들 가져옴
-           },
-           dataType: 'JSON',
-           success(response) {
-               console.log(response);//받은 데이터 콘솔 확인
-               return_value = response;
-           }
-       })
-       return return_value;
-   }
-   
-   
    //일정 만들기 확인 클릭
    $(".modal-footer").on('click', '#save', function (e) {
 	   var token = $("meta[name='_csrf']").attr("content");
@@ -393,7 +391,14 @@
        } else if ($("#content").val().trim() == "") {
            alert('일정 내용을 입력해주세요 !')
            return;
-       } else {
+       } else if ($("#location").val().trim() == "") {
+           alert('장소를 입력해주세요 !')
+           return;
+       }else if (click == 0) {
+           alert('지도의 장소를 선택해 주세요 !')
+           return;
+       }
+       else {
 
            $.ajax({
                url: "add",
@@ -412,13 +417,15 @@
                success: function (response) {
                    alert( '일정이 추가되었습니다!')
                    //calendar.refetchEvents();
-                   calendar.render();
+                  // calendar.render();
                   $('.modal').modal('hide');
                    //document.location.href = document.location.href;
                    //loadingEvents();
-                   //calendar.refetchEvents();
+                 calendar.removeAllEvents();
+                  calendar.refetchEvents();
+                  //calendar.render();
                    console.log(calendar)
-                   calendar.events.loadingEvents();
+                   //calendar.events.loadingEvents();
                   //$("#calendar").load("../calendar/view",{group_no: group_no})
                }
                ,
@@ -430,7 +437,6 @@
    });
    
    
- //deltet.png 클릭 시
 	$(".modal-footer").on('click', '#delete',function(){
 		var token = $("meta[name='_csrf']").attr("content");
 		  var header = $("meta[name='_csrf_header']").attr("content");
@@ -448,9 +454,10 @@
 			success:function(result){
 				if(result==1) {
 					alert( '일정이 삭제되었습니다!')
-					document.location.href = document.location.href;//다시 load하는 방법..?
+					//document.location.href = document.location.href;//다시 load하는 방법..?
 					$('.btn-close').click();
-					loadingEvents();//삭제 후 해당 페이지의 내용을 보여준다.
+					calendar.removeAllEvents();
+	                  calendar.refetchEvents();//삭제 후 해당 페이지의 내용을 보여준다.
 				}
 			}
 		})
@@ -483,7 +490,10 @@
 			success:function(result){
 				if(result==1) {
 					alert( '일정이 수정되었습니다!')
-					document.location.href = document.location.href;//다시 load하는 방법..?
+				 $('.btn-close').click();
+				 calendar.removeAllEvents();
+                  calendar.refetchEvents();
+					//document.location.href = document.location.href;//다시 load하는 방법..?
 					//$('.btn-close').click();
 					//loadingEvents();//삭제 후 해당 페이지의 내용을 보여준다.
 				}
@@ -609,12 +619,14 @@ function displayMarker(place) {
 
     // 마커에 클릭이벤트를 등록합니다
     kakao.maps.event.addListener(marker, 'click', function() {
-        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+        click++;
+    	// 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
         infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
         infowindow.open(map, marker);
         $('#location').val(place.place_name);
         $('#xcoord').val(place.x);
         $('#ycoord').val(place.y);
+        console.log("마커 클릭"+click);
     });
 }
 }

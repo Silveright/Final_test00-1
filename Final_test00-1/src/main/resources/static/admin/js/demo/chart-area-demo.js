@@ -29,9 +29,14 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 
 // Area Chart Example 주소/areachart
 $.ajax({
+	/*var token = $("meta[name='_csrf']").attr("content");
+	var header = $("meta[name='_csrf_header']").attr("content");*/
 	url: "../admin/areachart",
 	//type:"post",
     dataType: "json",
+  /*  beforeSend: function(xhr){
+		xhr.setRequestHeader(header, token);
+	},*/
     success: function (data){
 		
 		//console.log("날짜 길이"+data.chartdate.length)
