@@ -32,7 +32,7 @@
 <body id="page-top">
 
 <!-- 기능 구현용- 모임 기능 구현 뒤 그쪽으로 옮기기 -->
-<a href="${pageContext.request.contextPath}/calendar/view"><input type="button" value="일정관리"
+<a href="${pageContext.request.contextPath}/calendar/view2"><input type="button" value="일정관리"
          class="btn btn-primary rounded-pill btn-block shadow px-4 py-2"></a>
 
     <!-- Page Wrapper -->

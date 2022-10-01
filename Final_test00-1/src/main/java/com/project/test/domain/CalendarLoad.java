@@ -7,8 +7,15 @@ public class CalendarLoad {
     private String title;
     private String start;
     private String id;
+    private String color;
 
-	 public String getId() {
+	 public String getColor() {
+		return color;
+	}
+	public void setColor(String color) {
+		this.color = color;
+	}
+	public String getId() {
 		return id;
 	}
 	public void setId(String id) {

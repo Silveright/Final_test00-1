@@ -31,6 +31,12 @@ public class CalendarController {
 		mv.setViewName("calendar/calendar");
 		return mv;
 	}
+
+	@RequestMapping(value="/view2", method=RequestMethod.GET)
+	public ModelAndView view2(ModelAndView mv) {
+		mv.setViewName("calendar/calendar2");
+		return mv;
+	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/loadevent", method = RequestMethod.GET)
