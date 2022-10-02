@@ -22,7 +22,7 @@
     position: fixed;
     left: 20px;
     top: 200px;
-    width: 150px;
+   width: 160px;
     padding: 0 10px;
     border: 1px solid #ccc;
     background: #eee;
@@ -88,13 +88,13 @@
     color: #fff !important;
     color: var(--fc-button-text-color, #fff);
     background-color: #4c489d;
-    border-color: #282636;
+    border-color: #4c489d;
 }
 .fc .fc-button-primary:not(:disabled):active, .fc .fc-button-primary:not(:disabled).fc-button-active {
     color: #fff;
     color: var(--fc-button-text-color, #fff);
     background-color: #847fe9;
-    border-color: #282636;
+    border-color: #4c489d;
 }
 </style>
 </head>
@@ -103,7 +103,7 @@
   <div id='wrap'>
 	
     <div id='external-events'>
-      <h4>Draggable Events</h4>
+      <small>일정을 드래그하세요!</small>
 
       <div id='external-events-list'>
         <div class='fc-event fc-h-event1 fc-daygrid-event fc-daygrid-block-event'>
@@ -263,7 +263,7 @@
               url: "detail",
               //type: 'POST',
               dataType: 'JSON',
-              async: false,
+              //async: false,
               data: {
                   group_no: '1',
                   calendar_no: calendar_no
@@ -321,7 +321,7 @@
     	  $('#title').val(info.draggedEl.innerText);//input tag-모임 유형 입력
           $('#date').val(info.dateStr); //input tag-모임 날짜 입력
           $('#xcoord').val('126.99224354616133');
-          $('#ycoord').val('37.57295805285539');
+          $('#ycoord').val('37.57295805285539');//기본 좌표 설정 
            makeMap();
         // is the "remove after drop" checkbox checked?
         if (document.getElementById('drop-remove').checked) {
@@ -358,7 +358,7 @@
           $.ajax({
               url: "modifydate",
               //type: 'post',
-              async: false,
+              //async: false,
               data: {
             	  startdate: modifyDate,
                   calendar_no: calendar_no
@@ -403,7 +403,7 @@
            $.ajax({
                url: "add",
                //type: "post",
-               async: false,
+               //async: false,
                data: {
                    group_no: group_no,
                    title: $('#title').val(),
@@ -527,7 +527,7 @@ function makeMap() { //지도만들기
 
         // 지도에 클릭 이벤트를 등록합니다
         // 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
-        kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
+        /* kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
 
             // 클릭한 위도, 경도 정보를 가져옵니다
             var latlng = mouseEvent.latLng;
@@ -535,19 +535,20 @@ function makeMap() { //지도만들기
             // 마커 위치를 클릭한 위치로 옮깁니다
             marker.setPosition(latlng);
         });
-
+ 221002 필요성 x*/
         //div 위치오류 수정 (display : none 이었던 속성때문에 카카오 api가 위치를 제대로 못찾기때문에 재설정을 해줘야한다)
         setTimeout(function () {
             map.relayout();
             map.setCenter(new kakao.maps.LatLng(ycoord, xcoord));
             // map.setLevel(2); 필요하면 레벨조정
         }, 200);
-
-        var iwContent = '<div style="text-align: center; padding-left: 15px">모임장소' +
-            '<a href="https://map.kakao.com/link/map/' +
-            '모임장소' + ',' + ycoord + ',' + xcoord + '" style="color:#000000" target="_blank">&#129306;</a>' +
+		var destination=$('#location').val();
+		console.log(destination)
+        var iwContent = '<a href="https://map.kakao.com/link/to/' +
+        destination + ',' + ycoord + ',' + xcoord + '" style="color:#000000" target="_blank"><div style="text-align: center; padding-left: 10px; width:120px">길찾기' +
+            '&#129306;</a>' +
             '<a href="https://map.kakao.com/link/to/' +
-            '모임장소' + ',' + ycoord + ',' + xcoord + '" style="color:#000000" target="_blank">📌</a></div>',
+            destination + ',' + ycoord + ',' + xcoord + '" style="color:#000000" target="_blank">📌</a></div>',
 
 
             iwPosition = new kakao.maps.LatLng(ycoord, xcoord); //인포윈도우 표시 위치입니다

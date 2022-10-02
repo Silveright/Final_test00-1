@@ -15,7 +15,7 @@
 		where calendar_no = #{calendar_no}
 	</select>
 	
-	<insert id="CalendarAdd" parameterType="calendar">
+	<insert id="CalendarAdd">
 		insert into group_schedule 
 		values(calendar_seq.nextval, #{group_no}, #{title}, #{subject}, #{content}, to_char(#{startdate},'yyyy-mm-dd'),#{location}, #{xcoord}, #{ycoord})
 	</insert>
