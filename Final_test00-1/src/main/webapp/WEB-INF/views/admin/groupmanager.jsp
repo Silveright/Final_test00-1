@@ -3,14 +3,17 @@
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
+<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 <head>
-<style>
-a{text-decoration:none; color:black}
-</style>
-<!-- <script src="js/jquery-3.6.0.js"></script> -->
- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
+<link href="${pageContext.request.contextPath}/resources/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/resources/admin/css/sb-admin-2.min.css" rel="stylesheet">
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.js"></script>
 <script>
 $(document).ready(function() { 
@@ -39,72 +42,194 @@ $(document).ready(function() {
 </script>
 </head>
 <style>
-input{border:1px solid black}
-b{font-size:0.9em}
-.table-active1 {
-    --bs-table-accent-bg: #443dd529;
-    color: var(--bs-table-active-color);
-}
-    .page-link {
-    position: relative;
-    display: block;
-    padding: var(--bs-pagination-padding-y) var(--bs-pagination-padding-x);
-    font-size: var(--bs-pagination-font-size);
-    color: #776bcc;
-    text-decoration: none;
-    background-color: var(--bs-pagination-bg);
-    border: var(--bs-pagination-border-width) solid var(--bs-pagination-border-color);
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-}
-.pagination {
-    --bs-pagination-padding-x: 0.75rem;
-    --bs-pagination-padding-y: 0.375rem;
-    --bs-pagination-font-size: 1rem;
-    --bs-pagination-color: var(--bs-link-color);
-    --bs-pagination-bg: #fff;
-    --bs-pagination-border-width: 1px;
-    --bs-pagination-border-color: #dee2e6;
-    --bs-pagination-border-radius: 0.375rem;
-    --bs-pagination-hover-color: var(--bs-link-hover-color);
-    --bs-pagination-hover-bg: #e9ecef;
-    --bs-pagination-hover-border-color: #dee2e6;
-    --bs-pagination-focus-color: var(--bs-link-hover-color);
-    --bs-pagination-focus-bg: #e9ecef;
-    --bs-pagination-focus-box-shadow: 0 0 0 0.25remrgba(13, 110, 253, 0.25);
-    --bs-pagination-active-color: #fff;
-    --bs-pagination-active-bg: #776bcc;
-    --bs-pagination-active-border-color: #776bcc;
-    --bs-pagination-disabled-color: #6c757d;
-    --bs-pagination-disabled-bg: #fff;
-    --bs-pagination-disabled-border-color: #dee2e6;
-    display: flex;
-    padding-left: 0;
-    list-style: none;
-}
+    .bg-gradient-primary {background-image: linear-gradient(180deg,#776bcc 10%,#adb3c3 100%);}
+    .btn-primary{    background-color: #776bcc; border-color: #776bcc}
+    .btn-primary:hover{    background-color: #776bcc; border-color: #776bcc; opacity:0.5}
+    .btn-link {
+    color: #776bcc;}
+a{text-decoration:none; color:black}
 </style>
 <title>모임장</title>
 </head>
-<body>
-<jsp:include page="../include/header.jsp"/>
-<br>
-	<div class="container">
-	<c:if test="${listcount > 0 }">
-		<div class="row align-items-center justify-content-center">
-			<div class="col-sm-9 ">
-				<br>
-				<table class="table table-bordered">
-					<thead>
-						<tr class="table-active1">
-							<th>순위</th>
-							<th>아이디</th>
-							<th>지역</th>
-							<th>성별</th>
-							<th>모임명</th>
-							<th>카테고리</th>
-							<th>회원수</th>
-						</tr>
-					</thead>
-					<tbody>
+<body id="page-top">
+	<div id="wrapper">
+ <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <!-- <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <div class="sidebar-brand-icon ">rotate-n-15
+                    <i class="fas fa-laugh-wink">삼삼오오</i>
+                </div> -->
+                <%-- <div class="sidebar-brand-text mx-3"><img src="${pageContext.request.contextPath}/resources/admin/img/final_logo.png" width="100px></div> --%>
+            <!-- </a> -->
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" href="dashboard">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+                    
+            </li>
+
+            <!-- Divider -->
+          <!--   <hr class="sidebar-divider">
+ -->
+            <!-- Heading -->
+           <!--  <div class="sidebar-heading">
+                Board
+            </div> -->
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <!-- <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-edit"></i>
+                    <span>공지사항</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Notice</h6>
+                        <a class="collapse-item" href="noticewrite">작성하기</a>
+                        <a class="collapse-item" href="noticelist">공지사항 목록</a>
+                    </div>
+                </div>
+            </li>
+
+            Nav Item - Utilities Collapse Menu
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="inquiry">
+                    <i class="fas fa-fw fa-phone"></i>
+                    <span>문의처리</span>
+                </a>
+            </li> -->
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Member
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="memberinfo" data-toggle="collapse" data-target="#collapsePages"
+                    aria-expanded="true" aria-controls="collapsePages" -->
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>회원관리</span>
+                </a>
+               <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">전체 회원</h6>
+                        <a class="collapse-item" href="memberinfo">회원 목록</a>
+                        <div class="collapse-divider"></div>
+                        <h6 class="collapse-header">모임장</h6>
+                        <a class="collapse-item" href="groupmanager">모임장 목록</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Charts -->
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="charts.html">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Charts</span></a>
+            </li> -->
+
+            <!-- Nav Item - Tables -->
+           <!--  <li class="nav-item">
+                <a class="nav-link" href="tables.html">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Tables</span></a>
+            </li>
+ -->
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+            <!-- Sidebar Message -->
+            <%-- <div class="sidebar-card d-none d-lg-flex">
+                <img class="sidebar-card-illustration mb-2" src="${pageContext.request.contextPath}/resources/admin/img/undraw_rocket.svg" alt="...">
+                <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
+                <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
+            </div> --%>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <form class="form-inline">
+                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                    </form>
+
+                    <!-- Topbar Search -->
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+
+
+
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                   <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-2 text-gray-800">모임장 정보</h1>
+                    <a href="${pageContext.request.contextPath}/main/list" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                class="fas fa-angle-left"></i> 메인화면</a>
+                                </div>
+                    <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
+                        For more information about DataTables, please visit the <a target="_blank"
+                            href="https://datatables.net">official DataTables documentation</a>.</p>
+ -->
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">모임원 수 기준 모임장 목록</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <c:if test="${listcount > 0 }">
+                                
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+									<tr class="table-active1">
+										<th>순위</th>
+										<th>아이디</th>
+										<th>지역</th>
+										<th>성별</th>
+										<th>모임명</th>
+										<th>카테고리</th>
+										<th>회원수</th>
+									</tr>
+								</thead>
+                                <tbody>
 						<c:set var="num" value="${listcount-(page-1)*limit }"/>
 						<c:forEach var="m" items="${memberlist }">
 						<tr>
@@ -120,66 +245,68 @@ b{font-size:0.9em}
 						</tr>
 						</c:forEach>
 					</tbody>
-				</table>
-
-				<div class="center-block">
-					<div class="container">
-						<nav aria-label="Page navigation example">
-							<ul class="pagination justify-content-center">
-							<c:if test="${page <=1 }">
-								<li class="page-item"><a class="page-link disabled"
-									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-								</a></li>
-							</c:if>
-							<c:if test="${page >1 }">
-								<li class="page-item"><a class="page-link" href="groupmanager?page=${page-1 }&search_field=${search_field}&search_word=${search_word}"
-									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-								</a></li>
-							</c:if>
-							
-							
-							
-							<c:forEach var="a" begin="${startpage }" end="${endpage }">
-								<c:if test="${a==page}">
-								<li class="page-item active">
-									<a class="page-link">${a }</a>
-								</li>
-								</c:if>
-								<c:if test="${a!=page}">
-									<c:url var="go" value="groupmanager">
-		 							<c:param name="search_field" value="${search_field}"/>
-		 							<c:param name="search_word" value="${search_word }"/>
-		 							<c:param name="page" value="${a }"/>
-		 							</c:url>
-								<li class="page-item">
-									<a href="${go}" 
-									class="page-link">${a }</a>
-								</li>
-								</c:if>
-							</c:forEach>
-								
-								<c:if test="${page >=maxpage}">
-								<li class="page-item">
-								<a class="page-link disabled"
-									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-								</a></li>
-								</c:if>
-								<c:if test="${page <maxpage}">
-								<c:url var ="next" value="groupmanager">
-				 					<c:param name="search_field" value="${search_field}"/>
-				 					<c:param name="search_word" value="${search_word }"/>
-				 					<c:param name="page" value="${page+1 }"/>
-				 				</c:url>
-								<li class="page-item">
-								<a class="page-link" href="${next}"
-									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-								</a></li>
-								</c:if>
-							</ul>
-						</nav>
-					</div>
-				</div>
-				<form action="groupmanager" method="get">
+                                
+                                
+                                
+                                </table>
+                                <div class="center-block">
+								<div class="container">
+									<nav aria-label="Page navigation example">
+										<ul class="pagination justify-content-center">
+										<c:if test="${page <=1 }">
+											<li class="page-item"><a class="page-link disabled"
+												aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+											</a></li>
+										</c:if>
+										<c:if test="${page >1 }">
+											<li class="page-item"><a class="page-link" href="memberinfo?page=${page-1 }&search_field=${search_field}&search_word=${search_word}"
+												aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+											</a></li>
+										</c:if>
+										
+										
+										
+										<c:forEach var="a" begin="${startpage }" end="${endpage }">
+											<c:if test="${a==page}">
+											<li class="page-item active">
+												<a class="page-link">${a }</a>
+											</li>
+											</c:if>
+											<c:if test="${a!=page}">
+												<c:url var="go" value="memberinfo">
+					 							<c:param name="search_field" value="${search_field}"/>
+					 							<c:param name="search_word" value="${search_word }"/>
+					 							<c:param name="page" value="${a }"/>
+					 							</c:url>
+											<li class="page-item">
+												<a href="${go}" 
+												class="page-link">${a }</a>
+											</li>
+											</c:if>
+										</c:forEach>
+											
+											<c:if test="${page >=maxpage}">
+											<li class="page-item">
+											<a class="page-link disabled"
+												aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+											</a></li>
+											</c:if>
+											<c:if test="${page <maxpage}">
+											<c:url var ="next" value="memberinfo">
+							 					<c:param name="search_field" value="${search_field}"/>
+							 					<c:param name="search_word" value="${search_word }"/>
+							 					<c:param name="page" value="${page+1 }"/>
+							 				</c:url>
+											<li class="page-item">
+											<a class="page-link" href="${next}"
+												aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+											</a></li>
+											</c:if>
+										</ul>
+									</nav>
+								</div>
+							</div>
+							<form action="groupmanager" method="get">
 					<div class="input-group">
 						<select id="viewcount" name="search_field">
 							<option value="0" selected>아이디</option>
@@ -187,27 +314,56 @@ b{font-size:0.9em}
 							<option value="2">성별</option>
 						</select>
 						 <input id="search" name="search_word" type="text"  placeholder="아이디를 입력하세요" value="${search_word }">
-						<button class="btn btn-secondary" class="search" style="background:#4C489D; color:white" type="submit">검색</button>
+						<button class="btn" class="search" type="submit" style="background:#4C489D; color:white">검색</button>
 					</div>
 				</form>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-			</div>
-		</div>
-	</c:if> 
-	 <c:if test="${listcount==0 }"> 
+                                </c:if>
+                                 <c:if test="${listcount==0 }"> 
 		<section class="py-5">
- 		<font size=5>검색결과가 존재하지 않습니다.</font><br><br>
+ 		<font size=5>데이터가 존재하지 않습니다.</font><br><br>
  		<a href="main.net"><button type="button" class="btn btn-secondary float-left back">메인으로</button></a>
  		</section>
   </c:if> 
-	</div>
-	<jsp:include page="../include/footer.jsp"></jsp:include>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Your Website 2020</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+         <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="${pageContext.request.contextPath}/resources/admin/vendor/jquery/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="${pageContext.request.contextPath}/resources/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="${pageContext.request.contextPath}/resources/admin/js/sb-admin-2.min.js"></script>
+
+
+    </div>
+    <!-- End of Page Wrapper -->
 </body>
 </html>

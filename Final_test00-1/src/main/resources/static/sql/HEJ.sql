@@ -1,3 +1,25 @@
+select *
+			from (select rownum rnum, b.*
+					from ( select ui.userid, gender, email, area_name,group_name,catename,cnt
+		from user_info ui
+		inner join (select group_no, group_name, userid,catename,  cnt 
+			  from group_info gi join 
+			  					(select group_no as user_groupno, count(*) cnt
+								 from group_user_role
+								 group by group_no
+								 order by cnt desc
+								 ,group_no asc)
+								 on gi.group_no = user_groupno) g
+		on ui.userid=g.userid
+		
+		
+where ui.userid like '1'
+) b 
+
+					where rownum <=10
+					)
+					where rnum>=1 and rnum<=10
+
 delete from group_schedule
 select *
 from (select rownum rnum, j.userid, group_no, group_role, gender, email, area_name
@@ -59,15 +81,16 @@ CREATE TABLE group_schedule (
 select calendar_no as id, group_no, title, subject, content, startdate, location, xcoord,ycoord, calendar_no from group_schedule
 --임의 데이터 삽입 테스트
 create sequence calendar_seq
-insert into calendar
-values (1,1,'정모','만나요','강남역에서 봐요','2022-09-09')
+insert into group_schedule
+values (1,1,'정모','만나요','강남역에서 봐요','2022-09-09','강남역', null,null)
 
 insert into calendar
 values (2,1,'번개','만나요','집에서 봐요','2022-09-12')
 select calendar_no, title, to_char(startdate,'yyyy-mm-dd') as "start"
 	from calendar 
 	where group_no = 1
-
+select * from GROUP_SCHEDULE
+delete from group_schedule where calendar_no=1
 --회원테이블 생성
 CREATE TABLE user_info (
 	userid	varchar2(100)	NOT NULL primary key,

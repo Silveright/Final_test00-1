@@ -77,13 +77,13 @@
     color: #000 !important;
     color: var(--fc-button-text-color, #fff);
     background-color: #cac6e3ed;
-    border-color: #282636;
+    border-color: #4c489d;;
 }
 .fc .fc-button-primary:not(:disabled):active, .fc .fc-button-primary:not(:disabled).fc-button-active {
     color: #fff;
     color: var(--fc-button-text-color, #fff);
     background-color: #776bcc;
-    border-color: #282636;
+    border-color: #4c489d;
 }
 </style>
 </head>
@@ -157,7 +157,7 @@
       </div>
       <div class="modal-footer">
         <!-- <button type="button" class="btn btn-secondary" id="close" data-bs-dismiss="modal">Close</button> -->
-        <button type="button" class="btn btn-primary" id="save">Save</button>
+        <!-- <button type="button" class="btn btn-primary" id="save">Save</button> -->
       </div>
         </form>
     </div>
@@ -233,8 +233,8 @@
               }
           }) */
           console.log(event)
-          $('#content').val('');
-          $('#subject').val('');
+         /*  $('#content').val('');
+          $('#subject').val(''); */
           /* $('#diarySubmit').hide(); */ //확인버튼숨김
           var calendar_no = event.event.extendedProps.calendar_no//클릭한 이벤트의 스케쥴넘버(DB)
           console.log("캘린더 번호:"+calendar_no)
@@ -246,7 +246,7 @@
               url: "detail",
               //type: 'POST',
               dataType: 'JSON',
-              async: false,
+              //async: false,
               data: {
                   group_no: '1',
                   calendar_no: calendar_no
@@ -398,7 +398,7 @@
            $.ajax({
                url: "add",
                //type: "post",
-               async: false,
+               //async: false,
                data: {
                    group_no: group_no,
                    title: $('#title').val(),
@@ -412,9 +412,9 @@
                success: function (response) {
                    alert( '일정이 추가되었습니다!')
                    //calendar.refetchEvents();
-                   calendar.render();
+                   //calendar.render();
                   $('.modal').modal('hide');
-                   //document.location.href = document.location.href;
+                  document.location.href = document.location.href;
                    //loadingEvents();
                    //calendar.refetchEvents();
                    console.log(calendar)
