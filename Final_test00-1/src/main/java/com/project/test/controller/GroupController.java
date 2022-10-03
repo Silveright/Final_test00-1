@@ -1,14 +1,18 @@
 package com.project.test.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,14 +20,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.project.test.domain.Group;
 import com.project.test.domain.GroupJoin;
 import com.project.test.domain.GroupUser;
+import com.project.test.domain.Member;
+import com.project.test.domain.Session;
+import com.project.test.service.BoardService;
 import com.project.test.service.GroupService;
+import com.project.test.service.MemberService;
 import com.project.test.service.MySaveFolder;
 
 @Controller
 @RequestMapping(value="/group")
 public class GroupController {
+	
+	@Autowired
+	private MemberService memberService;
+    private GroupService groupService;
+	
 	private static final Logger logger = LoggerFactory.getLogger(GroupController.class);
 	private GroupService groupservice;
 	private MySaveFolder mysavefolder;
@@ -49,40 +63,65 @@ public class GroupController {
 		
 	}
 
-	@GetMapping(value="/groupmake")
-	public String groupmake () {
-		return "/group/groupmake";
-	}
- /*
-	수정해야함	(모임 생성)
-	@PostMapping("/add")
-	public String add(Group group, HttpServletRequest request)
-			throws Exception{
-		
-		MultipartFile uploadfile = group.getUploadfile();
-		
-		if(!uploadfile.isEmpty()) {
-			String fileName = uploadfile.getOriginalFilename(); // 원래 파일명
-			group.setG(fileName);// 원래 파일명 저장
-			// String saveFolder = request.getSession().getServletContext().getRealPath("resources")
-			//		 + "/upload";
-			String saveFolder = mysavefolder.getSavefolder();
+//=================================================================================
 
-			String fileDBName = fileDBName(fileName, saveFolder);
-			logger.info("fileDBName = " + fileDBName);
-			
-			// transferTo(File path) : 업로드한 파일을 매개변수의 경로에 저장합니다.
-			uploadfile.transferTo(new File(saveFolder + fileDBName));
-			logger.info("fileDBName = " + saveFolder + fileDBName);
-			//바뀐 파일명으로 저장
-			board.setBOARD_FILE(fileDBName);
-		}
-		
-		boardService.insertBoard(board); // 저장메서드 호출
-		logger.info(board.toString()); // selectKey로 정의한 BOARD_NUM 값 확인해 봅니다.
-		return "redirect:list";
-	}
-*/
+	 @RequestMapping(value = "/groupMake.do", method = RequestMethod.GET)
+	    public String groupMake(Model model, HttpServletRequest request) {
+
+	        HttpSession session = request.getSession();
+	        Session Session = (Session) session.getAttribute("userData");
+	        String userid = Session.getUserid();
+
+	        Member member = memberService.userInfoBasic(userid);
+	        int groupAdmin = member.getCnt();
+
+	        Group group = groupService.groupBefore();
+	        String beforeGroupNo = group.getGroup_no();
+
+	        //직전에 생성된 모임 번호에 +1
+	        String tmpNo1 = beforeGroupNo.substring(0, 1); //B
+	        int tmpNo2 = Integer.parseInt(beforeGroupNo.substring(1)) + 1; //0000+1
+	        String tmpNo3 = String.format("%05d", tmpNo2);
+	        String groupNo = tmpNo1.concat(tmpNo3);
+
+	        //모임장으로 속해있는 그룹이 있다면 에러페이지 이동
+	        if (groupAdmin == 1) {
+	            return "error/alreadyGroupError";
+	        }
+
+	        model.addAttribute("areaList", BoardService.getAreaList());
+	        model.addAttribute("groupNo", groupNo);
+
+	        return "group/group_make";
+	    }
+ 
+	    @RequestMapping(value = "/groupMake.do", method = RequestMethod.POST, consumes = {"multipart/form-data"})
+	    public String insertGroup(Group group,
+	                              String groupNo,
+	                              HttpServletRequest request) throws Exception {
+
+	        String userid = group.getUserid();
+	        groupService.groupMake(group, request, groupNo);
+
+	        return "redirect:/groupJoin.do?userid=" + userid;
+	    }
+
+	    /*
+	    @RequestMapping(value = "groupCategory.do", method = RequestMethod.GET)
+	    public String categoryChoice(Model model) {
+
+	        List<InterestCategoryDto> list = new ArrayList<>();
+	        InterestCategoryDto interestCategory = new InterestCategoryDto();
+	        list.add(interestCategory);
+
+	        model.addAttribute("interestCategory", userService.getInterestCategory());
+
+	        return "group/interestCategory";
+	    }
+		*/
+	
+//==================================================================================
+
 	/*
 //	@RequestMapping(value="/groupuserinfo")
 //	public ModelAndView memberList(@RequestParam(value="page", defaultValue="1",required=false) int page,

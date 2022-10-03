@@ -1,83 +1,91 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
+<%@ taglib prefix="se" uri="http://www.springframework.org/security/tags" %>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Load Require CSS -->
-<link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
-<!-- Font CSS -->
-<link href="${pageContext.request.contextPath}/resources/css/boxicon.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-<!-- Load Tempalte CSS -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/templatemo.css">
-<!-- Custom CSS -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/custom.css">
-<meta name="_csrf" content="${_csrf.token }">
-<meta name="_csrf_header" content="${_csrf.headerName }">
+    <title>Chting! = 취미 + 미팅</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="${pageContext.request.contextPath}/assets/img/apple-icon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/favicon.ico">
+    <!-- Load Require CSS -->
+    <link href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font CSS -->
+    <link href="${pageContext.request.contextPath}/assets/css/boxicon.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Load Tempalte CSS -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/templatemo.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/custom.css">
+    <!-- Select2 CSS -->
+    <link href="${pageContext.request.contextPath}/assets/css/select2.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/css/nice-select.css" rel="stylesheet"/>
+    <!-- Sweetalert2 CSS -->
+    <link href="${pageContext.request.contextPath}/assets/css/sweetalert2.css" rel="stylesheet"/>
+
 </head>
-<body>
 <!-- Header -->
 <nav id="main_nav" class="navbar navbar-expand-lg navbar-light bg-white shadow">
-	<div class="container d-flex justify-content-between align-items-center">
-		<a class="navbar-brand h1" href="${pageContext.request.contextPath}/main/list">
-			<span class="fs-4"><img src="${pageContext.request.contextPath}/resources/img/final_logo.png" width="150px"></span>
-		</a>
-		<!-- 검색 부분 -->
-		<div class="align-self-center collapse navbar-collapse flex-grow-1" id="navbar-toggler-success">
-			<div class="navbar flex-fill mx-xl-5 d-flex justify-content-center">
-				<div class="pe-lg-5" id="nav search">
-					<form class="form-inline" action="${pageContext.request.contextPath}/search" method="get">
-						<div class="input-group input-group-navbar justify-content-center" id="searchGroup">
-							<select name="category" class="form-control form-select-sm search" aria-label="Search"
+    <div class="container d-flex justify-content-between align-items-center" id="logoBox">
+        <se:authorize access="!hasAnyAuthority('ROLE_USER','ROLE_ADMIN')">
+            <a class="navbar_logo" href="${pageContext.request.contextPath}/index.do">
+                <img src="${pageContext.request.contextPath}/resources/img/final_logo.png" width="150px"></span>
+            </a>
+        </se:authorize>
+        <se:authorize access="hasAnyAuthority('ROLE_USER','ROLE_ADMIN')">
+            <a class="navbar_logo" href="${pageContext.request.contextPath}/myGroup.do">
+                <img class="logo_img" src="${pageContext.request.contextPath}/assets/img/demo_logo1.png" alt="logo">
+            </a>
+        </se:authorize>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbar-toggler-success" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="align-self-center collapse navbar-collapse flex-grow-1" id="navbar-toggler-success">
+            <div class="navbar flex-fill mx-xl-5 d-flex justify-content-center">
+                <div class="pe-lg-5" id="nav search">
+                    <form class="form-inline" action="${pageContext.request.contextPath}/search.do" method="get">
+                        <div class="input-group input-group-navbar justify-content-center" id="searchGroup">
+                            <select name="category" class="form-control form-select-sm search" aria-label="Search"
                                     id="searchSelect">
-							<option value="">전체</option>
-								<c:forEach items="${applicationScope.search_areaList}" var="area">
-									<c:choose>
-										<c:when test="${search_category != area.area_name}">
-											<option value="${area.area_name}">${area.area_name}</option>
-										</c:when>
-										<c:otherwise>
-											<option value="${area.area_name}" selected>${area.area_name}</option>
-										</c:otherwise>
-									</c:choose>
-								</c:forEach>
-							</select>
-							<input name="search" id="searchValue" type="search"
-									class="form-inline form-control form-control-sm"
-									placeholder="Search…" aria-label="Search"
-									value="<c:out value="${search_keyword}"></c:out>">
-							<button id="searchButton" class="btn btn-sm btn-outline-secondary" type="submit"><i
-									class="bx bx-search bx-sm"></i></button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-		
-		<!-- 로그인 버튼 -->
-		<c:choose>
-			<c:when test="${empty id}">
-	            <a class="btn" href="${pageContext.request.contextPath}/member/login" role="button" style="background:#4C489D; color:white">Login</a>
-	            <a class="btn" href="${pageContext.request.contextPath}/member/join" role="button" style="background:#4C489D; color:white">Join</a>
-	            <a class="btn" href="${pageContext.request.contextPath}/admin/dashboard" role="button" style="background:#4C489D; color:white">Admin</a>
-       		</c:when>
-			<c:when test="${id == 'admin'}">
-				<a class="btn" href="${pageContext.request.contextPath}/admin/dashboard" role="button" style="background:#4C489D; color:white">Admin</a>
-				<a class="btn" href="${pageContext.request.contextPath}/logout" role="button" style="background:#4C489D; color:white">Logout</a>
-			</c:when>
+                                <option value="">전체</option>
+                                <c:forEach items="${applicationScope.search_areaList}" var="area">
+                                    <c:choose>
+                                        <c:when test="${search_category != area.area_name}">
+                                            <option value="${area.area_name}">${area.area_name}</option>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <option value="${area.area_name}" selected>${area.area_name}</option>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                            </select>
+                            <input name="search" id="searchValue" type="search"
+                                   class="form-inline form-control form-control-sm"
+                                   placeholder="Search…" aria-label="Search"
+                                   value="<c:out value="${search_keyword}"></c:out>">
+                            <button id="searchButton" class="btn btn-sm btn-outline-secondary" type="submit"><i
+                                    class="bx bx-search bx-sm"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
-			<c:otherwise>
-				<a class="btn" href="${pageContext.request.contextPath}/admin" role="button" style="background:#4C489D; color:white">${id}님 </a>
-				<a class="btn" href="${pageContext.request.contextPath}/mypage" role="button" style="background:#4C489D; color:white">Mypage</a>
-				<a class="btn" href="${pageContext.request.contextPath}/logout" role="button" style="background:#4C489D; color:white">Logout</a>
-			</c:otherwise>
-		</c:choose>
-	</div>		
+            <div class="navbar align-self-center d-flex justify-content-center">
+                <se:authorize access="!hasAnyAuthority('ROLE_MEMBER','ROLE_ADMIN')">
+                    <a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/member/login">Login</a>
+                </se:authorize>
+                <se:authorize access="hasAuthority('ROLE_MEMBER')">
+                    <a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/myPage.do">MyPage</a>&emsp;|&emsp;
+                    <a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/logout">Logout</a>
+                </se:authorize>
+                <se:authorize access="hasAuthority('ROLE_ADMIN')">
+                    <a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/admin/dashboard">Admin</a>&emsp;|&emsp;
+                    <a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/myPage.do">MyPage</a>&emsp;|&emsp;
+                    <a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/logout">Logout</a>
+                </se:authorize>
+            </div>
+        </div>
+    </div>
 </nav>
-<!-- Close Header -->
-
-</body>
-</html>

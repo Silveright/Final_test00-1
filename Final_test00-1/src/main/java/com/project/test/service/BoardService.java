@@ -40,4 +40,11 @@ public interface BoardService {
 
 	public void deleteFileList(String filename);
 
+	
+	//모임 지역리스트
+	public static Object getAreaList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

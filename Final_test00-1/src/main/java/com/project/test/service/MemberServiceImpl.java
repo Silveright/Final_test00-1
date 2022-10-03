@@ -97,12 +97,17 @@ public class MemberServiceImpl implements MemberService {
 		return dao.getSearchListCount(map);
 	}
 
-//채팅
-//	@Override
-//	public String username(String id) {
-//      
-//
-//        return ;
-//    }
-	
+	@Override
+	public String username(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Member userInfoBasic(String userid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 }
