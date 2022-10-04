@@ -22,10 +22,10 @@
     </div>
 </section>
 <section class="container my-lg-5">
-    <form id="groupMakeFrm" method="POST" action='groupMake.do' enctype="multipart/form-data">
+    <form id="groupMakeFrm" method="POST" action='groupMake' enctype="multipart/form-data">
         <input type="hidden" name="userid" value="${sessionScope.get("userData").userid}">
         <input type="hidden" name="catecode" id="catecode" value="">
-        <input type="hidden" name="groupNo" value="${groupNo}">
+        <input type="hidden" name="groupNo" value="${group_no}">
 
         <div class="service-wrapper py-3">
             <%-- 모임 대표 사진 --%>

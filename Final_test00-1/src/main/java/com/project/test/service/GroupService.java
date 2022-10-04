@@ -24,8 +24,19 @@ public interface GroupService {
 
 	
 	//모임 생성
-	Group groupBefore();
+	public void insertGroup(Group group);
+	
+	public List<String> getDeleteFileList();
 
-	void groupMake(Group group, HttpServletRequest request, String groupNo);
+	public void deleteFileList(String filename);
+	
+	//모임 수정
+	public int groupModify(Group modifygroup);
+	
+	//모임 삭제
+	public int groupDelete(int num);
+	
+	//모임장인지 확인
+	public boolean isGroupWriter(int num, String userid);
 
 }

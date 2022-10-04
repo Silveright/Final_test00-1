@@ -15,16 +15,19 @@ import com.project.test.domain.Group;
 import com.project.test.domain.GroupJoin;
 import com.project.test.domain.GroupUser;
 import com.project.test.mybatis.mapper.GroupAdminMapper;
+import com.project.test.mybatis.mapper.GroupMapper;
 
 @Service
 public class GroupServiceImpl implements GroupService {
 
 	private GroupAdminMapper dao;
+	private GroupMapper gdao;
 	private static final Logger logger = LoggerFactory.getLogger(GroupServiceImpl.class);
 
 	@Autowired
-	public GroupServiceImpl(GroupAdminMapper dao) {
+	public GroupServiceImpl(GroupAdminMapper dao, GroupMapper gdao) {
 		this.dao = dao;
+		this.gdao = gdao;
 	}
 
 	@Override
@@ -89,17 +92,49 @@ public class GroupServiceImpl implements GroupService {
 		return 0;
 	}
 
-	//모임 생성
-	@Override
-	public Group groupBefore() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void groupMake(Group group, HttpServletRequest request, String groupNo) {
-		// TODO Auto-generated method stub
+	//=======================================================================	
+		//모임 생성
+		@Override
+		public void insertGroup(Group group) {
+			gdao.insertGroup(group);
+			
+		}
 		
-	}
+		@Override
+		public boolean isGroupWriter(int num, String userid) {
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("num", num);
+			map.put("userid", userid);
+			Group result = gdao.isGroupWriter(map);
+			if(result==null)
+				return false;
+			else
+				return true;
+		}
+
+
+		@Override
+		public List<String> getDeleteFileList() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public void deleteFileList(String filename) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public int groupModify(Group modifygroup) {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public int groupDelete(int num) {
+			// TODO Auto-generated method stub
+			return 0;
+		}
 
 }
