@@ -1,119 +1,148 @@
-CREATE TABLE community (
-	community_no			number				NOT NULL,
-	community_subject		varchar2(100)		NOT NULL,
-	community_content		varchar2(1000)		NOT NULL,
-	community_original		varchar2(100)		NULL,
-	community_file			varchar2(100)		NULL,
-	writedate				varchar2(100)		NOT NULL,
-	userid					varchar2(100)		NOT NULL
+-- 모임회원 게시판
+drop table post_group CASCADE CONSTRAINTS;
+create table post_group (
+	post_no		number	not null,
+	group_no	varchar2(100)	not null,
+	subject		varchar2(100) not null,
+	content		varchar2(1000) not null,
+	userid		varchar2(100) not null,
+	writedate	date not null,
+	primary key(post_no)
 );
 
-CREATE TABLE user_info (
-	userid		varchar2(100)		NOT NULL,
-	gender		varchar2(5)			NOT NULL,
-	email		varchar2(100)		NOT NULL,
-	area_name	varchar2(100)		NOT NULL,
-	joindate	date				NOT NULL
+select * from post_group;
+
+
+-- 모임회원 댓글
+drop table post_reply CASCADE CONSTRAINTS;
+
+create table post_reply (
+	reply_no	number	not null,
+	content		varchar2(1000) not null,
+	writedate	date not null,
+	userid		varchar2(100) not null,
+	post_no		number	not null,
+	primary key(reply_no)
 );
 
-CREATE TABLE group_info (
-	group_no		number				NOT NULL,
-	group_name		varchar2(100)		NOT NULL,
-	group_original	varchar2(100)		NOT NULL,
-	group_img		varchar2(100)		NOT NULL,
-	area_name		varchar2(100)		NOT NULL,
-	catename		varchar2(100)		NOT NULL,
-	opendate		date				NOT NULL,
-	userid			varchar2(100)		NOT NULL
+select * from post_reply;
+
+
+-- 회원정보
+drop table user_info CASCADE CONSTRAINTS;
+create table user_info (
+	userid			varchar2(100) not null,
+	name			varchar2(50) not null,
+	gender			varchar2(5) not null,
+	age				number(2)	not null,
+	password 		varchar2(60) not null,
+	email			varchar2(100) not null,
+	area_name		varchar2(100) not null,
+	joindate		date not null,
+	auth		 varchar2(50) not null,	
+	primary key(userid)
 );
 
-CREATE TABLE post_group (
-	post_no		number				NOT NULL,
-	group_no	number				NOT NULL,
-	subject		varchar2(100)		NOT NULL,
-	content		varchar2(1000)		NOT NULL,
-	userid		varchar2(100)		NOT NULL,
-	writedate	date				NOT NULL
+update user_info
+set auth='ROLE_ADMIN'
+where userid = 'admin';
+
+select * from user_info;
+
+
+-- 모임 내 역할
+drop table group_user_role CASCADE CONSTRAINTS;
+create table group_user_role (
+	group_role_no	number not null,
+	userid			varchar2(100) not null,
+	group_no		varchar2(100) not null,
+	group_role		number not null,
+	primary key(group_role_no)
 );
 
-drop table group_schedule purge;
-CREATE TABLE group_schedule (
-   calendar_no  number      NOT NULL,
-   group_no   	number      NOT NULL,
-   title   		varchar2(100)      NOT NULL,
-   subject   	varchar2(100)      NOT NULL,
-   content   	varchar2(1000)      NOT NULL,
-   startdate   	date      NOT NULL,
-   location   	varchar2(100)      NOT NULL,
-   xcoord   	varchar2(100)      NULL,
-   ycoord   	varchar2(100)      NULL
+select * from group_user_role;
+
+
+-- 모임 정보
+drop table group_info CASCADE CONSTRAINTS;
+create table group_info (
+	group_no		varchar2(100) not null,
+	group_name		varchar2(100) not null,
+	group_original	varchar2(100) not null,
+	group_img		varchar2(100) not null,
+	area_name		varchar2(100) not null,
+	catename		varchar2(100) not null,
+	opendate		date not null,
+	userid			varchar2(100) not null,
+	primary key(group_no)
 );
 
-CREATE TABLE post_reply (
-	reply_no	number				NOT NULL,
-	content		varchar2(1000)		NOT NULL,
-	writedate	date				NOT NULL,
-	userid		varchar2(100)		NOT NULL,
-	post_no		number				NOT NULL
+select * from group_info;
+
+
+-- 모임 일정
+drop table group_schedule CASCADE CONSTRAINTS;
+create table group_schedule (
+	calendar_no		number	not null,
+	group_no		varchar2(100) not null,
+	title			varchar2(100) not null,
+	subject			varchar2(100) not null,
+	content			varchar2(1000) not null,
+	startdate		date not null,
+	location		varchar2(100) not null,
+	xcoord			varchar2(100) null,
+	ycoord			varchar2(100) null,
+	primary key(calendar_no)
 );
 
-CREATE TABLE notice (
-	notice_no						number				NOT NULL,
-	subject							varchar2(100)		NOT NULL,
-	content							varchar2(1000)		NOT NULL,
-	writedate						date				NOT NULL,
-	notice_file_original			varchar2(100)		NULL,
-	notice_file						varchar2(100)		NULL,
-	userid							varchar2(100)		NOT NULL,
-	group_no						number				NOT NULL
+select * from group_schedule;
+
+
+-- 가입 승인 요청
+drop table group_join_request CASCADE CONSTRAINTS;
+create table group_join_request (
+	group_join_no	number	not null,
+	userid			varchar2(100) not null,
+	group_no		varchar2(100) not null,
+	primary key(group_join_no)
 );
 
-CREATE TABLE group_join_request (
-	group_join_no	number			NOT NULL,
-	userid			varchar2(100)	NOT NULL,
-	group_no		number			NOT NULL
+select * from group_join_request;
+
+
+-- 커뮤니티
+drop table community CASCADE CONSTRAINTS;
+create table community (
+	community_no			number	not null,
+	community_subject		varchar2(100) not null,
+	community_content		varchar2(1000) not null,
+	community_original		varchar2(100) null,
+	community_file			varchar2(100) null,
+	writedate				varchar2(100) not null,
+	userid					varchar2(100) not null,
+	primary key(community_no)
 );
 
-CREATE TABLE group_user_role (
-	group_role_no	number				NOT NULL,
-	userid			varchar2(100)		NOT NULL,
-	group_no		number				NOT NULL,
-	group_role		number				NOT NULL
+select * from community;
+
+
+--모임장 공지
+drop table notice CASCADE CONSTRAINTS;
+create table notice (
+	notice_no				number not null,
+	subject					varchar2(100) not null,
+	content					varchar2(1000) not null,
+	writedate				date not null,
+	notice_file_original	varchar2(100) null,
+	notice_file				varchar2(100) null,
+	userid					varchar2(100) not null,
+	group_no				varchar2(100) not null,
+	primary key(notice_no)
 );
 
-ALTER TABLE community ADD CONSTRAINT PK_COMMUNITY PRIMARY KEY (
-	community_no
-);
+select * from notice;
 
-ALTER TABLE user_info ADD CONSTRAINT PK_USER_INFO PRIMARY KEY (
-	userid
-);
 
-ALTER TABLE group_info ADD CONSTRAINT PK_GROUP_INFO PRIMARY KEY (
-	group_no
-);
 
-ALTER TABLE post_group ADD CONSTRAINT PK_POST_GROUP PRIMARY KEY (
-	post_no
-);
 
-ALTER TABLE group_schedule ADD CONSTRAINT PK_GROUP_SCHEDULE PRIMARY KEY (
-	calendar_no
-);
-
-ALTER TABLE post_reply ADD CONSTRAINT PK_POST_REPLY PRIMARY KEY (
-	reply_no
-);
-
-ALTER TABLE notice ADD CONSTRAINT PK_NOTICE PRIMARY KEY (
-	notice_no
-);
-
-ALTER TABLE group_join_request ADD CONSTRAINT PK_GROUP_JOIN_REQUEST PRIMARY KEY (
-	group_join_no
-);
-
-ALTER TABLE group_user_role ADD CONSTRAINT PK_GROUP_USER_ROLE PRIMARY KEY (
-	group_role_no
-);
 
