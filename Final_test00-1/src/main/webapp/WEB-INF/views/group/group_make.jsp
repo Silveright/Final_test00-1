@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
 <head>
 <title>모임 생성</title>
@@ -16,15 +17,14 @@
                 </p>
             </div>
             <div class="col-lg-6">
-                <img src="./assets/img/banner-img-02.svg">
+                <img src="${pageContext.request.contextPath}/resources/img/banner-img-02.svg">
             </div>
         </div>
     </div>
 </section>
 <section class="container my-lg-5">
-    <form id="groupMakeFrm" method="POST" action='groupMake' enctype="multipart/form-data">
-        <input type="hidden" name="userid" value="${sessionScope.get("userData").userid}">
-        <input type="hidden" name="catecode" id="catecode" value="">
+    <form id="groupMakeFrm" method="POST" action='/add' enctype="multipart/form-data">
+        <input type="hidden" name="userid" value="${userid}">
         <input type="hidden" name="groupNo" value="${group_no}">
 
         <div class="service-wrapper py-3">
@@ -46,7 +46,7 @@
                                     </c:when>
                                     <c:otherwise>
                                         <img class="img-fluid border rounded" id="preview"
-                                             src="./assets/img/work-slide-05-small.jpg"
+                                             src="${pageContext.request.contextPath}/resources/img/work-slide-05-small.jpg"
                                              style="width:250px; height:250px; margin-bottom: 10px;">
                                     </c:otherwise>
                                 </c:choose>
@@ -119,13 +119,15 @@
                         <p>관심사</p>
                     </div>
                     <div class="pricing-list-body col-9 align-items-center py-5">
-                        <input type="button" style="" id="interestBtn"
-                               class="btn rounded-pill px-4 btn-outline-primary light-300" value="관심사 선택"
-                               onclick="window.open('groupCategory.do', '관심사 선택', 'width=600, height=450, left=100, top=50');"/>
-                        <div class="text-left text-secondary text-muted d-inline-flex">
-                            <p id="interest" class="align-middle badge bg-primary text-wrap"
-                               style="font-size: 14px; padding: 1em;"></p>
-                        </div>
+                        <select name="catename" id="catename" class="form-select" style="width: 30vh; float:left;">
+                            <option value="" selected disabled hidden>=== 관심사를 선택하세요 ===</option>
+							<option value="음악">음악</option>
+			                <option value="운동">운동</option>
+			                <option value="독서">독서</option>
+			                <option value="공부">공부</option>
+			                <option value="게임">게임</option>
+			                <option value="낚시">낚시</option>
+                        </select>
                     </div>
                     <div class="pricing-list-footer col-4 text-center m-auto align-items-center">
                     </div>
@@ -140,11 +142,14 @@
                         <p>지역</p>
                     </div>
                     <div class="pricing-list-body col-9 align-items-center py-5">
-                        <select name="area_code" id="area_code" class="form-select" style="width: 15vh; float:left;">
-                            <option value="" selected disabled hidden>=== 선택 ===</option>
-                            <c:forEach items="${areaList}" var="area">
-                                <option value="${area.area_code}">${area.area_code} ${area.area_name}</option>
-                            </c:forEach>
+                        <select name="area_name" id="area_name" class="form-select" style="width: 30vh; float:left;">
+                            <option value="" selected disabled hidden>=== 지역을 선택하세요 ===</option>
+							<option value="서울">서울</option>
+			                <option value="인천">인천</option>
+			                <option value="충청도">충청도</option>
+			                <option value="전라도">전라도</option>
+			                <option value="부산">부산</option>
+			                <option value="경상도">경상도</option>
                         </select>
                     </div>
                     <div class="pricing-list-footer col-4 text-center m-auto align-items-center">
@@ -163,9 +168,86 @@
             </div>
         </div>
     </form>
+    <script>
+$(function () {
+    //모임 대표 이미지 프리뷰
+    let file = document.querySelector('#fileName');
+
+    file.onchange = function () {
+        let fileList = file.files;
+        // 읽기
+        let reader = new FileReader();
+        reader.readAsDataURL(fileList[0]);
+        //로드 한 후
+        reader.onload = function () {
+            document.querySelector('#preview').src = reader.result;
+        };
+    };
+
+    //모임 이름 keyUP
+ $('#group_name').keyup(function () {
+        var inputLength = $(this).val().length; //입력한 글자 수
+        var remain = 20 - inputLength; //20자에서 남은 글자수
+
+        $('#groupNameKeyUp').html(inputLength + '/20');
+
+        if (inputLength >= 1 && inputLength <= 3) {
+            $(this).css('color', 'red');
+        } else if (inputLength >= 4 && inputLength <= 20) {
+            $(this).css('color', 'grey');
+        } else if(remain < 1) {
+            alert("모임 이름은 20자 이내로 입력해 주세요!");
+        }
+    });
+
+    //모임 소개글 keyUP
+    $('#content').keyup(function () {
+        var inputLength = $(this).val().length; //입력한 글자 수
+        var remain = 1000 - inputLength; //1000자에서 남은 글자수
+
+        $('#contentKeyUp').html(inputLength + '/1000');
+
+        if (inputLength >= 1 && inputLength <= 9) {
+            $(this).css('color', 'red');
+        } else if (inputLength >= 10 && inputLength <= 1000) {
+            $(this).css('color', 'grey');
+        } else if (remain < 1) {
+            alert("모임 소개글은 1000자 이내로 입력해 주세요!")
+        }    
+    });
+
+});
+
+//Form 전송
+function confirm() {
+    console.log($('#interest').val());
+
+    if ($('#group_name').val().trim() == '') {
+        alert('모임 이름을 입력해 주세요 !')
+        return;
+    } else if ($('#group_name').val().length < 4) {
+    	alert('모임 이름을 최소 4자 이상 입력해 주세요 !')
+        return;
+    } else if ($('#content').val().trim() == '') {
+    	alert('모임 소개글을 입력해 주세요 !')
+        return;
+    } else if ($('#content').val().length < 10) {
+    	alert('모임 소개글을 최소 10자 이상 입력해 주세요 !')
+        return;
+    } else if ($('#area_name').val() == null) {
+    	alert('지역을 선택해 주세요 !')
+        return;
+    } else if ($('#catename').val() == '') {
+    	alert('관심사를 선택해 주세요 !')
+        return;
+    } else {
+    	alert("모임 생성이 완료되었습니다.")
+    }
+}
+
+</script>
 </section>
 <!-- End Service -->
-
 <jsp:include page="../include/footer.jsp"/>
 </body>
 </html>

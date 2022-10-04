@@ -104,7 +104,7 @@ public class GroupController {
 			
 			groupService.insertGroup(group); // 저장메서드 호출
 			logger.info(group.toString()); // selectKey로 정의한 BOARD_NUM 값 확인해 봅니다.
-			return "redirect:list";
+			return "redirect:main/list";
 		}
 		
 		
