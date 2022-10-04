@@ -470,7 +470,7 @@
             data: {
                 //null
             },
-            async: false,
+            //async: false,
             success: function (data) {
                 $('#map').empty();
                 console.log("지도")
