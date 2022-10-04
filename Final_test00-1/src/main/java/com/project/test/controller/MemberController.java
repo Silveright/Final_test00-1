@@ -70,7 +70,7 @@ public class MemberController {
 							  ) {
 		if(readCookie != null) {
 			logger.info("저장된 아이디 : " + userPrincipal.getName()); //principal.getName() : 로그인한 아이디값을 알 수 있어요.
-			mv.setViewName("redirect:/loginform");
+			mv.setViewName("redirect:/main/list");
 		} else {
 			mv.setViewName("member/loginForm");
 			mv.addObject("loginfail", session.getAttribute("loginfail")); //세션에 저장된 값을 한번만 실행될 수 있도록

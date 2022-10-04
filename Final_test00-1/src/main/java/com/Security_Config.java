@@ -27,14 +27,13 @@ public class Security_Config extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		
 		http.authorizeRequests()
-		        .antMatchers("/resources/**/**").permitAll()
-		        .antMatchers("/member/login").permitAll()
-				.antMatchers("/member/join").permitAll()
-				.antMatchers("/member/idcheck").permitAll()
-				.antMatchers("/member/joinProcess").permitAll()
-				.antMatchers("/main/list").access("hasRole('ROLE_ADMIN')")
-				.antMatchers("/main/info").access("hasRole('ROLE_ADMIN')");
-				//.antMatchers("/**").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')");
+        .antMatchers("/resources/**/**").permitAll()
+        .antMatchers("/member/login").permitAll()
+      .antMatchers("/member/join").permitAll()
+      .antMatchers("/member/idcheck").permitAll()
+      .antMatchers("/member/joinProcess").permitAll()
+      .antMatchers("/admin/dashboard").access("hasRole('ROLE_ADMIN')");
+      //.antMatchers("/**").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')");
 
 		http.formLogin().loginPage("/member/login")
 		                .loginProcessingUrl("/member/loginProcess")

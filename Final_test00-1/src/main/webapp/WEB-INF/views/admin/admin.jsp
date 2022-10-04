@@ -28,11 +28,10 @@
     </style>
 
 </head>
-<jsp:include page="/WEB-INF/views/include/header.jsp"/>
 <body id="page-top">
 
 <!-- 기능 구현용- 모임 기능 구현 뒤 그쪽으로 옮기기 -->
-<a href="${pageContext.request.contextPath}/calendar/view"><input type="button" value="일정관리"
+<a href="${pageContext.request.contextPath}/calendar/view2"><input type="button" value="일정관리"
          class="btn btn-primary rounded-pill btn-block shadow px-4 py-2"></a>
 
     <!-- Page Wrapper -->
@@ -54,22 +53,22 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="#">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
                     
             </li>
 
             <!-- Divider -->
-            <hr class="sidebar-divider">
-
+          <!--   <hr class="sidebar-divider">
+ -->
             <!-- Heading -->
-            <div class="sidebar-heading">
+           <!--  <div class="sidebar-heading">
                 Board
-            </div>
+            </div> -->
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-edit"></i>
@@ -84,13 +83,13 @@
                 </div>
             </li>
 
-            <!-- Nav Item - Utilities Collapse Menu -->
+            Nav Item - Utilities Collapse Menu
             <li class="nav-item">
                 <a class="nav-link collapsed" href="inquiry">
                     <i class="fas fa-fw fa-phone"></i>
                     <span>문의처리</span>
                 </a>
-            </li>
+            </li> -->
 
             <!-- Divider -->
             <hr class="sidebar-divider">

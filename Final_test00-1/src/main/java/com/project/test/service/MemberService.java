@@ -22,4 +22,10 @@ public interface MemberService {
 									  int page, int limit);
 	
 	public int getSearchListCount(int index, String search_word);
+	
+	//채팅유저이름 
+	public String username(String id);
+
+	//모임 생성시 유저 정보
+	public Member userInfoBasic(String userid); 
 }
