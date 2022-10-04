@@ -156,12 +156,12 @@ public class MemberController {
 			}
 		}
 		
-		//로그아웃
-		@RequestMapping(value = "logout", method = RequestMethod.GET)
-		   public String loginout(HttpSession session) {
-		      session.invalidate();
-		      return "redirect:login";
-		   }
+	//로그아웃
+	@RequestMapping(value = "logout", method = RequestMethod.GET)
+    public String loginout(HttpSession session) {
+       session.invalidate();
+       return "redirect:login";
+    }
 	
 	//수정 처리
 	@RequestMapping(value = "/updateProcess", method = RequestMethod.POST)
