@@ -2,38 +2,41 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="se" uri="http://www.springframework.org/security/tags" %>
 <head>
-    <title>Chting! = 취미 + 미팅</title>
+    <title>삼삼오오!!! 모임만들기</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="apple-touch-icon" href="${pageContext.request.contextPath}/assets/img/apple-icon.png">
-    <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/favicon.ico">
+    <link rel="apple-touch-icon" href="${pageContext.request.contextPath}/resources/img/apple-icon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
     <!-- Load Require CSS -->
-    <link href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font CSS -->
-    <link href="${pageContext.request.contextPath}/assets/css/boxicon.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/boxicon.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     <!-- Load Tempalte CSS -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/templatemo.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/templatemo.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/custom.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/custom.css">
     <!-- Select2 CSS -->
-    <link href="${pageContext.request.contextPath}/assets/css/select2.css" rel="stylesheet"/>
-    <link href="${pageContext.request.contextPath}/assets/css/nice-select.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/resources/css/select2.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/resources/css/nice-select.css" rel="stylesheet"/>
     <!-- Sweetalert2 CSS -->
-    <link href="${pageContext.request.contextPath}/assets/css/sweetalert2.css" rel="stylesheet"/>
-
+    <link href="${pageContext.request.contextPath}/resources/css/sweetalert2.css" rel="stylesheet"/>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<!-- jQuery -->
+	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.js"></script>
+	
 </head>
 <!-- Header -->
 <nav id="main_nav" class="navbar navbar-expand-lg navbar-light bg-white shadow">
     <div class="container d-flex justify-content-between align-items-center" id="logoBox">
         <se:authorize access="!hasAnyAuthority('ROLE_USER','ROLE_ADMIN')">
-            <a class="navbar_logo" href="${pageContext.request.contextPath}/index.do">
+            <a class="navbar_logo" href="${pageContext.request.contextPath}/main/list">
                 <img src="${pageContext.request.contextPath}/resources/img/final_logo.png" width="150px"></span>
             </a>
         </se:authorize>
         <se:authorize access="hasAnyAuthority('ROLE_USER','ROLE_ADMIN')">
-            <a class="navbar_logo" href="${pageContext.request.contextPath}/myGroup.do">
-                <img class="logo_img" src="${pageContext.request.contextPath}/assets/img/demo_logo1.png" alt="logo">
+            <a class="navbar_logo" href="${pageContext.request.contextPath}/main/list">
+                <img class="logo_img" src="${pageContext.request.contextPath}/resources/img/final_logo.png" alt="logo" width="150px">
             </a>
         </se:authorize>
         <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"

@@ -2465,6 +2465,18 @@ progress {
   color: #000;
   border-color: #c3c1db;
 }
+/* line 3, src/assets/scss/mixins/_table-variants.scss */
+.table-groupjoin {
+  --bs-table-bg: #4232C2;
+  --bs-table-striped-bg: #4232C2;
+  --bs-table-striped-color: #000;
+  --bs-table-active-bg: #4232C2;
+  --bs-table-active-color: #4232C2;
+  --bs-table-hover-bg: #4232C2;
+  --bs-table-hover-color: #000;
+  color: #000;
+  border-color: #4232C2;
+}
 
 /* line 3, src/assets/scss/mixins/_table-variants.scss */
 .table-secondary {
@@ -3692,6 +3704,13 @@ fieldset:disabled .btn {
 
 /* line 59, src/assets/scss/_buttons.scss */
 .btn-primary {
+  color: #f6f9fe;
+  background-color: #4232c2;
+  border-color: #4232c2;
+}
+
+
+. {
   color: #f6f9fe;
   background-color: #4232c2;
   border-color: #4232c2;

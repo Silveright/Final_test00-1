@@ -2,7 +2,7 @@
 drop table post_group CASCADE CONSTRAINTS;
 create table post_group (
 	post_no		number	not null,
-	group_no	number	not null,
+	group_no	varchar2(100)	not null,
 	subject		varchar2(100) not null,
 	content		varchar2(1000) not null,
 	userid		varchar2(100) not null,
@@ -32,12 +32,20 @@ select * from post_reply;
 drop table user_info CASCADE CONSTRAINTS;
 create table user_info (
 	userid			varchar2(100) not null,
+	name			varchar2(50) not null,
 	gender			varchar2(5) not null,
+	age				number(2)	not null,
+	password 		varchar2(60) not null,
 	email			varchar2(100) not null,
 	area_name		varchar2(100) not null,
 	joindate		date not null,
+	auth		 varchar2(50) not null,	
 	primary key(userid)
 );
+
+update user_info
+set auth='ROLE_ADMIN'
+where userid = 'admin';
 
 select * from user_info;
 
@@ -47,7 +55,7 @@ drop table group_user_role CASCADE CONSTRAINTS;
 create table group_user_role (
 	group_role_no	number not null,
 	userid			varchar2(100) not null,
-	group_no		number not null,
+	group_no		varchar2(100) not null,
 	group_role		number not null,
 	primary key(group_role_no)
 );
@@ -58,7 +66,7 @@ select * from group_user_role;
 -- 모임 정보
 drop table group_info CASCADE CONSTRAINTS;
 create table group_info (
-	group_no		number not null,
+	group_no		varchar2(100) not null,
 	group_name		varchar2(100) not null,
 	group_original	varchar2(100) not null,
 	group_img		varchar2(100) not null,
@@ -76,7 +84,7 @@ select * from group_info;
 drop table group_schedule CASCADE CONSTRAINTS;
 create table group_schedule (
 	calendar_no		number	not null,
-	group_no		number not null,
+	group_no		varchar2(100) not null,
 	title			varchar2(100) not null,
 	subject			varchar2(100) not null,
 	content			varchar2(1000) not null,
@@ -95,7 +103,7 @@ drop table group_join_request CASCADE CONSTRAINTS;
 create table group_join_request (
 	group_join_no	number	not null,
 	userid			varchar2(100) not null,
-	group_no		number not null,
+	group_no		varchar2(100) not null,
 	primary key(group_join_no)
 );
 
@@ -128,7 +136,7 @@ create table notice (
 	notice_file_original	varchar2(100) null,
 	notice_file				varchar2(100) null,
 	userid					varchar2(100) not null,
-	group_no				number not null,
+	group_no				varchar2(100) not null,
 	primary key(notice_no)
 );
 
