@@ -98,26 +98,6 @@ public class MemberController {
 		logger.info("회원가입 성공");
 
 	}		
-	}
-	
-	
-
-	
-	//회원 정보 수정폼
-	@RequestMapping(value = "/update", method = RequestMethod.GET)
-	public ModelAndView member_update(Principal principal,
-									  ModelAndView mv) {
-		String id = principal.getName();
-		if(id == null) {
-			mv.setViewName("redirect:login");
-			logger.info("id is null");
-		} else {
-			Member m = memberservice.member_info(id);
-			mv.setViewName("member/member_updateForm");
-			mv.addObject("memberinfo", m);
-		}
-		return mv;
-	}
 
 	
 	//회원가입 처리
@@ -270,10 +250,5 @@ public class MemberController {
 		return "redirect:list";
 	}
 	
-	@RequestMapping(value = "logout", method = RequestMethod.GET)
-	public String loginout(HttpSession session) {
-		session.invalidate();
-		return "redirect:login";
-	}
 	
 }
