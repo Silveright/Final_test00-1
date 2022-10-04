@@ -4,9 +4,20 @@
 
 <mapper namespace="Groups">
 	 <!-- 모임 생성  -->
-    <insert id="insertGroup" parameterType="com.project.test.mybatis.mapper.GroupMapper">
-        insert into group_info (userid, group_name, group_img, content, area_name, catename)
-        values (#{userid}, #{group_name}, #{group_img}, #{content}, #{area_name}, #{catename})
-
-    </insert>
+    <insert id="insertGroup" parameterType="group">
+	 	<selectKey resultType="int" order="BEFORE"
+	 				keyProperty="group_no">
+	 		select nvl(max(group_no), 0) + 1 from group_info
+	 	</selectKey>
+	 	insert into group_info
+	 	(group_no, 
+	 	group_name, group_content, group_img, 
+	 	group_orininal, area_name, catename, userid,
+	 	opendate)
+	 	values
+	 	(#{group_no},
+	 	 #{group_name}, #{group_content}, #{group_img, jdbcType=VARCHAR},
+	 	 #{group_orininal, jdbcType=VARCHAR}, #{area_name}, #{catename}, #{userid},
+	 	 sysdate)
+	 </insert>
 </mapper>

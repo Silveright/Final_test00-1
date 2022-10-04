@@ -1,9 +1,12 @@
 package com.project.test.controller;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,10 +17,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.test.domain.Group;
@@ -65,60 +70,84 @@ public class GroupController {
 
 //=================================================================================
 
-	 @RequestMapping(value = "/groupMake.do", method = RequestMethod.GET)
-	    public String groupMake(Model model, HttpServletRequest request) {
 
-	        HttpSession session = request.getSession();
-	        Session Session = (Session) session.getAttribute("userData");
-	        String userid = Session.getUserid();
+	//모임 생성
+		@GetMapping(value = "/groupMake") // 
+//		@RequestMapping(value = "/write", method = RequestMethod.GET)
+		public String group_make() {
+			return "group/group_make";
+		}
+		
+		@PostMapping("/add")
+//		@RequestMapping(value = "/add", method = RequestMethod.POST)
+		public String add(Group group, HttpServletRequest request)
+				throws Exception{
+			
+			MultipartFile uploadfile = group.getUploadfile();
+			
+			if(!uploadfile.isEmpty()) {
+				String fileName = uploadfile.getOriginalFilename(); // 원래 파일명
+				group.setGroup_original(fileName);// 원래 파일명 저장
+				/* String saveFolder = request.getSession().getServletContext().getRealPath("resources")
+						 + "/upload"; */
+				String saveFolder = mysavefolder.getSavefolder();
 
-	        Member member = memberService.userInfoBasic(userid);
-	        int groupAdmin = member.getCnt();
-
-	        Group group = groupService.groupBefore();
-	        String beforeGroupNo = group.getGroup_no();
-
-	        //직전에 생성된 모임 번호에 +1
-	        String tmpNo1 = beforeGroupNo.substring(0, 1); //B
-	        int tmpNo2 = Integer.parseInt(beforeGroupNo.substring(1)) + 1; //0000+1
-	        String tmpNo3 = String.format("%05d", tmpNo2);
-	        String groupNo = tmpNo1.concat(tmpNo3);
-
-	        //모임장으로 속해있는 그룹이 있다면 에러페이지 이동
-	        if (groupAdmin == 1) {
-	            return "error/alreadyGroupError";
-	        }
-
-	        model.addAttribute("areaList", BoardService.getAreaList());
-	        model.addAttribute("groupNo", groupNo);
-
-	        return "group/group_make";
-	    }
- 
-	    @RequestMapping(value = "/groupMake.do", method = RequestMethod.POST, consumes = {"multipart/form-data"})
-	    public String insertGroup(Group group,
-	                              String groupNo,
-	                              HttpServletRequest request) throws Exception {
-
-	        String userid = group.getUserid();
-	        groupService.groupMake(group, request, groupNo);
-
-	        return "redirect:/groupJoin.do?userid=" + userid;
-	    }
-
-	    /*
-	    @RequestMapping(value = "groupCategory.do", method = RequestMethod.GET)
-	    public String categoryChoice(Model model) {
-
-	        List<InterestCategoryDto> list = new ArrayList<>();
-	        InterestCategoryDto interestCategory = new InterestCategoryDto();
-	        list.add(interestCategory);
-
-	        model.addAttribute("interestCategory", userService.getInterestCategory());
-
-	        return "group/interestCategory";
-	    }
-		*/
+				String fileDBName = fileDBName(fileName, saveFolder);
+				logger.info("fileDBName = " + fileDBName);
+				
+				// transferTo(File path) : 업로드한 파일을 매개변수의 경로에 저장합니다.
+				uploadfile.transferTo(new File(saveFolder + fileDBName));
+				logger.info("fileDBName = " + saveFolder + fileDBName);
+				//바뀐 파일명으로 저장
+				group.setGroup_original(fileDBName);
+			}
+			
+			groupService.insertGroup(group); // 저장메서드 호출
+			logger.info(group.toString()); // selectKey로 정의한 BOARD_NUM 값 확인해 봅니다.
+			return "redirect:list";
+		}
+		
+		
+		private String fileDBName(String fileName, String saveFolder) {
+			// 새로운 폴더 이름 : 오늘 년+월+일
+			Calendar c = Calendar.getInstance();
+			int year = c.get(Calendar.YEAR); // 오늘 년도 구합니다.
+			int month = c.get(Calendar.MONTH) + 1; // 오늘 월을 구합니다.
+			int date = c.get(Calendar.DATE); // 오늘 일 구합니다.
+			
+			String homedir = saveFolder + "/" + year + "-" + month + "-" + date;
+			logger.info(homedir);
+			File path1 = new File(homedir);
+			if(!(path1.exists())) {
+				path1.mkdir(); // 새로운 폴더를 생성
+			}
+			
+			// 난수를 구합니다.
+			Random r = new Random();
+			int random = r.nextInt(10000000);
+			
+			/**** 확장자 구하기 시작 ****/
+			int index = fileName.lastIndexOf(".");
+			// 문자열에서 특정 문자열의 위치 값(index)를 반환합니다.
+			// indexOf가 처음 발견되는 문자열에 대한 index를 반환하는 반면,
+			// lastIndexOf는 마지막으로 발견되는 문자열의 index를 반환합니다.
+			// (파일명에 점에 여러개 있을 경우 맨 마지막에 발견되는 문자열의 위치를 리턴합니다.)
+			logger.info("index = " + index);
+			
+			String fileExtension = fileName.substring(index + 1);
+			logger.info("fileExtension = " + fileExtension);
+			/**** 확장자 구하기 끝 ****/
+			
+			// 새로운 파일명
+			String refileName = "bbs" + year + month + date + random + "." + fileExtension;
+			logger.info("refileName = " + refileName);
+			
+			// 오라클 디비에 저장될 파일 명
+//			String fileDBName = "/" + year + "-" + month + "-" + date + "/" + refileName;
+			String fileDBName = File.separator + year + "-" + month + "-" + date + File.separator + refileName;
+			logger.info("fileDBName = " + fileDBName);
+			return fileDBName;
+		}
 	
 //==================================================================================
 

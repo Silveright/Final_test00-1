@@ -31,7 +31,7 @@ from user_info)
 on id=userid
 where group_no=1
 and group_role=1--일반 회원만 출력
-and userid like '%1%'--검색 기능
+--and userid like '%1%'--검색 기능
 	  		)j
 	  		where rownum<=10)
 where rnum>=1 and rnum<=10;
@@ -100,8 +100,27 @@ CREATE TABLE user_info (
 	joindate	date	NOT NULL,
 	auth varchar2(50) not null
 );
+create table user_info (
+   userid         varchar2(100) not null,
+   name         varchar2(50) not null,
+   gender         varchar2(5) not null,
+   age            number(2)   not null,
+   password       varchar2(60) not null,
+   email         varchar2(100) not null,
+   area_name      varchar2(100) not null,
+   joindate      date not null,
+   auth       varchar2(50) not null,   
+   primary key(userid)
+);
+
+delete from user_info
+update user_info
+set auth='ROLE_ADMIN'
+where userid = 'admin';
+select * from user_info
+drop table user_info purge
 --데이터 임의 삽입
-insert into user_info values ('user1', '여', 'user1@kakao.com', '서울', sysdate)
+insert into user_info values ('admin', '관리자', '여', '21', '1234', 'admin@kakao.com', '서울', sysdate,'ROLE_ADMIN')
 insert into user_info values ('user2', '남', 'user2@kakao.com', '서울', sysdate)
 insert into user_info values ('user3', '여', 'user3@kakao.com', '서울', sysdate)
 insert into user_info values ('user4', '남', 'user4@kakao.com', '서울', sysdate)
@@ -113,7 +132,7 @@ select * from user_info
 drop table group_info purge;
 SELECT *
   FROM user_sequences
-select * from GROUP_INFO
+select * from group_user_role
 CREATE TABLE group_info (
 	group_no	number	NOT NULL primary key,
 	group_name	varchar2(100)	NOT NULL,
@@ -124,6 +143,28 @@ CREATE TABLE group_info (
 	group_img	varchar2(100)	NOT NULL,
 	userid	varchar2(100)	NOT NULL
 );
+
+
+select *
+      from (select rownum rnum, j.userid, group_no, group_role, gender, email, area_name
+           from (
+                 select * 
+      			 from group_user_role
+      			 join (select userid as id, gender, email, area_name
+      				   from user_info) 
+      			 on id=userid
+      			 where group_no=1
+                 
+                 )j
+             where rnum<=10
+           )
+      where rnum>=1 and rnum<=10
+
+
+
+
+
+
 --데이터 임의 삽입
 insert into group_info values (1, '3355', '사진1', '서울', '코딩', sysdate, '사진1', 'user1')
 insert into group_info values (2, '사진동호회', '사진2', '인천', '사진', sysdate, '사진2', 'user2')
@@ -146,7 +187,7 @@ insert into group_user_role values (3, 'user3', 1, 1)
 insert into group_user_role values (4, 'user4', 1, 1)
 
 insert into group_user_role values (5, 'user2', 2, 0)
-insert into group_user_role values (6, 'user3', 2, 1)
+insert into group_user_role values (22, 'user3', 2, 1)
 
 insert into group_user_role values (7, 'user3', 3, 1)
 insert into group_user_role values (8, 'user4', 3, 1)

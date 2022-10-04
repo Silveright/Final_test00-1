@@ -96,7 +96,29 @@ public class MemberController {
 		PrintWriter out = response.getWriter();
 		out.print(result);
 		logger.info("회원가입 성공");
+
 	}		
+	}
+	
+	
+
+	
+	//회원 정보 수정폼
+	@RequestMapping(value = "/update", method = RequestMethod.GET)
+	public ModelAndView member_update(Principal principal,
+									  ModelAndView mv) {
+		String id = principal.getName();
+		if(id == null) {
+			mv.setViewName("redirect:login");
+			logger.info("id is null");
+		} else {
+			Member m = memberservice.member_info(id);
+			mv.setViewName("member/member_updateForm");
+			mv.addObject("memberinfo", m);
+		}
+		return mv;
+	}
+
 	
 	//회원가입 처리
 		@RequestMapping(value = "/joinProcess", method = RequestMethod.POST)
@@ -137,6 +159,7 @@ public class MemberController {
 			}
 		}
 		
+
 	//회원 정보 수정폼
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
 	public ModelAndView member_update(Principal principal,
@@ -152,6 +175,14 @@ public class MemberController {
 		}
 		return mv;
 	}
+
+	//로그아웃
+	@RequestMapping(value = "logout", method = RequestMethod.GET)
+    public String loginout(HttpSession session) {
+       session.invalidate();
+       return "redirect:login";
+    }
+
 	
 	//수정 처리
 	@RequestMapping(value = "/updateProcess", method = RequestMethod.POST)
