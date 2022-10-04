@@ -7,10 +7,10 @@
 		<![CDATA[SELECT *
 		FROM
 	    (select count(*) "Male" from user_info
-	    where gender='남'
+	    where gender='Man'
 	    ),
 	    (select count(*) "Female" from user_info
-	    where gender='여'
+	    where gender='Woman'
 	    )  ]]>
 	</select>
 	
@@ -25,7 +25,7 @@
 	</select>
 	
 	<select id="getChartSchedule" resultType="Calendar">
-        select xcoord, ycoord
+        select *
         from group_schedule
                  left join group_info gi on gi.group_no = group_schedule.group_no
     </select>
