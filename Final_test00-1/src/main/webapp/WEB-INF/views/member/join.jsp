@@ -196,8 +196,11 @@ span{display:inline-block;margin-top:-20px;}
 				alert("email 형식을 입력하세요.");
 				$("input:eq(6)").focus();
 				return false;
-			}
-		}); //submit end
+			}					
+
+		
+		}); //submit end		
+		
 	})
 </script>
 </head>

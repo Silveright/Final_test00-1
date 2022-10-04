@@ -68,6 +68,7 @@
                             <button id="searchButton" class="btn btn-sm btn-outline-secondary" type="submit"><i
                                     class="bx bx-search bx-sm"></i></button>
                         </div>
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"> 
                     </form>
                 </div>
             </div>
@@ -77,13 +78,13 @@
                     <a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/member/login">Login</a>
                 </se:authorize>
                 <se:authorize access="hasAuthority('ROLE_MEMBER')">
-                    <a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/myPage.do">MyPage</a>&emsp;|&emsp;
-                    <a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/logout">Logout</a>
+                    <a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/member/updateProcess">MyPage</a>&emsp;|&emsp;
+                    <a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/member/logout" id="logout">Logout</a>
                 </se:authorize>
                 <se:authorize access="hasAuthority('ROLE_ADMIN')">
                     <a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/admin/dashboard">Admin</a>&emsp;|&emsp;
-                    <a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/myPage.do">MyPage</a>&emsp;|&emsp;
-                    <a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/logout">Logout</a>
+                    <a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/member/update">MyPage</a>&emsp;|&emsp;
+                    <a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/member/logout" id="logout">Logout</a>
                 </se:authorize>
             </div>
         </div>

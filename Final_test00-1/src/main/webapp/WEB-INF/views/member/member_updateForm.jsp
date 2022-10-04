@@ -1,120 +1,251 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<title>회원관리 시스템 회원수정 페이지</title>
+<title>회원 정보 수정페이지</title>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.js"></script>
-<link href="${pageContext.request.contextPath}/resources/css/join.css" type="text/css" rel="stylesheet"/>
 <style>
-h3 {text-align: center; color: #1a92b9}
-input[type=file] {display: none}
+body {font-family: Arial, Helvetica, sans-serif;box-sizing: border-box;
+  margin: 0;
+  padding: 0; 
+  font-family: Raleway, sans-serif; background: linear-gradient(90deg, #C7C5F4, #776BCC);   }
+* {box-sizing: border-box; border-radius: 40px 40px; }
+
+input{border-radius:3px;border:1px solid lightgray}
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+}
+
+input[type=radio]{
+	width: 5%;
+    display: inline-block;
+    border: none;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    outline: none;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+   
+    width: 100%;
+    opacity: 0.8;
+}
+
+button:hover {
+    opacity:1;
+     cursor: pointer; 
+    
+}
+button:focus{
+   outline:none;
+}
+
+
+.cancelbtn {
+    background: #fff;
+  font-size: 14px;
+  margin-top: 20px;
+  padding: 10px 15px;
+  border-radius: 26px;
+  border: 1px solid #D4D3E8;
+  text-transform: uppercase;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  color: #4C489D;
+  box-shadow: 0px 2px 2px #5C5696;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.cancelbtn, .submitbtn {
+  background: #fff;
+  font-size: 14px;
+  margin-top: 20px;
+  padding: 10px 15px;
+  border-radius: 26px;
+  border: 1px solid #D4D3E8;
+  text-transform: uppercase;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  color: #4C489D;
+  box-shadow: 0px 2px 2px #5C5696;
+  cursor: pointer;
+  transition: .2s;
+}
+
+form[name="joinform"] {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid lightgray;
+    width: 600px; /* Could be more or less, depending on screen size */
+    padding: 16px;
+    box-shadow: 0 20px 20px rgba(0, 0, 0, .5), 0px 0px 50px rgba(0, 0, 0, .5);
+  border-radius: 30px;
+}
+
+hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+}
+ 
+b + div{width: 100%;
+    padding: 10px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;}
+
+/* Clear floats */
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table; 
+}
+
+h1{text-align:center}
+
+b {
+	width: 100%;
+	display: block
+}
+
+span{display:inline-block;margin-top:-20px;}
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 300px) {
+    .cancelbtn, .signupbtn {
+       width: 100%;
+    }
+}
 </style>
-<jsp:include page="../board/header.jsp"/>
+<script>
+	$(function() {
+		var checkemail = true;
+		
+		$("input:eq(0)").on('keyup', function () {
+			$("#message").empty(); //처음에 pattern에 적합하지 않은 경우 메시지 출력 후 적합한 데이터를 입력해도 계속 같은
+			//[A-Za-z0-9_]의 의미가 \w
+			var pattern = /^\w{5,12}$/;
+			var id = $("input:eq(0)").val();
+			if(!pattern.test(id)) {
+				$("#message").css('color', 'red').html("영문자 숫자 _로 5~12자 가능합니다.");
+				checkid = false;
+				return;
+			}
+			
+		
+		});// id keyup end
+		
+		$("input:eq(6)").on('keyup', function() {
+			$("#email_message").empty();
+			//[A-Za-z0-9_]와 동일한 것이 \w입니다.
+			//+는 1회 이상 반복을 의미하고 {1,}과 동일합니다.
+			//\w+는 [A-Za-z0-9_]를 1개이상 사용하라는 의미입니다.
+			var pattern = /^\w+@\w+[.]\w{3}$/;
+			var email = $("input:eq(6)").val();
+			if(!pattern.test(email)) {
+				$("#email_message").css('color', 'red').html("이메일 형식이 맞지 않습니다.");
+				checkemail = false;
+			} else {
+				$("#email_message").css('color', 'green').html("이메일 형식에 맞습니다.");
+				checkemail = true;
+			} 
+		});//email keyup end
+		
+		$('form').submit(function() {
+			if(!$.isNumeric($("input[name='age']").val())) {
+				alert("나이는 숫자를 입력하세요.");
+				$("input[name='age']").val('').focus();
+				return false;
+			}		
+			
+			if(!checkemail) {
+				alert("email 형식을 입력하세요.");
+				$("input:eq(6)").focus();
+				return false;
+			}					
+
+		
+		}); //submit end		
+		
+	})
+</script>
 </head>
 <body>
 	<form name="joinform" action="updateProcess" method="post" enctype="multipart/form-data">
-		<h3>회원 정보 수정</h3>
+		<h1 style="font-style:italic; color:#776BCC;">회원정보 수정</h1>
 		<hr>
-		<b>아이디</b>
-		<input type = "text" name = "id" value="${memberinfo.id}" required readonly>
+		<b style="font-style:italic; color:#776BCC;">ID</b>
+		<input type = "text" name = "userid" placeholder="Enter id" value="${memberinfo.userid}" readonly maxlength="12" style="margin-bottom:0px">
+		<span id="message" style="margin-bottom:0px"></span>
 		
-		<b>비밀번호</b>
-		<input type = "password" name = "pass" value="${memberinfo.password}" required readonly>
+		<b style="font-style:italic; color:#776BCC;">Password</b>
+		<input type = "password" name = "password" placeholder="Enter password" value="${memberinfo.password}" readonly>
 			
-		<b>이름</b>
-		<input type = "text" name = "name" value="${memberinfo.name}" placeholder="Enter name" required>
+		<b style="font-style:italic; color:#776BCC;">Name</b>
+		<input type = "text" name = "name" placeholder="Enter name" value="${memberinfo.name}" maxlength="5" required>
 		
-		<b>나이</b>
-		<input type = "text" name = "age" value="${memberinfo.age}" maxlength="2" 
-				placeholder="Enter age" required>
+		<b style="font-style:italic; color:#776BCC;">Age</b>
+		<input type = "text" name = "age" maxlength="2" placeholder="Enter age" value="${memberinfo.age}" required>
 		
-		<b>성별</b>
+		 <div class="area">
+		 <b style="font-style:italic; color:#776BCC;">Area</b>
+            <select id="area" name="area_name">
+                <option>지역을 선택하세요.</option>
+                <option value="서울">서울</option>
+                <option value="인천">인천</option>
+                <option value="충청도">충청도</option>
+                <option value="전라도">전라도</option>
+                <option value="부산">부산</option>
+                <option value="경상도">경상도</option>
+            </select>
+            <div id="areaError" class="error"></div>
+        </div><br>
 		<div>
-			<input type = "radio" name = "gender" value="남"><span>남자</span>
-			<input type = "radio" name = "gender" value="여"><span>여자</span>
+		<b style="font-style:italic; color:#776BCC;">Gender</b>
+			<input type = "radio" name = "gender" value="남"><span style="font-style:italic; color:#776BCC;">남자</span>
+			<input type = "radio" name = "gender" value="여"><span style="font-style:italic; color:#776BCC;">여자</span>
 		</div>
 				
-		<b>이메일 주소</b>
-		<input type = "text" name = "email" value="${memberinfo.email}" placeholder="Enter email" required>
+		<b style="font-style:italic; color:#776BCC;">User-Email</b>
+		<input type = "text" name = "email" placeholder="Enter email" value="${memberinfo.email}" maxlength="30" required style="margin-bottom:0px">
 		<span id="email_message"></span>
-		
 		<div class="clearfix">
-			<button type="submit" class="submitbtn">수정</button>
-			<button type="button" class="cancelbtn">취소</button>
+			<button type="submit" class="submitbtn">Submit</button>
+			<button type="submit" class="cancelbtn">Cancel</button>
 		</div>
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	</form>
 	<script>
+	
+	//지역 체크해주는 부분
+	$("option[value = '${memberinfo.area_name}']").prop('selected', true);
+	
 	//성별 체크해주는 부분
 	$("input[value = '${memberinfo.gender}']").prop('checked', true);
 	
+	//지역 체크해주는 부분
+	function ChangeValue(){
+		var value_str = document.getElementById('select_value');
+	}
+		
 	$(".cancelbtn").click(function() {
 		history.back();
 	});
-	
-	//처음 화면 로드시 보여줄 이메일은 이미 체크 완료된 것이므로 기본 checkemail = true 입니다.
-	var checkemail = true;
-	$("input:eq(6)").on('keyup', function() {
-		$("#email_message").empty();
-		//[A-Za-z0-9_]와 동일한 것이 \w입니다.
-		//+는 1회 이상 반복을 의미하고 {1,}과 동일합니다.
-		//\w+는 [A-Za-z0-9_]를 1개이상 사용하라는 의미입니다.
-		var pattern = /^\w+@\w+[.]\w{3}$/;
-		var email = $("input:eq(6)").val();
-		if(!pattern.test(email)) {
-			$("#email_message").css('color', 'red').html("이메일 형식이 맞지 않습니다.");
-			checkemail = false;
-		} else {
-			$("#email_message").css('color', 'green').html("이메일 형식에 맞습니다.");
-			checkemail = true;
-		} 
-	});//email keyup end
-	
-	$('form').submit(function() {
-		if(!$.isNumeric($("input[name='age']").val())) {
-			alert("나이는 숫자를 입력하세요.");
-			$("input[name='age']").val('').focus();
-			return false;
-		}
-		
-		if(!checkemail) {
-			alert("email 형식을 입력하세요.");
-			$("input:eq(6)").focus();
-			return false;
-		}
-	}); //submit end
-	
-	$('input[type=file]').change(function(event){
-		var inputfile = $(this).val().split('\\');
-		var filename = inputfile[inputfile.length - 1];
-		
-		var pattern = /(gif|jpg|jpeg|png)$/i; //i(ignore case)는 대소문자 무시를 의미
-		
-		if(pattern.test(filename)) {
-			$('#filename').text(filename); //inputfile.length - 1 = 2
-			
-			var reader = new FileReader(); //파일을 읽기위한 객체 생성
-			//DataURL 형식(접두사 data:가 붙은 URL이며 바이너리 파일을 Base64로 인코딩하여 ASCII 문자열 형식으로 변환한것)으로
-			//파일을 읽어옵니다.(참고 - Base64 인코딩은 바이너리 데이터를 Text로 변경하는 Encoding입니다.)
-			//네트워크탭에서 실행 후 Headers 확인 해보세요.
-			
-		
-			//읽어온 결과는 reader 객체의 result 속성에 저장됩니다.
-			//event.target.files[0] : 선택한 그림의 파일객체에서 첫번째 객체를 가져옵니다.
-			reader.readAsDataURL(event.target.files[0]);
-			
-			reader.onload = function() { //읽기에 성공했을 때 실행되는 이벤트 핸들러
-				//$('#showImage').html('<img width="20px" src="' + this.result + '">');
-				$('#showImage > img').attr('src', this.result);
-			};
-		} else {
-			alert('이미지 파일(gif, jpg, jpeg, png)이 아닌 경우는 무시됩니다.')
-			$('#filename').text('');
-			$('#showImage > img').attr('src', 'image/profile.png');
-			$(this).val('')
-		}
-	}) //change() end
 	</script>
 </body>
 </html>
