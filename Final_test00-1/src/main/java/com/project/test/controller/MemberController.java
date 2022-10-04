@@ -98,7 +98,6 @@ public class MemberController {
 		logger.info("회원가입 성공");
 	}
 	
-	//회원가입 처리
 	
 
 	
@@ -156,6 +155,13 @@ public class MemberController {
 				return "error/error";
 			}
 		}
+		
+		//로그아웃
+		@RequestMapping(value = "logout", method = RequestMethod.GET)
+		   public String loginout(HttpSession session) {
+		      session.invalidate();
+		      return "redirect:login";
+		   }
 	
 	//수정 처리
 	@RequestMapping(value = "/updateProcess", method = RequestMethod.POST)
