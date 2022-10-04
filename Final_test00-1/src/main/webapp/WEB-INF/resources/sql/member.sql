@@ -60,8 +60,8 @@ delete table user_info
 delete from group_user_role
 
 select * from group_user_role
-
 select * from user_info
+select * from GROUP_JOIN_REQUEST
 
 create sequence calendar_seq
 

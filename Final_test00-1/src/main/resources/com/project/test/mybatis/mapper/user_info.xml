@@ -15,9 +15,9 @@
 	
 	<update id="update" parameterType="member">
 		update user_info set 
-		name=#{name}, age=#{age}, gender=#{gender}, email=#{email}
+		name=#{name}, age=#{age},area_name=#{area_name}, gender=#{gender}, email=#{email}
 		where userid=#{userid}
-	</update>
+	</update>	
 	
 	<select id="getSearchListCount" parameterType="map" resultType="int">
 		select count(*) from user_info

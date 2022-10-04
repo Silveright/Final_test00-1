@@ -187,7 +187,7 @@ body {
   transform: scale(1.5);  
 }
 </style>
-<script >
+<script>
 
 Kakao.init('b0aef16567d7b964e3834d1a650e2ba5'); //발급받은 키 중 javascript키를 사용해준다.
 console.log(Kakao.isInitialized()); // sdk초기화여부판단
