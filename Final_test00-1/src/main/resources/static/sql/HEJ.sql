@@ -1,3 +1,6 @@
+delete from group_info
+
+
 select *
 			from (select rownum rnum, b.*
 					from ( select ui.userid, gender, email, area_name,group_name,catename,cnt

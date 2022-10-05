@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="se" uri="http://www.springframework.org/security/tags" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -173,7 +174,7 @@
 		<!-- Start Recent Work -->
 		<div class="col-xl-3 col-md-4 col-sm-6 project new best all">
 			<a href="#" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
-				<img class="service card-img" src="${pageContext.request.contextPath}/resources/img/services-01.jpg" alt="Card image">
+				<img class="service card-img" src="<spring:url value = '/upload${b.group_img}'/>" alt="Card image">
 				<div class="service-work-vertical card-img-overlay d-flex align-items-end">
 					<div class="service-work-content text-left text-light">
 						<span class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300">${b.area_name}</span>
