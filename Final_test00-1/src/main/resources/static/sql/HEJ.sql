@@ -180,8 +180,8 @@ insert into group_info values (1, '3355', '사진1', '서울', '코딩', sysdate
 insert into group_info values (2, '사진동호회', '사진2', '인천', '사진', sysdate, '사진2', 'user2')
 insert into group_info values (3, '코딩모임', '사진3', '경기', '코딩', sysdate, '사진3', 'user3')
 insert into group_info values (4, '게임 동호회', '사진4', '서울', '게임', sysdate, '사진4', 'user1')
-
-
+select * from group_info
+select * from group_user_role
 --모임-회원 테이블 생성
 CREATE TABLE group_user_role (
 	group_role_no	number	NOT NULL primary key,
@@ -189,6 +189,8 @@ CREATE TABLE group_user_role (
 	group_no	number	NOT NULL,
 	group_role	number	NOT NULL--0이 관리자, 1이 일반 유저?
 );
+delete from group_user_role
+create sequence role_seq
 --데이터 임의 삽입
 insert into group_user_role values (1, 'user1', 1, 0)
 --일반 회원 모임 가입
