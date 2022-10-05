@@ -1,6 +1,7 @@
 package com.project.test.mybatis.mapper;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -11,4 +12,8 @@ public interface GroupMapper {
 	//모임 생성
     public void insertGroup(Group Group);
 
-	public Group isGroupWriter(HashMap<String, Object> map);}
+	public Group isGroupWriter(HashMap<String, Object> map);
+
+	public List<Group> getGroupList(HashMap<String, Integer> map);
+
+	public int getListCount();}

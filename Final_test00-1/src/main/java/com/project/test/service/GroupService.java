@@ -38,5 +38,11 @@ public interface GroupService {
 	
 	//모임장인지 확인
 	public boolean isGroupWriter(int num, String userid);
+	
+	//그룹 리스트 
+	List<Group> getGroupList(int page, int limit);
+
+	int getListCount();
+
 
 }

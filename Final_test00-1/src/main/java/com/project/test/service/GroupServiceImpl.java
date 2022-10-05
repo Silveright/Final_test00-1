@@ -137,4 +137,19 @@ public class GroupServiceImpl implements GroupService {
 			return 0;
 		}
 
+		@Override
+		public List<Group> getGroupList(int page, int limit) {
+			HashMap<String, Integer> map = new HashMap<String, Integer>();
+			int startrow = (page - 1) * limit + 1;
+			int endrow = startrow + limit - 1;
+			map.put("start", startrow);
+			map.put("end", endrow);
+			return gdao.getGroupList(map);
+		}
+
+		@Override
+		public int getListCount() {
+			return gdao.getListCount();
+		}
+
 }

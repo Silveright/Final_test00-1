@@ -74,6 +74,7 @@ create table group_info (
 	catename		varchar2(100) not null,
 	opendate		date not null,
 	userid			varchar2(100) not null,
+	group_content	varchar2(1000) not null,
 	primary key(group_no)
 );
 
@@ -143,6 +144,9 @@ create table notice (
 select * from notice;
 
 
-
-
-
+select * from 
+         (select rownum rnum, j.*     
+         from (select * from group_info) j     
+         where rownum<=10
+         ) 
+      where rnum>=1  and rnum<=10
