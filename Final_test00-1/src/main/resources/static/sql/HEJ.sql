@@ -132,19 +132,29 @@ select * from user_info
 drop table group_info purge;
 SELECT *
   FROM user_sequences
-select * from group_user_role
+select * from group_info
 CREATE TABLE group_info (
 	group_no	number	NOT NULL primary key,
 	group_name	varchar2(100)	NOT NULL,
+	group_content	varchar2(1000)	NOT NULL,
+	group_img	varchar2(100)	NOT NULL,
 	group_original	varchar2(100)	NOT NULL,
 	area_name	varchar2(100)	NOT NULL,
 	catename	varchar2(100)	NOT NULL,
-	opendate	date	NOT NULL,
-	group_img	varchar2(100)	NOT NULL,
-	userid	varchar2(100)	NOT NULL
+	userid	varchar2(100)	NOT NULL,
+	opendate	date	NOT NULL
 );
-
-
+insert into group_info
+	 	(group_no, 
+	 	group_name, group_content, group_img, 
+	 	group_original, area_name, catename, userid,
+	 	opendate)
+	 	values
+	 	(1,
+	 	 '코딩공부', '같이 코딩 공부 해봐요', '이미지',
+	 	 '원본 이미지', '서울', '공부', 'user1',
+	 	 sysdate)
+drop table group_info purge
 select *
       from (select rownum rnum, j.userid, group_no, group_role, gender, email, area_name
            from (

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="GroupMapper">
+<mapper namespace="com.project.test.mybatis.mapper.GroupMapper">
 	 <!-- 모임 생성  -->
     <insert id="insertGroup" parameterType="group">
 	 	<selectKey resultType="int" order="BEFORE"
@@ -12,12 +12,12 @@
 	 	insert into group_info
 	 	(group_no, 
 	 	group_name, group_content, group_img, 
-	 	group_orininal, area_name, catename, userid,
+	 	group_original, area_name, catename, userid,
 	 	opendate)
 	 	values
 	 	(#{group_no},
 	 	 #{group_name}, #{group_content}, #{group_img, jdbcType=VARCHAR},
-	 	 #{group_orininal, jdbcType=VARCHAR}, #{area_name}, #{catename}, #{userid},
+	 	 #{group_original, jdbcType=VARCHAR}, #{area_name}, #{catename}, #{userid},
 	 	 sysdate)
 	 </insert>
 </mapper>

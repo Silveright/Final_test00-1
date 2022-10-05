@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
 <title>모임 생성</title>
@@ -23,7 +23,7 @@
     </div>
 </section>
 <section class="container my-lg-5">
-    <form id="groupMakeFrm" method="POST" action='/add' enctype="multipart/form-data">
+    <form id="groupMakeFrm" method="POST" action='add' enctype="multipart/form-data">
         <input type="hidden" name="userid" value="${userid}">
         <input type="hidden" name="groupNo" value="${group_no}">
 
@@ -51,7 +51,7 @@
                                     </c:otherwise>
                                 </c:choose>
                                 <div class="input-group">
-                                    <input type="file" class="form-control" id="fileName" name="fileName"
+                                    <input type="file" class="form-control" id="fileName" name="uploadfile"
                                            aria-describedby="inputGroupFileAddon04"
                                            aria-label="Upload" accept="image/*;capture=camera">
                                 </div>
@@ -98,7 +98,7 @@
                     <div class="pricing-list-body col-9 align-items-center pl-3 pt-2 pe-4">
                         <ul class="list-unstyled text-center light-300">
                             <div class="form-floating mb-4">
-                        <textarea name="content" id="content" class="form-control form-control-lg light-300"
+                        <textarea name="group_content" id="content" class="form-control form-control-lg light-300"
                                   style="resize: none; width: border-box; height: 300px;"
                                   placeholder="10 ~ 1000자 이내로 입력해 주세요."></textarea>
                                 <label for="content">10 ~ 1000자 이내로 입력해 주세요.</label>
@@ -161,12 +161,18 @@
             <div class="pricing-list shadow-sm rounded-top rounded-3 py-sm-0 py-5">
                 <div class="row p-2">
                     <div class="col-md-12 col-12 my-5 text-center">
-                        <input type="button" onclick="confirm()" value="완료"
+                        <input type="button" onclick="confirm()" value="완료" id="groupmake"
                                class="btn btn-secondary rounded-pill px-md-5 px-4 py-2 radius-0 text-light light-300">
                     </div>
                 </div>
             </div>
         </div>
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+        <sec:authorize access="isAuthenticated()">
+    	 <sec:authentication property="principal" var="pinfo"/>
+     		<input type="hidden" id="loginid" name="userid" value="${pinfo.username }">
+    	</sec:authorize>
+        
     </form>
     <script>
 $(function () {
@@ -221,7 +227,7 @@ $(function () {
 //Form 전송
 function confirm() {
     console.log($('#interest').val());
-
+	console.log('로그인 아이디는 '+$('#loginid').val());
     if ($('#group_name').val().trim() == '') {
         alert('모임 이름을 입력해 주세요 !')
         return;
@@ -242,6 +248,7 @@ function confirm() {
         return;
     } else {
     	alert("모임 생성이 완료되었습니다.")
+    	$('#groupMakeFrm').submit();
     }
 }
 
