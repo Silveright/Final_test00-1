@@ -20,16 +20,17 @@ where userid = 'admin';
 select * from user_info;
 
 drop table group_info purge
-
+delete from group_info
 CREATE TABLE group_info (
-	group_no	number		NOT NULL,
-	group_name	varchar2(100)		NOT NULL,
-	group_original	varchar2(100)		NOT NULL,
-	group_img	varchar2(100)		NOT NULL,
-	area_name	varchar2(100)		NOT NULL,
-	catename	varchar2(100)		NOT NULL,
-	opendate	date		NOT NULL,
-	userid	varchar2(100)		NOT NULL
+	group_no	number	NOT NULL,
+	group_name	varchar2(100)	NOT NULL,
+	group_content	varchar2(1000)	NOT NULL,
+	group_original	varchar2(100)	NOT NULL,
+	group_img	varchar2(100)	NOT NULL,
+	area_name	varchar2(100)	NOT NULL,
+	catename	varchar2(100)	NOT NULL,
+	opendate	date	NOT NULL,
+	userid	varchar2(100)	NOT NULL
 );
 
 drop table group_user_role purge
@@ -48,7 +49,7 @@ CREATE TABLE group_join_request (
 	userid	varchar2(100)		NOT NULL,
 	group_no	number		NOT NULL
 );
-
+select * from group_schedule
 drop table group_schedule purge
 drop sequence calendar_seq
 create sequence calendar_seq
