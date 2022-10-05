@@ -9,7 +9,7 @@
 	 				keyProperty="group_no">
 	 		select nvl(max(group_no), 0) + 1 from group_info
 	 	</selectKey>
-	 	insert into group_info
+	 	insert ALL into group_info
 	 	(group_no, 
 	 	group_name, group_content, group_img, 
 	 	group_original, area_name, catename, userid,
@@ -19,5 +19,7 @@
 	 	 #{group_name}, #{group_content}, #{group_img, jdbcType=VARCHAR},
 	 	 #{group_original, jdbcType=VARCHAR}, #{area_name}, #{catename}, #{userid},
 	 	 sysdate)
+	 	 into group_user_role(group_role_no, userid, group_no, group_role) values(role_seq.nextval, #{userid}, #{group_no}, 0)
+	 	 select * from dual
 	 </insert>
 </mapper>
