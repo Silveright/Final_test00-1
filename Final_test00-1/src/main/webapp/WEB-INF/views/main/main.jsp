@@ -85,61 +85,8 @@
 </div>
 <!-- End Banner Hero -->
 
-<!-- Start Service -->
+<!-- 로그인 안했을 때 보여지는 화면 -->
 <se:authorize access="!hasAnyAuthority('ROLE_USER','ROLE_ADMIN')">
-<section class="service-wrapper py-3" style="background:#4C489D" >
-	<div class="service-tag py-5" style="background:#4C489D">
-		<div class="col-md-12" style="background:#4C489D">
-			<ul class="nav d-flex justify-content-center">
-				<li class="nav-item mx-lg-4">
-					<a class="filter-btn nav-link btn-outline-primary active shadow rounded-pill text-light px-4 light-300" href="#" data-filter=".new">NEW</a>
-				</li>
-				<li class="nav-item mx-lg-4">
-					<a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300" href="#" data-filter=".best">BEST</a>
-				</li>
-				<li class="filter-btn nav-item mx-lg-4">
-					<a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300" href="#" data-filter=".all">ALL</a>
-				</li>
-			</ul>
-		</div>
-	</div>
-</section>
-
-<section class="container overflow-hidden py-5">
-	<div class="container-fluid pb-3">
-		<div class="row">
-			<div class="service-header col-2 col-lg-3">
-				<span><img src="${pageContext.request.contextPath}/resources/img/group.png" width="50px"></span>
-				<div class="service-heading col-10 col-lg-9 text-start float-end ">
-					<h2 class="h3 pb-4 typo-space-line">&nbsp;&nbsp;추천&nbsp;모임</h2>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row gx-5 gx-sm-3 gx-lg-5 gy-lg-5 gy-3 pb-3 projects">
-	<c:forEach var="b" items="${grouplist}">
-		<!-- Start Recent Work -->
-		<div class="col-xl-3 col-md-4 col-sm-6 project new best all">
-			<a href="#" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
-				<img class="service card-img" src="${pageContext.request.contextPath}/resources/img/services-01.jpg" alt="Card image">
-				<div class="service-work-vertical card-img-overlay d-flex align-items-end">
-					<div class="service-work-content text-left text-light">
-						<span class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300">${b.group_name}</span>
-						<p class="card-text">${b.group_content}</p>
-					</div>
-				</div>
-			</a>
-		</div>
-		<!-- End Recent Work -->
-
-	</c:forEach>	
-	</div>
-</section>
-</se:authorize>
-<!-- End Service -->
-
-<!-- Start View Work -->
-<se:authorize access="hasAnyAuthority('ROLE_USER','ROLE_ADMIN')">
 <section class="service-wrapper py-3" style="background:#4C489D" >
 	<div class="service-tag py-5" style="background:#4C489D">
 		<div class="col-md-12" style="background:#4C489D">
@@ -177,7 +124,7 @@
 				<img class="service card-img" src="<spring:url value = '/upload${b.group_img}'/>" alt="Card image">
 				<div class="service-work-vertical card-img-overlay d-flex align-items-end">
 					<div class="service-work-content text-left text-light">
-						<span class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300">${b.area_name}</span>
+						<span class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300">${b.area_name}</span><br>
 						<span class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300">${b.group_name}</span>
 					</div>
 				</div>
@@ -185,9 +132,14 @@
 		</div>
 		<!-- End Recent Work -->
 
-	</c:forEach>
+	</c:forEach>	
 	</div>
 </section>
+</se:authorize>
+<!-- 로그인 안했을 때 보여지는 화면 끝 -->
+
+<!-- 로그인 했을 때 보여지는 화면 -->
+<se:authorize access="hasAnyAuthority('ROLE_USER','ROLE_ADMIN')">
 <section class="service-wrapper py-3" style="background:#4C489D">
 	<div class="container py-5" >
 		<div class="row d-flex justify-content-center text-center">
@@ -229,36 +181,8 @@
 					<img class="recent-work-img card-img" src="${pageContext.request.contextPath}/resources/img/recent-work-01.jpg" alt="Card image">
 					<div class="recent-work-vertical card-img-overlay d-flex align-items-end">
 						<div class="recent-work-content text-start mb-3 ml-3 text-dark">
-							<h3 class="card-title light-300">${group.userid}</h3>
-							<p class="card-text">가입한 모임1 설명</p>
-						</div>
-					</div>
-				</a>
-			</div>
-			<!-- End Recent Work -->
-
-			<!-- Start Recent Work -->
-			<div class="col-md-4 mb-3">
-				<a href="#" class="recent-work card border-0 shadow-lg overflow-hidden">
-					<img class="recent-work-img card-img" src="${pageContext.request.contextPath}/resources/img/recent-work-02.jpg" alt="Card image">
-					<div class="recent-work-vertical card-img-overlay d-flex align-items-end">
-						<div class="recent-work-content text-start mb-3 ml-3 text-dark">
-							<h3 class="card-title light-300">가입한 모임2</h3>
-							<p class="card-text">가입한 모임2 설명</p>
-						</div>
-					</div>
-				</a>
-			</div>
-			<!-- End Recent Work -->
-
-			<!-- Start Recent Work -->
-			<div class="col-md-4 mb-3">
-				<a href="#" class="recent-work card border-0 shadow-lg overflow-hidden">
-					<img class="recent-work-img card-img" src="${pageContext.request.contextPath}/resources/img/recent-work-03.jpg" alt="Card image">
-					<div class="recent-work-vertical card-img-overlay d-flex align-items-end">
-						<div class="recent-work-content text-start mb-3 ml-3 text-dark">
-							<h3 class="card-title light-300">가입한 모임3</h3>
-							<p class="card-text">가입한 모임3 설명</p>
+						<h3 class="card-title light-300">가입한 모임1</h3>
+						<p class="card-text">가입한 모임1 설명</p>
 						</div>
 					</div>
 				</a>
@@ -268,8 +192,59 @@
 		</div>
 	</div>
 </section>
+
+
+<section class="service-wrapper py-3" style="background:#4C489D" >
+	<div class="service-tag py-5" style="background:#4C489D">
+		<div class="col-md-12" style="background:#4C489D">
+			<ul class="nav d-flex justify-content-center">
+				<li class="nav-item mx-lg-4">
+					<a class="filter-btn nav-link btn-outline-primary active shadow rounded-pill text-light px-4 light-300" href="#" data-filter=".new">NEW</a>
+				</li>
+				<li class="nav-item mx-lg-4">
+					<a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300" href="#" data-filter=".best">BEST</a>
+				</li>
+				<li class="filter-btn nav-item mx-lg-4">
+					<a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300" href="#" data-filter=".all">ALL</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</section>
+
+<section class="container overflow-hidden py-5">
+	<div class="container-fluid pb-3">
+		<div class="row">
+			<div class="service-header col-2 col-lg-3">
+				<span><img src="${pageContext.request.contextPath}/resources/img/group.png" width="50px"></span>
+				<div class="service-heading col-10 col-lg-9 text-start float-end ">
+					<h2 class="h3 pb-4 typo-space-line">&nbsp;&nbsp;추천&nbsp;모임</h2>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row gx-5 gx-sm-3 gx-lg-5 gy-lg-5 gy-3 pb-3 projects">
+	<c:forEach var="b" items="${grouplist}">
+		<!-- Start Recent Work -->
+		<div class="col-xl-3 col-md-4 col-sm-6 project new best all">
+			<a href="#" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
+				<img class="service card-img" src="<spring:url value = '/upload${b.group_img}'/>" alt="Card image">
+				<div class="service-work-vertical card-img-overlay d-flex align-items-end">
+					<div class="service-work-content text-left text-light">
+						<span class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300">${b.area_name}</span><br>
+						<span class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300">${b.group_name}</span>
+					</div>
+				</div>
+			</a>
+		</div>
+		<!-- End Recent Work -->
+
+	</c:forEach>
+	</div>
+</section>
+
 </se:authorize>
-<!-- End Recent Work -->
+<!-- 로그인 했을 때 보여지는 화면 끝-->
 
 <!-- Footer -->
 <jsp:include page="../include/footer.jsp"></jsp:include>
