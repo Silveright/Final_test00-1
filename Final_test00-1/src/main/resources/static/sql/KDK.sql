@@ -143,10 +143,10 @@ create table notice (
 
 select * from notice;
 
-
+-- 모임 생성 후 메인화면에 뿌려주기
 select * from 
-         (select rownum rnum, j.*     
-         from (select * from group_info) j     
-         where rownum<=10
-         ) 
-      where rnum>=1  and rnum<=10
+	(select rownum rnum, j.*     
+	from (select * from group_info) j     
+	where rownum<=10
+	) 
+where rnum>=1  and rnum<=10
