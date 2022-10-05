@@ -105,7 +105,6 @@
 </section>
 
 <section class="container overflow-hidden py-5">
-<c:forEach var="b" items="${grouplist}">
 	<div class="container-fluid pb-3">
 		<div class="row">
 			<div class="service-header col-2 col-lg-3">
@@ -117,6 +116,7 @@
 		</div>
 	</div>
 	<div class="row gx-5 gx-sm-3 gx-lg-5 gy-lg-5 gy-3 pb-3 projects">
+	<c:forEach var="b" items="${grouplist}">
 		<!-- Start Recent Work -->
 		<div class="col-xl-3 col-md-4 col-sm-6 project new best all">
 			<a href="#" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
@@ -131,8 +131,8 @@
 		</div>
 		<!-- End Recent Work -->
 
+	</c:forEach>	
 	</div>
-</c:forEach>	
 </section>
 </se:authorize>
 <!-- End Service -->
