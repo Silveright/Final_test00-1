@@ -120,7 +120,7 @@
 	<c:forEach var="b" items="${grouplist}">
 		<!-- Start Recent Work -->
 		<div class="col-xl-3 col-md-4 col-sm-6 project new best all">
-			<a href="#" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
+			<a href="${pageContext.request.contextPath}/group/group_detail?num=${b.group_no}" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
 				<img class="service card-img" src="<spring:url value = '/upload${b.group_img}'/>" alt="Card image">
 				<div class="service-work-vertical card-img-overlay d-flex align-items-end">
 					<div class="service-work-content text-left text-light">
@@ -227,7 +227,7 @@
 	<c:forEach var="b" items="${grouplist}">
 		<!-- Start Recent Work -->
 		<div class="col-xl-3 col-md-4 col-sm-6 project new best all">
-			<a href="#" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
+			<a href="${pageContext.request.contextPath}/group/group_detail?num=${b.group_no}" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
 				<img class="service card-img" src="<spring:url value = '/upload${b.group_img}'/>" alt="Card image">
 				<div class="service-work-vertical card-img-overlay d-flex align-items-end">
 					<div class="service-work-content text-left text-light">

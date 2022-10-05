@@ -35,5 +35,11 @@
 	 	 sysdate)
 	 </insert>
 	 
+	 <select id="getDetail" parameterType="int" resultType="group">
+	 	select * 
+	 	from group_info
+	 	where group_no=#{grouo_no}
+	 </select>
+	 
 	 
 </mapper>
