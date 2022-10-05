@@ -40,9 +40,14 @@ public interface GroupService {
 	public boolean isGroupWriter(int num, String userid);
 	
 	//그룹 리스트 
-	List<Group> getGroupList(int page, int limit);
+	public List<Group> getGroupList(int page, int limit);
 
-	int getListCount();
+	public int getListCount();
+
+
+	public Group getDetail(int num);
+
+	public int getListCount(int num);
 
 
 }

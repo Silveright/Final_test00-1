@@ -16,4 +16,6 @@ public interface GroupMapper {
 
 	public List<Group> getGroupList(HashMap<String, Integer> map);
 
-	public int getListCount();}
+	public int getListCount();
+
+	public Group getDetail(int num);}

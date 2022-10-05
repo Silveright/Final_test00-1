@@ -79,4 +79,12 @@ public class MainController {
 		
 	}
 	
+	// 그룹 참여하기
+			@RequestMapping(value="/enter", method=RequestMethod.POST)
+			public ModelAndView group_enter(ModelAndView mv) {
+				mv.setViewName("group/group_enter");
+				return mv;
+				
+			}
+	
 }

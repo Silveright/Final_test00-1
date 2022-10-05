@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -155,6 +156,33 @@ public class GroupController {
 			String fileDBName = File.separator + year + "-" + month + "-" + date + File.separator + refileName;
 			logger.info("fileDBName = " + fileDBName);
 			return fileDBName;
+		}
+		
+		// detail?num=9요청시 파라미터 num의 값을 int num에 저장합니다.
+		@GetMapping("/group_detail")
+		public ModelAndView Detail(
+				int num, ModelAndView mv,
+				HttpServletRequest request,
+				@RequestHeader(value = "referer") String beforeURL)
+		// String bsforeURL = request.getHeader("referer"); 의미로
+		// 어느 주소에서 detail로 이동했지만 header의 정보 중에서 "referer"를 통해 알 수 있습니다.
+		{
+			
+			Group group = groupservice.getDetail(num);
+			// board=null; // error 페이지 이동 확인하고자 임의로 지정합니다.
+			if(group == null) {
+				logger.info("가입신청 페이지 이동 실패");
+				mv.setViewName("error/error");
+				mv.addObject("url",request.getRequestURL());
+				mv.addObject("message","가입신청 페이지 이동 실패입니다.");
+			}else {
+				logger.info("가입신청 성공");
+				int count = groupservice.getListCount(num);
+				mv.setViewName("group/group_detail");
+				mv.addObject("count", count);
+				mv.addObject("groupdata", group);
+			}
+			return mv;
 		}
 	
 //==================================================================================

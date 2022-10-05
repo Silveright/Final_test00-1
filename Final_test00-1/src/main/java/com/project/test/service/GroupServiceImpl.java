@@ -152,4 +152,18 @@ public class GroupServiceImpl implements GroupService {
 			return gdao.getListCount();
 		}
 
+
+		@Override
+		public Group getDetail(int num) {
+			return gdao.getDetail(num);
+		}
+		
+
+
+		@Override
+		public int getListCount(int num) {
+			return gdao.getListCount();
+		}
+
+
 }
