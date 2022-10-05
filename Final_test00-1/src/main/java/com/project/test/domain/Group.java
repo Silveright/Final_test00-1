@@ -4,7 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class Group {
 
-	private String group_no;
+	private int group_no;
 	private String group_name;
 	private String group_content;
 	private String group_original;
@@ -17,10 +17,10 @@ public class Group {
 	private int CNT; //베스트 모임 만들때 사용 예정
 	
 	
-	public String getGroup_no() {
+	public int getGroup_no() {
 		return group_no;
 	}
-	public void setGroup_no(String group_no) {
+	public void setGroup_no(int group_no) {
 		this.group_no = group_no;
 	}
 	public String getGroup_name() {

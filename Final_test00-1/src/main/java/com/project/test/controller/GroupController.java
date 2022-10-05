@@ -39,9 +39,9 @@ import com.project.test.service.MySaveFolder;
 @RequestMapping(value="/group")
 public class GroupController {
 	
-	@Autowired
+	//@Autowired
 	private MemberService memberService;
-    private GroupService groupService;
+    //private GroupService groupService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(GroupController.class);
 	private GroupService groupservice;
@@ -84,7 +84,7 @@ public class GroupController {
 				throws Exception{
 			
 			MultipartFile uploadfile = group.getUploadfile();
-			
+			logger.info("uploadfile = " + uploadfile);
 			if(!uploadfile.isEmpty()) {
 				String fileName = uploadfile.getOriginalFilename(); // 원래 파일명
 				group.setGroup_original(fileName);// 원래 파일명 저장
@@ -99,12 +99,20 @@ public class GroupController {
 				uploadfile.transferTo(new File(saveFolder + fileDBName));
 				logger.info("fileDBName = " + saveFolder + fileDBName);
 				//바뀐 파일명으로 저장
-				group.setGroup_original(fileDBName);
+				group.setGroup_img(fileDBName);
 			}
-			
-			groupService.insertGroup(group); // 저장메서드 호출
+			logger.info(group.getArea_name());
+			logger.info(group.getCatename());
+			logger.info(group.getGroup_content());
+			logger.info(group.getGroup_img());
+			logger.info(group.getGroup_name());
+			logger.info(group.getGroup_original());
+			String userid=group.getUserid().substring(1);
+			group.setUserid(userid);
+			logger.info(group.getUserid());
+			groupservice.insertGroup(group); // 저장메서드 호출
 			logger.info(group.toString()); // selectKey로 정의한 BOARD_NUM 값 확인해 봅니다.
-			return "redirect:main/list";
+			return "redirect:/main/list";
 		}
 		
 		
