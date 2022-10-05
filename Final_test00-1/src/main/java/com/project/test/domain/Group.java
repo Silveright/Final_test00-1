@@ -11,7 +11,7 @@ public class Group {
 	private String group_img;
 	private String area_name;
 	private String catename;
-	private int opendate;
+	private String opendate;
 	private String userid;
 	private MultipartFile uploadfile;
 	private int CNT; //베스트 모임 만들때 사용 예정
@@ -59,10 +59,10 @@ public class Group {
 	public void setCatename(String catename) {
 		this.catename = catename;
 	}
-	public int getOpendate() {
+	public String getOpendate() {
 		return opendate;
 	}
-	public void setOpendate(int opendate) {
+	public void setOpendate(String opendate) {
 		this.opendate = opendate;
 	}
 	public String getUserid() {
