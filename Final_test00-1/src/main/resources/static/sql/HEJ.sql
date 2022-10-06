@@ -1,9 +1,7 @@
 delete from group_info
-
-
-select *
-			from (select rownum rnum, b.*
-					from ( select ui.userid, gender, email, area_name,group_name,catename,cnt
+select * from group_info
+select count(*) from (
+		 select ui.userid, gender, email, area_name,group_name,catename,cnt
 		from user_info ui
 		inner join (select group_no, group_name, userid,catename,  cnt 
 			  from group_info gi join 
@@ -14,34 +12,11 @@ select *
 								 ,group_no asc)
 								 on gi.group_no = user_groupno) g
 		on ui.userid=g.userid
-		
-		
-where ui.userid like '1'
-) b 
-
-					where rownum <=10
+		 ) 
+		 ) b 
+					where rownum<=10
 					)
-					where rnum>=1 and rnum<=10
-
-delete from group_schedule
-select *
-from (select rownum rnum, j.userid, group_no, group_role, gender, email, area_name
-	  from (
-	  		select * 
-from group_user_role
-join (select userid as id, gender, email, area_name
-from user_info) 
-on id=userid
-where group_no=1
-and group_role=1--일반 회원만 출력
---and userid like '%1%'--검색 기능
-	  		)j
-	  		where rownum<=10)
-where rnum>=1 and rnum<=10;
-
-RNUM USERID GROUP_NO GROUP_ROLE GENDER EMAIL           AREA_NAME
- ---- ------ -------- ---------- ------ --------------- ---------
-    1 user1         1          1 여      user1@kakao.com 서울
+					where rnum>=1 and rnum&lt<=10
 
 
 drop table group_schedule purge

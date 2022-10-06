@@ -160,7 +160,7 @@ public class MemberController {
 	@RequestMapping(value = "logout", method = RequestMethod.GET)
     public String loginout(HttpSession session) {
        session.invalidate();
-       return "redirect:login";
+       return "redirect:/main/list";
     }
 
 	

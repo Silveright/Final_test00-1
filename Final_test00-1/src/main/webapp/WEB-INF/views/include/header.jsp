@@ -29,12 +29,12 @@
 <!-- Header -->
 <nav id="main_nav" class="navbar navbar-expand-lg navbar-light bg-white shadow">
     <div class="container d-flex justify-content-between align-items-center" id="logoBox">
-        <se:authorize access="!hasAnyAuthority('ROLE_USER','ROLE_ADMIN')">
+        <se:authorize access="!hasAnyAuthority('ROLE_MEMBER','ROLE_ADMIN')">
             <a class="navbar_logo" href="${pageContext.request.contextPath}/main/list">
                 <img src="${pageContext.request.contextPath}/resources/img/final_logo.png" width="150px"></span>
             </a>
         </se:authorize>
-        <se:authorize access="hasAnyAuthority('ROLE_USER','ROLE_ADMIN')">
+        <se:authorize access="hasAnyAuthority('ROLE_MEMBER','ROLE_ADMIN')">
             <a class="navbar_logo" href="${pageContext.request.contextPath}/main/list">
                 <img class="logo_img" src="${pageContext.request.contextPath}/resources/img/final_logo.png" alt="logo" width="150px">
             </a>
@@ -82,9 +82,15 @@
                 </se:authorize>
                 <se:authorize access="hasAuthority('ROLE_MEMBER')">
                     <a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/member/update">MyPage</a>&emsp;|&emsp;
+
+    	 			<se:authentication property="principal" var="pinfo"/>
+                    <span id="loginid">${pinfo.username }</span>님&nbsp;
+
                     <a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/member/logout" id="logout">Logout</a>
                 </se:authorize>
                 <se:authorize access="hasAuthority('ROLE_ADMIN')">
+    	 			<se:authentication property="principal" var="pinfo"/>
+                    <span id="loginid">${pinfo.username }</span>님&nbsp;
                     <a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/admin/dashboard">Admin</a>&emsp;|&emsp;
                     <a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/member/update">MyPage</a>&emsp;|&emsp;
                     <a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/member/logout" id="logout">Logout</a>
