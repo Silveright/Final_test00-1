@@ -81,16 +81,16 @@
                     <a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/member/login">Login</a>
                 </se:authorize>
                 <se:authorize access="hasAuthority('ROLE_MEMBER')">
+    	 			<se:authentication property="principal" var="pinfo"/>
+                    <span id="loginid">${pinfo.username }</span>님&nbsp;&emsp;|&emsp;
                     <a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/member/update">MyPage</a>&emsp;|&emsp;
 
-    	 			<se:authentication property="principal" var="pinfo"/>
-                    <span id="loginid">${pinfo.username }</span>님&nbsp;
 
                     <a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/member/logout" id="logout">Logout</a>
                 </se:authorize>
                 <se:authorize access="hasAuthority('ROLE_ADMIN')">
     	 			<se:authentication property="principal" var="pinfo"/>
-                    <span id="loginid">${pinfo.username }</span>님&nbsp;
+                    <span id="loginid">${pinfo.username }</span>님&nbsp;&emsp;|&emsp;
                     <a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/admin/dashboard">Admin</a>&emsp;|&emsp;
                     <a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/member/update">MyPage</a>&emsp;|&emsp;
                     <a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/member/logout" id="logout">Logout</a>

@@ -52,6 +52,9 @@ public interface GroupService {
 	GroupUser getUserRole(int group_no, String userid);
 
 	int getMemberCount(int num);
+	
+	//모임 가입 신청
+	public void insert(String userid, int group_no);
 
 
 }

@@ -139,6 +139,13 @@
 <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
 <!-- End Footer / Script -->
 <script>
+function join(){
+	var answer = confirm("가입 신청 하시겠습니까?");
+	console.log(answer); //취소를 클릭한 경우 false
+	if(!answer) { //취소를 클릭한 경우
+		event.preventDefault(); //이동하지 않습니다.
+	}
+}
 $.ajax({
     url: "../group/main",
     data: {
@@ -160,7 +167,7 @@ $.ajax({
             buttonArea.append("<button onclick='out()' class='banner-button btn rounded-pill btn-primary btn-lg px-4 my-lg-5'>탈퇴하기</button>");
             //modalBtn.attr('data-bs-target', '#groupMemberListModal');
         } else { //비로그인유저, 모임미가입유저
-            buttonArea.append("<button onclick='join()' class='banner-button btn rounded-pill btn-primary btn-lg px-4 my-lg-5'>가입하기</button>");
+            buttonArea.append('<a href="insert?userid=${groupdata.userid}&group_no=${groupdata.group_no}"><button onclick="join()" class="banner-button btn rounded-pill btn-primary btn-lg px-4 my-lg-5">가입하기</button></a>');
             //modalBtn.attr('onclick', 'memberListAlert()');
         }
     },
