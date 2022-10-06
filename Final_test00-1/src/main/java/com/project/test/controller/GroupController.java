@@ -187,34 +187,6 @@ public class GroupController {
 	
 //==================================================================================
 
-	/*
-//	@RequestMapping(value="/groupuserinfo")
-//	public ModelAndView memberList(@RequestParam(value="page", defaultValue="1",required=false) int page,
-//									@RequestParam(value="limit", defaultValue="3", required=false) int limit,
-//									ModelAndView mv,
-//									@RequestParam(value="search_field", defaultValue="-1", required=false) int index,
-//									@RequestParam(value="search_word", defaultValue="", required=false) String search_word) {
-//		
-//		int listcount=groupservice.getSearchListCount(index, search_word);//총 리스트 수를 받아옴
-//		List<Member> list = groupservice.getSearchList(index, search_word, page, limit);
-//		
-//		int maxpage = (listcount + limit -1)/limit;
-//		int startpage = ((page-1)/10) *10 +1;
-//		int endpage = startpage +10-1;
-//		
-//		if(endpage>maxpage)
-//			endpage=maxpage;
-//		
-//		mv.setViewName("group/groupuserinfo");
-//		mv.addObject("page",page);
-//		mv.addObject("maxpage",maxpage);
-//		mv.addObject("startpage",startpage);
-//		mv.addObject("endpage",endpage);
-//		mv.addObject("listcount",listcount);
-//		mv.addObject("memberlist",list);
-//		mv.addObject("search_field",index);
-//		mv.addObject("search_word",search_word);
-*/
 	@RequestMapping(value="/groupuserinfo")
 	   public ModelAndView memberList(@RequestParam(value="group_no", defaultValue="1",required=false) int group_no,
 	                           @RequestParam(value="page", defaultValue="1",required=false) int page,
@@ -246,21 +218,6 @@ public class GroupController {
 	   }
 
 	
-//	@RequestMapping(value="/list", method=RequestMethod.GET)
-//	public ModelAndView grouplist(ModelAndView mv) {
-//		mv.setViewName("main/grouplist");
-//		return mv;
-//		
-//	}
-	
-	
-//	@RequestMapping(value="/groupuserinfo", method =RequestMethod.GET)
-//	public ModelAndView groupuserinfo(ModelAndView mv) {
-//		mv.setViewName("group/groupuserinfo");
-//		return mv;
-//	}
-	
-
 	@RequestMapping(value="/groupDisband", method =RequestMethod.GET)
 	public ModelAndView groupDisband(ModelAndView mv) {
 		mv.setViewName("group/groupDisband");
@@ -326,5 +283,12 @@ public class GroupController {
 			return (user==null) ? -1: user.getGroup_role();
 		}
 
+		//그룹 가입신청
+		@RequestMapping(value = "/insert", method = RequestMethod.GET)
+		public String member_delete(String userid, int group_no) {
+			groupservice.insert(userid, group_no);
+			
+			return "redirect:/group/group_detail?num="+group_no;
+		}
 
 }
