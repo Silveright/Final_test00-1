@@ -21,10 +21,10 @@
     <link href="${pageContext.request.contextPath}/resources/css/nice-select.css" rel="stylesheet"/>
     <!-- Sweetalert2 CSS -->
     <link href="${pageContext.request.contextPath}/resources/css/sweetalert2.css" rel="stylesheet"/>
-	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-	<!-- jQuery -->
-	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.js"></script>
-	
+   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+   <!-- jQuery -->
+   <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.js"></script>
+   
 </head>
 <!-- Header -->
 <nav id="main_nav" class="navbar navbar-expand-lg navbar-light bg-white shadow">
@@ -81,7 +81,7 @@
                     <a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/member/login">Login</a>
                 </se:authorize>
                 <se:authorize access="hasAuthority('ROLE_MEMBER')">
-    	 			<se:authentication property="principal" var="pinfo"/>
+                 <se:authentication property="principal" var="pinfo"/>
                     <span id="loginid">${pinfo.username }</span>님&nbsp;&emsp;|&emsp;
                     <a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/member/update">MyPage</a>&emsp;|&emsp;
 
@@ -89,7 +89,7 @@
                     <a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/member/logout" id="logout">Logout</a>
                 </se:authorize>
                 <se:authorize access="hasAuthority('ROLE_ADMIN')">
-    	 			<se:authentication property="principal" var="pinfo"/>
+                 <se:authentication property="principal" var="pinfo"/>
                     <span id="loginid">${pinfo.username }</span>님&nbsp;&emsp;|&emsp;
                     <a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/admin/dashboard">Admin</a>&emsp;|&emsp;
                     <a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/member/update">MyPage</a>&emsp;|&emsp;

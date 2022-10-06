@@ -115,7 +115,7 @@ footer{
 	<div class="container">
 	
 		<div class="row align-items-center justify-content-center">
-		<div class="col-sm-2 text-center">
+			<div class="col-sm-2 text-center">
 				<aside>
 					<input type="hidden" id="active" value="${active }">
 					<jsp:include page="group_left.jsp" />
