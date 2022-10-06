@@ -177,7 +177,7 @@ public class GroupController {
 				mv.addObject("message","가입신청 페이지 이동 실패입니다.");
 			}else {
 				logger.info("가입신청 성공");
-				int count = groupservice.getListCount(num);
+				int count = groupservice.getMemberCount(num);
 				mv.setViewName("group/group_detail");
 				mv.addObject("count", count);
 				mv.addObject("groupdata", group);
@@ -324,6 +324,12 @@ public class GroupController {
 		return mv;
 	}
 
+		@ResponseBody
+		@GetMapping(value="/main")
+		public int getUserRole(@RequestParam("group_no") int group_no, String userid) {
+			GroupUser user= groupservice.getUserRole(group_no, userid);
+			return (user==null) ? -1: user.getGroup_role();
+		}
 
 
 }

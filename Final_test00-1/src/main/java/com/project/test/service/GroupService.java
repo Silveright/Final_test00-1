@@ -49,5 +49,9 @@ public interface GroupService {
 
 	public int getListCount(int num);
 
+	GroupUser getUserRole(int group_no, String userid);
+
+	int getMemberCount(int num);
+
 
 }

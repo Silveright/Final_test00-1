@@ -36,13 +36,23 @@
 	 	 into group_user_role(group_role_no, userid, group_no, group_role) values(role_seq.nextval, #{userid}, #{group_no}, 0)
 	 	 select * from dual
 	 </insert>
-
 	 
 	 <select id="getDetail" parameterType="int" resultType="group">
 	 	select * 
 	 	from group_info
 	 	where group_no=#{grouo_no}
 	 </select>
+
+	 <select id="getMemberCount" parameterType="int" resultType="int">
+	 	select count(*)  
+	 	from group_user_role
+	 	where group_no=#{grouo_no}
+	 </select>
 	 
+	 <select id="getUserRole" resultType="GroupUser">
+	 	select * from group_user_role
+	 	where userid=#{userid} 
+	 	and group_no=#{group_no}
+	 </select>
 	 
 </mapper>

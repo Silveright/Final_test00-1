@@ -165,5 +165,19 @@ public class GroupServiceImpl implements GroupService {
 			return gdao.getListCount();
 		}
 
+		@Override
+		public GroupUser getUserRole(int group_no, String userid) {
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("group_no", group_no);
+			map.put("userid", userid);
+			return gdao.getUserRole(map);
+		}
+
+		@Override
+		public int getMemberCount(int num) {
+			// TODO Auto-generated method stub
+			return gdao.getMemberCount(num);
+		}
+
 
 }
