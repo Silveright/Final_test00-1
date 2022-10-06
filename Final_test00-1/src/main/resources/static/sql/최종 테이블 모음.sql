@@ -13,6 +13,10 @@ create table user_info (
    primary key(userid)
 );
 
+create sequence role_seq
+
+select * from group_user_role
+
 update user_info
 set auth='ROLE_ADMIN'
 where userid = 'admin';
@@ -96,4 +100,15 @@ CREATE TABLE notice (
 	group_no	number		NOT NULL
 );
 
+CREATE TABLE group_join_request (
+	group_join_no	number	NOT NULL,
+	userid	varchar2(100)	NOT NULL,
+	group_no	number	NOT NULL
+);
 
+select * from group_join_request
+
+create sequence JOIN_SEQ
+
+insert into group_join_request(group_join_no, userid, group_no) 
+values (JOIN_SEQ.nextval, 'test3', 1)
