@@ -179,5 +179,13 @@ public class GroupServiceImpl implements GroupService {
 			return gdao.getMemberCount(num);
 		}
 
+		@Override
+		public void insert(String userid, int group_no) {
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("group_no", group_no);
+			map.put("userid", userid);
+			gdao.insert(map);
+		}
+
 
 }

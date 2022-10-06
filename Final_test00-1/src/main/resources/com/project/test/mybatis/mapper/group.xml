@@ -55,4 +55,12 @@
 	 	and group_no=#{group_no}
 	 </select>
 	 
+	 <insert id="insert">
+	 	insert into group_join_request
+	 	(group_join_no, userid, group_no)
+	 	values (JOIN_SEQ.nextval, #{userid}, #{group_no})
+	 </insert>
+	 
+	 
+	 
 </mapper>

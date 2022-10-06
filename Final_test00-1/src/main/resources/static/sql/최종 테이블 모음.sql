@@ -17,6 +17,7 @@ create sequence role_seq
 
 select * from group_user_role
 
+
 update user_info
 set auth='ROLE_ADMIN'
 where userid = 'admin';
@@ -40,6 +41,8 @@ CREATE TABLE group_info (
 drop table group_user_role purge
 drop sequence role_seq
 create sequence role_seq
+select * from group_user_role
+delete from group_user_role where userid = 'user3';
 CREATE TABLE group_user_role (
 	group_role_no	number		NOT NULL,
 	userid	varchar2(100)		NOT NULL,
@@ -112,3 +115,12 @@ create sequence JOIN_SEQ
 
 insert into group_join_request(group_join_no, userid, group_no) 
 values (JOIN_SEQ.nextval, 'test3', 1)
+
+insert into group_join_request(group_join_no, userid, group_no) 
+values (JOIN_SEQ.nextval, 'test2', 1)
+
+insert into group_join_request(group_join_no, userid, group_no) 
+values (JOIN_SEQ.nextval, 'test1', 1)
+
+insert into group_join_request(group_join_no, userid, group_no) 
+values (JOIN_SEQ.nextval, 'test4', 1)

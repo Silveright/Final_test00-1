@@ -150,3 +150,7 @@ select * from
 	where rownum<=10
 	) 
 where rnum>=1  and rnum<=10
+
+create sequence JOIN_SEQ
+
+create sequence role_seq

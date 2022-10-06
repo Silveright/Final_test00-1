@@ -22,4 +22,8 @@ public interface GroupMapper {
 
 	public GroupUser getUserRole(HashMap<String, Object> map);
 
-	public int getMemberCount(int num);}
+	public int getMemberCount(int num);
+
+	public void insert(HashMap<String, Object> map);
+	
+}
