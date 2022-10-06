@@ -18,4 +18,8 @@ public interface GroupMapper {
 
 	public int getListCount();
 
-	public Group getDetail(int num);}
+	public Group getDetail(int num);
+
+	public GroupUser getUserRole(HashMap<String, Object> map);
+
+	public int getMemberCount(int num);}

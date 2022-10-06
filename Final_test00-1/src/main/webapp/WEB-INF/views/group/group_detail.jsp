@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%> 
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <body>
 <!-- Header / <head> -->
@@ -56,13 +57,17 @@
         <div class="col-lg-8 ml-auto mr-auto pt-3 pb-4">
             <h2 class="objective-heading h3 mb-5 mb-sm-4 text-center light-300">
                 <button type="button" class="btn btn-outline-primary btn-lg my-md-4" data-bs-toggle="modal" id="modalBtn">
-                    회원<i class="bx bx-user bx-lg"></i> : <c:out value="${joinUser}"></c:out> 명
+                    회원<i class="bx bx-user bx-lg"></i> : <c:out value="${count}"></c:out> 명
                 </button>
             </h2>
             <h5 class="objective-heading h5 mb-3 text-center light-300"><p><i class="fas fa-angle-double-left"></i> 모임
                 소개 <i class="fas fa-angle-double-right"></i></p></h5>
             <h6 class="text-center h6">
                 <c:out value="${groupdata.group_content}"/>
+                <%-- <sec:authorize access="isAuthenticated()">
+    	 <sec:authentication property="principal" var="pinfo"/>
+     		<input type="hidden" id="loginid" name="userid" value="${pinfo.username }">
+    	</sec:authorize> --%>
             </h6>
         </div>
     </div>
@@ -70,8 +75,8 @@
 
     <%-- 권한에 따라 다르게 보여지는 버튼 영역 --%>
     <div id="buttonArea" style="text-align: center">
-    <button class="btn btn-success">가입하기</button>
-    <button class="btn btn-danger" onclick="history.back()">취소</button>
+    <!-- <button class="btn btn-success">가입하기</button>
+    <button class="btn btn-danger" onclick="history.back()">취소</button> -->
     </div>
     <br>
     <br>
@@ -134,176 +139,35 @@
 <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
 <!-- End Footer / Script -->
 <script>
-    $(function () {
-        openNav();
-    });
-    var modalBtn = $('#modalBtn');
-    var length = ${length}; //모임 가입 전체 개수
-
-    var buttonArea = $('#buttonArea');
-    var userid = '${sessionScope.get("userData").userid}';
-    var authority = '';
-    $.ajax({
-        url: "group/main",
-        data: {
-            userid: userid,
-            group_no: '${groupdata.group_no}'
-        },
-        type: "get",
-        success: function (response) {
-            authority = response;
-
-            console.log(response);
-
-            if (response == '1') { //모임장유저
-                buttonArea.append("<button onclick='update()' class='banner-button btn rounded-pill btn-primary btn-lg px-4 my-lg-5' style='margin-right: 10px;'> 수정하기</button>");
-                buttonArea.append("<button onclick='out()' class='banner-button btn rounded-pill btn-primary btn-lg px-4 my-lg-5'>탈퇴하기</button>");
-                modalBtn.attr('data-bs-target', '#groupMemberListModal');
-            } else if (response == '2') { //모임원유저
-                buttonArea.append("<button onclick='out()' class='banner-button btn rounded-pill btn-primary btn-lg px-4 my-lg-5'>탈퇴하기</button>");
-                modalBtn.attr('data-bs-target', '#groupMemberListModal');
-            } else { //비로그인유저, 모임미가입유저
-                buttonArea.append("<button onclick='join()' class='banner-button btn rounded-pill btn-primary btn-lg px-4 my-lg-5'>가입하기</button>");
-                modalBtn.attr('onclick', 'memberListAlert()');
-            }
-        },
-        error: function (Http, status, error) {
-            console.log("Http : " + Http + ", status : " + status + ", error : " + error);
+$.ajax({
+    url: "../group/main",
+    data: {
+        userid: $("#loginid").text(),
+        group_no: '${groupdata.group_no}'
+    },
+    type: "get",
+    success: function (response) {
+        authority = response;
+        var buttonArea = $('#buttonArea');
+        console.log(response);
+        console.log($("#loginid").text())
+        if (response == '0') { //모임장유저
+            
+        	buttonArea.append("<button onclick='update()' class='banner-button btn rounded-pill btn-primary btn-lg px-4 my-lg-5' style='margin-right: 10px;'> 수정하기</button>");
+            buttonArea.append("<button onclick='out()' class='banner-button btn rounded-pill btn-primary btn-lg px-4 my-lg-5'>탈퇴하기</button>");
+            //modalBtn.attr('data-bs-target', '#groupMemberListModal');
+        } else if (response == '1') { //모임원유저
+            buttonArea.append("<button onclick='out()' class='banner-button btn rounded-pill btn-primary btn-lg px-4 my-lg-5'>탈퇴하기</button>");
+            //modalBtn.attr('data-bs-target', '#groupMemberListModal');
+        } else { //비로그인유저, 모임미가입유저
+            buttonArea.append("<button onclick='join()' class='banner-button btn rounded-pill btn-primary btn-lg px-4 my-lg-5'>가입하기</button>");
+            //modalBtn.attr('onclick', 'memberListAlert()');
         }
-    });
-
-    function memberListAlert(){
-        Swal.fire({
-            title: "모임 멤버 리스트",
-            text: "모임 멤버만 확인 할 수 있습니다.",
-            icon: "error",
-            buttons: '확인',
-            confirmButtonColor: '#A0A0FF'
-        })
+    },
+    error: function (Http, status, error) {
+        console.log("Http : " + Http + ", status : " + status + ", error : " + error);
     }
-
-    function join() {
-
-        console.log(length);
-
-        if (length >= 3) { //모임 가입 개수 체크
-            Swal.fire({
-                title: "모임 가입 개수는 3개로 제한됩니다.",
-                text: "가입한 모임 탈퇴 후 새로운 모임에 가입할 수 있습니다.",
-                confirmButtonText: '마이페이지로 이동',
-                confirmButtonColor: '#A0A0FF',
-                showCancelButton: true,
-                cancelButtonText: '취소',
-                cancelButtonColor: '#aaaaaa'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    location.href = "myPage.do";
-                }
-            })
-        } else {
-            if (userid == '') {
-                Swal.fire({
-                    title: "비로그인 유저입니다.",
-                    text: "로그인 후 가입을 진행해 주세요.",
-                    icon: "error",
-                    buttons: '확인',
-                    confirmButtonColor: '#A0A0FF'
-                }).then((value) => {
-                    if (value) {
-                        location.href = 'login';
-                    }
-                });
-            } else {
-                let json = {"userid": userid, "group_no": '${groupdata.group_no}'}
-                $.ajax({
-                    url: "group/insert",
-                    dataType: "text",
-                    type: "POST",
-                    data: JSON.stringify(json),
-                    contentType: "application/json; charset=UTF-8",
-                    success: function (response) {
-                        if (response == "success") {
-                            Swal.fire({
-                                title: "모임 가입신청이 완료되었습니다.",
-                                text: "모임장이 신청을 수락할 때까지 기다려주세요!",
-                                confirmButtonColor: '#A0A0FF',
-                                response
-                            });
-                        } else if (response == "warning") {
-                            Swal.fire({
-                                title: "이미 모임 가입신청이 되어있습니다.",
-                                text: "모임장이 신청을 수락할 때까지 기다려주세요!",
-                                confirmButtonColor: '#A0A0FF',
-                                response
-                            });
-                        }
-                    },
-                    error: function (Http, status, error) {
-                        console.log("Http : " + Http + ", status : " + status + ", error : " + error);
-                        Swal.fire({
-                            title: "모임 가입신청에 실패했습니다.",
-                            text: "모임 가입신청을 다시 확인해주세요.",
-                            confirmButtonColor: '#A0A0FF',
-                            error
-                        });
-                    }
-                });
-            }
-        }
-
-    }
-
-    function out() {
-        if (authority == '1') {
-            Swal.fire({
-                title: "모임장 권한을 가지고 있습니다.",
-                text: "탈퇴하시려면 모임장 권한을 양도하고 탈퇴해주세요.",
-                icon: "error",
-                buttons: '확인',
-                confirmButtonColor: '#A0A0FF'
-            }).then((value) => {
-                if (value) {
-                    location.href = 'groupMemberManage.do?userid=' + userid;
-                }
-            });
-        } else {
-            let json = {"userid": userid, "group_no": '${groupdata.group_no}'}
-            $.ajax({
-                url: "group/insert",
-                dataType: "text",
-                type: "DELETE",
-                data: JSON.stringify(json),
-                contentType: "application/json; charset=UTF-8",
-                success: function (response) {
-                    Swal.fire({
-                        title: "모임에서 탈퇴되었습니다.",
-                        text: "모임에 대한 권한이 사라집니다.",
-                        icon: response,
-                        buttons: '확인',
-                        confirmButtonColor: '#A0A0FF'
-                    }).then((value) => {
-                        if (value) {
-                            location.href = 'index.do';
-                        }
-                    });
-                },
-                error: function (Http, status, error) {
-                    console.log("Http : " + Http + ", status : " + status + ", error : " + error);
-                    Swal.fire({
-                        title: "모임 탈퇴에 실패했습니다.",
-                        text: "다시 확인해 주세요.",
-                        confirmButtonColor: '#A0A0FF',
-                        error
-                    });
-                }
-            });
-        }
-    }
-
-    function update() {
-        let groupNo = "${groupdata.group_no}";
-        location.href = "groupUpdate.do?group_no=" + groupNo;
-    }
+});
 
 </script>
 </body>
