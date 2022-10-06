@@ -180,6 +180,7 @@ public class GroupController {
 				int count = groupservice.getMemberCount(num);
 				mv.setViewName("group/group_detail");
 				mv.addObject("count", count);
+				mv.addObject("group_no", group.getGroup_no());
 				mv.addObject("groupdata", group);
 			}
 			return mv;
@@ -214,6 +215,7 @@ public class GroupController {
 	      mv.addObject("memberlist",list);
 	      mv.addObject("search_field",index);
 	      mv.addObject("search_word",search_word);
+	      mv.addObject("group_no",group_no);
 	      return mv;
 	   }
 
@@ -252,14 +254,16 @@ public class GroupController {
        map.put("endpage",endpage);
        map.put("listcount",listcount);
        map.put("list",list);
+       map.put("group_no",group_no);
        map.put("limit",limit);
        return map;
     }
  
  
 		@RequestMapping(value="/groupjoinagree")
-		public ModelAndView test(
+		public ModelAndView test(int group_no,
 				ModelAndView mv) {
+			mv.addObject("group_no", group_no);
 		mv.setViewName("group/groupjoinagree");
 		return mv;
 	}

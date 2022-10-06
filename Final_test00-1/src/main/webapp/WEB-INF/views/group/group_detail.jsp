@@ -182,7 +182,8 @@ $.ajax({
             //modalBtn.attr('data-bs-target', '#groupMemberListModal');
         } else { //비로그인유저, 모임미가입유저
             buttonArea.append('<a href="insert?userid='+loginid+'&group_no=${groupdata.group_no}"><button onclick="join()" class="banner-button btn rounded-pill btn-primary btn-lg px-4 my-lg-5">가입하기</button></a>');
-            //modalBtn.attr('onclick', 'memberListAlert()');
+        	$('aside').remove();    
+        //modalBtn.attr('onclick', 'memberListAlert()');
         }
     },
     error: function (Http, status, error) {
