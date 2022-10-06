@@ -197,7 +197,7 @@ span{display:inline-block;margin-top:-20px;}
 		<input type = "password" name = "password" placeholder="Enter password" value="${memberinfo.password}" readonly>
 			
 		<b style="font-style:italic; color:#776BCC;">Name</b>
-		<input type = "text" name = "name" placeholder="Enter name" value="${memberinfo.name}" maxlength="5" required>
+		<input type = "text" name = "name" placeholder="Enter name" value="${memberinfo.name}" maxlength="20" required>
 		
 		<b style="font-style:italic; color:#776BCC;">Age</b>
 		<input type = "text" name = "age" maxlength="2" placeholder="Enter age" value="${memberinfo.age}" required>

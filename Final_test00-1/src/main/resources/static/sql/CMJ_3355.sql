@@ -84,6 +84,14 @@ CREATE TABLE group_user_role (
 	group_role	number		NOT NULL
 );
 
+select * from group_join_request
+
+delete from group_join_request
+
+select * from user_info
+
+select * from group_user_role
+
 ALTER TABLE community ADD CONSTRAINT PK_COMMUNITY PRIMARY KEY (
 	community_no
 );
