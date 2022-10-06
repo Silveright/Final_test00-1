@@ -216,7 +216,7 @@ span{display:inline-block;margin-top:-20px;}
 		<input type = "password" name = "password" placeholder="Enter password" required>
 			
 		<b style="font-style:italic; color:#776BCC;">Name</b>
-		<input type = "text" name = "name" placeholder="Enter name" maxlength="5" required>
+		<input type = "text" name = "name" placeholder="Enter name" maxlength="20" required>
 		
 		<b style="font-style:italic; color:#776BCC;">Age</b>
 		<input type = "text" name = "age" maxlength="2" placeholder="Enter age" required>
@@ -236,8 +236,8 @@ span{display:inline-block;margin-top:-20px;}
         </div><br>
 		<div>
 		<b style="font-style:italic; color:#776BCC;">Gender</b>
-			<input type = "radio" name = "gender" value="Man" checked><span style="font-style:italic; color:#776BCC;">Man</span>
-			<input type = "radio" name = "gender" value="Woman"><span style="font-style:italic; color:#776BCC;">Woman</span>
+			<input type = "radio" name = "gender" value="남" checked><span style="font-style:italic; color:#776BCC;">Man</span>
+			<input type = "radio" name = "gender" value="여"><span style="font-style:italic; color:#776BCC;">Woman</span>
 		</div>
 				
 		<b style="font-style:italic; color:#776BCC;">User-Email</b>

@@ -81,7 +81,7 @@
                     <a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/member/login">Login</a>
                 </se:authorize>
                 <se:authorize access="hasAuthority('ROLE_MEMBER')">
-                    <a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/member/updateProcess">MyPage</a>&emsp;|&emsp;
+                    <a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/member/update">MyPage</a>&emsp;|&emsp;
                     <a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/member/logout" id="logout">Logout</a>
                 </se:authorize>
                 <se:authorize access="hasAuthority('ROLE_ADMIN')">

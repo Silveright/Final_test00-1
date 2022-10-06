@@ -86,7 +86,7 @@
 <!-- End Banner Hero -->
 
 <!-- 로그인 안했을 때 보여지는 화면 -->
-<se:authorize access="!hasAnyAuthority('ROLE_USER','ROLE_ADMIN')">
+<se:authorize access="!hasAnyAuthority('ROLE_MEMBER','ROLE_ADMIN')">
 <section class="service-wrapper py-3" style="background:#4C489D" >
 	<div class="service-tag py-5" style="background:#4C489D">
 		<div class="col-md-12" style="background:#4C489D">
@@ -139,7 +139,7 @@
 <!-- 로그인 안했을 때 보여지는 화면 끝 -->
 
 <!-- 로그인 했을 때 보여지는 화면 -->
-<se:authorize access="hasAnyAuthority('ROLE_USER','ROLE_ADMIN')">
+<se:authorize access="hasAnyAuthority('ROLE_MEMBER','ROLE_ADMIN')">
 <section class="service-wrapper py-3" style="background:#4C489D">
 	<div class="container py-5" >
 		<div class="row d-flex justify-content-center text-center">

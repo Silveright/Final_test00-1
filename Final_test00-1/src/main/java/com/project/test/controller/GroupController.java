@@ -306,7 +306,7 @@ public class GroupController {
 		mv.setViewName("group/groupjoinagree");
 		return mv;
 	}
-		
+		 	
 		@ResponseBody
 		@GetMapping(value = "/joinAccept")
 		public int JoinAccept(@RequestParam("group_no") int group_no,
@@ -317,12 +317,7 @@ public class GroupController {
 		      
 	}
 		
-		@RequestMapping(value="/groupjoin")
-		public ModelAndView test2(
-				ModelAndView mv) {
-		mv.setViewName("group/groupjoin");
-		return mv;
-	}
+
 
 
 
