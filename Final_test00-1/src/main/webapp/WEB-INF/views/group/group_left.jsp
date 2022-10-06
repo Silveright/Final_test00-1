@@ -6,6 +6,7 @@
 <!-- Sidebar -->
 <div class="left-bar" style="background-color:#776bcc59;">
  
+<a href="${pageContext.request.contextPath}/group/group_detail?num=${groupdata.group_no}" class="nav-link">모임 메인</a>
 <a href="#" class="nav-link">게시판</a>
 <a href="#" class="nav-link">일정</a>
 <a href="#" class="nav-link">채팅</a>

@@ -49,7 +49,7 @@ public class MainController {
 	public ModelAndView groupList(
 									@RequestParam(value = "page", defaultValue = "1", required = false) int page,
 									ModelAndView mv) {
-		int limit = 10; // 한 화면에 출력할 로우 갯수
+		int limit = 12; // 한 화면에 출력할 로우 갯수
 		
 		int listcount = groupService.getListCount(); // 총 리스트 수를 받아옴
 		

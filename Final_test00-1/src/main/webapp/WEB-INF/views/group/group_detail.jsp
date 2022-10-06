@@ -15,10 +15,15 @@
 
 <!-- End Board SideBar -->
 <section class="container">
+
     <%-- 모임 이름 --%>
+    
     <div class="row pt-5">
-        <div class="worksingle-content col-lg-8 m-auto text-left justify-content-center">
+    
+        <div class="worksingle-content col-sm-9 m-auto text-left justify-content-center">
+        
             <h2 class="worksingle-heading h3 pb-3 light-300 typo-space-line mb-4">
+            
                 <c:choose>
                     <c:when test="${groupdata.group_no == adminGroup.group_no}">
                         <i class="fas fa-crown m-1"></i><c:out value="${groupdata.group_name}"/>
@@ -30,9 +35,16 @@
             </h2>
         </div>
     </div>
+    
     <%-- 대표 사진, 지역, 관심사--%>
     <div class="row justify-content-center pb-4">
-        <div class="col-lg-5 mt-3">
+    <div class="col-sm-2 text-center">
+				<aside>
+					<input type="hidden" id="active" value="${active }">
+					<jsp:include page="group_left.jsp" />
+				</aside>
+			</div>
+        <div class="col-sm-9 mt-3 " style="width:500px; margin:0px 360px 0px 140px">
             <h6 class="objective-heading h6 mb-1 text-end light-300">
                 <i class="fas fa-map-marker-alt m-3"> <c:out value="${groupdata.area_name}"/></i>
                 <i class="fas fa-bookmark m-3"> <c:out value="${groupdata.catename}"/></i>
@@ -60,6 +72,7 @@
                     회원<i class="bx bx-user bx-lg"></i> : <c:out value="${count}"></c:out> 명
                 </button>
             </h2>
+            
             <h5 class="objective-heading h5 mb-3 text-center light-300"><p><i class="fas fa-angle-double-left"></i> 모임
                 소개 <i class="fas fa-angle-double-right"></i></p></h5>
             <h6 class="text-center h6">

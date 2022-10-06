@@ -7,7 +7,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 </head>
 <!-- Start Footer -->
-<footer class="pt-4" style="background:#4C489D">
+<footer class="pt-4" style="background:rgb(119, 107, 204)">
 <div class="container">
 	<div class="row py-4">
 		<div class="col-lg-3 col-12 align-left">

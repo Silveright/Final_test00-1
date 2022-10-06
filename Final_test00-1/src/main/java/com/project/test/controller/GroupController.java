@@ -281,7 +281,7 @@ public class GroupController {
 		public int getUserRole(@RequestParam("group_no") int group_no, String userid) {
 			GroupUser user= groupservice.getUserRole(group_no, userid);
 			return (user==null) ? -1: user.getGroup_role();
-		}
+	}
 
 		//그룹 가입신청
 		@RequestMapping(value = "/insert", method = RequestMethod.GET)
