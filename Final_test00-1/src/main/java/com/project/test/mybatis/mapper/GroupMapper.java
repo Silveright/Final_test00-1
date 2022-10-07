@@ -25,5 +25,9 @@ public interface GroupMapper {
 	public int getMemberCount(int num);
 
 	public void insert(HashMap<String, Object> map);
+
+	public List<Group_Board> getGroupBoardList(HashMap<String, Integer> map);
+
+	public int getBoardListCount();
 	
 }

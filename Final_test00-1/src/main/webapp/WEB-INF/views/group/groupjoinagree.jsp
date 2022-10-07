@@ -24,9 +24,9 @@ footer{
          width:100%; 
          text-align:center;
          }
-         .table-active {
-    --bs-table-accent-bg: #776bcc59;
-    color: #000000;
+    .table-active {
+    --bs-table-accent-bg: #776bcc59 !important;
+    color: var(--bs-table-active-color);
 }
 .btn-secondary {
     --bs-btn-color: #fff;
@@ -85,6 +85,7 @@ footer{
 <title>모임 회원 가입 승인 게시판</title>
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/include/header.jsp"/>
 <br>
 
    <div class="container">
@@ -96,7 +97,9 @@ footer{
                <jsp:include page="group_left.jsp" />
             </aside>
          </div>
+               
          <div class="col-sm-9 ">
+         <!-- 
          <form action="memberinfocat" method="post" class="cat">            
             
             <input type="button" class="btn btn-secondary" value="회원 정보"
@@ -108,10 +111,8 @@ footer{
             <input type="button" class="btn btn-secondary" value="모임 해산"
                   onclick="location.href='groupDisband'">
          </form>
+         -->
          
-         
-         <br>
-         <br>
          
             <br>
             <legend style="text-align:center">가입 승인 게시판</legend>
@@ -209,7 +210,8 @@ footer{
 $(document).ready(function() { 
    loadRequest(1);
 });
-   
+var group_no="${group_no}"
+    console.log(group_no)
    function go(page){
       var limit = $('#viewcount').val();
       var data = "limit="+ limit + "&state=ajax&page=" + page;
@@ -239,7 +241,7 @@ $(document).ready(function() {
       var header = $("meta[name='_csrf_header']").attr("content"); */
       $.ajax({
          //type: "POST",
-         data: {page:data},
+         data: {page:data, group_no: group_no},
          /* beforeSend: function(xhr){
                   xhr.setRequestHeader(header, token);
                }, */
@@ -307,8 +309,8 @@ $(document).ready(function() {
 
 
       
-      
    $('#accept').click(function (event) {
+     
       //$('tbody').children().remove();
         event.preventDefault();
         var requests = [];
@@ -326,7 +328,7 @@ $(document).ready(function() {
             dataType: "json",
             data: {
                 requestList: requests,
-                group_no: 1//임의로 값 넣었음 나중에 바꾸기
+                group_no: group_no//임의로 값 넣었음 나중에 바꾸기
             },
             success: function (data) {
                console.log("가입승인 성공")

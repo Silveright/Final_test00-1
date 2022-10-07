@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:include page="/WEB-INF/views/include/header.jsp"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -122,6 +123,7 @@ footer{
          </div>
          <div class="col-sm-9 ">
          
+         <!--  
          <form action="memberinfocat" method="post" class="cat">            
             
             <input type="button" class="btn btn-secondary" value="회원 정보"
@@ -133,6 +135,7 @@ footer{
             <input type="button" class="btn btn-secondary" value="모임 해산"
                   onclick="location.href='groupDisband'">
          </form>
+         -->
          
          <br>
          <c:if test="${listcount > 0 }">

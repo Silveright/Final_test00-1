@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.project.test.domain.Group;
 import com.project.test.domain.GroupJoin;
 import com.project.test.domain.GroupUser;
+import com.project.test.domain.Group_Board;
 import com.project.test.mybatis.mapper.GroupAdminMapper;
 import com.project.test.mybatis.mapper.GroupMapper;
 
@@ -186,6 +187,22 @@ public class GroupServiceImpl implements GroupService {
 			map.put("userid", userid);
 			gdao.insert(map);
 		}
+
+		@Override
+		public List<Group_Board> getGroupBoardList(int page, int limit) {
+			HashMap<String, Integer> map = new HashMap<String, Integer>();
+			int startrow = (page - 1) * limit + 1;
+			int endrow = startrow + limit - 1;
+			map.put("start", startrow);
+			map.put("end", endrow);
+			return gdao.getGroupBoardList(map);
+		}
+
+		@Override
+		public int getBoardListCount() {
+			return gdao.getBoardListCount();
+		}
+		
 
 
 }

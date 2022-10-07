@@ -11,7 +11,10 @@
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e0bcd3b3132ff2c2897199023d1833c7&libraries=services"></script>
  <style>
-
+.left-bar{
+	/* position:absolute;
+	top:200px */
+}
   body {
     margin-top: 40px;
     font-size: 14px;
@@ -20,7 +23,7 @@
 
   #external-events {
     position: fixed;
-    left: 20px;
+    left: 1500px;
     top: 200px;
    width: 160px;
     padding: 0 10px;
@@ -101,7 +104,6 @@
 <body>
 <jsp:include page="../include/header.jsp"/>
   <div id='wrap'>
-	
     <div id='external-events'>
       <small>일정을 드래그하세요!</small>
 
@@ -122,9 +124,18 @@
         <label for='drop-remove'>remove after drop</label>
       </p>
     </div>
+    </div>
 
     <div id='calendar-wrap'>
+	<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-2">
+	<jsp:include page="../group/group_left.jsp" />
+	</div>
+    <div class="col-sm-6">
       <div id='calendar'></div>
+	</div>
+	</div>
     </div>
 
   </div>
@@ -176,9 +187,9 @@
 </div>
    <script>
    var click=0;
-   var group_no=1;//더미용
-  /*  console.log(group_no);
-   console.log($("#xcoord").val()) */
+   var group_no='${group_no}'//더미용
+    console.log(group_no);
+   //console.log($("#xcoord").val()) */
    var myModal = new bootstrap.Modal(document.getElementById('exampleModal'))
 
     var containerEl = document.getElementById('external-events-list');
@@ -211,7 +222,7 @@
   				//type: 'POST',
   				dataType: 'json',
   				data: {
-  					"group_no": "1"// group_no
+  					"group_no": "${group_no}"// group_no
   				},
   				success: function(data) {
   					for(idx in data){
@@ -265,7 +276,7 @@
               dataType: 'JSON',
               //async: false,
               data: {
-                  group_no: '1',
+                  group_no: group_no,
                   calendar_no: calendar_no
               },
               success: function (response) {

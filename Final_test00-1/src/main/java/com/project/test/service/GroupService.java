@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.project.test.domain.Group;
 import com.project.test.domain.GroupJoin;
 import com.project.test.domain.GroupUser;
+import com.project.test.domain.Group_Board;
 
 public interface GroupService {
 
@@ -56,5 +57,8 @@ public interface GroupService {
 	//모임 가입 신청
 	public void insert(String userid, int group_no);
 
+	public List<Group_Board> getGroupBoardList(int page, int limit);
+
+	public int getBoardListCount();
 
 }

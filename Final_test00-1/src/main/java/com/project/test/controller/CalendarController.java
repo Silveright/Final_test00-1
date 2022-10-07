@@ -33,7 +33,9 @@ public class CalendarController {
 	}
 
 	@RequestMapping(value="/view2", method=RequestMethod.GET)
-	public ModelAndView view2(ModelAndView mv) {
+	public ModelAndView view2(@RequestParam("group_no") String group_no, ModelAndView mv) {
+		logger.info("모임번호는"+group_no);
+		mv.addObject("group_no",group_no);
 		mv.setViewName("calendar/calendar2");
 		return mv;
 	}
@@ -41,6 +43,7 @@ public class CalendarController {
 	@ResponseBody
 	@RequestMapping(value = "/loadevent", method = RequestMethod.GET)
     public List<CalendarLoad> Calendarlist(@RequestParam("group_no") String group_no) {
+		logger.info("모임번호는"+group_no);
         List<CalendarLoad> list = calendarService.getCalendarList(group_no);
         return list;
     }

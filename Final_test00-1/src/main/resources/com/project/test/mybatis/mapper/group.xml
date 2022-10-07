@@ -61,6 +61,26 @@
 	 	values (JOIN_SEQ.nextval, #{userid}, #{group_no})
 	 </insert>
 	 
+	 <select id="getBoardListCount" resultType="int">
+		select count(*) from Group_Board
+	</select>
+	 
+	 <select id="getGroupBoardList" parameterType="java.util.Map" resultType="group_board">
+		select * from 
+		  ( select rownum rnum, b.*
+		    from 
+		         (select Group_Board.*, nvl(cnt,0) cnt
+                  from 
+                  Group_Board   left outer join (select board_num, count(*) cnt
+                                            from COMMENTS
+                                            group by board_num) c
+                  on Group_Board.board_num = c.board_num
+                  ) b
+             where rownum &lt;=  #{end}     
+		   ) 
+	     where rnum &gt;= #{start} and rnum  &lt;=  #{end}
+	</select>
+	 
 	 
 	 
 </mapper>
