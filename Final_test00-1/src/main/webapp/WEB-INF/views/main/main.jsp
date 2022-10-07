@@ -86,7 +86,7 @@
 
 <!-- 로그인 했을 때 보여지는 화면 -->
 <se:authorize access="hasAnyAuthority('ROLE_MEMBER','ROLE_ADMIN')">
-<section class="service-wrapper py-3" style="background:#4C489D">
+<section class="service-wrapper py-3" style="background:rgb(119, 107, 204)">
    <div class="container py-5" >
       <div class="row d-flex justify-content-center text-center">
          <div class="col-lg-2 col-12 text-light align-items-center">
@@ -98,7 +98,7 @@
          </div>
          <div class="col-lg-3 col-12 pt-4">
             <a href="${pageContext.request.contextPath}/group/groupMake" 
-               class="btn btn-success rounded-pill btn-block shadow px-4 py-2">모임 만들러 가기 => </a>
+               class="btn btn-success rounded-pill btn-block shadow px-4 py-2"  style="background:#4C489D; border-color:#4C489D">모임 만들러 가기 => </a>
          </div>
       </div>
    </div>
@@ -141,9 +141,9 @@
 </se:authorize>
 <!-- 로그인 했을 때 보여지는 화면 끝-->
 <!-- End Banner Hero -->
-<section class="service-wrapper py-3" style="background:#4C489D" >
-   <div class="service-tag py-5" style="background:#4C489D">
-      <div class="col-md-12" style="background:#4C489D">
+<section class="service-wrapper py-3" style="background:rgb(119, 107, 204)" >
+   <div class="service-tag py-5" style="background:rgb(119, 107, 204)">
+      <div class="col-md-12" style="background:rgb(119, 107, 204)">
          <ul class="nav d-flex justify-content-center">
             <li class="nav-item mx-lg-4">
                <a class="filter-btn nav-link btn-outline-primary active shadow rounded-pill text-light px-4 light-300" href="#" data-filter=".new">NEW</a>

@@ -12,7 +12,7 @@
 	<div class="row py-4">
 		<div class="col-lg-3 col-12 align-left">
 			<a class="navbar-brand h1" href="index.html">
-				<span class="fs-4"><img src="${pageContext.request.contextPath}/resources/img/final_logo.png" width="150px"></span>
+				<span class="fs-4"><img src="${pageContext.request.contextPath}/resources/img/final_logo2.png" width="150px"></span>
 			</a>
 			<p class="text-light my-lg-4 my-2">
 				중앙 HTA 2204기<br>
