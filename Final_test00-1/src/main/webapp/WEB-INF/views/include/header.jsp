@@ -48,30 +48,35 @@
         <div class="align-self-center collapse navbar-collapse flex-grow-1" id="navbar-toggler-success">
             <div class="navbar flex-fill mx-xl-5 d-flex justify-content-center">
                 <div class="pe-lg-5" id="nav search">
-                    <form class="form-inline" action="${pageContext.request.contextPath}/search.do" method="get">
+                    <form class="form-inline" action="${pageContext.request.contextPath}/search/list" method="get">
                         <div class="input-group input-group-navbar justify-content-center" id="searchGroup">
-                            <select name="category" class="form-control form-select-sm search" aria-label="Search"
-                                    id="searchSelect">
+                            <select name="search_field" class="form-control form-select-sm search" aria-label="Search"
+                                    id="search_field" style="width : 80px" >
                                 <option value="">전체</option>
-                                <c:forEach items="${applicationScope.search_areaList}" var="area">
-                                    <c:choose>
-                                        <c:when test="${search_category != area.area_name}">
-                                            <option value="${area.area_name}">${area.area_name}</option>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <option value="${area.area_name}" selected>${area.area_name}</option>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </c:forEach>
+                                <option>서울</option>
+								<option>경기</option>
+								<option>인천</option>
+								<option>강원</option>
+								<option>충북</option>
+								<option>충남</option>
+								<option>대전</option>
+								<option>전북</option>
+								<option>전남</option>
+								<option>광주</option>
+								<option>경북</option>
+								<option>경남</option>
+								<option>대구</option>
+								<option>부산</option>
+								<option>울산</option>
+								<option>제주</option>
                             </select>
-                            <input name="search" id="searchValue" type="search"
+                            <input name="search_keyword" id="searchValue" type="search"
                                    class="form-inline form-control form-control-sm"
                                    placeholder="Search…" aria-label="Search"
                                    value="<c:out value="${search_keyword}"></c:out>">
                             <button id="searchButton" class="btn btn-sm btn-outline-secondary" type="submit"><i
                                     class="bx bx-search bx-sm"></i></button>
                         </div>
-                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"> 
                     </form>
                 </div>
             </div>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,8 +21,8 @@
 			<c:choose>
 				<c:when test="${not empty search_keyword}">
 					<c:choose>
-						<c:when test="${not empty search_category}">
-							<h3 class="h4 pb-0 regular-400">"${search_category}"지역의 "${search_keyword}"검색 결과 입니다.</h3>
+						<c:when test="${not empty search_field}">
+							<h3 class="h4 pb-0 regular-400">"${search_field}"지역의 "${search_keyword}"검색 결과 입니다.</h3>
 						</c:when>
 						<c:otherwise>
 							<h3 class="h4 pb-0 regular-400">"전체"지역의 "${search_keyword}"검색 결과 입니다.</h3>
@@ -30,8 +31,8 @@
 				</c:when>
 				<c:otherwise>
 					<c:choose>
-						<c:when test="${not empty search_category}">
-							<h3 class="h4 pb-0 regular-400">"${search_category}"지역의 "전체"검색 결과 입니다.</h3>
+						<c:when test="${not empty search_field}">
+							<h3 class="h4 pb-0 regular-400">"${search_field}"지역의 "전체"검색 결과 입니다.</h3>
 						</c:when>
 						<c:otherwise>
 							<h3 class="h4 pb-0 regular-400">"전체"지역의 "전체"검색 결과 입니다.</h3>
@@ -42,7 +43,29 @@
 		</div>
 	</div>
 </div>
+<section class="container overflow-hidden py-5">
+<div class="row gx-5 gx-sm-3 gx-lg-5 gy-lg-5 gy-3 pb-3 projects">
+   <c:forEach var="search" items="${searchlist}">
+      <!-- Start Recent Work -->
+      <div class="col-xl-3 col-md-4 col-sm-6 project new best all">
+         <a href="${pageContext.request.contextPath}/group/group_detail?num=${search.group_no}" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
+            <img class="service card-img" src="<spring:url value = '/upload${search.group_img}'/>" alt="Card image">
+            <div class="service-work-vertical card-img-overlay d-flex align-items-end">
+               <div class="service-work-content text-left text-light">
+                  <span class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300">${search.area_name}</span><br>
+                  <span class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300">${search.group_name}</span>
+               </div>
+            </div>
+         </a>
+      </div>
+      <!-- End Recent Work -->
 
+   </c:forEach>   
+   </div>
+</section>
+<c:if test="${listcount == 0 && !empty search_keyword}">
+	<h1>검색 결과가 없습니다.</h1>
+</c:if>
 <c:if test="${listcount > 0 }">
 	<div class="center-block">
 		<ul class="pagination justify-content-center">
@@ -86,6 +109,8 @@
 <!-- End Banner Hero -->
 
 
+
+
 <!-- Footer -->
 <jsp:include page="../include/footer.jsp"></jsp:include>
 
@@ -120,6 +145,7 @@
 		});
 	});
 </script>
+
 <!-- Templatemo -->
 <script src="${pageContext.request.contextPath}/resources/js/templatemo.js"></script>
 <!-- Custom -->

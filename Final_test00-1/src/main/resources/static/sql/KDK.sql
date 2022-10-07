@@ -43,6 +43,9 @@ create table user_info (
 	primary key(userid)
 );
 
+insert into user_info values 
+('admin11', '관리자', '여', '21', '1234', 'admin@kakao.com', '서울', sysdate,'ROLE_ADMIN')
+
 update user_info
 set auth='ROLE_ADMIN'
 where userid = 'admin';
@@ -154,3 +157,7 @@ where rnum>=1  and rnum<=10
 create sequence JOIN_SEQ
 
 create sequence role_seq
+
+select * from group_info
+where area_name ='인천'
+and catename = '독서';
