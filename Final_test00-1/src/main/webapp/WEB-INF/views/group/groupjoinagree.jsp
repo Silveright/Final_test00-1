@@ -97,7 +97,9 @@ footer{
                <jsp:include page="group_left.jsp" />
             </aside>
          </div>
+               
          <div class="col-sm-9 ">
+         <!-- 
          <form action="memberinfocat" method="post" class="cat">            
             
             <input type="button" class="btn btn-secondary" value="회원 정보"
@@ -109,10 +111,8 @@ footer{
             <input type="button" class="btn btn-secondary" value="모임 해산"
                   onclick="location.href='groupDisband'">
          </form>
+         -->
          
-         
-         <br>
-         <br>
          
             <br>
             <legend style="text-align:center">가입 승인 게시판</legend>

@@ -123,6 +123,7 @@ footer{
          </div>
          <div class="col-sm-9 ">
          
+         <!--  
          <form action="memberinfocat" method="post" class="cat">            
             
             <input type="button" class="btn btn-secondary" value="회원 정보"
@@ -134,6 +135,7 @@ footer{
             <input type="button" class="btn btn-secondary" value="모임 해산"
                   onclick="location.href='groupDisband'">
          </form>
+         -->
          
          <br>
          <c:if test="${listcount > 0 }">

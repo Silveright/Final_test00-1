@@ -29,6 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.project.test.domain.Group;
 import com.project.test.domain.GroupJoin;
 import com.project.test.domain.GroupUser;
+import com.project.test.domain.Group_Board;
 import com.project.test.domain.Member;
 import com.project.test.domain.Session;
 import com.project.test.service.BoardService;
@@ -226,6 +227,8 @@ public class GroupController {
 		return mv;
 	}
 	
+	
+	
 	@ResponseBody//각 메서드의 실행 결과는 JSON으로 변환되어 HTTP Response BODY에 설정된다
     @RequestMapping(value="/list_ajax", method=RequestMethod.GET)
     public Map<String,Object> boardListAjax(
@@ -261,12 +264,12 @@ public class GroupController {
  
  
 		@RequestMapping(value="/groupjoinagree")
-		public ModelAndView test(int group_no,
+		public ModelAndView groupjoinagree(int group_no,
 				ModelAndView mv) {
 			mv.addObject("group_no", group_no);
 		mv.setViewName("group/groupjoinagree");
 		return mv;
-	}
+	}		
 		 	
 		@ResponseBody
 		@GetMapping(value = "/joinAccept")
@@ -293,6 +296,52 @@ public class GroupController {
 			groupservice.insert(userid, group_no);
 			
 			return "redirect:/group/group_detail?num="+group_no;
-		}
+	}
+		
+		@RequestMapping(value = "/groupboardlist", method = RequestMethod.GET)
+		public ModelAndView groupboardList(  @RequestParam(value="group_no", defaultValue="1",required=false) int group_no,
+										@RequestParam(value = "page", defaultValue = "1", required = false) int page,
+										ModelAndView mv) {
+			int limit = 10; // 한 화면에 출력할 로우 갯수
+			
+			int listcount = groupservice.getBoardListCount(); // 총 리스트 수를 받아옴
+			
+			// 총 페이지 수
+			int maxpage = (listcount + limit -1) / limit;
+			
+			// 현재 페이지에 보여줄 시작 페이지 수(1, 11, 21 등...)
+			int startpage = ((page - 1) / 10) * 10 +1;
+			
+			// 현재 페이지에 보여줄 마지막 페이지 수(10,20,30 등..)
+			int endpage = startpage + 10 -1;
+			
+			if(endpage > maxpage)
+				endpage = maxpage;
+			
+			List<Group_Board> groupboardlist = groupservice.getGroupBoardList(page, limit); // 리스트를 받아옴
+			
+			mv.setViewName("group/groupboardlist");
+			mv.addObject("page", page);
+			mv.addObject("maxpage", maxpage);
+			mv.addObject("startpage", startpage);
+			mv.addObject("endpage", endpage);
+			mv.addObject("listcount", listcount);
+			mv.addObject("groupboardlist", groupboardlist);
+			mv.addObject("limit", limit);
+			mv.addObject("group_no",group_no);
+			return mv;			
+			
+	}
+//		@RequestMapping(value="/groupboardlist")
+//		public ModelAndView groupboardlist(int group_no,
+//				ModelAndView mv) {
+//			mv.addObject("group_no", group_no);
+//		mv.setViewName("group/groupboardlist");
+//		return mv;
+//	}
+		
+		
+		
+		
 
 }
