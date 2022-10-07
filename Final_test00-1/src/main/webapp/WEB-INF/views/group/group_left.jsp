@@ -1,10 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%> 
     
 <!-- main contents -->
-<main class=container>
+<style>
+body {
+  font-family: "Lato", sans-serif;
+}
 
+.sidenav {
+  width: 150px;
+  z-index: 1;
+  top: 200px;
+  left: 10px;
+  background: rgb(119, 107, 204);
+  
+  overflow-x: hidden;
+  padding: 8px 0;
+  text-align:center
+}
+
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color:white;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #064579;
+}
+
+.main {
+  margin-left: 140px; /* Same width as the sidebar + left position in px */
+  font-size: 28px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+</style>
 <!-- Sidebar -->
-<div class="left-bar" style="background-color:#776bcc59;">
+<div class="sidenav">
  
 <a href="${pageContext.request.contextPath}/group/group_detail?num=${group_no}" class="nav-link">모임 메인</a>
 <a href="${pageContext.request.contextPath}/group/groupboardlist?group_no=${group_no}" class="nav-link">게시판</a>
@@ -16,7 +54,6 @@
 </div>
 
 
-</main>    
 <script>
 
 $.ajax({
@@ -34,7 +71,7 @@ $.ajax({
         if (response == '0') { //모임장유저
             str='<a href="${pageContext.request.contextPath}/group/groupuserinfo?group_no=${group_no}" class="nav-link">회원관리</a>'
             str+='<a href="${pageContext.request.contextPath}/group/groupjoinagree?group_no=${group_no}" class="nav-link">가입신청</a>'	
-            		$('.left-bar').append(str);
+            		$('.sidenav').append(str);
         }
     },
     error: function (Http, status, error) {
