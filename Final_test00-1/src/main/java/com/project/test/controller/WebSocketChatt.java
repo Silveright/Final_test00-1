@@ -13,7 +13,7 @@ import javax.websocket.server.ServerEndpoint;
 import org.springframework.stereotype.Service;
 
 @Service
-@ServerEndpoint(value="/chatt")
+@ServerEndpoint(value="/group/chatt")
 public class WebSocketChatt {
 	private static Set<Session> clients = 
 			Collections.synchronizedSet(new HashSet<Session>());
@@ -26,7 +26,7 @@ public class WebSocketChatt {
 			clients.add(s);
 			System.out.println("session open : " + s);
 		}else {
-			System.out.println("이미 연결된 session 입니다.");
+			System.out.println("이미 연결된 session 입니다.!!!");
 		}
 	}
 	
