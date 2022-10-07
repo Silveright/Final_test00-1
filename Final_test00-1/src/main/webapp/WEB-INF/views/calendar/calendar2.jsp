@@ -23,7 +23,7 @@
 
   #external-events {
     position: fixed;
-    left: 1500px;
+    left: 1800px;
     top: 200px;
    width: 160px;
     padding: 0 10px;
@@ -69,18 +69,18 @@
   	border-color:#776bcc
   } */
   .fc-h-event3{
-  	background-color:#4c489d;
-  	border-color:#4c489d;
+  	background-color:#3e2eb1e0;
+  	border-color:#3e2eb1e0;
   	color:#fff
   }
   .fc-h-event1{
-  	background-color:#847fe9  ;
-  	border-color:#847fe9  ;
+  	background-color:#2000ff59  ;
+  	border-color:#2000ff59  ;
   	color:#fff
   }
   .fc-h-event2{
-  	background-color:#5851e9  ;
-  	border-color:#5851e9  ;
+  	background-color:#584bafcf  ;
+  	border-color:#584bafcf  ;
   	color:#fff
   }
   a {
@@ -90,14 +90,14 @@
 .fc .fc-button-primary:hover,.fc .fc-button-primary, .fc .fc-button-primary:disabled {
     color: #fff !important;
     color: var(--fc-button-text-color, #fff);
-    background-color: #4c489d;
-    border-color: #4c489d;
+    background-color: #776bcc;
+    border-color: #776bcc;
 }
 .fc .fc-button-primary:not(:disabled):active, .fc .fc-button-primary:not(:disabled).fc-button-active {
     color: #fff;
     color: var(--fc-button-text-color, #fff);
-    background-color: #847fe9;
-    border-color: #4c489d;
+    background-color:#564aad;
+    border-color: #564aad;
 }
 </style>
 </head>
@@ -229,11 +229,11 @@
   					    console.log(data[idx]);
   					    console.log(data[idx].title);
   					    if(data[idx].title=='번개'){
-  					    	data[idx].color='#5851e9';
+  					    	data[idx].color='#584bafcf';
   					    }else if(data[idx].title=='정모'){
-  					    	data[idx].color='#847fe9';
+  					    	data[idx].color='#2000ff59';
   					    }else{
-  					    	data[idx].color='#4c489d';
+  					    	data[idx].color='#3e2eb1e0';
   					    }
   					};
   					
