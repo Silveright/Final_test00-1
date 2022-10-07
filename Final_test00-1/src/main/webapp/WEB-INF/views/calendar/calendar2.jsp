@@ -23,7 +23,7 @@
 
   #external-events {
     position: fixed;
-    left: 1800px;
+    left: 1500px;
     top: 200px;
    width: 160px;
     padding: 0 10px;
