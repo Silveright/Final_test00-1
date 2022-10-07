@@ -10,7 +10,7 @@
 <a href="#" class="nav-link">게시판</a>
 <a href="#" class="nav-link">일정</a>
 <a href="#" class="nav-link">채팅</a>
-<a href="groupuserinfo" class="nav-link">회원관리</a>
+<a href="groupuserinfo?num=${groupdata.group_no}" class="nav-link">회원관리</a>
 
  
 </div>
