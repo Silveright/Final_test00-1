@@ -83,26 +83,66 @@ function getId(id){
 var data = {};//전송 데이터(JSON)
 
 var ws ;
-var mid = getId('mid');
+//var mid = getId('mid');
+//console.log(mid);
+//var id=mid.getAttribute('value');
+//console.log(id);
 var btnLogin = getId('btnLogin');
 var btnSend = getId('btnSend');
 var talk = getId('talk');
 var msg = getId('msg');
 
 btnLogin.onclick = function(){
-	ws = new WebSocket("ws://" + location.host + "/test/group/chatt?group_no=" + ${group_no});
-	
-	ws.onmessage = function(msg){
-		var data = JSON.parse(msg.data);
-		console.log("msg.data="+data)
-		console.log("data.msg="+data.msg)
-		var css;
-		
-		if(data.mid == mid.value){
-			css = 'class=me';
-		}else{
-			css = 'class=other';
-		}
+	window.onbeforeunload = function() {
+    		data.mid = getId('mid').value;
+		console.log(data.mid);
+		data.msg =data.mid+'님이 퇴장하셨습니다.';
+		data.date = new Date().toLocaleString();
+		var temp = JSON.stringify(data);
+		ws.send(temp);
+		ws.close();
+    	};	    	
+	window.beforeunload = function() {
+    		data.mid = getId('mid').value;
+		console.log(data.mid);
+		data.msg =data.mid+'님이 퇴장하셨습니다.';
+		data.date = new Date().toLocaleString();
+		var temp = JSON.stringify(data);
+		ws.send(temp);
+		ws.close();
+    	};
+
+    	ws = new WebSocket("ws://" + location.host + "/test/group/chatt?group_no=" + ${group_no});
+    	mid.setAttribute("value",mid.value);
+    	ws.onopen = function(msg){
+    		data.mid = getId('mid').value;
+    		console.log(data.mid);
+    		data.msg = data.mid+'님이 입장하셨습니다.';
+    		data.date = new Date().toLocaleString();
+    		var temp = JSON.stringify(data);
+    		ws.send(temp);
+    	}
+    	ws.onclose = function(msg){
+    		console.log('onclose실행');
+    		data.mid = getId('mid').value;
+    		console.log(data.mid);
+    		data.msg = '퇴장하셨습니다.';
+    		data.date = new Date().toLocaleString();
+    		var temp = JSON.stringify(data);
+    		ws.send(temp);
+    		ws.close();
+    	}
+    	console.log(mid.value);
+    	ws.onmessage = function(msg){
+    		var data = JSON.parse(msg.data);
+    		console.log(data);
+    		var css;
+    		console.log(data.mid)
+    		if(data.mid == mid.value){
+    			css = 'class=me';
+    		}else{
+    			css = 'class=other';
+    		}
 		
 		var item = "<div " + css + ">"+
 		              "<span><b>" + data.mid+  "</b></span>" + "["+ data.date + " ]" + "<br/>"
