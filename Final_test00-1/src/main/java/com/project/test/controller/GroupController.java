@@ -31,7 +31,6 @@ import com.project.test.domain.GroupJoin;
 import com.project.test.domain.GroupUser;
 import com.project.test.domain.Group_Board;
 import com.project.test.domain.Member;
-import com.project.test.domain.Session;
 import com.project.test.service.BoardService;
 import com.project.test.service.GroupService;
 import com.project.test.service.MemberService;
