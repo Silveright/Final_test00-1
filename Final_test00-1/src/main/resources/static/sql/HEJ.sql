@@ -18,6 +18,19 @@ select count(*) from (
 					)
 					where rnum>=1 and rnum&lt<=10
 
+select count(*) from group_user_role, group_join_request
+where group_user_role.userid='test1'
+
+select count(*) from(
+select group_no, userid from group_user_role union all select group_no, userid from group_join_request
+where userid='test1'
+)
+
+
+select * from group_user_role
+where userid='test1'
+select * from group_join_request
+where userid='test1'
 
 drop table group_schedule purge
 drop sequence calendar_seq

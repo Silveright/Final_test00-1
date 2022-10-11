@@ -238,6 +238,7 @@ footer {
 				<button type=submit class="btn btn-primary">수정</button>
 				<button type=reset class="btn btn-danger" onClick="history.go(-1)">취소</button>
 			</div>
+			<input type="hidden" name="group_no" value="${group_no}">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 		</form>
 		</div>

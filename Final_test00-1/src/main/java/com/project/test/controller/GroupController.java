@@ -400,8 +400,7 @@ public class GroupController {
 			
 			groupservice.insertBoard(groupboard); // 저장메서드 호출
 			logger.info(groupboard.toString()); // selectKey로 정의한 BOARD_NUM 값 확인해 봅니다.
-			return "redirect:/main/list";
-					//groupboardlst?group_no=${group_no}";
+			return "redirect:groupboardlist?group_no="+groupboard.getGROUP_NO();
 		}
 
 		private String fileDBName1(String fileName1, String saveFolder) {
@@ -483,7 +482,7 @@ public class GroupController {
 		@GetMapping("/groupboardmodifyView")
 		public ModelAndView ModifyView(
 				
-				int num, ModelAndView mv,
+				int num, int group_no, ModelAndView mv,
 				HttpServletRequest request
 				
 				){
@@ -505,14 +504,14 @@ public class GroupController {
 			mv.setViewName("group/groupboardmodify");
 			// 글 수정 폼 페이지로 이동하기 위해 경로를 설정합니다.
 			mv.addObject("boarddata", groupboardmodify);
-			//mv.addObject("group_no",group_no);
+			mv.addObject("group_no",group_no);
 			return mv;
 		}
 		
 		//그룹 수정 페이지 작동
 		@PostMapping("/groupboardmodifyAction")
 		public String BoardModifyAction(
-				@RequestParam(value="group_no", defaultValue="1",required=false) int group_no,
+				@RequestParam(value="group_no") int group_no,
 				Group_Board boarddata, 
 				String check, Model mv, 
 				HttpServletRequest request,
@@ -521,6 +520,7 @@ public class GroupController {
 			boolean usercheck = 
 			  groupservice.isBoardWriter(boarddata.getBOARD_NUM(), boarddata.getBOARD_PASS());
 			logger.info("입력한 비밀번호" + boarddata.getBOARD_PASS());
+			logger.info("받아온 모임번호"+group_no);
 			String url="";
 			// 비밀번호가 다른 경우
 			if (usercheck == false) {
@@ -579,6 +579,7 @@ public class GroupController {
 				// 수정한 글 내용을 보여주기 위해 글 내용 보기 보기 페이지로 이동하기위해 경로를 설정합니다.
 				url = "redirect:groupboarddetail";
 				rattr.addAttribute("num", boarddata.getBOARD_NUM());
+				rattr.addAttribute("group_no", group_no);
 			}
 			return url;
 		}
