@@ -142,6 +142,7 @@ create table notice (
 
 select * from notice;
 
+create sequence calendar_seq;
 
 
 
