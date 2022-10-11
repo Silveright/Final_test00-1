@@ -79,4 +79,8 @@ public interface GroupService {
 
 	List<UserGroup> getUserGroup(String userid);
 
+	int getUserJoin(int group_no, String userid);
+
+	int getUserGroupCount(String userid);
+
 }

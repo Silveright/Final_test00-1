@@ -4,6 +4,11 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%> 
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
+<style>
+a{
+    color: #ffffff !important;
+}
+</style>
 <body>
 <!-- Header / <head> -->
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
@@ -152,13 +157,89 @@
 <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
 <!-- End Footer / Script -->
 <script>
-function join(){
-	var answer = confirm("가입 신청 하시겠습니까?");
+$(function(){
+	$("body").on("click","#join a" , function(event){
+		
+		var a=0;
+		$.ajax({
+		    url: "../group/groupcount",
+		    data: {
+		        userid: $("#loginid").text()
+		    },
+		    type: "get",
+		    async: false,
+		    success: function (response) {
+		        
+		        var buttonArea = $('#buttonArea');
+		        var loginid = $('#loginid').text();
+		        console.log(response);
+		        console.log($("#loginid").text())
+		        if (response >= '3' ) { //가입 모임 수
+		        	//return false;
+		        	//alert("모임 가입은 3개만 가능합니다.")
+		           
+		        	a=1;
+		        	
+		        } else { //모임원유저
+		        	$("#join").unbind();
+		        	alert("가입 신청 되셨습니다.");
+		        } 
+		    },
+		    error: function (Http, status, error) {
+		        console.log("Http : " + Http.status + ", status : " + status + ", error : " + error);
+		    }
+		});
+		
+		if(a==1){
+			alert("모임 가입은 3개만 가능합니다.")
+			event.preventDefault();
+		}
+		
+	})
+})
+function join(e){
+	//event.preventDefault();
+		$.ajax({
+		    url: "../group/groupcount",
+		    data: {
+		        userid: $("#loginid").text()
+		    },
+		    type: "get",
+		    success: function (response) {
+		        
+		        var buttonArea = $('#buttonArea');
+		        var loginid = $('#loginid').text();
+		        console.log(response);
+		        console.log($("#loginid").text())
+		        if (response >= '3' ) { //가입 모임 수
+		        	//return false;
+		        	e.stopPropagation();
+		        	alert("모임 가입은 3개만 가능합니다.")
+		        } else { //모임원유저
+		        	$("#join").unbind();
+		        	alert("가입 신청 되셨습니다.");
+		        } 
+		    },
+		    error: function (Http, status, error) {
+		        console.log("Http : " + Http + ", status : " + status + ", error : " + error);
+		    }
+		});
+		
+		
+	/* var answer = confirm("가입 신청 하시겠습니까?");
 	console.log(answer); //취소를 클릭한 경우 false
 	if(!answer) { //취소를 클릭한 경우
 		event.preventDefault(); //이동하지 않습니다.
-	}
+	}else{
+		
+		//event.preventDefault();
+	} */
 }
+function joinalert(){
+	alert("이미 신청하셨습니다.")
+}
+
+
 $.ajax({
     url: "../group/main",
     data: {
@@ -167,22 +248,28 @@ $.ajax({
     },
     type: "get",
     success: function (response) {
-        authority = response;
+        authority = response.role;
         var buttonArea = $('#buttonArea');
         var loginid = $('#loginid').text();
         console.log(response);
         console.log($("#loginid").text())
-        if (response == '0') { //모임장유저
+        if (authority == '0') { //모임장유저
             
         	buttonArea.append("<button onclick='update()' class='banner-button btn rounded-pill btn-primary btn-lg px-4 my-lg-5' style='margin-right: 10px;'> 수정하기</button>");
             buttonArea.append("<button onclick='out()' class='banner-button btn rounded-pill btn-primary btn-lg px-4 my-lg-5'>탈퇴하기</button>");
             //modalBtn.attr('data-bs-target', '#groupMemberListModal');
-        } else if (response == '1') { //모임원유저
+        } else if (authority == '1') { //모임원유저
             buttonArea.append("<button onclick='out()' class='banner-button btn rounded-pill btn-primary btn-lg px-4 my-lg-5'>탈퇴하기</button>");
             //modalBtn.attr('data-bs-target', '#groupMemberListModal');
         } else { //비로그인유저, 모임미가입유저
-            buttonArea.append('<a href="insert?userid='+loginid+'&group_no=${groupdata.group_no}"><button onclick="join()" class="banner-button btn rounded-pill btn-primary btn-lg px-4 my-lg-5">가입하기</button></a>');
+           if(response.join=='-1'){
+        	buttonArea.append('<button type="button" class="banner-button btn rounded-pill btn-primary btn-lg px-4 my-lg-5" id="join"><a href="insert?userid='+loginid+'&group_no=${groupdata.group_no}">가입하기</a></button>');
         	$('aside').remove();    
+           }else if(response.join=='1'){
+        	   buttonArea.append('<button onclick="joinalert()" class="banner-button btn rounded-pill btn-primary btn-lg px-4 my-lg-5">가입 신청 중...</button>');
+           		$('aside').remove();    
+           }
+        	
         //modalBtn.attr('onclick', 'memberListAlert()');
         }
     },
