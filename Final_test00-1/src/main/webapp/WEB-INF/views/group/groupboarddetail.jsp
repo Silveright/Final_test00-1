@@ -272,7 +272,7 @@ footer {
 								 또는 ${boarddata.board_num}
 							--%>
 									<input type="hidden" name="num" value="${param.num}"
-										id="board_num">
+										id="BOARD_NUM">
 									<div class="form-group">
 										<label for="pwd">비밀번호</label> <input type="password"
 											class="form-control" placeholder="Enter password"

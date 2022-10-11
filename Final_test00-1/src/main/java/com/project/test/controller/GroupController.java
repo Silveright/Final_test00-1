@@ -602,7 +602,7 @@ public class GroupController {
 			//삭제 처리 성공한 경우 - 글 목록 보기 요청을 전송하는 부분입니다.
 			logger.info("게시판 삭제 성공");
 			rattr.addFlashAttribute("result", "deleteSuccess");
-			return "redirect:list";
+			return "redirect:groupboarddetail";
 		}
 		
 		//다운로드
