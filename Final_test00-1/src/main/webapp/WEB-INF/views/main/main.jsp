@@ -84,6 +84,7 @@
 <!-- End View Work -->
 
 <!-- Start Recent Work -->
+<c:if test="${!empty usergroup}">
 <section class="container overflow-hidden py-5">
    <div class="container-fluid pb-3">
       <div class="row">
@@ -100,22 +101,25 @@
       <div class="container">
       <div class="row gy-5 g-lg-5 mb-4">
          <!-- Start Recent Work -->
+         <c:forEach var="a" items="${usergroup}">
          <div class="col-md-4 mb-3">
-            <a href="#" class="recent-work card border-0 shadow-lg overflow-hidden">
-               <img class="recent-work-img card-img" src="${pageContext.request.contextPath}/resources/img/recent-work-01.jpg" alt="Card image">
+            <a href="${pageContext.request.contextPath}/group/group_detail?num=${a.group_no}" class="recent-work card border-0 shadow-lg overflow-hidden">
+               <img class="recent-work-img card-img" src="<spring:url value = '/upload${a.group_img}'/>" alt="Card image">
                <div class="recent-work-vertical card-img-overlay d-flex align-items-end">
                   <div class="recent-work-content text-start mb-3 ml-3 text-dark">
-                  <h3 class="card-title light-300">가입한 모임1</h3>
-                  <p class="card-text">가입한 모임1 설명</p>
+                  <h3 class="card-title light-300">${a.group_name}</h3>
+                  <p class="card-text">${a.group_content}</p>
                   </div>
                </div>
             </a>
          </div>
+         </c:forEach>
          <!-- End Recent Work -->
       </div>
       </div>
    </div>
 </section>
+</c:if>
 </se:authorize>
 <!-- 로그인 했을 때 보여지는 화면 끝-->
 <!-- End Banner Hero -->

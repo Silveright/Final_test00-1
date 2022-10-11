@@ -8,6 +8,7 @@ import com.project.test.domain.Group;
 import com.project.test.domain.GroupJoin;
 import com.project.test.domain.GroupUser;
 import com.project.test.domain.Group_Board;
+import com.project.test.domain.UserGroup;
 
 public interface GroupService {
 
@@ -60,5 +61,5 @@ public interface GroupService {
 	public List<Group_Board> getGroupBoardList(int page, int limit);
 
 	public int getBoardListCount();
-
+	List<UserGroup> getUserGroup(String userid);
 }
