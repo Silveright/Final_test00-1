@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>내가 가입한 모임</title>
 
 <style>
 @charset "UTF-8";
@@ -66,12 +66,12 @@
 		<jsp:include page="../group/group_left.jsp" />
 	</aside>
 		<h1><h1> 채팅방</h1></h1>
-		<input type='text' id='mid' value='홍길동'>
-		<input type='button' value='로그인' id='btnLogin'>
+		<input type='hidden' id='mid' value='${userid}'>
+		
 		<br/>
 		<div id='talk'></div>
 		<div id='sendZone'>
-			<textarea id='msg' value='hi...' ></textarea>
+			<textarea id='msg' ></textarea>
 			<input type='button' value='전송' id='btnSend'>
 		</div>
 	</div>
@@ -91,8 +91,7 @@ var btnLogin = getId('btnLogin');
 var btnSend = getId('btnSend');
 var talk = getId('talk');
 var msg = getId('msg');
-
-btnLogin.onclick = function(){
+ function user(){
 	window.onbeforeunload = function() {
     		data.mid = getId('mid').value;
 		console.log(data.mid);
@@ -152,6 +151,8 @@ btnLogin.onclick = function(){
 		talk.scrollTop=talk.scrollHeight;//스크롤바 하단으로 이동
 	}
 }
+ 
+ user();
 
 msg.onkeyup = function(ev){
 	if(ev.keyCode == 13){
