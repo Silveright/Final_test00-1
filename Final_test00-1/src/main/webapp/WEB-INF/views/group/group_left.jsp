@@ -68,7 +68,7 @@ $.ajax({
         var loginid = $('#loginid').text();
         console.log(response);
         console.log($("#loginid").text())
-        if (response == '0') { //모임장유저
+        if (response.role == '0') { //모임장유저
             str='<a href="${pageContext.request.contextPath}/group/groupuserinfo?group_no=${group_no}" class="nav-link">회원관리</a>'
             str+='<a href="${pageContext.request.contextPath}/group/groupjoinagree?group_no=${group_no}" class="nav-link">가입신청</a>'	
             		$('.sidenav').append(str);
