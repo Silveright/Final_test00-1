@@ -53,7 +53,7 @@
                         <div class="input-group input-group-navbar justify-content-center" id="searchGroup">
                             <select name="search_field" class="form-control form-select-sm search" aria-label="Search"
                                     id="search_field" style="width : 80px" >
-                                <option value="">전체</option>
+                                <option>전체</option>
                                 <option>서울</option>
 								<option>경기</option>
 								<option>인천</option>

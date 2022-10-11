@@ -21,7 +21,7 @@
 			<c:choose>
 				<c:when test="${not empty search_keyword}">
 					<c:choose>
-						<c:when test="${not empty search_field}">
+						<c:when test="${search_field != '전체'}">
 							<h3 class="h4 pb-0 regular-400">"${search_field}"지역의 "${search_keyword}"검색 결과 입니다.</h3>
 						</c:when>
 						<c:otherwise>
@@ -29,9 +29,9 @@
 						</c:otherwise>
 					</c:choose>
 				</c:when>
-				<c:otherwise>
+				<c:otherwise><!-- search_keyword 입력 안했을 때 -->
 					<c:choose>
-						<c:when test="${not empty search_field}">
+						<c:when test="${search_field != '전체'}">
 							<h3 class="h4 pb-0 regular-400">"${search_field}"지역의 "전체"검색 결과 입니다.</h3>
 						</c:when>
 						<c:otherwise>

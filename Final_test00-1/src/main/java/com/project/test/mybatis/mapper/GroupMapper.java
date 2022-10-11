@@ -28,6 +28,7 @@ public interface GroupMapper {
 
 	public List<Group_Board> getGroupBoardList(HashMap<String, Integer> map);
 
+
 	public int getBoardListCount(int group_no);
 
 	public void insertBoard(Group_Board groupboard);
@@ -42,4 +43,10 @@ public interface GroupMapper {
 
 	public int boardDelete(Group_Board groupboard);
 	
+  public List<UserGroup> getUserGroup(String userid);
+
+public GroupUser getUserJoin(int group_no, String userid);
+
+public int getUserGroupCount(String userid);
+
 }

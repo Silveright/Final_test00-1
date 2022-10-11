@@ -13,6 +13,7 @@ import com.project.test.domain.Group;
 import com.project.test.domain.GroupJoin;
 import com.project.test.domain.GroupUser;
 import com.project.test.domain.Group_Board;
+import com.project.test.domain.UserGroup;
 import com.project.test.mybatis.mapper.GroupAdminMapper;
 import com.project.test.mybatis.mapper.GroupMapper;
 
@@ -248,6 +249,22 @@ public class GroupServiceImpl implements GroupService {
 
 		
 		
+		@Override
+		public List<UserGroup> getUserGroup(String userid) {
+			// TODO Auto-generated method stub
+			return gdao.getUserGroup(userid);
+		}
 
+		@Override
+		public int getUserJoin(int group_no, String userid) {
+			GroupUser user = gdao.getUserJoin(group_no, userid);
+			return (user==null) ? -1 : 1;
+		}
+
+		@Override
+		public int getUserGroupCount(String userid) {
+			// TODO Auto-generated method stub
+			return gdao.getUserGroupCount(userid);
+		}
 
 }

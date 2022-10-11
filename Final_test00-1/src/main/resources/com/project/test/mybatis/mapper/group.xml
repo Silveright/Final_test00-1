@@ -163,6 +163,23 @@
 	
 	
 	 
+	 <select id="getUserGroup" resultType="UserGroup">
+	 	select group_no, GROUP_IMG, group_name, group_content, catename, group_user, group_role 
+		from group_info gi join (select group_no as user_groupno, userid as group_user, group_role
+							from group_user_role
+							)
+		on gi.group_no = user_groupno
+		and group_user=#{userid}
+	 </select>
 	 
+	 <select id="getUserJoin" resultType="GroupUser">
+	 	select group_no, userid from group_join_request
+	 	where userid=#{userid} and group_no=#{group_no}
+	 </select>
+
+	 <select id="getUserGroupCount" resultType="int">
+	 	select count(*) from group_user_role
+	 	where userid=#{userid}
+	 </select>
 	 
 </mapper>

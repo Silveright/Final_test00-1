@@ -7,6 +7,8 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.test.domain.Group;
+import com.project.test.domain.UserGroup;
 import com.project.test.service.BoardService;
 import com.project.test.service.GroupService;
 import com.project.test.service.MySaveFolder;
@@ -75,6 +78,17 @@ public class MainController {
 		mv.addObject("listcount", listcount);
 		mv.addObject("grouplist", grouplist);
 		mv.addObject("limit", limit);
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String userid=authentication.getName();
+		logger.info(authentication.getName());
+		if(userid.equals("anonymousUser")) {
+			logger.info("비로그인유저");
+		}else {
+			List<UserGroup> usergroup = groupService.getUserGroup(userid);
+			mv.addObject("usergroup",usergroup);//GROUP_NO, GROUP_NAME, GROUP_CONTENT, CATENAME, GROUP_USER, GROUP_ROLE
+		}
+		
 		return mv;
 		
 	}

@@ -26,47 +26,25 @@
          </ol>
          <div class="carousel-inner">
             <div class="carousel-item active">
-               <div class="py-5 row d-flex align-items-center">
+               <div class=" align-items-center">
+					<img src="${pageContext.request.contextPath}/resources/img/banner1.jpg" height="600px" width="80%">
                   <div class="banner-content col-lg-8 col-8 offset-2 m-lg-auto text-left py-5 pb-5">
-                     <h1 class="banner-heading h1 text-secondary display-3 mb-0 pb-5 mx-0 px-0 light-300 typo-space-line">
-                        Develop <strong>Strategies</strong> for 
-                        <br>your business
-                     </h1>
-                     <p class="banner-body text-muted py-3 mx-0 px-0">
-                        Purple Buzz is a corporate HTML template with Bootstrap 5 Beta 1. This CSS template is 100% free to download provided by <a rel="nofollow" href="https://templatemo.com/page/1" target="_parent">TemplateMo</a>. Total 6 HTML pages included in this template. Icon fonts by <a rel="nofollow" href="https://boxicons.com/" target="_blank">Boxicons</a>. Photos are from <a rel="nofollow" href="https://unsplash.com/" target="_blank">Unsplash</a> and <a rel="nofollow" href="https://icons8.com/" target="_blank">Icons 8</a>.
-                     </p>
-                     <a class="banner-button btn rounded-pill btn-outline-primary btn-lg px-4" href="#" role="button">Get Started</a>
                   </div>
                </div>
             </div>
             
             <div class="carousel-item">
-               <div class="py-5 row d-flex align-items-center">
+               <div class=" row d-flex align-items-center">
                   <div class="banner-content col-lg-8 col-8 offset-2 m-lg-auto text-left py-5 pb-5">
-                     <h1 class="banner-heading h1 text-secondary display-3 mb-0 pb-3 mx-0 px-0 light-300">
-                        HTML CSS Template with Bootstrap 5 Beta 1
-                     </h1>
-                     <p class="banner-body text-muted py-3">
-                        You are not allowed to re-distribute this Purple Buzz HTML template as a downloadable ZIP file on any kind of Free CSS collection websites. This is strongly prohibited. Please contact TemplateMo for more information.
-                     </p>
-                     <a class="banner-button btn rounded-pill btn-outline-primary btn-lg px-4" href="#" role="button">Get Started</a>
+					<img src="${pageContext.request.contextPath}/resources/img/banner2.png">
                   </div>
                </div>
             </div>
                     
             <div class="carousel-item">
-               <div class="py-5 row d-flex align-items-center">
+               <div class=" row d-flex align-items-center">
                   <div class="banner-content col-lg-8 col-8 offset-2 m-lg-auto text-left py-5 pb-5">
-                     <h1 class="banner-heading h1 text-secondary display-3 mb-0 pb-3 mx-0 px-0 light-300">
-                        Cupidatat non proident, sunt in culpa qui officia
-                     </h1>
-                     <p class="banner-body text-muted py-3">
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                        irure dolor in reprehenderit in voluptate velit esse cillum
-                        dolore eu fugiat nulla pariatur. Excepteur sint occaecat.
-                     </p>
-                     <a class="banner-button btn rounded-pill btn-outline-primary btn-lg px-4" href="#" role="button">Get Started</a>
+					<img src="${pageContext.request.contextPath}/resources/img/banner3.jpg">
                   </div>
                </div>
             </div>
@@ -106,6 +84,7 @@
 <!-- End View Work -->
 
 <!-- Start Recent Work -->
+<c:if test="${!empty usergroup}">
 <section class="container overflow-hidden py-5">
    <div class="container-fluid pb-3">
       <div class="row">
@@ -122,22 +101,25 @@
       <div class="container">
       <div class="row gy-5 g-lg-5 mb-4">
          <!-- Start Recent Work -->
+         <c:forEach var="a" items="${usergroup}">
          <div class="col-md-4 mb-3">
-            <a href="#" class="recent-work card border-0 shadow-lg overflow-hidden">
-               <img class="recent-work-img card-img" src="${pageContext.request.contextPath}/resources/img/recent-work-01.jpg" alt="Card image">
+            <a href="${pageContext.request.contextPath}/group/group_detail?num=${a.group_no}" class="recent-work card border-0 shadow-lg overflow-hidden">
+               <img class="recent-work-img card-img" src="<spring:url value = '/upload${a.group_img}'/>" alt="Card image">
                <div class="recent-work-vertical card-img-overlay d-flex align-items-end">
                   <div class="recent-work-content text-start mb-3 ml-3 text-dark">
-                  <h3 class="card-title light-300">가입한 모임1</h3>
-                  <p class="card-text">가입한 모임1 설명</p>
+                  <h3 class="card-title light-300">${a.group_name}</h3>
+                  <p class="card-text">${a.group_content}</p>
                   </div>
                </div>
             </a>
          </div>
+         </c:forEach>
          <!-- End Recent Work -->
       </div>
       </div>
    </div>
 </section>
+</c:if>
 </se:authorize>
 <!-- 로그인 했을 때 보여지는 화면 끝-->
 <!-- End Banner Hero -->

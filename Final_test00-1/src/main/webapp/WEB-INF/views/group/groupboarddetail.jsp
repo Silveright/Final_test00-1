@@ -240,7 +240,7 @@ footer {
 								<sec:authentication property="principal" var="pinfo" />
 								<c:if
 									test="${boarddata.BOARD_NAME == pinfo.username || pinfo.username == 'admin'}">
-									<a href="groupboardmodifyView?num=${boarddata.BOARD_NUM}">
+									<a href="groupboardmodifyView?num=${boarddata.BOARD_NUM}&group_no=${group_no}">
 										<button class="btn btn-warning">수정</button>
 									</a>
 									<%-- href의 주소를 #으로 설정합니다. --%>
