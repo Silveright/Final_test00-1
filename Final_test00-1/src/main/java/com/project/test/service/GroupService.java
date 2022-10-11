@@ -57,8 +57,23 @@ public interface GroupService {
 	//모임 가입 신청
 	public void insert(String userid, int group_no);
 
-	public List<Group_Board> getGroupBoardList(int page, int limit);
+	//public List<Group_Board> getGroupBoardList(int page, int limit);
 
-	public int getBoardListCount();
+	public int getBoardListCount(int group_no);
+
+	void insertBoard(Group_Board groupboard);
+
+	int setReadCountUpdate(int num);
+
+	Group_Board getBoardDetail(int num);
+
+	boolean isBoardWriter(int board_NUM, String board_PASS);
+
+	int boardModify(Group_Board boarddata);
+
+	int boardDelete(int num);
+
+	List<Group_Board> getGroupBoardList(int page, int limit, int group_no);
+
 
 }

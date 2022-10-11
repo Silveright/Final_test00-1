@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
@@ -34,9 +35,9 @@ a {
 	}
 	$(function() {
 		$("form[action=delete]").submit(function() {
-			if($("#board_pass").val() == '') {
+			if($("#BOARD_PASS").val() == '') {
 				alert("비밀번호를 입력하세요.");
-				$("#board_pass").focus();
+				$("#BOARD_PASS").focus();
 				return false;
 			}
 		})
@@ -194,124 +195,54 @@ footer {
 			</div>
 
 			<div class="col-sm-9 ">
-				<table class="table table-striped">
-					<tr>
-						<th colspan="2">게시판 상세페이지</th>
-					</tr>
-					<tr>
-						<td><div>작성자</div></td>
-						<td><div>${boarddata.BOARD_NAME}</div></td>
-					</tr>
-					<tr>
-						<td><div>제목</div></td>
-						<td><c:out value="${boarddata.BOARD_SUBJECT}" /></td>
-					</tr>
-
-					<tr>
-						<td><div>내용</div></td>
-						<td style="padding-right: 0px"><textarea class="form-control"
-								rows="5" readOnly>${boarddata.BOARD_CONTENT}</textarea></td>
-					</tr>
-
-					<%-- 원문글인 경우에만 첨부파일을 추가 할 수 있습니다. --%>
-					<tr>
-						<td>
-							<div>첨부파일</div>
-						</td>
-						<c:if test="${!empty boarddata.BOARD_FILE}">
-							<%-- 파일첨부한 경우 --%>
-							<td><img src="../resources/image/down.png" width="10px">
-								<form method="post" action="down" style="height: 0px">
-									<input type="hidden" value="${boarddata.BOARD_FILE}"
-										name="filename"> <input type="hidden"
-										value="${boarddata.BOARD_ORIGINAL}" name="original"> <input
-										type="submit" value="${boarddata.BOARD_ORIGINAL}">
-								</form></td>
-						</c:if>
-						<c:if test="${empty boarddata.BOARD_FILE}">
-							<td></td>
-						</c:if>
-					</tr>
-
-					<tr>
-						<td colspan="2" class="center">
-							<button class="btn btn-primary">댓글</button> <span id="count">${count}</span>
-							<sec:authorize access="isAuthenticated()">
-								<sec:authentication property="principal" var="pinfo" />
-								<c:if
-									test="${boarddata.BOARD_NAME == pinfo.username || pinfo.username == 'admin'}">
-									<a href="groupboardmodifyView?num=${boarddata.BOARD_NUM}">
-										<button class="btn btn-warning">수정</button>
-									</a>
-									<%-- href의 주소를 #으로 설정합니다. --%>
-									<a href="#">
-										<button class="btn btn-danger" data-toggle="modal"
-											data-target="#myModal">삭제</button>
-									</a>
-								</c:if>
-							</sec:authorize> <a href="replyView?num=${boarddata.BOARD_NUM}">
-								
-						</a> <a href="groupboardlist?group_no=${group_no}">
-								<button class="btn btn-success">목록</button>
-						</a>
-						</td>
-					</tr>
-				</table>
-				<%-- 게시판 view end --%>
-
-				<%-- modal 시작 --%>
-				<div class="modal" id="myModal">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<%-- Modal body --%>
-							<div class="modal-body">
-								<form name="deleteForm" action="delete" method="post">
-									<%-- http://localhost:8088/Board/BoardDetailAction.bo?num=22
-								 주소를 보면 num을 파라미터로 넘기고 있습니다.
-								 이 값을 가져와서 ${param.num}를 사용
-								 또는 ${boarddata.board_num}
-							--%>
-									<input type="hidden" name="num" value="${param.num}"
-										id="board_num">
-									<div class="form-group">
-										<label for="pwd">비밀번호</label> <input type="password"
-											class="form-control" placeholder="Enter password"
-											name="BOARD_PASS" id="board_pass">
-									</div>
-									<button type="submit" class="btn btn-primary">전송</button>
-									<button type="button" class="btn btn-danger"
-										data-dismiss="modal">취소</button>
-									<input type="hidden" name="${_csrf.parameterName}"
-										value="${_csrf.token}">
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-				<%-- id="myModal" end --%>
-				<div id="comment">
-					<button class="btn btn-info float-left">총 50자까지 가능합니다.</button>
-					<button id="write" class="btn btn-info float-right">등록</button>
-					<textarea rows="3" class="form-control" id="content" maxlength="50"></textarea>
-					<table class="table table striped">
-						<thead>
-							<tr>
-								<td>아이디</td>
-								<td>내용</td>
-								<td>날짜</td>
-							</tr>
-						</thead>
-						<tbody>
-
-						</tbody>
-					</table>
-					<div id="message"></div>
-				</div>
+		<form action="groupboardmodifyAction" method="post" name="modifyform" enctype="multipart/form-data" >
+			<input type="hidden" name="BOARD_NUM" value="${boarddata.BOARD_NUM}">
+			<input type="hidden" name="BOARD_FILE" value="${boarddata.BOARD_FILE}">
+			<h1>게시판 수정</h1>
+			<div class="form-group">
+				<label for="board_name">글쓴이</label>
+				<input type="text" name="BOARD_NAME"
+					   class="form-control"  value="${boarddata.BOARD_NAME}" readOnly>
 			</div>
+			<div class="form-group">
+				<label for="board_subject">제목</label>
+				<textarea name="BOARD_SUBJECT" id="board_subject" rows="1" 
+					      maxlength="100" class="form-control" >${boarddata.BOARD_SUBJECT}</textarea>
+				
+			</div>
+			<div class="form-group">
+				<label for="board_content">내용</label>
+				<textarea name="BOARD_CONTENT" id="board_content" 
+					      class="form-control" rows="15">${boarddata.BOARD_CONTENT}</textarea>
+					  
+			</div>
+			<%--원문글인 경우에만 파일 첨부 수정 가능합니다. --%>
+			<div class="form-group">
+				<label for="board_file">파일 첨부</label>
+				<label for="upfile">
+					<img src="../resources/image/attach.png" alt="파일첨부" width="20px" >
+				</label>
+				<input type="file" id="upfile" name="uploadfile" >
+				<span id="filevalue">${boarddata.BOARD_ORIGINAL}</span>
+				<img alt="파일삭제" src="../resources/image/remove.png" width="10px" class="remove">
+			</div>
+			
+			
+			<div class="form-group">
+				<label for="board_pass">비밀번호</label>
+				<input name="BOARD_PASS"
+					   id="board_pass" type="password" maxlength="30"
+					   class="form-control" placeholder="Enter board_pass" value="">
+			</div>
+			<div class="form-group">
+				<button type=submit class="btn btn-primary">수정</button>
+				<button type=reset class="btn btn-danger" onClick="history.go(-1)">취소</button>
+			</div>
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+		</form>
 		</div>
-		<%--comment-area end --%>
-	</div>
-	<%--class="container" end --%>
+		</div>
+	</div> <%--class="container" end --%>
 	<jsp:include page="../include/footer.jsp"></jsp:include>
 </body>
 

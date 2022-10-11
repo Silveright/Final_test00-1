@@ -24,6 +24,7 @@
    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
    <!-- jQuery -->
    <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.js"></script>
+   <script src="${pageContext.request.contextPath}/resources/js/bootstrap.js"></script>
    
 </head>
 <!-- Header -->
