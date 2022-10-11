@@ -29,5 +29,5 @@ public interface GroupMapper {
 	public List<Group_Board> getGroupBoardList(HashMap<String, Integer> map);
 
 	public int getBoardListCount();
-	
+	public List<UserGroup> getUserGroup(String userid);
 }
