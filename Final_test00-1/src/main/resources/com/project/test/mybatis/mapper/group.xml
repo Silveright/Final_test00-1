@@ -172,4 +172,14 @@
 		and group_user=#{userid}
 	 </select>
 	 
+	 <select id="getUserJoin" resultType="GroupUser">
+	 	select group_no, userid from group_join_request
+	 	where userid=#{userid} and group_no=#{group_no}
+	 </select>
+
+	 <select id="getUserGroupCount" resultType="int">
+	 	select count(*) from group_user_role
+	 	where userid=#{userid}
+	 </select>
+	 
 </mapper>

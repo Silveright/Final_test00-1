@@ -45,4 +45,8 @@ public interface GroupMapper {
 	
   public List<UserGroup> getUserGroup(String userid);
 
+public GroupUser getUserJoin(int group_no, String userid);
+
+public int getUserGroupCount(String userid);
+
 }

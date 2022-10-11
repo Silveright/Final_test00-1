@@ -255,4 +255,16 @@ public class GroupServiceImpl implements GroupService {
 			return gdao.getUserGroup(userid);
 		}
 
+		@Override
+		public int getUserJoin(int group_no, String userid) {
+			GroupUser user = gdao.getUserJoin(group_no, userid);
+			return (user==null) ? -1 : 1;
+		}
+
+		@Override
+		public int getUserGroupCount(String userid) {
+			// TODO Auto-generated method stub
+			return gdao.getUserGroupCount(userid);
+		}
+
 }

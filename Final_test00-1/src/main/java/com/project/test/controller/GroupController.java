@@ -283,14 +283,28 @@ public class GroupController {
 	}
 		
 
-		// 그룹 메인
 		@ResponseBody
 		@GetMapping(value="/main")
-		public int getUserRole(@RequestParam("group_no") int group_no, String userid) {
+		public Map<String, Object> getUserRole(@RequestParam("group_no") int group_no, String userid) {
 			GroupUser user= groupservice.getUserRole(group_no, userid);
-			return (user==null) ? -1: user.getGroup_role();
+			
+			int result = (user==null) ? -1: user.getGroup_role();
+			
+			Map<String,Object> map = new HashMap<String,Object>();
+		     map.put("join", groupservice.getUserJoin(group_no, userid));//(user==null) ? -1 : 1;
+		     map.put("role", result);
+			return map;
 	}
-
+		
+		@ResponseBody
+		@GetMapping(value="/groupcount")
+		public int getUserGroup(String userid) {
+			
+			int result = groupservice.getUserGroupCount(userid);
+			logger.info("가입 모임 수는 " + result);
+			return result;
+		}
+		
 		//그룹 가입신청
 		@RequestMapping(value = "/insert", method = RequestMethod.GET)
 		public String member_delete(String userid, int group_no) {
