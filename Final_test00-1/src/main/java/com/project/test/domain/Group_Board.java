@@ -10,7 +10,15 @@ public class Group_Board {
 	private String BOARD_CONTENT;	//글 내용
 	private String BOARD_FILE;		//실제 저장된 파일의 이름
 	private int BOARD_READCOUNT;	//글의 조회수
-	
+	private int GROUP_NO;
+	public int getGROUP_NO() {
+		return GROUP_NO;
+	}
+
+	public void setGROUP_NO(int gROUP_NO) {
+		GROUP_NO = gROUP_NO;
+	}
+
 	//board_write.jsp에서 name 속성 확인하세요.
 	//<input type="file" id="upfile" name="uploadfile"> 확인
 	private MultipartFile uploadfile;

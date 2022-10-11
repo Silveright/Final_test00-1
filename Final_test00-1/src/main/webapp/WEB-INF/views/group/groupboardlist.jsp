@@ -169,7 +169,7 @@ footer{
 							<div>
 								
 								 
-								 <a href="detail?num=${b.BOARD_NUM}">
+								 <a href="groupboarddetail?num=${b.BOARD_NUM}&group_no=${group_no}">
 							 		<c:out value="${b.BOARD_SUBJECT}" escapeXml="true"/>
 							 		<span class="gray small">[<c:out value="${b.CNT}"/>]</span>
 								 </a>
@@ -247,8 +247,10 @@ footer{
 		<font size=5>등록된 글이 없습니다.</font>
 	</c:if>
 	-->
-	<button type="button" class="btn btn-info float-right">글쓰기</button>      
-	<button type="button" class="btn btn-info float-right">공지등록</button>      
+	<button type="button" class="btn btn-info float-right" 
+			onclick="location.href='groupboardwrite?group_no=${group_no}'">글쓰기</button>      
+	<button type="button" class="btn btn-info float-right"
+			onclick="location.href='groupboardnotice'">공지등록</button>      
 <br>
 <br>
 <br>
@@ -279,5 +281,6 @@ var group_no="${group_no}"
    
    
 </script>
+<jsp:include page="../include/footer.jsp"></jsp:include>
 </body>
 </html>

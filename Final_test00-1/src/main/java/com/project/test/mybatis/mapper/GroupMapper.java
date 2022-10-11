@@ -28,6 +28,21 @@ public interface GroupMapper {
 
 	public List<Group_Board> getGroupBoardList(HashMap<String, Integer> map);
 
-	public int getBoardListCount();
-	public List<UserGroup> getUserGroup(String userid);
+
+	public int getBoardListCount(int group_no);
+
+	public void insertBoard(Group_Board groupboard);
+
+	public int setReadCountUpdate(int num);
+
+	public Group_Board getBoardDetail(int num);
+
+	public int boardModify(Group_Board boarddata);
+
+	public Group_Board isBoardWriter(HashMap<String, Object> map);
+
+	public int boardDelete(Group_Board groupboard);
+	
+  public List<UserGroup> getUserGroup(String userid);
+
 }

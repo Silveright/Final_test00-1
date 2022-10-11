@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -190,19 +188,66 @@ public class GroupServiceImpl implements GroupService {
 		}
 
 		@Override
-		public List<Group_Board> getGroupBoardList(int page, int limit) {
+		public List<Group_Board> getGroupBoardList(int page, int limit, int group_no) {
 			HashMap<String, Integer> map = new HashMap<String, Integer>();
 			int startrow = (page - 1) * limit + 1;
 			int endrow = startrow + limit - 1;
 			map.put("start", startrow);
 			map.put("end", endrow);
+			map.put("group_no", group_no);
 			return gdao.getGroupBoardList(map);
 		}
 
 		@Override
-		public int getBoardListCount() {
-			return gdao.getBoardListCount();
+		public int getBoardListCount(int group_no) {
+			return gdao.getBoardListCount(group_no);
 		}
+
+		@Override
+		public void insertBoard(Group_Board groupboard) {
+			gdao.insertBoard(groupboard);
+			
+		}
+
+		@Override
+		public int setReadCountUpdate(int num) {
+			return gdao.setReadCountUpdate(num);
+			
+		}
+
+		@Override
+		public Group_Board getBoardDetail(int num) {
+			return gdao.getBoardDetail(num);
+		}
+
+		@Override
+		public boolean isBoardWriter(int board_NUM, String board_PASS) {
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("num", board_NUM);
+			map.put("pass", board_PASS);
+			Group_Board result = gdao.isBoardWriter(map);
+			if(result==null)
+				return false;
+			else
+				return true;
+		}
+
+		@Override
+		public int boardModify(Group_Board boarddata) {
+			return  gdao.boardModify(boarddata);
+		}
+
+		@Override
+		public int boardDelete(int num) {
+			int result = 0;
+			Group_Board groupboard = gdao.getBoardDetail(num);
+			if(groupboard != null ) {
+				result = gdao.boardDelete(groupboard);
+			}
+			return result;
+		}
+
+		
 		
 		@Override
 		public List<UserGroup> getUserGroup(String userid) {
