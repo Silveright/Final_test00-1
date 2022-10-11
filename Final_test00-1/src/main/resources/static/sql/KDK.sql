@@ -159,5 +159,8 @@ create sequence JOIN_SEQ
 create sequence role_seq
 
 select * from group_info
+
+create sequence calendar_seq
+
 where area_name ='인천'
 and catename = '독서';
