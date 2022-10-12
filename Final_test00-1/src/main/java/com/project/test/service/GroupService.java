@@ -32,12 +32,6 @@ public interface GroupService {
 
 	public void deleteFileList(String filename);
 	
-	//모임 수정
-	public int groupModify(Group modifygroup);
-	
-	//모임 삭제
-	public int groupDelete(int num);
-	
 	//모임장인지 확인
 	public boolean isGroupWriter(int num, String userid);
 	
@@ -82,5 +76,16 @@ public interface GroupService {
 	int getUserJoin(int group_no, String userid);
 
 	int getUserGroupCount(String userid);
+
+	//모임 수정처리 
+	boolean isGroupWriter(int group_no);
+
+	//모임 수정
+	public int groupModify(Group modifygroup);
+	
+	//모임 삭제
+	public int groupDelete(int num);
+
+	
 
 }
