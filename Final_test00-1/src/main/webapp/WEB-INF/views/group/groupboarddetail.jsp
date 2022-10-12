@@ -26,7 +26,7 @@ a {
 	integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK"
 	crossorigin="anonymous"></script>
 <script
-	srca="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.js"></script>
+	src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.js"></script>
 <script>
 	var result="${result}";
 	if(result == "passFail") {
@@ -224,9 +224,15 @@ footer {
 								<form method="post" action="down" style="height: 0px">
 									<input type="hidden" value="${boarddata.BOARD_FILE}"
 										name="filename"> <input type="hidden"
-										value="${boarddata.BOARD_ORIGINAL}" name="original"> <input
+										value="${boarddata.BOARD_ORIGINAL}" name="original">
+										<input type="hidden" name="group_no" value="${param.group_no}"
+										id="group_no">
+										<input
 										type="submit" value="${boarddata.BOARD_ORIGINAL}">
-								</form></td>
+									<input type="hidden" name="${_csrf.parameterName}"
+										value="${_csrf.token}">	
+								</form>
+								</td>
 						</c:if>
 						<c:if test="${empty boarddata.BOARD_FILE}">
 							<td></td>
@@ -273,6 +279,8 @@ footer {
 							--%>
 									<input type="hidden" name="num" value="${param.num}"
 										id="BOARD_NUM">
+									<input type="hidden" name="group_no" value="${param.group_no}"
+										id="group_no">
 									<div class="form-group">
 										<label for="pwd">비밀번호</label> <input type="password"
 											class="form-control" placeholder="Enter password"

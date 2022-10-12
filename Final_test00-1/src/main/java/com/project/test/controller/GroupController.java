@@ -588,7 +588,7 @@ public class GroupController {
 		@PostMapping("/delete")
 		public String BoardDeleteAction(
 										@RequestParam(value="group_no", 
-										defaultValue="1",required=false) int group_no,
+										required=false) int group_no,
 										String BOARD_PASS, int num,
 										Model mv, RedirectAttributes rattr,
 										HttpServletRequest request) {
@@ -600,6 +600,7 @@ public class GroupController {
 			if(usercheck == false) {
 				rattr.addFlashAttribute("result", "passFail");
 				rattr.addAttribute("num", num);
+				rattr.addAttribute("group_no", group_no);
 				return "redirect:groupboarddetail";
 			}
 			
@@ -617,7 +618,8 @@ public class GroupController {
 			//삭제 처리 성공한 경우 - 글 목록 보기 요청을 전송하는 부분입니다.
 			logger.info("게시판 삭제 성공");
 			rattr.addFlashAttribute("result", "deleteSuccess");
-			return "redirect:groupboarddetail";
+			rattr.addAttribute("group_no", group_no);
+			return "redirect:groupboardlist";
 		}
 		
 		//다운로드
@@ -625,7 +627,7 @@ public class GroupController {
 		@PostMapping("/down")
 		public byte[] BoardFileDown(
 									@RequestParam(value="group_no", 
-									defaultValue="1",required=false) int group_no,
+									required=false) int group_no,
 									String filename,
 									HttpServletRequest request,
 									String original,
