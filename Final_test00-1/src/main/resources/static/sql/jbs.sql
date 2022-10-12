@@ -71,9 +71,7 @@ create table comments(
   );
   
   
-update user_info
-set auth='ROLE_ADMIN'
-where userid = 'admin';
+
 
 select * from user_info;
 
@@ -171,17 +169,14 @@ create table notice (
 
 select * from notice;
 
--- 모임 생성 후 메인화면에 뿌려주기
-select * from 
-   (select rownum rnum, j.*     
-   from (select * from group_info) j     
-   where rownum<=10
-   ) 
-where rnum>=1  and rnum<=10
+drop sequence JOIN_SEQ;
 
-select * from group_info
-where area_name ='인천'
-and catename = '독서';
+drop sequence role_seq;
+
+drop sequence calendar_seq;
+
+drop sequence com_seq;
+
 
 create sequence JOIN_SEQ;
 
@@ -191,3 +186,8 @@ create sequence calendar_seq;
 
 create sequence com_seq;
 
+insert into user_info values ('admin', '관리자', '여', '21', '1234', 'admin@kakao.com', '서울', sysdate,'ROLE_ADMIN')
+
+update user_info
+set auth='ROLE_ADMIN'
+where userid = 'admin';
