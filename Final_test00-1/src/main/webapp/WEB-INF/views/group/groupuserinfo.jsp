@@ -184,7 +184,8 @@ footer{
                      <td>${m.area_name}</td>
                      <td>${m.gender }</td>
                      <td><input type="button" class="btn btn-secondary btn-sm" value="모임장 위임">
-                     <td><input type="button" class="btn btn-secondary btn-sm" value="회원 강퇴"><%-- ${r.review_readcount } --%></td>
+                     <td><input type="button" class="btn btn-secondary btn-sm" 
+                     			onclick="location.href='groupuserdelete?userid=${m.userid}&group_no=${group_no}'" value="회원 강퇴"><%-- ${r.review_readcount } --%></td>
                   </tr>
                   </c:forEach>
                </tbody>

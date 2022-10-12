@@ -267,4 +267,10 @@ public class GroupServiceImpl implements GroupService {
 			return gdao.getUserGroupCount(userid);
 		}
 
+		@Override
+		public void groupuserdelete(String userid, int group_no) {
+			gdao.groupuserdelete(userid, group_no);
+			
+		}
+
 }

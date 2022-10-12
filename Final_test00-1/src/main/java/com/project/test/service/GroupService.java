@@ -83,4 +83,8 @@ public interface GroupService {
 
 	int getUserGroupCount(String userid);
 
+	void groupuserdelete(String userid, int group_no);
+
+
+
 }

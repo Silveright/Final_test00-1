@@ -49,4 +49,6 @@ public GroupUser getUserJoin(int group_no, String userid);
 
 public int getUserGroupCount(String userid);
 
+public void groupuserdelete(String userid, int group_no);
+
 }

@@ -182,4 +182,9 @@
 	 	where userid=#{userid}
 	 </select>
 	 
+	 <delete id="groupuserdelete">
+		delete from group_user_role
+		where userid=#{userid} and group_no=#{group_no}
+	</delete>
+	 
 </mapper>
