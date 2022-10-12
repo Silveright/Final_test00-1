@@ -182,6 +182,11 @@
 	 	where userid=#{userid}
 	 </select>
 	 
+
+	 <delete id="groupuserdelete">
+		delete from group_user_role
+		where userid=#{userid} and group_no=#{group_no}
+
 	 <select id="isGroupWriter" parameterType="map" resultType="Group">
 	    select * from group_info
 	    where    group_no=#{group_no} 

@@ -290,4 +290,10 @@ public class GroupServiceImpl implements GroupService {
 
 	
 
+		@Override
+		public void groupuserdelete(String userid, int group_no) {
+			gdao.groupuserdelete(userid, group_no);
+			
+		}
+
 }

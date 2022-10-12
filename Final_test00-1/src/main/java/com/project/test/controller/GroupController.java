@@ -267,8 +267,8 @@ public class GroupController {
 		@RequestMapping(value="/groupjoinagree")
 		public ModelAndView groupjoinagree(int group_no,
 				ModelAndView mv) {
-			mv.addObject("group_no", group_no);
-		mv.setViewName("group/groupjoinagree");
+				mv.addObject("group_no", group_no);
+				mv.setViewName("group/groupjoinagree");
 		return mv;
 	}		
 		 	
@@ -281,6 +281,20 @@ public class GroupController {
 		return result;
 		      
 	}
+		
+		//모임 회원 강퇴
+		@RequestMapping(value = "/groupuserdelete", method = RequestMethod.GET)
+		public String groupuserdelete(@RequestParam("userid") String userid, 
+									  @RequestParam("group_no") int group_no,
+									  RedirectAttributes rattr
+									  ) {
+			
+			groupservice.groupuserdelete(userid, group_no);
+			
+			rattr.addAttribute("group_no",group_no);
+						
+			return "redirect:groupuserinfo";
+		}
 		
 
 		@ResponseBody
@@ -303,7 +317,7 @@ public class GroupController {
 			int result = groupservice.getUserGroupCount(userid);
 			logger.info("가입 모임 수는 " + result);
 			return result;
-		}
+		}				
 		
 		//그룹 가입신청
 		@RequestMapping(value = "/insert", method = RequestMethod.GET)
@@ -478,7 +492,7 @@ public class GroupController {
 			return mv;
 		}
 		
-		//그룹 게시판 수정
+		//그룹 보드 게시판 수정
 		@GetMapping("/groupboardmodifyView")
 		public ModelAndView ModifyView(
 				
@@ -508,7 +522,7 @@ public class GroupController {
 			return mv;
 		}
 		
-		//그룹 수정 페이지 작동
+		//그룹 보드 수정 페이지 작동
 		@PostMapping("/groupboardmodifyAction")
 		public String BoardModifyAction(
 				@RequestParam(value="group_no") int group_no,

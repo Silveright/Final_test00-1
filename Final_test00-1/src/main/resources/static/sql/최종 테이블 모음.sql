@@ -38,6 +38,8 @@ CREATE TABLE group_info (
 	userid	varchar2(100)	NOT NULL
 );
 
+select * from group_user_role
+
 drop table group_user_role purge
 drop sequence role_seq
 create sequence role_seq

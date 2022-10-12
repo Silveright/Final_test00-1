@@ -77,6 +77,10 @@ public interface GroupService {
 
 	int getUserGroupCount(String userid);
 
+
+	void groupuserdelete(String userid, int group_no);
+
+
 	//모임 수정처리 
 	boolean isGroupWriter(int group_no);
 

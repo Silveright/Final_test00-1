@@ -53,4 +53,6 @@ public interface GroupMapper {
 	public int groupDelete(Group group);
 	
 
+public void groupuserdelete(String userid, int group_no);
+
 }

@@ -66,3 +66,6 @@ select * from comments;
 	
 	update group_board set board_subject='살려주세요2'
 			where board_num=12;
+			
+delete from group_user_role
+where userid = 'test2' and group_no = 4
