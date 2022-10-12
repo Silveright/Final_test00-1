@@ -266,7 +266,7 @@ $(function() {
 	<div class="container">
   <div class="screen">
     <div class="screen__content">
-    <img alt="2" src="${pageContext.request.contextPath}/resources/img/final_logo.png" style="width:100px; higth:50px;">
+    <%-- <img alt="2" src="${pageContext.request.contextPath}/resources/img/final_logo.png" style="width:100px; higth:50px;"> --%>
       <form class="login" action="loginProcess" method="post">
          <div class="login__field">
           <i class="login__icon fas fa-user"></i>
@@ -290,7 +290,7 @@ $(function() {
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">      
       </form>
       <div class="social-login">
-        <h3>3.3.5.5</h3>
+       <!--  <h3>3.3.5.5</h3> -->
       </div>
     </div>
     <div class="screen__background">

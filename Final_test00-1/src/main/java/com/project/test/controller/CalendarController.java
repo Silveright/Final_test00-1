@@ -58,7 +58,7 @@ public class CalendarController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public int CalendarAdd(Calendar calendar) {
 		//logger.info("시작시간"+calendar.getStartdate());
 		return calendarService.CalendarAdd(calendar);
@@ -72,14 +72,14 @@ public class CalendarController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/modify", method = RequestMethod.GET)
+	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 	public int CalendarModify(Calendar calendar) {
 		//logger.info("시작시간"+calendar.getStartdate());
 		return calendarService.CalendarModify(calendar);
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/modifydate", method = RequestMethod.GET)
+	@RequestMapping(value = "/modifydate", method = RequestMethod.POST)
 	public int CalendarModifyDate(String startdate, int calendar_no) {
 		logger.info("일정번호"+calendar_no);
 		return calendarService.CalendarModifyDate(startdate,calendar_no);
