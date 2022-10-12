@@ -25,7 +25,8 @@
    <!-- jQuery -->
    <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.js"></script>
    <script src="${pageContext.request.contextPath}/resources/js/bootstrap.js"></script>
-   
+   <meta name="_csrf" content="${_csrf.token }">
+<meta name="_csrf_header" content="${_csrf.headerName }">
 </head>
 <!-- Header -->
 <nav id="main_nav" class="navbar navbar-expand-lg navbar-light bg-white shadow">

@@ -12,8 +12,6 @@ public interface GroupMapper {
 	//모임 생성
     public void insertGroup(Group Group);
 
-	public Group isGroupWriter(HashMap<String, Object> map);
-
 	public List<Group> getGroupList(HashMap<String, Integer> map);
 
 	public int getListCount();
@@ -27,7 +25,6 @@ public interface GroupMapper {
 	public void insert(HashMap<String, Object> map);
 
 	public List<Group_Board> getGroupBoardList(HashMap<String, Integer> map);
-
 
 	public int getBoardListCount(int group_no);
 
@@ -43,11 +40,18 @@ public interface GroupMapper {
 
 	public int boardDelete(Group_Board groupboard);
 	
-  public List<UserGroup> getUserGroup(String userid);
+	public List<UserGroup> getUserGroup(String userid);
 
-public GroupUser getUserJoin(int group_no, String userid);
+	public GroupUser getUserJoin(int group_no, String userid);
+	
+	public int getUserGroupCount(String userid);
 
-public int getUserGroupCount(String userid);
+	public Group isGroupWriter(HashMap<String, Object> map);
+	
+	public int groupModify(Group modifygroup);
+
+	public int groupDelete(Group group);
+	
 
 public void groupuserdelete(String userid, int group_no);
 

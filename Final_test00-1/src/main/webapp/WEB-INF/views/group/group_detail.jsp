@@ -9,6 +9,7 @@ a{
     color: #ffffff !important;
 }
 </style>
+
 <body>
 <!-- Header / <head> -->
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
@@ -235,9 +236,30 @@ function join(e){
 		//event.preventDefault();
 	} */
 }
+$("#buttonArea > button:nth-child(2)").click(function(event) {
+    var answer = confirm("정말 삭제하시겠습니까?");
+    console.log(answer); //취소를 클릭한 경우 false
+    if(!answer) { //취소를 클릭한 경우
+       event.preventDefault(); //이동하지 않습니다.
+    }
+ })//삭제 클릭이벤트 end
+
 function joinalert(){
 	alert("이미 신청하셨습니다.")
 }
+
+function update(){
+	 location.href="groupmodifyView?num=${groupdata.group_no}&group_no=${group_no}"
+}
+
+function groupdelete(){
+	 
+	
+	 location.href="groupdelete?num=${groupdata.group_no}&group_no=${group_no}"
+	 alert("모임이 삭제되었습니다.")
+}
+
+
 
 
 $.ajax({
@@ -255,8 +277,9 @@ $.ajax({
         console.log($("#loginid").text())
         if (authority == '0') { //모임장유저
             
-        	buttonArea.append("<button onclick='update()' class='banner-button btn rounded-pill btn-primary btn-lg px-4 my-lg-5' style='margin-right: 10px;'> 수정하기</button>");
-            buttonArea.append("<button onclick='out()' class='banner-button btn rounded-pill btn-primary btn-lg px-4 my-lg-5'>탈퇴하기</button>");
+        	buttonArea.append("<button onclick='update()' class='banner-button btn rounded-pill btn-primary btn-lg px-4 my-lg-5' style='margin-right: 10px;'>수정하기</button>");
+            buttonArea.append("<button onclick='groupdelete()' class='banner-button btn rounded-pill btn-primary btn-lg px-4 my-lg-5'>모임해산</button>");
+            
             //modalBtn.attr('data-bs-target', '#groupMemberListModal');
         } else if (authority == '1') { //모임원유저
             buttonArea.append("<button onclick='out()' class='banner-button btn rounded-pill btn-primary btn-lg px-4 my-lg-5'>탈퇴하기</button>");
