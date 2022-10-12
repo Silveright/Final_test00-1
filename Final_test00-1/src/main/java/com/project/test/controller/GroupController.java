@@ -650,6 +650,143 @@ public class GroupController {
 			response.setContentLength(bytes.length);
 			return bytes;
 		}
+//================================================================================================	
+		@GetMapping("/groupmodifyView")
+		public ModelAndView ModifyView(
+				int num, ModelAndView mv,
+				HttpServletRequest request,
+				@RequestParam(value="group_no", 
+                required=false) int group_no
+				){
+			Group groupdata = groupservice.getDetail(num);
+			
+			// 글 내용 불러오기 실패한 경우입니다.
+			if(groupdata == null) {
+				logger.info("수정보기 실패");
+				mv.setViewName("error/error");
+				mv.addObject("url",request.getRequestURL());
+				mv.addObject("message","수정보기 실패입니다.");
+				mv.addObject("group_no",group_no);
+				mv.addObject("num",num);
+				return mv;
+			}
+			
+			logger.info("(수정)상세보기 성공");
+			// 수정 폼 페이지로 이동할 때 원문 글 내용을 보여주기 때문에 boarddata 객체를
+			// ModelAndView 객체에 저장합니다.
+			mv.setViewName("group/group_modify");
+			// 글 수정 폼 페이지로 이동하기 위해 경로를 설정합니다.
+			mv.addObject("groupdata", groupdata);
+			mv.addObject("group_no",group_no);
+			return mv;
+		}
 		
+		@PostMapping("/groupmodifyAction")
+		public String GroupModifyAction(
+				Group groupdata, 
+				String check, Model mv, 
+				HttpServletRequest request,
+				RedirectAttributes rattr,
+				@RequestParam(value="group_no", 
+                required=false) int group_no
+				)  throws Exception {
+			boolean usercheck = 
+			  groupservice.isGroupWriter(groupdata.getGroup_no());
+			String url="";
+			// 비밀번호가 다른 경우
+			if (usercheck == false) {
+				  rattr.addAttribute("group_no", group_no);
+				 return "redirect:groupmodifyView";
+			}
 
+			MultipartFile uploadfile = groupdata.getUploadfile();
+			/* String saveFolder =	request.getSession().getServletContext().getRealPath("resources") 
+					           + "/upload"; */
+			
+			if (check != null && !check.equals("")) { // 기존파일 그대로 사용하는 경우입니다.
+				logger.info("기존파일 그대로 사용합니다.");			
+				groupdata.setGroup_original(check);
+				//<input type="hidden" name="BOARD_FILE" value="${boarddata.BOARD_FILE}">
+				//위 문장 때문에 board.setBOARD_FILE()값은 자동 저장됩니다.
+			} else {
+				//답변글의 경우 파일 첨부에 대한 기능이 없습니다.
+				//만약 답변글을 수정할 경우 
+				//<input type="file" id="upfile" name="uploadfile" > 엘리먼트가 존재하지 않아
+				//private MultipartFile uploadfile;에서 uploadfile은 null 입니다.
+				if (uploadfile!=null && !uploadfile.isEmpty()) { 
+					logger.info("파일 변경되었습니다.");	
+					String saveFolder = mysavefolder.getSavefolder();
+
+					String fileName = uploadfile.getOriginalFilename(); // 원래 파일명
+					groupdata.setGroup_original(fileName);
+
+					String fileDBName = fileDBName(fileName, saveFolder);
+					logger.info("fileDBName = " + fileDBName);
+					// transferTo(File path) : 업로드한 파일을 매개변수의 경로에 저장합니다.
+					uploadfile.transferTo(new File(saveFolder + fileDBName));
+					logger.info("transferTo path = " + saveFolder + fileDBName);
+					// 바뀐 파일명으로 저장
+					groupdata.setGroup_img(fileDBName);
+				} else {//기존 파일이 없는데 파일 선택하지 않은 경우 또는 기존 파일이 있었는데 삭제한 경우
+					logger.info("선택 파일 없습니다.");
+					//<input type="hidden" name="BOARD_FILE" value="${boarddata.BOARD_FILE}">
+					//위 태그에 값이 있다면 ""로 값을 변경합니다.
+					groupdata.setGroup_img("");//""로 초기화 합니다.
+					groupdata.setGroup_original("");//""로 초기화 합니다.
+				}//else end
+			}//else end
+			
+			// DAO에서 수정 메서드 호출하여 수정합니다.
+			int result = groupservice.groupModify(groupdata);
+			// 수정에 실패한 경우
+			if (result == 0) {
+				logger.info("모임 수정 실패");
+				mv.addAttribute("url", request.getRequestURL());
+				mv.addAttribute("message", "모임 수정 실패");
+				url="error/error";
+			} else { // 수정 성공의 경우
+				logger.info("모임 수정 완료");
+				// 수정한 글 내용을 보여주기 위해 글 내용 보기 보기 페이지로 이동하기위해 경로를 설정합니다.
+				url = "redirect:group_detail";
+				rattr.addAttribute("num", groupdata.getGroup_no());
+				rattr.addAttribute("group_no", group_no);
+			}
+			return url;
+		}
+		
+		@GetMapping("/groupdelete")
+		public String BoardDeleteAction(int num,
+										Model mv, RedirectAttributes rattr,
+										HttpServletRequest request,
+										@RequestParam(value="group_no", 
+			                            required=false) int group_no) {
+			//글 삭제 명령을 요청한 사용자가 글을 작성한 사용자인지 판단하기 위해
+			//입력한 비밀번호와 저장된 비밀번호를 비교하여 일치하면 삭제합니다.
+			boolean usercheck = groupservice.isGroupWriter(num);
+			
+			//비밀번호가 일치하지 않는 경우
+			if(usercheck == false) {
+				rattr.addFlashAttribute("result", "passFail");
+				rattr.addAttribute("num", num);
+				rattr.addAttribute("group_no", group_no);
+				return "redirect:groupdetail";
+			}
+			
+			//비밀번호 일치하는 경우 삭제처리 합니다.
+			int result = groupservice.groupDelete(num);
+			
+			//삭제 처리 실패한 경우
+			if(result == 0) {
+				logger.info("모임 삭제 실패");
+				mv.addAttribute("url", request.getRequestURL());
+				mv.addAttribute("message", "삭제 실패");
+				return "error/error";
+			}
+			
+			//삭제 처리 성공한 경우 - 글 목록 보기 요청을 전송하는 부분입니다.
+			logger.info("모임 삭제 성공");
+			rattr.addFlashAttribute("result", "deleteSuccess");
+			return "redirect:/main/list";
+		}
+		
 }
