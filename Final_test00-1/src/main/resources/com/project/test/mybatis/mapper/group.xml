@@ -149,16 +149,16 @@
 	<delete id="boardDelete">
 		
 		delete from Group_Board
-		where board_num=#{board_num}
+		where BOARD_NUM=#{BOARD_NUM}
 		
 	</delete>
 	
 	<select id="getDeleteFileList" resultType="String">
-		select board_file from delete_file
+		select BOARD_FILE from DELETE_FILE
 	</select>
 	
 	<delete id="deleteFileList" parameterType="String">
-		delete delete_file where board_file=#{board_file}
+		delete DELETE_FILE where BOARD_FILE=#{BOARD_FILE}
 	</delete>
 	
 	
