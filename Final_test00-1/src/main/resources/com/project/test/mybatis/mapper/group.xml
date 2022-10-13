@@ -83,6 +83,48 @@
 	     where rnum &gt;= #{start} and rnum  &lt;=  #{end}
 	</select>
 	
+	<!-- 모임 게시판 검색 -->
+	<select id="getSearchList" parameterType="map" resultType="Group_Board">
+	  select * 
+	  from ( select rownum rnum, b.*
+	          from  (select * 
+	                 from Group_Board 
+	                   <!-- <if test="search_field!=null">
+	                         and	           
+	                         <choose>
+	                           <when test="search_field=='id'">id</when>
+	                           <when test="search_field=='name'">name</when>
+	                           <when test="search_field=='age'">age</when>
+	                           <when test="search_field=='gender'">gender</when>
+	                        </choose>	  
+	                            like #{search_word}	     
+      	                </if> --> 
+      	                <include refid="search_"/>
+	                   
+	                  )b 
+	           where rownum &lt;=  #{end}    
+	        ) 
+	  where rnum &gt;= #{start} and rnum  &lt;=  #{end} 
+	</select>
+	
+	<select id="getSearchListCount" resultType="int" parameterType="map">
+		select count(*) 
+		from Group_Board
+		
+		<include refid ="search_"/>
+	</select>
+	
+	<sql id="search_">
+		 <if test="search_field!=null">
+		 where
+	      <choose>
+	           <when test="search_field=='제목'">#{BOARD_SUBJECT}</when>
+	           <when test="search_field=='작성자'">#{userid}</when>
+	       </choose>	  
+	       like #{search_word}
+	  </if>
+	</sql>
+	
 	<!--  
 		 1. jdbcType=VARCHAR : 첨부 파일을 추가하지 않은 경우 에러 처리해 줍니다.
 		 					   해당 필드가 null인 경우 jdbcType=VARCHAR로 처리하면 null로 설정됩니다.

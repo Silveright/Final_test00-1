@@ -8,6 +8,7 @@ import com.project.test.domain.Group;
 import com.project.test.domain.GroupJoin;
 import com.project.test.domain.GroupUser;
 import com.project.test.domain.Group_Board;
+import com.project.test.domain.Search;
 import com.project.test.domain.UserGroup;
 
 public interface GroupService {
@@ -84,6 +85,10 @@ public interface GroupService {
 	int getUserGroupCount(String userid);
 
 	void groupuserdelete(String userid, int group_no);
+
+	int getSearchListCount(String index, String search_keyword);
+
+	List<Search> getSearchList(String index, String search_keyword, int page, int limit);
 
 
 
