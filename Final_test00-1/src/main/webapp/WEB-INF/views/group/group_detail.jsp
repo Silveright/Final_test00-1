@@ -254,9 +254,14 @@ function update(){
 
 function groupdelete(){
 	 
-	
-	 location.href="groupdelete?num=${groupdata.group_no}&group_no=${group_no}"
-	 alert("모임이 삭제되었습니다.")
+	if(confirm("정말 삭제하시겠습니까?")){
+		location.href="groupdelete?num=${groupdata.group_no}&group_no=${group_no}"
+		alert("모임 삭제가 완료되었습니다.")
+	}else{
+		return
+	}
+	// location.href="groupdelete?num=${groupdata.group_no}&group_no=${group_no}"
+	 //alert("모임이 삭제되었습니다.")
 }
 
 

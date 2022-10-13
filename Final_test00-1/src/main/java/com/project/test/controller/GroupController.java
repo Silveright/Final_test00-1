@@ -706,14 +706,8 @@ public class GroupController {
 				@RequestParam(value="group_no", 
                 required=false) int group_no
 				)  throws Exception {
-			boolean usercheck = 
-			  groupservice.isGroupWriter(groupdata.getGroup_no());
+			
 			String url="";
-			// 비밀번호가 다른 경우
-			if (usercheck == false) {
-				  rattr.addAttribute("group_no", group_no);
-				 return "redirect:groupmodifyView";
-			}
 
 			MultipartFile uploadfile = groupdata.getUploadfile();
 			/* String saveFolder =	request.getSession().getServletContext().getRealPath("resources") 
@@ -778,15 +772,6 @@ public class GroupController {
 			                            required=false) int group_no) {
 			//글 삭제 명령을 요청한 사용자가 글을 작성한 사용자인지 판단하기 위해
 			//입력한 비밀번호와 저장된 비밀번호를 비교하여 일치하면 삭제합니다.
-			boolean usercheck = groupservice.isGroupWriter(num);
-			
-			//비밀번호가 일치하지 않는 경우
-			if(usercheck == false) {
-				rattr.addFlashAttribute("result", "passFail");
-				rattr.addAttribute("num", num);
-				rattr.addAttribute("group_no", group_no);
-				return "redirect:groupdetail";
-			}
 			
 			//비밀번호 일치하는 경우 삭제처리 합니다.
 			int result = groupservice.groupDelete(num);
