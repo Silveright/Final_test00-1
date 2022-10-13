@@ -1,3 +1,24 @@
+select *
+			from (select rownum rnum, b.*
+					from ( select ui.userid, gender, area as area_name, email,group_name,catename,cnt
+		from user_info ui
+		inner join (select group_no, group_name, userid,catename,area_name as area,  cnt 
+			  from group_info gi join 
+			  					(select group_no as user_groupno, count(*) cnt
+								 from group_user_role
+								 group by group_no
+								 order by cnt desc
+								 ,group_no asc)
+								 on gi.group_no = user_groupno) g
+		on ui.userid=g.userid
+		
+) b 
+					where rownum <=10
+					)
+					where rnum>=1 and rnum<=10
+select * from user_info
+update user_info set gender ='남' 
+where gender='Man'
 delete from group_info
 select * from group_info
 select count(*) from (
@@ -26,7 +47,7 @@ select group_no, userid from group_user_role union all select group_no, userid f
 where userid='test1'
 )
 
-
+select * from group_info
 select * from group_user_role
 where userid='test1'
 select * from group_join_request
