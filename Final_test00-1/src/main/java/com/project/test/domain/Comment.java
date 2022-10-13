@@ -2,7 +2,7 @@ package com.project.test.domain;
 
 public class Comment {
 	private int num;
-	private String id;
+	private String userid;
 	private String content;
 	private String reg_date; //2020-12-24 16:08:35
 	private int board_num;
@@ -16,11 +16,11 @@ public class Comment {
 	}
 	
 	public String getId() {
-		return id;
+		return userid;
 	}
 	
 	public void setId(String id) {
-		this.id = id;
+		this.userid = id;
 	}
 	
 	public String getContent() {

@@ -118,12 +118,13 @@ footer{
             <%-- 게시글이 있는 경우 --%>
 	<!--<c:if test="${listcount > 0 }">-->
 		
-		<form action="groupboardlist" method="post">
+		<form action="groupboardlistsearch" method="get">
                <div class="input-group center-block">
+               <input type="hidden" name="group_no" value="${param.group_no}"
+										id="group_no">
                   <select id="viewcount" name="search_field">
-                     <option value="0" selected>제목</option>
-                     <option value="1">내용</option>
-                     <option value="2">작성자</option>
+                     <option selected>제목</option>
+                     <option>작성자</option>
                   </select>
                    <input id="search" name="search_word" type="text"  placeholder="제목을 입력하세요" value="${search_word }">
                   <button class="btn btn-secondary" class="search" type="submit">검색</button>
@@ -269,15 +270,16 @@ footer{
    <script>
 $(document).ready(function() { 
    loadRequest(1);
-});
+
 var group_no="${group_no}"
     console.log(group_no)
    function go(page){
       var limit = $('#viewcount').val();
       var data = "limit="+ limit + "&state=ajax&page=" + page;
       ajax(data);
-   }    
-})
+   } 
+});
+
    
    
 </script>

@@ -41,6 +41,7 @@ delete Group_Board where BOARD_NUM = 20;
 
 drop table comments cascade constraints purge;
 
+select * from comments
 create table comments(
   num          number       primary key,
   userid           varchar2(30) references user_info(userid),

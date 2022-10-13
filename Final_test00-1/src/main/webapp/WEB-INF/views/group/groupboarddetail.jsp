@@ -25,8 +25,9 @@ a {
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"
 	integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK"
 	crossorigin="anonymous"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/view.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/view.css">
 <script>
 	var result="${result}";
 	if(result == "passFail") {
@@ -43,7 +44,8 @@ a {
 	})
 </script>
 </head>
-
+<meta name="_csrf" content="${_csrf.token}">
+<meta name="_csrf_header" content="${_csrf.headerName}">
 
 <style>
 

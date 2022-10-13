@@ -2,6 +2,7 @@ package com.project.test.mybatis.mapper;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -54,5 +55,9 @@ public interface GroupMapper {
 	
 
 public void groupuserdelete(String userid, int group_no);
+
+public int getSearchListCount(HashMap<String, Object> map);
+
+public List<Search> getSearchList(Map<String, Object> map);
 
 }
