@@ -70,3 +70,11 @@ select * from comments;
 			
 delete from group_user_role
 where userid = 'test2' and group_no = 4
+
+select count(*) from Group_Board 
+where BOARD_SUBJECT like '123'
+
+select count(*) 
+from group_info 
+where area_name like '서울'
+and catename like '음악'
