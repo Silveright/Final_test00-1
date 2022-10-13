@@ -119,7 +119,7 @@
 		 where
 	      <choose>
 	           <when test="search_field=='제목'">#{BOARD_SUBJECT}</when>
-	           <when test="search_field=='작성자'">#{userid}</when>
+	           <when test="search_field=='작성자'">#{BOARD_NAME}</when>
 	       </choose>	  
 	       like #{search_word}
 	  </if>
