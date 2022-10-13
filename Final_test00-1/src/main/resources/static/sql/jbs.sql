@@ -75,24 +75,10 @@ create table comments(
 
 select * from user_info;
 
-
--- 모임 내 역할
-drop table group_user_role CASCADE CONSTRAINTS;
-create table group_user_role (
-   group_role_no   number not null,
-   userid         varchar2(100) not null,
-   group_no      varchar2(100) not null,
-   group_role      number not null,
-   primary key(group_role_no)
-);
-
-select * from group_user_role;
-
-
 -- 모임 정보
 drop table group_info CASCADE CONSTRAINTS;
 create table group_info (
-   group_no      varchar2(100) not null,
+   group_no      	NUMBER not null,
    group_name      varchar2(100) not null,
    group_original   varchar2(100) not null,
    group_img      varchar2(100) not null,
@@ -103,6 +89,20 @@ create table group_info (
    group_content   varchar2(1000) not null,
    primary key(group_no)
 );
+
+-- 모임 내 역할
+drop table group_user_role CASCADE CONSTRAINTS;
+create table group_user_role (
+   group_role_no   number not null,
+   userid         varchar2(100) not null,
+   group_no       number not null references group_info(group_no)  
+               on delete cascade ,
+   group_role      number not null,
+   primary key(group_role_no)
+);
+
+select * from group_user_role;
+
 
 select * from group_info;
 
@@ -186,8 +186,31 @@ create sequence calendar_seq;
 
 create sequence com_seq;
 
-insert into user_info values ('admin', '관리자', '여', '21', '1234', 'admin@kakao.com', '서울', sysdate,'ROLE_ADMIN')
-
+--admin 계정 회원가입 후 실행
 update user_info
 set auth='ROLE_ADMIN'
 where userid = 'admin';
+
+select * from group_info
+select * from group_user_role
+
+delete from group_info
+where group_no = 1
+
+delete from group_user_role
+where group_no = 3
+
+DELETE FROM group_info, group_user_role
+    	USING group_info AS a
+    	LEFT JOIN group_user_role AS b
+    	ON a.group_no = b.group_no
+		WHERE b.group_no = '1'
+		
+		
+		
+DELETE 
+  FROM (SELECT a.userid
+             , b.group_no
+      FROM group_info a
+         , group_user_role b)
+ WHERE group_no = 1	

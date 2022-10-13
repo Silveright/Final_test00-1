@@ -3,7 +3,10 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
-<title>모임 생성</title>
+<title>모임 수정</title>
+<style>
+	#upfile{display}
+</style>
 <body>
 <jsp:include page="../include/header.jsp"/>
 
@@ -21,8 +24,8 @@
 </section>
 <section class="container my-lg-5">
     <form id="groupModifyFrm" method="POST" action='groupmodifyAction' enctype="multipart/form-data">
-        <input type="hidden" name="group_name" value="${groupdata.group_name}">
         <input type="hidden" name="group_no" value="${groupdata.group_no}">
+        <input type="hidden" name="group_img" value="${groupdata.group_img}">
 
         <div class="service-wrapper py-3">
             <%-- 모임 대표 사진 --%>
@@ -35,22 +38,14 @@
                     <div class="pricing-list-body col-md-5 align-items-center pl-3 pt-2">
                         <ul class="list-unstyled text-center light-300">
                             <div class="form-floating mb-4">
-                                <c:choose>
-                                    <c:when test="${not empty group_img}">
                                         <img class="img-fluid border rounded" id="preview"
-                                             src="${groupdata.group_img}"
+                                             src="/test/upload${groupdata.group_img}"
                                              style="width:250px; height:250px; margin-bottom: 10px;">
-                                    </c:when>
-                                    <c:otherwise>
-                                        <img class="img-fluid border rounded" id="preview"
-                                             src="${pageContext.request.contextPath}/resources/img/work-slide-05-small.jpg"
-                                             style="width:250px; height:250px; margin-bottom: 10px;">
-                                    </c:otherwise>
-                                </c:choose>
                                 <div class="input-group">
-                                    <input type="file" class="form-control" id="fileName" name="uploadfile"
-                                           aria-describedby="inputGroupFileAddon04"
-                                           aria-label="Upload" accept="image/*;capture=camera">${groupdata.group_img}
+                                    <input type="file" class="form-control" id="upfile" name="uploadfile">
+                                          <span id="filevalue">${groupdata.group_original}</span> 
+                                          
+                                          
                                 </div>
                             </div>
                         </ul>
@@ -170,6 +165,8 @@
                     <div class="col-md-12 col-12 my-5 text-center">
                         <input type="button" onclick="confirm()" value="완료" id="groupmodify"
                                class="btn btn-secondary rounded-pill px-md-5 px-4 py-2 radius-0 text-light light-300">
+                        <input type="button" onclick="history.go(-1)" value="취소" id="groupmodify"
+                               class="btn btn-secondary rounded-pill px-md-5 px-4 py-2 radius-0 text-light light-300">       
                     </div>
                 </div>
             </div>
@@ -182,6 +179,12 @@
         
     </form>
     <script>
+  //지역 체크해주는 부분
+	$('#catename').val('${groupdata.catename}');
+  
+	$('#area_name').val('${groupdata.area_name}');
+    
+    
 $(function () {
     //모임 대표 이미지 프리뷰
     let file = document.querySelector('#fileName');
@@ -231,9 +234,21 @@ $(function () {
 
 });
 
+
+
+var check = 0;
+$("#upfile").change(function() {
+	check++;
+	var inputfile = $(this).val().split('\\');
+	$('#filevalue').text(inputfile[inputfile.length - 1]);
+	show();
+	console.log(check);
+});
+
 //Form 전송
 function confirm() {
-    console.log($('#interest').val());
+	
+	console.log($('#interest').val());
 	console.log('로그인 아이디는 '+$('#loginid').val());
     if ($('#group_name').val().trim() == '') {
         alert('모임 이름을 입력해 주세요 !')
@@ -254,9 +269,23 @@ function confirm() {
     	alert('관심사를 선택해 주세요 !')
         return;
     } else {
+    	
+    	//파일첨부를 변경하지 않으면 $('#filevalue').text()의 파일명을
+    	//파라미터 'check'라는 이름으로 form에 추가하여 전송합니다.
+    	if(check == 0) {
+    		value = $('#filevalue').text();
+    		html = "<input type='hidden' value='" + value + "' name='check'>";
+    		
+    		$("#groupModifyFrm").append(html);
+    	}
+    	
+    	
+    	
     	alert("모임 수정이 완료되었습니다.")
     	$('#groupModifyFrm').submit();
     }
+    
+  	
 }
 
 </script>
