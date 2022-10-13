@@ -2,7 +2,6 @@ package com.project.test.service;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 
 import com.project.test.domain.Group;
 import com.project.test.domain.GroupJoin;
@@ -36,11 +35,16 @@ public interface GroupService {
 	//모임장인지 확인
 	public boolean isGroupWriter(int num, String userid);
 	
-	//그룹 리스트 
+	//그룹 리스트
 	public List<Group> getGroupList(int page, int limit);
+		
+	//New그룹 리스트
+	public List<Group> getNewGroupList(int page, int limit);
+		
+	//Best그룹 리스트
+	public List<Group> getBestGroupList(int page, int limit);
 
 	public int getListCount();
-
 
 	public Group getDetail(int num);
 
@@ -71,20 +75,17 @@ public interface GroupService {
 
 	List<Group_Board> getGroupBoardList(int page, int limit, int group_no);
 
-
 	List<UserGroup> getUserGroup(String userid);
 
 	int getUserJoin(int group_no, String userid);
 
 	int getUserGroupCount(String userid);
 
-
 	void groupuserdelete(String userid, int group_no);
 
 	int getSearchListCount(String index, String search_keyword);
 
 	List<Search> getSearchList(String index, String search_keyword, int page, int limit);
-
 
 	//모임 수정처리 
 	boolean isGroupWriter(int group_no);

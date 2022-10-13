@@ -14,6 +14,10 @@ public interface GroupMapper {
     public void insertGroup(Group Group);
 
 	public List<Group> getGroupList(HashMap<String, Integer> map);
+	
+	public List<Group> getNewGroupList(HashMap<String, Integer> map);
+	
+	public List<Group> getBestGroupList(HashMap<String, Integer> map);
 
 	public int getListCount();
 
@@ -53,11 +57,10 @@ public interface GroupMapper {
 
 	public int groupDelete(Group group);
 	
+	public void groupuserdelete(String userid, int group_no);
 
-public void groupuserdelete(String userid, int group_no);
+	public int getSearchListCount(HashMap<String, Object> map);
 
-public int getSearchListCount(HashMap<String, Object> map);
-
-public List<Search> getSearchList(Map<String, Object> map);
+	public List<Search> getSearchList(Map<String, Object> map);
 
 }

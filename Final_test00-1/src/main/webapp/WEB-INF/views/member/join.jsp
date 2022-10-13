@@ -226,11 +226,21 @@ span{display:inline-block;margin-top:-20px;}
             <select id="area" name="area_name">
                 <option selected disabled>지역을 선택하세요.</option>
                 <option>서울</option>
-                <option>인천</option>
-                <option>충청도</option>
-                <option>전라도</option>
-                <option>부산</option>
-                <option>경상도</option>
+				<option>경기</option>
+				<option>인천</option>
+				<option>강원</option>
+				<option>충북</option>
+				<option>충남</option>
+				<option>대전</option>
+				<option>전북</option>
+				<option>전남</option>
+				<option>광주</option>
+				<option>경북</option>
+				<option>경남</option>
+				<option>대구</option>
+				<option>부산</option>
+				<option>울산</option>
+				<option>제주</option>
             </select>
             <div id="areaError" class="error"></div>
         </div><br>

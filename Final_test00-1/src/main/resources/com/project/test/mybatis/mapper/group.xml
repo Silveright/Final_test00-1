@@ -16,6 +16,30 @@
          ) 
       where rnum&gt;=#{start}  and rnum&lt;=#{end}
 	</select>
+	
+	<select id="getNewGroupList" parameterType="java.util.Map" resultType="group">
+		select * from 
+         (select rownum rnum, j.*     
+         from (select * from group_info) j     
+         where rownum&lt;=#{end}
+         ) 
+		where rnum&gt;=#{start} and rnum&lt;=#{end}
+		order by opendate desc
+	</select>
+	
+	<select id="getBestGroupList" parameterType="java.util.Map" resultType="group">
+		select * from
+         (select rownum rnum, j.*
+         from (select * from group_info
+				inner join (select count(userid), group_no 
+							from group_user_role
+							group by group_no
+            				order by count(userid) desc ) b
+				on group_info.group_no = b.group_no) j     
+         where rownum&lt;=#{end}
+         ) 
+		where rnum&gt;=#{start} and rnum&lt;=#{end}
+	</select>
 	 
 	 <!-- 모임 생성  -->
     <insert id="insertGroup" parameterType="group">
@@ -33,7 +57,8 @@
 	 	 #{group_name}, #{group_content}, #{group_img, jdbcType=VARCHAR},
 	 	 #{group_original, jdbcType=VARCHAR}, #{area_name}, #{catename}, #{userid},
 	 	 sysdate)
-	 	 into group_user_role(group_role_no, userid, group_no, group_role) values(role_seq.nextval, #{userid}, #{group_no}, 0)
+	 	 into group_user_role(group_role_no, userid, group_no, group_role)
+	 	 values(role_seq.nextval, #{userid}, #{group_no}, 0)
 	 	 select * from dual
 	 </insert>
 	 
