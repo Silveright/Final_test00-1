@@ -224,9 +224,32 @@
 	 	where userid=#{userid}
 	 </select>
 	 
+
 	 <delete id="groupuserdelete">
 		delete from group_user_role
 		where userid=#{userid} and group_no=#{group_no}
+	</delete>
+
+	 <select id="isGroupWriter" parameterType="map" resultType="Group">
+	    select * from group_info
+	    where    group_no=#{group_no} 
+	</select>
+	
+	<update id="groupModify" parameterType="Group">
+	  update group_info
+	  set 
+		     group_name=#{group_name},
+		     group_content=#{group_content},
+		     group_original=#{group_original, jdbcType=VARCHAR},
+		     group_img=#{group_img, jdbcType=VARCHAR},
+		     area_name=#{area_name}, 
+		     catename=#{catename} 
+	  where  group_no=#{group_no}
+	</update>
+	
+	<delete id="groupDelete" parameterType="group">
+		delete from group_info
+		where group_no = #{group_no}
 	</delete>
 	 
 </mapper>

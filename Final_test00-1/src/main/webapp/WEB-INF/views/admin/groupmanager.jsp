@@ -259,7 +259,7 @@ a{text-decoration:none; color:black}
 											</a></li>
 										</c:if>
 										<c:if test="${page >1 }">
-											<li class="page-item"><a class="page-link" href="memberinfo?page=${page-1 }&search_field=${search_field}&search_word=${search_word}"
+											<li class="page-item"><a class="page-link" href="groupmanager?page=${page-1 }&search_field=${search_field}&search_word=${search_word}"
 												aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 											</a></li>
 										</c:if>
@@ -273,7 +273,7 @@ a{text-decoration:none; color:black}
 											</li>
 											</c:if>
 											<c:if test="${a!=page}">
-												<c:url var="go" value="memberinfo">
+												<c:url var="go" value="groupmanager">
 					 							<c:param name="search_field" value="${search_field}"/>
 					 							<c:param name="search_word" value="${search_word }"/>
 					 							<c:param name="page" value="${a }"/>
@@ -292,7 +292,7 @@ a{text-decoration:none; color:black}
 											</a></li>
 											</c:if>
 											<c:if test="${page <maxpage}">
-											<c:url var ="next" value="memberinfo">
+											<c:url var ="next" value="groupmanager">
 							 					<c:param name="search_field" value="${search_field}"/>
 							 					<c:param name="search_word" value="${search_word }"/>
 							 					<c:param name="page" value="${page+1 }"/>
@@ -321,7 +321,7 @@ a{text-decoration:none; color:black}
                                  <c:if test="${listcount==0 }"> 
 		<section class="py-5">
  		<font size=5>데이터가 존재하지 않습니다.</font><br><br>
- 		<a href="main.net"><button type="button" class="btn btn-secondary float-left back">메인으로</button></a>
+ 		<button type="button" class="btn btn-secondary float-left back" onclick="history.back()">이전으로</button>
  		</section>
   </c:if> 
                             </div>

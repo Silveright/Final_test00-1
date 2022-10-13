@@ -127,18 +127,6 @@ public class GroupServiceImpl implements GroupService {
 		}
 
 		@Override
-		public int groupModify(Group modifygroup) {
-			// TODO Auto-generated method stub
-			return 0;
-		}
-
-		@Override
-		public int groupDelete(int num) {
-			// TODO Auto-generated method stub
-			return 0;
-		}
-
-		@Override
 		public List<Group> getGroupList(int page, int limit) {
 			HashMap<String, Integer> map = new HashMap<String, Integer>();
 			int startrow = (page - 1) * limit + 1;
@@ -267,6 +255,41 @@ public class GroupServiceImpl implements GroupService {
 			// TODO Auto-generated method stub
 			return gdao.getUserGroupCount(userid);
 		}
+		
+		//모임 생성시 모임장 구분
+		@Override
+		public boolean isGroupWriter(int group_no) {
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("group_no", group_no);
+			Group result = gdao.isGroupWriter(map);
+			if(result==null)
+				return false;
+			else
+				return true;
+		}
+		
+		//모입 수정
+		@Override
+		public int groupModify(Group modifygroup) {
+			return  gdao.groupModify(modifygroup);
+		}
+
+		//모임 삭제
+		@Override
+		public int groupDelete(int num) {
+			int result = 0;
+			Group group = gdao.getDetail(num);
+			if(group != null ) {
+				result = gdao.groupDelete(group);
+			}
+			return result;
+		}
+		
+		
+
+		
+
+	
 
 		@Override
 		public void groupuserdelete(String userid, int group_no) {

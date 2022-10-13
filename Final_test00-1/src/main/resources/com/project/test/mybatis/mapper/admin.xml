@@ -128,9 +128,9 @@ order by dt
 	<select id="getGroupSearchList" resultType="AdminMember">
 		 select *
 			from (select rownum rnum, b.*
-					from ( select ui.userid, gender, email, area_name,group_name,catename,cnt
+					from ( select ui.userid, gender, email, area as area_name,group_name,catename,cnt
 		from user_info ui
-		inner join (select group_no, group_name, userid,catename,  cnt 
+		inner join (select group_no, group_name, userid,catename,area_name as area,  cnt 
 			  from group_info gi join 
 			  					(select group_no as user_groupno, count(*) cnt
 								 from group_user_role

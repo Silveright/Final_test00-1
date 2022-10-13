@@ -187,10 +187,14 @@
 </div>
    <script>
    var click=0;
+   
    var group_no='${group_no}'//더미용
     console.log(group_no);
    //console.log($("#xcoord").val()) */
    var myModal = new bootstrap.Modal(document.getElementById('exampleModal'))
+   $(".btn-close").click(function(){
+	   myModal.hide();
+   })
 
     var containerEl = document.getElementById('external-events-list');
     new FullCalendar.Draggable(containerEl, {
@@ -368,12 +372,16 @@
 
           $.ajax({
               url: "modifydate",
-              //type: 'post',
+              type: 'post',
+      		
               //async: false,
               data: {
             	  startdate: modifyDate,
                   calendar_no: calendar_no
               },
+              beforeSend: function(xhr){
+  				xhr.setRequestHeader(header, token);
+  			},
               success: function (response) {
                   alert('날짜가 변경되었습니다!')
               },
@@ -413,7 +421,7 @@
 
            $.ajax({
                url: "add",
-               //type: "post",
+               type: "post",
                //async: false,
                data: {
                    group_no: group_no,
@@ -425,11 +433,15 @@
                    xcoord: $('#xcoord').val(),
                    ycoord: $('#ycoord').val()
                },
+               beforeSend: function(xhr){
+     				xhr.setRequestHeader(header, token);
+     			},
                success: function (response) {
                    alert( '일정이 추가되었습니다!')
                    //calendar.refetchEvents();
                   // calendar.render();
-                  $('.modal').modal('hide');
+                  myModal.hide(); 
+                  //$('.btn-close').click();
                    //document.location.href = document.location.href;
                    //loadingEvents();
                  calendar.removeAllEvents();
@@ -466,7 +478,7 @@
 				if(result==1) {
 					alert( '일정이 삭제되었습니다!')
 					//document.location.href = document.location.href;//다시 load하는 방법..?
-					$('.btn-close').click();
+					 myModal.hide(); 
 					calendar.removeAllEvents();
 	                  calendar.refetchEvents();//삭제 후 해당 페이지의 내용을 보여준다.
 				}
@@ -485,7 +497,7 @@
 			return;
 		}
 		$.ajax({
-			//type: "post",
+			type: "post",
 			url:"modify",
 			data : {
 				group_no: group_no,
@@ -498,10 +510,13 @@
                 ycoord: $('#ycoord').val(),
                 calendar_no : calendar_no
 			},
+			 beforeSend: function(xhr){
+  				xhr.setRequestHeader(header, token);
+  			},
 			success:function(result){
 				if(result==1) {
 					alert( '일정이 수정되었습니다!')
-				 $('.btn-close').click();
+				  myModal.hide(); 
 				 calendar.removeAllEvents();
                   calendar.refetchEvents();
 					//document.location.href = document.location.href;//다시 load하는 방법..?

@@ -75,7 +75,7 @@
             <p class="light-300">원하는 모임이 없으신가요??</p>
          </div>
          <div class="col-lg-3 col-12 pt-4">
-            <a href="${pageContext.request.contextPath}/group/groupMake" 
+            <a href="${pageContext.request.contextPath}/group/groupMake" id="groupmake"
                class="btn btn-success rounded-pill btn-block shadow px-4 py-2"  style="background:#4C489D; border-color:#4C489D">모임 만들러 가기 => </a>
          </div>
       </div>
@@ -187,6 +187,45 @@
 <script src="${pageContext.request.contextPath}/resources/js/isotope.pkgd.js"></script>
 <!-- Page Script -->
 <script>
+$(function(){
+	$("body").on("click","#groupmake" , function(event){
+		
+		
+		$.ajax({
+		    url: "../group/groupcount",
+		    data: {
+		        userid: $("#loginid").text()
+		    },
+		    type: "get",
+		    async: false,
+		    success: function (response) {
+		        
+		        var buttonArea = $('#buttonArea');
+		        var loginid = $('#loginid').text();
+		        console.log(response);
+		        console.log($("#loginid").text())
+		        if (response >= '3' ) { //가입 모임 수
+		        	alert("모임은 3개까지 가능합니다.")
+					event.preventDefault();
+		           
+		        	
+		        } else { //모임원유저
+		        	//$("#groupmake").unbind();
+		        	
+		        } 
+		    },
+		    error: function (Http, status, error) {
+		        console.log("Http : " + Http.status + ", status : " + status + ", error : " + error);
+		    }
+		});
+		
+		/* if(a==1){
+			alert("모임 가입은 3개만 가능합니다.")
+			event.preventDefault();
+		} */
+		
+	})
+})
    function isUser(){
       if($('#loginid').text()==''){
          alert("로그인이 필요합니다.")
