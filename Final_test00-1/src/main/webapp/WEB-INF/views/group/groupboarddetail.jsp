@@ -104,14 +104,6 @@ b {
 	font-size: 0.9em
 }
 
-footer {
-	bottom: 0px;
-	height: 3rem;
-	background: #ccc;
-	width: 100%;
-	text-align: center;
-}
-
 .table-active { -
 	-bs-table-accent-bg: #776bcc59 !important;
 	color: var(- -bs-table-active-color);
@@ -302,8 +294,8 @@ footer {
 				<%-- id="myModal" end --%>
 				<div id="comment">
 					<button class="btn btn-info float-left">총 50자까지 가능합니다.</button>
-					<button id="write" class="btn btn-info float-right">등록</button>
-					<textarea rows="3" class="form-control" id="content" maxlength="50"></textarea>
+					<button id="write" class="btn btn-info float-right">등록</button><br><br>
+					<textarea rows="3" class="form-control" id="content" maxlength="50"></textarea><br>
 					<table class="table table striped">
 						<thead>
 							<tr>

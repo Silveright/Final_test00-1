@@ -17,17 +17,7 @@ a{text-decoration:none; color:black}
 <style>
 input{border:1px solid black}
 b{font-size:0.9em}
-footer{
-         bottom:0px; 
-         height:3rem;
-         background:#ccc;
-         width:100%; 
-         text-align:center;
-         }
-    .table-active {
-    --bs-table-accent-bg: #776bcc59 !important;
-    color: var(--bs-table-active-color);
-}
+
 .btn-secondary {
     --bs-btn-color: #fff;
     --bs-btn-bg: #776bcc;
@@ -343,5 +333,6 @@ var group_no="${group_no}"
    
    
 </script>
+<jsp:include page="../include/footer.jsp"></jsp:include>
 </body>
 </html>

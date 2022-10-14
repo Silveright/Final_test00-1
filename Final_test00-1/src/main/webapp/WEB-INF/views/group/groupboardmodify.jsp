@@ -102,13 +102,6 @@ b {
 	font-size: 0.9em
 }
 
-footer {
-	bottom: 0px;
-	height: 3rem;
-	background: #ccc;
-	width: 100%;
-	text-align: center;
-}
 
 .table-active { -
 	-bs-table-accent-bg: #776bcc59 !important;
@@ -227,19 +220,23 @@ footer {
 				<img alt="파일삭제" src="../resources/image/remove.png" width="10px" class="remove">
 			</div>
 			
-			
+			<br>
 			<div class="form-group">
 				<label for="board_pass">비밀번호</label>
 				<input name="BOARD_PASS"
 					   id="board_pass" type="password" maxlength="30"
 					   class="form-control" placeholder="Enter board_pass" value="">
 			</div>
+			<br>
 			<div class="form-group">
 				<button type=submit class="btn btn-primary">수정</button>
 				<button type=reset class="btn btn-danger" onClick="history.go(-1)">취소</button>
 			</div>
 			<input type="hidden" name="group_no" value="${group_no}">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+			<br>
+			<br>
+			<br>
 		</form>
 		</div>
 		</div>
