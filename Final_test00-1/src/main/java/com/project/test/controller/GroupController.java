@@ -194,7 +194,7 @@ public class GroupController {
 	@RequestMapping(value="/groupuserinfo")
 	   public ModelAndView memberList(@RequestParam(value="group_no", defaultValue="1",required=false) int group_no,
 	                           @RequestParam(value="page", defaultValue="1",required=false) int page,
-	                           @RequestParam(value="limit", defaultValue="10", required=false) int limit,
+	                           @RequestParam(value="limit", defaultValue="3", required=false) int limit,
 	                           ModelAndView mv,
 	                           @RequestParam(value="search_field", defaultValue="-1", required=false) int index,
 	                           @RequestParam(value="search_word", defaultValue="", required=false) String search_word) {

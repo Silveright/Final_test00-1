@@ -209,7 +209,7 @@ footer{
           </c:if>
           <c:if test="${page > 1 }"> <!-- 현재 페이지가 1보다 클때 이전을 누르면 현재페이지-1 페이지로 이동 -->
              <li class="page-item">
-                <a href="groupboardlist?page=${page-1 }" 
+                <a href="groupboardlist?page=${page-1}&group_no=${group_no}" 
                 class="page-link">이전&nbsp; </a>
              </li>
           </c:if>
@@ -222,7 +222,7 @@ footer{
              </c:if>
              <c:if test="${a!=page}"> 
                 <li class="page-item">
-                   <a href="groupboardlist?page=${a}" 
+                   <a href="groupboardlist?page=${a}&group_no=${group_no}" 
                    class="page-link">${a } </a>
                 </li>
              </c:if>
@@ -235,7 +235,7 @@ footer{
              </c:if>
              <c:if test="${page <maxpage}"> 
                 <li class="page-item">
-                   <a href ="groupboardlist?page=${page+1}" 
+                   <a href ="groupboardlist?page=${page+1}&group_no=${group_no}" 
                    class="page-link">&nbsp;다음 </a>
                 </li>
              </c:if>
