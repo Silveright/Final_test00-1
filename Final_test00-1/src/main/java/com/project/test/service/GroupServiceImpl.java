@@ -76,7 +76,7 @@ public class GroupServiceImpl implements GroupService {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("group_no", group_no);
 		if (index != -1) {
-			String[] search_field = new String[] { "userid", "area_name", "gender" };
+			String[] search_field = new String[] { "BOARD_SUBJECT", "BOARD_NAME" };
 			map.put("search_field", search_field[index]);
 			map.put("search_word", "%" + search_word + "%");
 		}
@@ -322,8 +322,9 @@ public class GroupServiceImpl implements GroupService {
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			if(!index.equals("")) {
 				map.put("search_field", index);
-				map.put("search_keyword", "%" + search_keyword + "%");
+				map.put("search_word", "%" + search_keyword + "%");
 			}
+			logger.info(map.get("search_field") + "");
 			return gdao.getSearchListCount(map);
 		}
 
@@ -336,7 +337,7 @@ public class GroupServiceImpl implements GroupService {
 			//map.get("search_field")의 값은 null이 됩니다.
 			if(!index.equals("")) {
 				map.put("search_field", index);
-				map.put("search_keyword", "%" + search_keyword + "%");
+				map.put("search_word", "%" + search_keyword + "%");
 			}
 			int startrow = (page - 1) * limit + 1;
 			int endrow = startrow + limit - 1;

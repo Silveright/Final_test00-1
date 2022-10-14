@@ -14,15 +14,15 @@ public class Comment {
 	public void setNum(int num) {
 		this.num = num;
 	}
-	
-	public String getId() {
+
+	public String getUserid() {
 		return userid;
 	}
-	
-	public void setId(String id) {
-		this.userid = id;
+
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
-	
+
 	public String getContent() {
 		return content;
 	}

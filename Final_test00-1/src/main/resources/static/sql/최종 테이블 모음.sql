@@ -40,16 +40,14 @@ CREATE TABLE group_info (
 
 select * from group_user_role
 
-drop table group_user_role purge
-drop sequence role_seq
-create sequence role_seq
-select * from group_user_role
-delete from group_user_role where userid = 'user3';
-CREATE TABLE group_user_role (
-	group_role_no	number		NOT NULL,
-	userid	varchar2(100)		NOT NULL,
-	group_no	number		NOT NULL,
-	group_role	number		NOT NULL
+drop table group_user_role CASCADE CONSTRAINTS;
+create table group_user_role (
+   group_role_no   number not null,
+   userid         varchar2(100) not null,
+   group_no       number not null references group_info(group_no)  
+               on delete cascade ,
+   group_role      number not null,
+   primary key(group_role_no)
 );
 
 drop table group_join_request purge

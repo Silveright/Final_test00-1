@@ -123,8 +123,8 @@ footer{
                <input type="hidden" name="group_no" value="${param.group_no}"
 										id="group_no">
                   <select id="viewcount" name="search_field">
-                     <option selected>제목</option>
-                     <option>작성자</option>
+                     <option value='0' selected>제목</option>
+                     <option value='1'>작성자</option>
                   </select>
                    <input id="search" name="search_word" type="text"  placeholder="제목을 입력하세요" value="${search_word }">
                   <button class="btn btn-secondary" class="search" type="submit">검색</button>

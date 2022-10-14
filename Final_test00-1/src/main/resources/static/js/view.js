@@ -15,7 +15,7 @@ $(function() {
 		$.ajax({
 			type : "post",
 			url : "../comment/list",
-			data : {"board_num" : $("#board_num").val(),
+			data : {"board_num" : $("#BOARD_NUM").val(),
 					"page" : currentPage},
 			dataType : "json",
 			beforeSend : function(xhr){
@@ -97,7 +97,7 @@ $(function() {
 		url = "../comment/add";
 		data = {"content" : content,
 				"userid" : $("#loginid").text(),
-				"board_num" : $("#board_num").val()};
+				"board_num" : $("#BOARD_NUM").val()};
 		} else { //댓글을 수정하는 경우
 			url = "../comment/update";
 			data = {"num" : num,
@@ -105,6 +105,9 @@ $(function() {
 					$("#write").text("등록");	//다시 등록으로 변경
 					$("#comment .cancel").remove(); //취소 버튼 삭제
 		}
+		
+		console.log("header= " + header, "token= " + token);
+		
 		
 		$.ajax({
 			type : "post",

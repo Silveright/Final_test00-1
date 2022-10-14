@@ -113,20 +113,13 @@
 	  select * 
 	  from ( select rownum rnum, b.*
 	          from  (select * 
-	                 from Group_Board 
-	                   <!-- <if test="search_field!=null">
-	                         and	           
-	                         <choose>
-	                           <when test="search_field=='id'">id</when>
-	                           <when test="search_field=='name'">name</when>
-	                           <when test="search_field=='age'">age</when>
-	                           <when test="search_field=='gender'">gender</when>
-	                        </choose>	  
-	                            like #{search_word}	     
-      	                </if> --> 
-      	                <include refid="search_"/>
-	                   
-	                  )b 
+	                 from Group_Board                
+	                  left outer join (select board_num, count(*) cnt
+                                            from COMMENTS
+                                            group by board_num) c
+                  on Group_Board.board_num = c.board_num
+                  <include refid="search_"/>
+                  order by Group_Board.board_num desc) b 
 	           where rownum &lt;=  #{end}    
 	        ) 
 	  where rnum &gt;= #{start} and rnum  &lt;=  #{end} 
@@ -143,8 +136,8 @@
 		 <if test="search_field!=null">
 		 where
 	      <choose>
-	           <when test="search_field=='제목'">#{BOARD_SUBJECT}</when>
-	           <when test="search_field=='작성자'">#{BOARD_NAME}</when>
+	           <when test='search_field=="0"'>BOARD_SUBJECT</when>
+	           <when test='search_field=="1"'>BOARD_NAME</when>
 	       </choose>	  
 	       like #{search_word}
 	  </if>
