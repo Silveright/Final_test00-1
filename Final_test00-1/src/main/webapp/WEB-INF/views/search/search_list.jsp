@@ -47,7 +47,7 @@
 <div class="row gx-5 gx-sm-3 gx-lg-5 gy-lg-5 gy-3 pb-3 projects">
    <c:forEach var="search" items="${searchlist}">
       <!-- Start Recent Work -->
-      <div class="col-xl-3 col-md-4 col-sm-6 project new best all">
+      <div class="col-xl-3 col-md-4 col-sm-6 project all">
          <a href="${pageContext.request.contextPath}/group/group_detail?num=${search.group_no}" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
             <img class="service card-img" src="<spring:url value = '/upload${search.group_img}'/>" alt="Card image">
             <div class="service-work-vertical card-img-overlay d-flex align-items-end">
@@ -76,7 +76,8 @@
 			</c:if>
 			<c:if test="${page > 1}">
 				<li class="page-item">
-					<a href="list?page=${page - 1}" class="page-link">이전&nbsp;</a>
+					<a href="list?page=${page - 1}&search_field=${search_field}&search_keyword=${search_keyword}" 
+					   class="page-link">이전&nbsp;</a>
 				</li>
 			</c:if>
 				
@@ -88,7 +89,8 @@
 				</c:if>
 				<c:if test="${a != page}">
 					<li class="page-item">
-						<a href="list?page=${a}" class="page-link">${a}</a>
+						<a href="list?page=${a}&search_field=${search_field}&search_keyword=${search_keyword}" 
+						   class="page-link">${a}</a>
 					</li>
 				</c:if>
 			</c:forEach>
@@ -100,7 +102,8 @@
 			</c:if>
 			<c:if test="${page < maxpage}">
 				<li class="page-item">
-					<a href="list?page=${page + 1}" class="page-link">&nbsp;다음</a>
+					<a href="list?page=${page + 1}&search_field=${search_field}&search_keyword=${search_keyword}" 
+					   class="page-link">&nbsp;다음</a>
 				</li>
 			</c:if>
 		</ul>

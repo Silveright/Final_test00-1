@@ -22,18 +22,14 @@ public class SearchController {
 	private static final Logger logger = LoggerFactory.getLogger(SearchController.class);
 	
 	private SearchService searchService;
-	private GroupService groupService;
-	private MySaveFolder mysavefolder;
 	
 	
 	@Autowired
 	public SearchController(SearchService searchService, MySaveFolder mysavefolder, GroupService groupService) {
 		this.searchService = searchService;
-		this.mysavefolder = mysavefolder;
-		this.groupService = groupService;
 	}
 	
-	//earch_field=경기&search_keyword=음악
+	//search_field=경기&search_keyword=음악
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public ModelAndView searchlist(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
 								  @RequestParam(value = "limit", defaultValue = "12", required = false) int limit,

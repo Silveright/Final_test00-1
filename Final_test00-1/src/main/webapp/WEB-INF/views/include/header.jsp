@@ -50,7 +50,8 @@
         <div class="align-self-center collapse navbar-collapse flex-grow-1" id="navbar-toggler-success">
             <div class="navbar flex-fill mx-xl-5 d-flex justify-content-center">
                 <div class="pe-lg-5" id="nav search">
-                    <form class="form-inline" action="${pageContext.request.contextPath}/search/list" method="get">
+                    <form class="form-inline" action="${pageContext.request.contextPath}/search/list" 
+                    method="get">
                         <div class="input-group input-group-navbar justify-content-center" id="searchGroup">
                             <select name="search_field" class="form-control form-select-sm search" aria-label="Search"
                                     id="search_field" style="width : 80px" >
