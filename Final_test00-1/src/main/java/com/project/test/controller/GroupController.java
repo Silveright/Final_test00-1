@@ -222,15 +222,6 @@ public class GroupController {
 	      return mv;
 	   }
 
-	// 그룹 해산
-	@RequestMapping(value="/groupDisband", method =RequestMethod.GET)
-	public ModelAndView groupDisband(ModelAndView mv) {
-		mv.setViewName("group/groupDisband");
-		return mv;
-	}
-	
-	
-	
 	@ResponseBody//각 메서드의 실행 결과는 JSON으로 변환되어 HTTP Response BODY에 설정된다
     @RequestMapping(value="/list_ajax", method=RequestMethod.GET)
     public Map<String,Object> boardListAjax(
