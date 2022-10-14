@@ -74,7 +74,7 @@ body > div > table > tbody tr:last-child {
 }
 
 #comment > table > tbody > tr > td:nth-child(2){
- width:60%
+ width:50%
 }
 #count{
     position: relative;
@@ -222,7 +222,7 @@ footer {
 						</td>
 						<c:if test="${!empty boarddata.BOARD_FILE}">
 							<%-- 파일첨부한 경우 --%>
-							<td><img src="../resources/image/down.png" width="10px">
+							<td><img src="${pageContext.request.contextPath}/resources/img/down.png" width="10px">
 								<form method="post" action="down" style="height: 0px">
 									<input type="hidden" value="${boarddata.BOARD_FILE}"
 										name="filename"> <input type="hidden"

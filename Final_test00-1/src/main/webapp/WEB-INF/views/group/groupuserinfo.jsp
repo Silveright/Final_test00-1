@@ -205,62 +205,46 @@ footer{
             </table>
 
             <div class="center-block">
-               <div class="container">
-                  <nav aria-label="Page navigation example">
-                     <ul class="pagination justify-content-center">
-                     <c:if test="${page <=1 }">
-                        <li class="page-item"><a class="page-link disabled"
-                           aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-                        </a></li>
-                     </c:if>
-                     <c:if test="${page >1 }">
-                        <li class="page-item"><a class="page-link" href="groupuserinfo?page=${page-1 }&search_field=${search_field}&search_word=${search_word}"
-                           aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-                        </a></li>
-                     </c:if>
-                     
-                     
-                     
-                     <c:forEach var="a" begin="${startpage }" end="${endpage }">
-                        <c:if test="${a==page}">
-                        <li class="page-item active">
-                           <a class="page-link">${a }</a>
-                        </li>
-                        </c:if>
-                        <c:if test="${a!=page}">
-                           <c:url var="go" value="groupuserinfo">
-                            <c:param name="search_field" value="${search_field}"/>
-                            <c:param name="search_word" value="${search_word }"/>
-                            <c:param name="page" value="${a }"/>
-                            </c:url>
-                        <li class="page-item">
-                           <a href="${go}" 
-                           class="page-link">${a }</a>
-                        </li>
-                        </c:if>
-                     </c:forEach>
-                        
-                        <c:if test="${page >=maxpage}">
-                        <li class="page-item">
-                        <a class="page-link disabled"
-                           aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-                        </a></li>
-                        </c:if>
-                        <c:if test="${page <maxpage}">
-                        <c:url var ="next" value="groupuserinfo">
-                            <c:param name="search_field" value="${search_field}"/>
-                            <c:param name="search_word" value="${search_word }"/>
-                            <c:param name="page" value="${page+1 }"/>
-                         </c:url>
-                        <li class="page-item">
-                        <a class="page-link" href="${next}"
-                           aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-                        </a></li>
-                        </c:if>
-                     </ul>
-                  </nav>
-               </div>
-            </div>
+       <ul class="pagination justify-content-center">
+          <c:if test="${page <=1 }"> <!-- 현재 페이지가 1일때 -->
+             <li class="page-item">
+                <a class="page-link gray">이전&nbsp; </a>
+             </li>
+          </c:if>
+          <c:if test="${page > 1 }"> <!-- 현재 페이지가 1보다 클때 이전을 누르면 현재페이지-1 페이지로 이동 -->
+             <li class="page-item">
+                <a href="groupuserinfo?page=${page-1}&group_no=${group_no}" 
+                class="page-link">이전&nbsp; </a>
+             </li>
+          </c:if>
+          
+          <c:forEach var="a" begin="${startpage }" end="${endpage }">
+             <c:if test="${a==page}"> 
+                <li class="page-item active">
+                   <a class="page-link">${a } </a>
+                </li>
+             </c:if>
+             <c:if test="${a!=page}"> 
+                <li class="page-item">
+                   <a href="groupuserinfo?page=${a}&group_no=${group_no}" 
+                   class="page-link">${a } </a>
+                </li>
+             </c:if>
+          </c:forEach>
+          
+             <c:if test="${page >=maxpage}"> 
+                <li class="page-item">
+                   <a class="page-link gray">&nbsp;다음 </a>
+                </li>
+             </c:if>
+             <c:if test="${page <maxpage}"> 
+                <li class="page-item">
+                   <a href ="groupuserinfo?page=${page+1}&group_no=${group_no}" 
+                   class="page-link">&nbsp;다음 </a>
+                </li>
+             </c:if>
+       </ul>
+    </div>
             
 <br>
 <br>
