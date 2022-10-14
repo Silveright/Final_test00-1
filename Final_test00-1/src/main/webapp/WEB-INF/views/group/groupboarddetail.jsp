@@ -96,7 +96,8 @@ form[action=down] > input[type=submit]{
 }
 
 input {
-	border: 1px solid black
+	border: 1px solid black;
+	background: none;
 }
 
 b {
