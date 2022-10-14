@@ -21,22 +21,26 @@
 #chatt #talk{
 	width: 800px;
 	height: 400px;
-	overflow: scroll;
-	border : 1px solid #aaa;
+	overflow: auto;
 }
 #chatt #msg{
 	width: 740px;
-	height:100px;
+	height:50px;
 	display: inline-block;
+	border-radius: 8px;
 }
 
 #chatt #sendZone > *{
 	vertical-align: top;
 	
+	
 }
 #chatt #btnSend{
 	width: 54px;
-	height: 100px;
+	height: 50px;
+	background: rgb(119, 107, 204);
+	color: white;
+	border-radius: 12px;
 }
 
 #chatt #talk div{
@@ -48,14 +52,16 @@
 }
 
 #chatt .me{
-	background-color : #ffc;
-	margin : 1px 0px 2px 30%;	
+	background-color : rgb(119, 107, 204);
+	margin : 1px 0px 2px 30%;
+	color : white;	
 }
 
 #chatt .other{
-	background-color : #eee;
+	background-color : #E8D9FF;
 	margin : 2px;
 }
+
 </style>
 </head>
 <body>
