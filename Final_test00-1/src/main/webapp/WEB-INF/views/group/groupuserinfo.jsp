@@ -192,7 +192,7 @@ footer{
                      <td>
                         <c:out value="${m.rnum }"/>
                      </td>
-                        <td><a href="groupuserinfo?id=${m.userid }">${m.userid }</a></td>
+                     <td>${m.userid }</td>
                      <td>${m.area_name}</td>
                      <td>${m.gender }</td>
                      <td><input type="button" class="btn btn-secondary btn-sm" value="모임장 위임"></td>

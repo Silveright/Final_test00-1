@@ -220,7 +220,7 @@ footer {
 			<div class="form-group">
 				<label for="board_file">파일 첨부</label>
 				<label for="upfile">
-					<img src="../resources/image/attach.png" alt="파일첨부" width="20px" >
+					<img src="${pageContext.request.contextPath}/resources/img/attach.png" alt="파일첨부" width="25px" >
 				</label>
 				<input type="file" id="upfile" name="uploadfile" >
 				<span id="filevalue">${boarddata.BOARD_ORIGINAL}</span>
