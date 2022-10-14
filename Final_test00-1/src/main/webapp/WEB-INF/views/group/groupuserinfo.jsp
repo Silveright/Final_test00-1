@@ -139,8 +139,10 @@ footer{
          
          <br>
          <c:if test="${listcount > 0 }">
-         <form action="groupuserinfo" method="post">
+         <form action="groupuserinfo" method="get">
                <div class="input-group center-block">
+               <input type="hidden" name="group_no" value="${param.group_no}"
+										id="group_no">
                   <select id="viewcount" name="search_field">
                      <option value="0" selected>아이디</option>
                      <option value="1">지역</option>
@@ -183,7 +185,7 @@ footer{
                         <td><a href="groupuserinfo?id=${m.userid }">${m.userid }</a></td>
                      <td>${m.area_name}</td>
                      <td>${m.gender }</td>
-                     <td><input type="button" class="btn btn-secondary btn-sm" value="모임장 위임">
+                     <td><input type="button" class="btn btn-secondary btn-sm" value="모임장 위임"></td>
                      <td><input type="button" class="btn btn-secondary btn-sm" 
                      			onclick="location.href='groupuserdelete?userid=${m.userid}&group_no=${group_no}'" value="회원 강퇴"><%-- ${r.review_readcount } --%></td>
                   </tr>

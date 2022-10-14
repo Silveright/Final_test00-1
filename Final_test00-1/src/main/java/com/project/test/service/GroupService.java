@@ -19,11 +19,6 @@ public interface GroupService {
 	List<GroupJoin> getJoinList(int group_no, int page, int limit);
 
 	int acceptmembers(List<String> requestList, int group_no);
-
-	int getSearchListCount(int index, String search_word, int group_no);
-
-	List<GroupUser> getSearchList(int index, String search_word, int page, int limit, int group_no);
-
 	
 	//모임 생성
 	public void insertGroup(Group group);
@@ -95,6 +90,10 @@ public interface GroupService {
 	
 	//모임 삭제
 	public int groupDelete(int num);
+
+	int getUserSearchListCount(int index, String search_word, int group_no);
+
+	List<GroupUser> getUserSearchList(int index, String search_word, int page, int limit, int group_no);
 
 	
 
