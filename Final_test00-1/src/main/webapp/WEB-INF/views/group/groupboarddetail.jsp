@@ -26,7 +26,7 @@ a {
 	integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK"
 	crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/view.js"></script>
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/view.css">
 <script>
 	var result="${result}";
@@ -180,10 +180,10 @@ footer {
 </style>
 <title>모임 자유게시판</title>
 </head>
-<meta name="_csrf" content="${_csrf.token}">
-<meta name="_csrf_header" content="${_csrf.headerName}">
+
 <body>
 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
+	<script src="${pageContext.request.contextPath}/resources/js/view.js"></script>
 	<!-- <input type="hidden" id="loginid" value="${id}" name="loginid"> -->
 	<div class="container">
 

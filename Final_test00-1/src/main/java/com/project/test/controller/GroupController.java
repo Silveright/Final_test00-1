@@ -399,7 +399,7 @@ public class GroupController {
 			mv.addObject("startpage", startpage);
 			mv.addObject("endpage", endpage);
 			mv.addObject("listcount", listcount);
-			mv.addObject("searchlist", list);
+			mv.addObject("groupboardlist", list);
 			mv.addObject("group_no",group_no);
 			mv.addObject("search_field", index);
 			mv.addObject("search_word", search_word);
@@ -514,7 +514,8 @@ public class GroupController {
 		// 어느 주소에서 detail로 이동했지만 header의 정보 중에서 "referer"를 통해 알 수 있습니다.
 		{
 			logger.info("referer : " + beforeURL);
-			if(beforeURL.endsWith("list")) { // myhome4/board/member/list 에서 제목을 클릭한 경우 조회수 증가하도록 합니다.
+			logger.info("referer : [t/f] : " + beforeURL.contains("groupboardlist"));
+			if(beforeURL.contains("groupboardlist")) {
 				groupservice.setReadCountUpdate(num);
 				
 			}

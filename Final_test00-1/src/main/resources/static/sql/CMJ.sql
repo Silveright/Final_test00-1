@@ -1,47 +1,66 @@
-drop table Group_Board cascade constraints purge;
-
-CREATE TABLE Group_Board(
-	GROUP_NO number,
-	BOARD_NUM       NUMBER,         --글 번호
-	BOARD_NAME      VARCHAR2(30),   --작성자
-	BOARD_PASS      VARCHAR2(30),   --비밀번호
-	BOARD_SUBJECT   VARCHAR2(300),  --제목
-	BOARD_CONTENT   VARCHAR2(4000), --내용
-	BOARD_FILE      VARCHAR2(50),   --첨부 파일 명(가공)
-	BOARD_ORIGINAL  VARCHAR2(50),   --첨부 파일 명
-	BOARD_READCOUNT NUMBER,    --글의 조회수
-	BOARD_DATE DATE,           --글의 작성 날짜
-	PRIMARY KEY(BOARD_NUM)
+-- 모임회원 게시판
+drop table post_group CASCADE CONSTRAINTS;
+create table post_group (
+   post_no      number   not null,
+   group_no   varchar2(100)   not null,
+   subject      varchar2(100) not null,
+   content      varchar2(1000) not null,
+   userid      varchar2(100) not null,
+   writedate   date not null,
+   primary key(post_no)
 );
 
-select * from 
-		  ( select rownum rnum, b.*
-		    from 
-		         (select Group_Board.*, nvl(cnt,0) cnt
-                  from 
-                  Group_Board   left outer join (select board_num, count(*) cnt
-                                            from COMMENTS
-                                            group by board_num) c
-                  on Group_Board.board_num = c.board_num
-                  order by Group_Board.board_num desc) b
-             where rownum <=10 
-             and group_no = 4  
-		   ) 
-	     where rnum >= 1 and rnum  <=10
+select * from post_group;
 
 
-insert into GROUP_BOARD(BOARD_NUM, BOARD_NAME, BOARD_PASS, BOARD_SUBJECT, BOARD_CONTENT, BOARD_DATE)
-VALUES (2, '관리자', 1234, '테스트2', '테스트2입니다.', sysdate)
+-- 모임회원 댓글
+drop table post_reply CASCADE CONSTRAINTS;
 
-delete from group_board
+create table post_reply (
+   reply_no   number   not null,
+   content      varchar2(1000) not null,
+   writedate   date not null,
+   userid      varchar2(100) not null,
+   post_no      number   not null,
+   primary key(reply_no)
+);
 
-select * from Group_Board;
+select * from post_reply;
 
-delete Group_Board where BOARD_NUM = 20;
 
-drop table comments cascade constraints purge;
+-- 회원정보
+drop table user_info CASCADE CONSTRAINTS;
+create table user_info (
+   userid         varchar2(100) not null,
+   name         varchar2(50) not null,
+   gender         varchar2(5) not null,
+   age            number(2)   not null,
+   password       varchar2(60) not null,
+   email         varchar2(100) not null,
+   area_name      varchar2(100) not null,
+   joindate      date not null,
+   auth       varchar2(50) not null,   
+   primary key(userid)
+);
 
-select * from comments
+--그룹 내 게시판
+drop table Group_Board CASCADE CONSTRAINTS;
+CREATE TABLE Group_Board(
+   GROUP_NO       NUMBER,
+   BOARD_NUM       NUMBER,         --글 번호
+   BOARD_NAME      VARCHAR2(30),   --작성자
+   BOARD_PASS      VARCHAR2(30),   --비밀번호
+   BOARD_SUBJECT   VARCHAR2(300),  --제목
+   BOARD_CONTENT   VARCHAR2(4000), --내용
+   BOARD_FILE      VARCHAR2(50),   --첨부 파일 명(가공)
+   BOARD_ORIGINAL  VARCHAR2(50),   --첨부 파일 명
+   BOARD_READCOUNT NUMBER,    --글의 조회수
+   BOARD_DATE DATE,           --글의 작성 날짜
+   PRIMARY KEY(BOARD_NUM)
+);
+
+--그룹 내 게시판 댓글
+drop table comments CASCADE CONSTRAINTS;
 create table comments(
   num          number       primary key,
   userid           varchar2(30) references user_info(userid),
@@ -50,31 +69,170 @@ create table comments(
   board_num    number references Group_Board(board_num) 
                on delete cascade 
   );
+  
+  
+
+
+select * from user_info;
+
+-- 모임 정보
+drop table group_info CASCADE CONSTRAINTS;
+create table group_info (
+   group_no      	NUMBER not null,
+   group_name      varchar2(100) not null,
+   group_original   varchar2(100) not null,
+   group_img      varchar2(100) not null,
+   area_name      varchar2(100) not null,
+   catename      varchar2(100) not null,
+   opendate      date not null,
+   userid         varchar2(100) not null,
+   group_content   varchar2(1000) not null,
+   primary key(group_no)
+);
+
+-- 모임 내 역할
+drop table group_user_role CASCADE CONSTRAINTS;
+create table group_user_role (
+   group_role_no   number not null,
+   userid         varchar2(100) not null,
+   group_no       number not null references group_info(group_no)  
+               on delete cascade ,
+   group_role      number not null,
+   primary key(group_role_no)
+);
+
+select * from group_user_role;
+
+
+select * from group_info;
+
+
+-- 모임 일정
+drop table group_schedule CASCADE CONSTRAINTS;
+create table group_schedule (
+   calendar_no      number   not null,
+   group_no      varchar2(100) not null,
+   title         varchar2(100) not null,
+   subject         varchar2(100) not null,
+   content         varchar2(1000) not null,
+   startdate      date not null,
+   location      varchar2(100) not null,
+   xcoord         varchar2(100) null,
+   ycoord         varchar2(100) null,
+   primary key(calendar_no)
+);
+
+select * from group_schedule;
+
+
+-- 가입 승인 요청
+drop table group_join_request CASCADE CONSTRAINTS;
+create table group_join_request (
+   group_join_no   number   not null,
+   userid         varchar2(100) not null,
+   group_no      varchar2(100) not null,
+   primary key(group_join_no)
+);
+
+select * from group_join_request;
+
+
+-- 커뮤니티
+drop table community CASCADE CONSTRAINTS;
+create table community (
+   community_no         number   not null,
+   community_subject      varchar2(100) not null,
+   community_content      varchar2(1000) not null,
+   community_original      varchar2(100) null,
+   community_file         varchar2(100) null,
+   writedate            varchar2(100) not null,
+   userid               varchar2(100) not null,
+   primary key(community_no)
+);
+
+select * from community;
+
+
+--모임장 공지
+drop table notice CASCADE CONSTRAINTS;
+create table notice (
+   notice_no            number not null,
+   subject               varchar2(100) not null,
+   content               varchar2(1000) not null,
+   writedate            date not null,
+   notice_file_original   varchar2(100) null,
+   notice_file            varchar2(100) null,
+   userid               varchar2(100) not null,
+   group_no            varchar2(100) not null,
+   primary key(notice_no)
+);
+
+select * from notice;
+
+drop sequence JOIN_SEQ;
+
+drop sequence role_seq;
+
+drop sequence calendar_seq;
+
 drop sequence com_seq;
+
+
+create sequence JOIN_SEQ;
+
+create sequence role_seq;
+
+create sequence calendar_seq;
+
 create sequence com_seq;
 
-select * from comments;
+--admin 계정 회원가입 후 실행
+update user_info
+set auth='ROLE_ADMIN'
+where userid = 'admin';
 
-<update id="boardModify">
-	  update Group_Board
-	  set 
-		     BOARD_SUBJECT=#{BOARD_SUBJECT},
-		     BOARD_CONTENT=#{BOARD_CONTENT},
-		     BOARD_FILE=#{BOARD_FILE, jdbcType=VARCHAR}, 
-		     BOARD_ORIGINAL=#{BOARD_ORIGINAL, jdbcType=VARCHAR}
-	  where  BOARD_NUM=#{BOARD_NUM}
-	</update>
-	
-	update group_board set board_subject='살려주세요2'
-			where board_num=12;
-			
-delete from group_user_role
-where userid = 'test2' and group_no = 4
+select * 
+	  from ( select rownum rnum, b.*
+	          from  (select * 
+	                 from Group_Board 
+	                   
+	                         where	           
+	                         board_subject like '테%'    
+      	                
+	                   
+	                  )b 
+	           where rownum <=  1    
+	        ) 
+where rnum >= 1 and rnum  <=  10 
 
-select count(*) from Group_Board 
-where BOARD_SUBJECT like '123'
+select *     
+from ( select rownum rnum, b.*            
+       from  (
+       
+              select *                    
+       		  from Group_Board                                
+                                                        
+              left outer join (select board_num, count(*) cnt                                             from COMMENTS                                             
+       							group by board_num) c                   
+       			on Group_Board.board_num = c.board_num                  
+       			where board_subject like '%1%'
+       			order by Group_Board.board_num desc
+       			
+       		   ) b  
+       		   
+        where rownum <=  1              
+)     
+where rnum >= 1 and rnum  <=  10
 
-select count(*) 
-from group_info 
-where area_name like '서울'
-and catename like '음악'
+
+
+
+
+              select *                    
+       		  from Group_Board                                
+              left outer join (select board_num, count(*) cnt                                             from COMMENTS                                             
+       							group by board_num) c                   
+       		  on Group_Board.board_num = c.board_num                  
+              where board_subject like '%1%'
+       		  order by Group_Board.board_num desc
+
