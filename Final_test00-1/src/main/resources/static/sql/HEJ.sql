@@ -1,4 +1,29 @@
 select *
+      from (select rownum rnum, j.userid, group_no, group_role, gender, email, area_name
+           from (
+                 select * 
+      			 from group_user_role
+      			 join (select userid as id, gender, email, area_name
+      				   from user_info) 
+      			 on id=userid
+      			 where group_no=#{group_no}
+                 <if test='search_field !=null'>
+			      and 
+			      <choose>
+			         <when test="search_field=='userid'">userid</when>
+			         <when test="search_field=='area_name'">area_name</when>
+			         <when test="search_field=='gender'">gender</when>
+			      </choose>
+			      like #{search_word}
+			      </if>
+                 )j
+           where rownum&lt;= #{end}
+           )
+      where rnum&gt;=#{start} and rnum&lt;= #{end}
+
+select * from group_user_role
+insert into group_user_role values(82, 'test1', 6, 0)
+select *
 			from (select rownum rnum, b.*
 					from ( select ui.userid, gender, area as area_name, email,group_name,catename,cnt
 		from user_info ui

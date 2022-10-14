@@ -7,10 +7,10 @@
 		<![CDATA[SELECT *
 		FROM
 	    (select count(*) "Male" from user_info
-	    where gender='Man'
+	    where gender='남'
 	    ),
 	    (select count(*) "Female" from user_info
-	    where gender='Woman'
+	    where gender='여'
 	    )  ]]>
 	</select>
 	
