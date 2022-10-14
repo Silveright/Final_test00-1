@@ -1,8 +1,6 @@
 package com.project.test.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,29 +15,21 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.project.test.domain.Group;
 import com.project.test.domain.UserGroup;
-import com.project.test.service.BoardService;
 import com.project.test.service.GroupService;
-import com.project.test.service.MySaveFolder;
 
 @Controller
 @RequestMapping(value="/main")
 public class MainController {
 	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 	private GroupService groupService;
-	private MySaveFolder mysavefolder;
-	private BoardService boardService;
 	/*
 	 * @Autowired public GroupController(GroupService groupservice) {
 	 * this.groupservice = groupservice; }
 	 */
 	
 	@Autowired
-	public MainController(BoardService boardService,
-						  GroupService groupService,
-						  MySaveFolder mysavefolder) {
-		this.boardService = boardService;
+	public MainController(GroupService groupService) {
 		this.groupService = groupService;
-		this.mysavefolder = mysavefolder;
 	}
 	
 	@RequestMapping(value="/main", method=RequestMethod.GET)
@@ -49,9 +39,8 @@ public class MainController {
 	}
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView groupList(
-									@RequestParam(value = "page", defaultValue = "1", required = false) int page,
-									ModelAndView mv) {
+	public ModelAndView groupList(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
+								  ModelAndView mv) {
 		int limit = 12; // 한 화면에 출력할 로우 갯수
 		
 		int listcount = groupService.getListCount(); // 총 리스트 수를 받아옴
@@ -69,6 +58,8 @@ public class MainController {
 			endpage = maxpage;
 		
 		List<Group> grouplist = groupService.getGroupList(page, limit); // 리스트를 받아옴
+		List<Group> newgrouplist = groupService.getNewGroupList(page, limit); // NEW리스트를 받아옴
+		List<Group> bestgrouplist = groupService.getBestGroupList(page, limit); // BEST리스트를 받아옴
 		
 		mv.setViewName("main/main");
 		mv.addObject("page", page);
@@ -77,6 +68,8 @@ public class MainController {
 		mv.addObject("endpage", endpage);
 		mv.addObject("listcount", listcount);
 		mv.addObject("grouplist", grouplist);
+		mv.addObject("newgrouplist", newgrouplist);
+		mv.addObject("bestgrouplist", bestgrouplist);
 		mv.addObject("limit", limit);
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -84,21 +77,20 @@ public class MainController {
 		logger.info(authentication.getName());
 		if(userid.equals("anonymousUser")) {
 			logger.info("비로그인유저");
-		}else {
+		} else {
 			List<UserGroup> usergroup = groupService.getUserGroup(userid);
 			mv.addObject("usergroup",usergroup);//GROUP_NO, GROUP_NAME, GROUP_CONTENT, CATENAME, GROUP_USER, GROUP_ROLE
 		}
 		
 		return mv;
-		
 	}
 	
 	// 그룹 참여하기
-			@RequestMapping(value="/enter", method=RequestMethod.POST)
-			public ModelAndView group_enter(ModelAndView mv) {
-				mv.setViewName("group/group_enter");
-				return mv;
-				
-			}
+	@RequestMapping(value="/enter", method=RequestMethod.POST)
+	public ModelAndView group_enter(ModelAndView mv) {
+		mv.setViewName("group/group_enter");
+		
+		return mv;
+	}
 	
 }

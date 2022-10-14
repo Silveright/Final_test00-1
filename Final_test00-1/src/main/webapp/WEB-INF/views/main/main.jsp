@@ -75,15 +75,13 @@
             <p class="light-300">원하는 모임이 없으신가요??</p>
          </div>
          <div class="col-lg-3 col-12 pt-4">
-            <a href="${pageContext.request.contextPath}/group/groupMake" id="groupmake"
+            <a href="${pageContext.request.contextPath}/group/groupMake" 
                class="btn btn-success rounded-pill btn-block shadow px-4 py-2"  style="background:#4C489D; border-color:#4C489D">모임 만들러 가기 => </a>
          </div>
       </div>
    </div>
 </section>
-<!-- End View Work -->
 
-<!-- Start Recent Work -->
 <c:if test="${!empty usergroup}">
 <section class="container overflow-hidden py-5">
    <div class="container-fluid pb-3">
@@ -100,7 +98,6 @@
    <div class="container-fluid pb-3">
       <div class="container">
       <div class="row gy-5 g-lg-5 mb-4">
-         <!-- Start Recent Work -->
          <c:forEach var="a" items="${usergroup}">
          <div class="col-md-4 mb-3">
             <a href="${pageContext.request.contextPath}/group/group_detail?num=${a.group_no}" class="recent-work card border-0 shadow-lg overflow-hidden">
@@ -114,7 +111,6 @@
             </a>
          </div>
          </c:forEach>
-         <!-- End Recent Work -->
       </div>
       </div>
    </div>
@@ -122,19 +118,19 @@
 </c:if>
 </se:authorize>
 <!-- 로그인 했을 때 보여지는 화면 끝-->
-<!-- End Banner Hero -->
+
 <section class="service-wrapper py-3" style="background:rgb(119, 107, 204)" >
    <div class="service-tag py-5" style="background:rgb(119, 107, 204)">
       <div class="col-md-12" style="background:rgb(119, 107, 204)">
          <ul class="nav d-flex justify-content-center">
             <li class="nav-item mx-lg-4">
-               <a class="filter-btn nav-link btn-outline-primary active shadow rounded-pill text-light px-4 light-300" href="#" data-filter=".new">NEW</a>
+               <a class="filter-btn nav-link btn-outline-primary active shadow rounded-pill text-light px-4 light-300 new" href="#" data-filter=".new">NEW</a>
             </li>
             <li class="nav-item mx-lg-4">
-               <a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300" href="#" data-filter=".best">BEST</a>
+               <a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300 best" href="#" data-filter=".best">BEST</a>
             </li>
             <li class="filter-btn nav-item mx-lg-4">
-               <a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300" href="#" data-filter=".all">ALL</a>
+               <a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300 all" href="#" data-filter=".all">ALL</a>
             </li>
          </ul>
       </div>
@@ -153,9 +149,22 @@
       </div>
    </div>
    <div class="row gx-5 gx-sm-3 gx-lg-5 gy-lg-5 gy-3 pb-3 projects">
-   <c:forEach var="b" items="${grouplist}">
-      <!-- Start Recent Work -->
-      <div class="col-xl-3 col-md-4 col-sm-6 project new best all">
+   <c:forEach var="n" items="${newgrouplist}">
+      <div class="col-xl-3 col-md-4 col-sm-6 project new">
+         <a href="${pageContext.request.contextPath}/group/group_detail?num=${n.group_no}" onclick="isUser()" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
+            <img class="service card-img" src="<spring:url value = '/upload${n.group_img}'/>" alt="Card image">
+            <div class="service-work-vertical card-img-overlay d-flex align-items-end">
+               <div class="service-work-content text-left text-light">
+                  <span class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300">${n.area_name}</span><br>
+                  <span class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300">${n.group_name}</span>
+               </div>
+            </div>
+         </a>
+      </div>
+   </c:forEach>
+   
+   <c:forEach var="b" items="${bestgrouplist}">
+      <div class="col-xl-3 col-md-4 col-sm-6 project best">
          <a href="${pageContext.request.contextPath}/group/group_detail?num=${b.group_no}" onclick="isUser()" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
             <img class="service card-img" src="<spring:url value = '/upload${b.group_img}'/>" alt="Card image">
             <div class="service-work-vertical card-img-overlay d-flex align-items-end">
@@ -166,14 +175,23 @@
             </div>
          </a>
       </div>
-      <!-- End Recent Work -->
-
-   </c:forEach>   
+   </c:forEach>
+   
+   <c:forEach var="a" items="${grouplist}">
+      <div class="col-xl-3 col-md-4 col-sm-6 project all">
+         <a href="${pageContext.request.contextPath}/group/group_detail?num=${a.group_no}" onclick="isUser()" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
+            <img class="service card-img" src="<spring:url value = '/upload${a.group_img}'/>" alt="Card image">
+            <div class="service-work-vertical card-img-overlay d-flex align-items-end">
+               <div class="service-work-content text-left text-light">
+                  <span class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300">${a.area_name}</span><br>
+                  <span class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300">${a.group_name}</span>
+               </div>
+            </div>
+         </a>
+      </div>
+   </c:forEach>
    </div>
 </section>
-
-
-
 
 <!-- Footer -->
 <jsp:include page="../include/footer.jsp"></jsp:include>
