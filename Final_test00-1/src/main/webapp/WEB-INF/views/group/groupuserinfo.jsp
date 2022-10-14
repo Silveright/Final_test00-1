@@ -16,25 +16,35 @@ a{text-decoration:none; color:black}
 <script>
 $(document).ready(function() { 
    
-   var selectedValue='${search_field}'
-   if(selectedValue !='-1')
-      $("#viewcount").val(selectedValue);
-   
-   $(".search").click(function(){
-      if($('#search').val()==''){
-         alert("검색어를 입력하세요");
-         $('input').focus();
-         return false;
-      }
-   })
+	var selectedValue='${search_field}'
+		   if(selectedValue !='-1')
+		      $("#viewcount").val(selectedValue);
+		   
+		   $(".search").click(function(){
+		      if($('#search').val()==''){
+		         alert("검색어를 입력하세요");
+		         $('input').focus();
+		         return false;
+		      }
+		   })
+
+		   
+		   $("#viewcount").change(function(){
+		      selectedValue=$(this).val();
+		      $("#search").val('');
+		      message=["아이디", "지역", "여 또는 남"]
+		      $("#search").attr("placeholder", message[selectedValue]+"을 입력하세요")
+		   })
 
    
-   $("#viewcount").change(function(){
-      selectedValue=$(this).val();
-      $("input").val('');
-      message=["아이디", "지역", "여 또는 남"]
-      $("input").attr("placeholder", message[selectedValue]+"을 입력하세요")
-   })
+   //body > div > div > div > table > tbody > tr:nth-child(2) > td:nth-child(6) > button
+	$("body > div > div > div.col-sm-9 > table > tbody > tr:nth-child(1) > td:nth-child(6) > a > input").click(function(event){
+		var answer = confirm("정말 강퇴하시겠습니까?");
+		console.log(answer);
+		if(!answer){
+			event.preventDefault();
+		}
+	})
    
    });
 </script>
@@ -186,8 +196,9 @@ footer{
                      <td>${m.area_name}</td>
                      <td>${m.gender }</td>
                      <td><input type="button" class="btn btn-secondary btn-sm" value="모임장 위임"></td>
-                     <td><input type="button" class="btn btn-secondary btn-sm" 
-                     			onclick="location.href='groupuserdelete?userid=${m.userid}&group_no=${group_no}'" value="회원 강퇴"><%-- ${r.review_readcount } --%></td>
+                     <td><a href='groupuserdelete?userid=${m.userid}&group_no=${group_no}'>
+                         <input type="button" class="btn btn-secondary btn-sm" 
+                     			value="회원 강퇴"></a></td>
                   </tr>
                   </c:forEach>
                </tbody>

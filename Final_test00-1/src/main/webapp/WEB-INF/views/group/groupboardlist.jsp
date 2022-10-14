@@ -116,7 +116,7 @@ footer{
          
          
             <%-- 게시글이 있는 경우 --%>
-	<!--<c:if test="${listcount > 0 }">-->
+	<c:if test="${listcount > 0 }">
 		
 		<form action="groupboardlistsearch" method="get">
                <div class="input-group center-block">
@@ -241,17 +241,21 @@ footer{
              </c:if>
        </ul>
     </div>
-   <!-- 
+    
     </c:if>
     <%-- 게시글이 없는 경우 --%>
 	<c:if test="${listcount == 0}">
 		<font size=5>등록된 글이 없습니다.</font>
 	</c:if>
-	-->
-	<button type="button" class="btn btn-info float-right" 
+	<br>
+	<br>
+	<br>
+	
+	<br><br>
+	
+	<button type="button" class="btn btn-secondary float-right" 
 			onclick="location.href='groupboardwrite?group_no=${group_no}'">글쓰기</button>      
-	<button type="button" class="btn btn-info float-right"
-			onclick="location.href='groupboardnotice'">공지등록</button>      
+     
 <br>
 <br>
 <br>
