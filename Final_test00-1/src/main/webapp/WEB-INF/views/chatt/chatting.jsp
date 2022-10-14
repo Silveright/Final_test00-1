@@ -74,7 +74,7 @@
 		<h1><h1> 채팅방</h1></h1>
 		<input type='hidden' id='mid' value='${userid}'>
 		
-		<br/>
+		<br/> 
 		<div id='talk'></div>
 		<div id='sendZone'>
 			<textarea id='msg' ></textarea>

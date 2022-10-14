@@ -74,6 +74,7 @@ create table comments(
 
 
 select * from user_info;
+select * from group_info;
 
 -- 모임 정보
 drop table group_info CASCADE CONSTRAINTS;
