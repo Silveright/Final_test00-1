@@ -173,6 +173,8 @@
                     <div class="col-md-12 col-12 my-5 text-center">
                         <input type="button" onclick="confirm()" value="완료" id="groupmake"
                                class="btn btn-secondary rounded-pill px-md-5 px-4 py-2 radius-0 text-light light-300">
+                    	<input type="button" onclick="history.go(-1)" value="취소" id="groupmodify"
+                               class="btn btn-secondary rounded-pill px-md-5 px-4 py-2 radius-0 text-light light-300">
                     </div>
                 </div>
             </div>
