@@ -75,7 +75,7 @@
             <p class="light-300">원하는 모임이 없으신가요??</p>
          </div>
          <div class="col-lg-3 col-12 pt-4">
-            <a href="${pageContext.request.contextPath}/group/groupMake" 
+            <a href="${pageContext.request.contextPath}/group/groupMake" id="groupmake"
                class="btn btn-success rounded-pill btn-block shadow px-4 py-2"  style="background:#4C489D; border-color:#4C489D">모임 만들러 가기 => </a>
          </div>
       </div>
@@ -124,13 +124,13 @@
       <div class="col-md-12" style="background:rgb(119, 107, 204)">
          <ul class="nav d-flex justify-content-center">
             <li class="nav-item mx-lg-4">
-               <a class="filter-btn nav-link btn-outline-primary active shadow rounded-pill text-light px-4 light-300 new" href="#" data-filter=".new">NEW</a>
+               <a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300" href="#" data-filter=".new">NEW</a>
             </li>
             <li class="nav-item mx-lg-4">
-               <a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300 best" href="#" data-filter=".best">BEST</a>
+               <a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300" href="#" data-filter=".best">BEST</a>
             </li>
-            <li class="filter-btn nav-item mx-lg-4">
-               <a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300 all" href="#" data-filter=".all">ALL</a>
+            <li class="nav-item mx-lg-4">
+               <a class="filter-btn nav-link btn-outline-primary active shadow rounded-pill text-light px-4 light-300" href="#" data-filter=".all">ALL</a>
             </li>
          </ul>
       </div>
@@ -150,7 +150,7 @@
    </div>
    <div class="row gx-5 gx-sm-3 gx-lg-5 gy-lg-5 gy-3 pb-3 projects">
    <c:forEach var="n" items="${newgrouplist}">
-      <div class="col-xl-3 col-md-4 col-sm-6 project new">
+      <div class="col-xl-3 col-md-4 col-sm-6 project new ">
          <a href="${pageContext.request.contextPath}/group/group_detail?num=${n.group_no}" onclick="isUser()" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
             <img class="service card-img" src="<spring:url value = '/upload${n.group_img}'/>" alt="Card image">
             <div class="service-work-vertical card-img-overlay d-flex align-items-end">
@@ -178,7 +178,7 @@
    </c:forEach>
    
    <c:forEach var="a" items="${grouplist}">
-      <div class="col-xl-3 col-md-4 col-sm-6 project all">
+      <div class="initial-filter-class col-xl-3 col-md-4 col-sm-6 project all">
          <a href="${pageContext.request.contextPath}/group/group_detail?num=${a.group_no}" onclick="isUser()" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
             <img class="service card-img" src="<spring:url value = '/upload${a.group_img}'/>" alt="Card image">
             <div class="service-work-vertical card-img-overlay d-flex align-items-end">
@@ -206,8 +206,8 @@
 <!-- Page Script -->
 <script>
 $(function(){
+	
 	$("body").on("click","#groupmake" , function(event){
-		
 		
 		$.ajax({
 		    url: "../group/groupcount",
@@ -222,7 +222,7 @@ $(function(){
 		        var loginid = $('#loginid').text();
 		        console.log(response);
 		        console.log($("#loginid").text())
-		        if (response >= '3' ) { //가입 모임 수
+		        if (response >= 3) { //가입 모임 수
 		        	alert("모임은 3개까지 가능합니다.")
 					event.preventDefault();
 		           
@@ -252,11 +252,13 @@ $(function(){
          return true;
       }
    }
+   
    $(window).load(function() {
-      
+     
       // init Isotope
       var $projects = $('.projects').isotope({
          itemSelector: '.project',
+         filter : '.all',
          layoutMode: 'fitRows'
       });
    
@@ -271,9 +273,12 @@ $(function(){
          $(".filter-btn").removeClass("shadow");
          $(this).addClass("active");
          $(this).addClass("shadow");
-      return false;
+      
+         return false;
       });
+      
    });
+   
 </script>
 <!-- Templatemo -->
 <script src="${pageContext.request.contextPath}/resources/js/templatemo.js"></script>
