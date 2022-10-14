@@ -236,3 +236,24 @@ where rnum >= 1 and rnum  <=  10
               where board_subject like '%1%'
        		  order by Group_Board.board_num desc
 
+
+select count(*)            
+		from group_user_role           
+		join (select userid as id, gender, email, area_name              
+				from user_info)            
+								on id=userid           
+				where group_no=?                             
+		and                      
+like ?
+
+select * 
+	  from ( select rownum rnum, b.*
+	          from  (select * 
+	                 from group_user_role  
+	                         where userid	           
+	                            like '%a%'	     
+	                   order by userid
+	                  )b 
+	           where rownum <=  1   
+	        ) 
+	  where rnum <= 1 and rnum  >=  1

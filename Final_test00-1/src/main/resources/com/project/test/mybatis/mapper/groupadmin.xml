@@ -40,7 +40,7 @@
     and group_no=#{group_no}
    </delete>
    
-   <select id="getSearchListCount" resultType="int">
+   <select id="getUserSearchListCount" resultType="int">
       select count(*) 
       			 from group_user_role
       			 join (select userid as id, gender, email, area_name
@@ -58,7 +58,7 @@
 			      </if>
    </select>
    
-   <select id="getSearchList" resultType="GroupUser">
+   <select id="getUserSearchList" resultType="GroupUser">
       select *
       from (select rownum rnum, j.userid, group_no, group_role, gender, email, area_name
            from (

@@ -60,23 +60,23 @@ public class GroupServiceImpl implements GroupService {
 	}
 
 	@Override
-	public int getSearchListCount(int index, String search_word, int group_no) {
+	public int getUserSearchListCount(int index, String search_word, int group_no) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("group_no", group_no);
 		if (index != -1) {
-			String[] search_field = new String[] { "BOARD_SUBJECT", "BOARD_NAME"};
+			String[] search_field = new String[] {"userid", "group_area", "gender"};
 			map.put("search_field", search_field[index]);
 			map.put("search_word", "%" + search_word + "%");
 		}
-		return dao.getSearchListCount(map);
+		return dao.getUserSearchListCount(map);
 	}
 
 	@Override
-	public List<GroupUser> getSearchList(int index, String search_word, int page, int limit, int group_no) {
+	public List<GroupUser> getUserSearchList(int index, String search_word, int page, int limit, int group_no) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("group_no", group_no);
 		if (index != -1) {
-			String[] search_field = new String[] { "BOARD_SUBJECT", "BOARD_NAME" };
+			String[] search_field = new String[] {"userid", "group_area", "gender"};
 			map.put("search_field", search_field[index]);
 			map.put("search_word", "%" + search_word + "%");
 		}
@@ -84,7 +84,7 @@ public class GroupServiceImpl implements GroupService {
 		int endrow = startrow + limit - 1;
 		map.put("start", startrow);
 		map.put("end", endrow);
-		return dao.getSearchList(map);
+		return dao.getUserSearchList(map);
 	}
 
 	@Override

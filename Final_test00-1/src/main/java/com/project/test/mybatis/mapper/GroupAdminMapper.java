@@ -24,6 +24,10 @@ public interface GroupAdminMapper {
 
    List<GroupUser> getSearchList(Map<String, Object> map);
 
+int getUserSearchListCount(Map<String, Object> map);
+
+List<GroupUser> getUserSearchList(Map<String, Object> map);
+
 
 
 
