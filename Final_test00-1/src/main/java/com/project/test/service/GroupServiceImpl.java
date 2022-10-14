@@ -64,7 +64,7 @@ public class GroupServiceImpl implements GroupService {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("group_no", group_no);
 		if (index != -1) {
-			String[] search_field = new String[] {"userid", "group_area", "gender"};
+			String[] search_field = new String[] {"userid", "area_name", "gender"};
 			map.put("search_field", search_field[index]);
 			map.put("search_word", "%" + search_word + "%");
 		}
@@ -76,7 +76,7 @@ public class GroupServiceImpl implements GroupService {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("group_no", group_no);
 		if (index != -1) {
-			String[] search_field = new String[] {"userid", "group_area", "gender"};
+			String[] search_field = new String[] {"userid", "area_name", "gender"};
 			map.put("search_field", search_field[index]);
 			map.put("search_word", "%" + search_word + "%");
 		}
