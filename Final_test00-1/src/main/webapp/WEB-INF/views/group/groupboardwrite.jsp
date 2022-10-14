@@ -19,17 +19,7 @@ a{text-decoration:none; color:black}
 <style>
 input{border:1px solid black}
 b{font-size:0.9em}
-footer{
-         bottom:0px; 
-         height:3rem;
-         background:#ccc;
-         width:100%; 
-         text-align:center;
-         }
-    .table-active {
-    --bs-table-accent-bg: #776bcc59 !important;
-    color: var(--bs-table-active-color);
-}
+
 .btn-secondary {
     --bs-btn-color: #fff;
     --bs-btn-bg: #776bcc;
@@ -126,7 +116,7 @@ footer{
 			<div class="form-group">
 				<label for="board_content">내용</label>
 				<textarea name="BOARD_CONTENT" id="board_content" rows="10" class="form-control"></textarea>
-			</div>
+			</div><br>
 			<div class="form-group">
 				<label for="BOARD_FILE">파일 첨부</label>
 				<label for="upfile">
@@ -135,13 +125,16 @@ footer{
 				<input type="file" id="upfile" name="uploadfile">
 				
 				<span id="filevalue"></span>
-			<input type="hidden" name="GROUP_NO" value="${group_no }">
-				
+			<input type="hidden" name="GROUP_NO" value="${group_no }">			
 			</div>
+			<br>
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary">등록</button>
 				<button type="reset" class="btn btn-danger" onclick="history.back()">취소</button>
 			</div>
+			<br>
+			<br>
+			<br>
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"> 
 		</form>
 		</sec:authorize>
@@ -150,6 +143,6 @@ footer{
       </div>
     
    </div>
-
+<jsp:include page="../include/footer.jsp"></jsp:include>
 </body>
 </html>

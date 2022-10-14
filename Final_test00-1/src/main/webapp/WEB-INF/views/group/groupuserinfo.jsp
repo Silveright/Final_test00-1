@@ -52,17 +52,7 @@ $(document).ready(function() {
 <style>
 input{border:1px solid black}
 b{font-size:0.9em}
-footer{
-         bottom:0px; 
-         height:3rem;
-         background:#ccc;
-         width:100%; 
-         text-align:center;
-         }
-         .table-active {
-    --bs-table-accent-bg: #776bcc59;
-    color: #000000;
-}
+
 .btn-secondary {
     --bs-btn-color: #fff;
     --bs-btn-bg: #776bcc;
@@ -266,5 +256,6 @@ footer{
    
     
    </div>
+   <jsp:include page="../include/footer.jsp"></jsp:include>
 </body>
 </html>
