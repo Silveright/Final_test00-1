@@ -121,12 +121,19 @@
                     <div class="pricing-list-body col-9 align-items-center py-5">
                         <select name="catename" id="catename" class="form-select" style="width: 30vh; float:left;">
                             <option value="" selected disabled hidden>=== 관심사를 선택하세요 ===</option>
-							<option value="음악">음악</option>
-			                <option value="운동">운동</option>
 			                <option value="독서">독서</option>
 			                <option value="공부">공부</option>
 			                <option value="게임">게임</option>
 			                <option value="낚시">낚시</option>
+			                <option value="여행">여행</option>
+			                <option value="자전거">자전거</option>
+			                <option value="요리">요리</option>
+			                <option value="러닝">러닝</option>
+			                <option value="캠핑">캠핑</option>
+			                <option value="영화">영화</option>
+			                <option value="사진">사진</option>
+			                <option value="반려동물">반려동물</option>
+			                <option value="기타">기타</option>
                         </select>
                     </div>
                     <div class="pricing-list-footer col-4 text-center m-auto align-items-center">
