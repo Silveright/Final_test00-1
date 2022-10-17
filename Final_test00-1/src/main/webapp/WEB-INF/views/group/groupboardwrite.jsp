@@ -17,7 +17,6 @@ a{text-decoration:none; color:black}
 
 </head>
 <style>
-input{border:1px solid black}
 b{font-size:0.9em}
 
 .btn-secondary {
@@ -117,14 +116,13 @@ b{font-size:0.9em}
 				<label for="board_content">내용</label>
 				<textarea name="BOARD_CONTENT" id="board_content" rows="10" class="form-control"></textarea>
 			</div><br>
-			<div class="form-group">
-				<label for="BOARD_FILE">파일 첨부</label>
-				<label for="upfile">
-					<img src="${pageContext.request.contextPath}/resources/img/attach.png" alt="파일첨부" width="25px">
-				</label>
-				<input type="file" id="upfile" name="uploadfile">
-				
-				<span id="filevalue"></span>
+			
+			<div class="input-group">
+                                    <input type="file" class="form-control" id="fileName" name="uploadfile"
+                                           aria-describedby="inputGroupFileAddon04"
+                                           aria-label="Upload" accept="image/*;capture=camera">
+                                </div>
+			
 			<input type="hidden" name="GROUP_NO" value="${group_no }">			
 			</div>
 			<br>
