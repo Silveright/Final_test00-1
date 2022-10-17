@@ -346,6 +346,16 @@ public class GroupServiceImpl implements GroupService {
 			return gdao.getSearchList(map);
 		}
 
+		@Override
+		public void grouproleupdate(String userid, String manager, int group_no) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			
+			map.put("userid", userid);
+			map.put("manager", manager);
+			map.put("group_no", group_no);
+			gdao.grouproleupdate(map);
+			
+		}
 
 		
 

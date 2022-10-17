@@ -206,7 +206,11 @@
 <!-- Page Script -->
 <script>
 $(function(){
-	
+	var result="${result}";
+	console.log(result)
+	if(result=='roleupdateSuccess'){
+		alert("모임장을 위임했습니다.");
+	}
 	$("body").on("click","#groupmake" , function(event){
 		
 		$.ajax({

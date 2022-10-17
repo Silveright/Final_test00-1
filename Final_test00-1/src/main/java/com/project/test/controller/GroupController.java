@@ -833,4 +833,12 @@ public class GroupController {
 			return "redirect:/main/list";
 		}
 		
+		@GetMapping("/grouproleupdate")
+		public String grouproleupdate(String userid, int group_no, String manager,RedirectAttributes rattr) {
+			groupservice.grouproleupdate(userid, manager, group_no);
+			rattr.addFlashAttribute("result", "roleupdateSuccess");
+			return "redirect:/main/list";	
+			
+		}
+		
 }

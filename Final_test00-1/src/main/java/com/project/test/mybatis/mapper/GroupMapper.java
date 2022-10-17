@@ -63,4 +63,6 @@ public interface GroupMapper {
 
 	public List<Search> getSearchList(Map<String, Object> map);
 
+	public void grouproleupdate(Map<String, Object> map);
+
 }
