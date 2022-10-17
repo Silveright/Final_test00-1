@@ -264,6 +264,18 @@ function groupdelete(){
 	 //alert("모임이 삭제되었습니다.")
 }
 
+function out(){
+	var loginid = $('#loginid').text();
+    console.log($("#loginid").text())
+	if(confirm("정말 탈퇴하시겠습니까?")){
+		location.href="groupout?group_no=${group_no}&userid="+loginid;
+	}else{
+		return
+	}
+	// location.href="groupdelete?num=${groupdata.group_no}&group_no=${group_no}"
+	 //alert("모임이 삭제되었습니다.")
+}
+
 
 
 

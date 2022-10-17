@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="se" uri="http://www.springframework.org/security/tags" %>
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
 <!DOCTYPE html>
 <html>
@@ -190,7 +191,10 @@ b{font-size:0.9em}
                      <td>${m.userid }</td>
                      <td>${m.area_name}</td>
                      <td>${m.gender }</td>
-                     <td><input type="button" class="btn btn-primary btn-sm" value="모임장 위임"></td>
+
+                     <se:authentication property="principal" var="pinfo"/>
+                     <td><a href='grouproleupdate?userid=${m.userid}&group_no=${group_no}&manager=${pinfo.username }'><input type="button" class="btn btn-secondary btn-sm" value="모임장 위임"></a></td>
+
                      <td><a href='groupuserdelete?userid=${m.userid}&group_no=${group_no}'>
                          <input type="button" class="btn btn-danger btn-sm" 
                      			value="회원 강퇴"></a></td>

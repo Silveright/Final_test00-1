@@ -826,4 +826,11 @@ public class GroupController {
 			return "redirect:/main/list";
 		}
 		
+		
+		@GetMapping("/groupout")
+		public String groupout(String userid, int group_no, Model mv,HttpServletRequest request, RedirectAttributes rattr) {
+			groupservice.groupuserdelete(userid,group_no);
+			return "redirect:/main/list";
+		}
+		
 }

@@ -95,6 +95,7 @@ public interface GroupService {
 
 	List<GroupUser> getUserSearchList(int index, String search_word, int page, int limit, int group_no);
 
+
 	
 
 }

@@ -4,6 +4,7 @@
 <head>
 <title>회원 정보 수정페이지</title>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.js"></script>
+<link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
 <style>
 body {font-family: Arial, Helvetica, sans-serif;box-sizing: border-box;
   margin: 0;
@@ -136,6 +137,14 @@ span{display:inline-block;margin-top:-20px;}
 	$(function() {
 		var checkemail = true;
 		
+		$("a").click(function(event){
+			var answer = confirm("정말 탈퇴하시겠습니까?");
+			console.log(answer);
+			if(!answer){
+				event.preventDefault();
+			}
+		})
+		
 		$("input:eq(0)").on('keyup', function () {
 			$("#message").empty(); //처음에 pattern에 적합하지 않은 경우 메시지 출력 후 적합한 데이터를 입력해도 계속 같은
 			//[A-Za-z0-9_]의 의미가 \w
@@ -181,6 +190,8 @@ span{display:inline-block;margin-top:-20px;}
 
 		
 		}); //submit end		
+		
+		
 		
 	})
 </script>
@@ -236,7 +247,8 @@ span{display:inline-block;margin-top:-20px;}
 		<span id="email_message"></span>
 		<div class="clearfix">
 			<button type="submit" class="submitbtn">Submit</button>
-			<button type="submit" class="cancelbtn">Cancel</button>
+			<button type="button" class="cancelbtn">Cancel</button>
+			<div class="float-end"><small style="color:red"><a href="delete?id=${memberinfo.userid }">탈퇴하기</a></small></div>
 		</div>
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	</form>
