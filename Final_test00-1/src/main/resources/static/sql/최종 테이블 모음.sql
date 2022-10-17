@@ -104,13 +104,12 @@ select * from Group_Board;
 drop table comments CASCADE CONSTRAINTS;
 create table comments(
   num          number       primary key,
-  userid       varchar2(30) references user_info(userid),
+  userid       varchar2(30), --references user_info(userid), 10/17일 수정사항
   content      varchar2(200),
   reg_date     date,
   board_num    number references Group_Board(board_num) 
                on delete cascade 
 );
-
 select * from comments;
 
 -- 시퀀스

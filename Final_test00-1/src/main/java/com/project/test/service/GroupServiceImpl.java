@@ -346,6 +346,7 @@ public class GroupServiceImpl implements GroupService {
 			return gdao.getSearchList(map);
 		}
 
+
 		
 
 }

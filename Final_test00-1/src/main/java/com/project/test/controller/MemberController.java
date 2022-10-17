@@ -245,9 +245,11 @@ public class MemberController {
 	
 	//삭제
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public String member_delete(String id) {
+	public String member_delete(String id, HttpServletRequest request) {
 		memberservice.delete(id);
-		return "redirect:list";
+		 HttpSession session = request.getSession();
+		 session.invalidate();
+		return "redirect:/main/list";
 	}
 	
 	
