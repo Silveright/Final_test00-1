@@ -21,7 +21,7 @@ a{text-decoration:none; color:black}
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.js"></script>
 <script>
 $(document).ready(function() { 
-   //console.log($("body > div > div > div.col-sm-9 > table > tbody > tr:nth-child(1) > td:nth-child(2)").text())
+   
 	var selectedValue='${search_field}'
 		   if(selectedValue !='-1')
 		      $("#viewcount").val(selectedValue);
@@ -51,46 +51,6 @@ $(document).ready(function() {
 			event.preventDefault();
 		}
 	})
-	
-	$("body").on("click", "#roleupdate" , function(event){
-		
-		var a=0;
-		var userid=$(this).parent().parent().prev().prev().prev().text();
-		console.log("위임 대상은 "+userid)
-		$.ajax({
-		    url: "../group/groupcount",
-		    data: {
-		        userid:userid
-		    },
-		    type: "get",
-		    async: false,
-		    success: function (response) {
-		        
-		        if (response >= '3' ) { //가입 모임 수
-		        	//return false;
-		        	//alert("모임 가입은 3개만 가능합니다.")
-		           
-		        	a=1;
-		        	
-		        } else { //모임원유저
-		        	$("#roleupdate").unbind();
-		        	alert("모임장 위임");
-		        } 
-		    },
-		    error: function (Http, status, error) {
-		        console.log("Http : " + Http.status + ", status : " + status + ", error : " + error);
-		    }
-		});
-		
-		if(a==1){
-			alert("해당 회원은 더이상 모임을 가질 수 없습니다.")
-			event.preventDefault();
-		}
-		
-	})
-	
-	
-	
    
    });
 </script>
@@ -184,7 +144,7 @@ b{font-size:0.9em}
          -->
          
          <br>
-         <c:if test="${listcount > 0 }">
+         <c:if test="${listcount > 0}">
          <form action="groupuserinfo" method="get">
                <div class="input-group center-block">
                <input type="hidden" name="group_no" value="${param.group_no}"
@@ -221,11 +181,9 @@ b{font-size:0.9em}
                   </tr>
                </thead>
                
-               <se:authentication property="principal" var="pinfo"/>
                <tbody>
                   <c:set var="num" value="${listcount-(page-1)*limit }"/>
                   <c:forEach var="m" items="${memberlist }">
-                  <c:if test="${m.userid != pinfo.username}">
                   <tr>
                      <td>
                         <c:out value="${m.rnum }"/>
@@ -234,13 +192,13 @@ b{font-size:0.9em}
                      <td>${m.area_name}</td>
                      <td>${m.gender }</td>
 
-                     <td><a href='grouproleupdate?userid=${m.userid}&group_no=${group_no}&manager=${pinfo.username }'><input type="button" class="btn btn-secondary btn-sm" id="roleupdate" value="모임장 위임"></a></td>
+                     <se:authentication property="principal" var="pinfo"/>
+                     <td><a href='grouproleupdate?userid=${m.userid}&group_no=${group_no}&manager=${pinfo.username }'><input type="button" class="btn btn-secondary btn-sm" value="모임장 위임"></a></td>
 
                      <td><a href='groupuserdelete?userid=${m.userid}&group_no=${group_no}'>
                          <input type="button" class="btn btn-danger btn-sm" 
                      			value="회원 강퇴"></a></td>
                   </tr>
-                  </c:if>
                   </c:forEach>
                </tbody>
             </table>
