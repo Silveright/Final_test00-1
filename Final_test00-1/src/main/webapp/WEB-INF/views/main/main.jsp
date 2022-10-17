@@ -36,7 +36,7 @@
             <div class="carousel-item">
                <div class=" row d-flex align-items-center">
                   <div class="banner-content col-lg-8 col-8 offset-2 m-lg-auto text-left py-5 pb-5">
-					<img src="${pageContext.request.contextPath}/resources/img/banner2.png">
+					<img src="${pageContext.request.contextPath}/resources/img/banner2.jpg">
                   </div>
                </div>
             </div>
