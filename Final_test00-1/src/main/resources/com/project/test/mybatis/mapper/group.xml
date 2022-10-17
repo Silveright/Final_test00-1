@@ -270,4 +270,15 @@
 		where group_no = #{group_no}
 	</delete>
 	 
+	 <update id="grouproleupdate">
+	 	update GROUP_USER_ROLE
+		set group_role =
+		case
+		when userid=#{manager} then 1
+		when userid=#{userid} then 0
+		else 1
+		end
+		where group_no=#{group_no}
+	 </update>
+	 
 </mapper>

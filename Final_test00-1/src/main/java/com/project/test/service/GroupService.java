@@ -95,6 +95,8 @@ public interface GroupService {
 
 	List<GroupUser> getUserSearchList(int index, String search_word, int page, int limit, int group_no);
 
+	void grouproleupdate(String userid, String manager, int group_no);
+
 
 	
 
