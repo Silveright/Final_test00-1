@@ -7,6 +7,11 @@
 <head>
 <style>
 a{text-decoration:none; color:black}
+
+.table-active {
+    --bs-table-accent-bg: #776bcc !important;
+    color: white !important;
+}
 </style>
 <!-- <script src="js/jquery-3.6.0.js"></script> -->
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
@@ -148,8 +153,8 @@ b{font-size:0.9em}
                      <option value="1">지역</option>
                      <option value="2">성별</option>
                   </select>
-                   <input id="search" name="search_word" type="text"  placeholder="아이디를 입력하세요" value="${search_word }">
-                  <button class="btn btn-secondary" class="search" type="submit">검색</button>
+                  <input id="search" name="search_word" type="text" placeholder="아이디를 입력하세요" value="${search_word }">
+                  <button class="btn btn-primary" class="search" type="submit">검색</button>
                </div>
          </form>
             <br>
@@ -185,9 +190,9 @@ b{font-size:0.9em}
                      <td>${m.userid }</td>
                      <td>${m.area_name}</td>
                      <td>${m.gender }</td>
-                     <td><input type="button" class="btn btn-secondary btn-sm" value="모임장 위임"></td>
+                     <td><input type="button" class="btn btn-primary btn-sm" value="모임장 위임"></td>
                      <td><a href='groupuserdelete?userid=${m.userid}&group_no=${group_no}'>
-                         <input type="button" class="btn btn-secondary btn-sm" 
+                         <input type="button" class="btn btn-danger btn-sm" 
                      			value="회원 강퇴"></a></td>
                   </tr>
                   </c:forEach>

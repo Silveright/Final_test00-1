@@ -659,5 +659,6 @@ function displayMarker(place) {
 }
 	//새로고침 방식  calendar.refetchEvents(); 으로 바꾸는 법 찾기
 </script>
+<jsp:include page="../include/footer.jsp"></jsp:include>
 </body>
 </html>
