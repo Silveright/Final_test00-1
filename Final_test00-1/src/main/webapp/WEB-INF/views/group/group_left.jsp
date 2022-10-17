@@ -12,7 +12,6 @@ body {
   top: 200px;
   left: 10px;
   background: rgb(119, 107, 204);
-  
   overflow-x: hidden;
   padding: 8px 0;
   text-align:center

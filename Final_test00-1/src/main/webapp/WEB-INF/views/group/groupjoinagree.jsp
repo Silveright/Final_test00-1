@@ -70,7 +70,10 @@ b{font-size:0.9em}
     list-style: none;
 }
 .cat{float:right;}
-
+.table-active {
+    --bs-table-accent-bg: #776bcc !important;
+    color: white !important;
+}
 </style>
 <title>모임 회원 가입 승인 게시판</title>
 </head>
@@ -109,7 +112,7 @@ b{font-size:0.9em}
             <table class="table table-bordered text-center">
                <thead>
                   
-                  <tr class="table-active">
+                  <tr class="table-active" >
                      <th>번호</th>
                      <th>아이디</th>
                      <th>성별</th>
@@ -135,8 +138,8 @@ b{font-size:0.9em}
             </table>
             
             <div class="col-sm-12 text-sm-end">
-               <input type="button" class="btn btn-secondary agree" id="accept" value="가입 승인">         
-               <input type="button" class="btn btn-secondary agree" value="가입 거절">         
+               <input type="button" class="btn btn-primary" id="accept" value="가입 승인">         
+               <input type="button" class="btn btn-danger" value="가입 거절">         
             </div>   
             
             <div class="center-block">
