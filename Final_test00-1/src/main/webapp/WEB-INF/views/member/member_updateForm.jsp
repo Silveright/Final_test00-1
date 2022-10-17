@@ -205,20 +205,30 @@ span{display:inline-block;margin-top:-20px;}
 		 <div class="area">
 		 <b style="font-style:italic; color:#776BCC;">Area</b>
             <select id="area" name="area_name">
-                <option>지역을 선택하세요.</option>
-                <option value="서울">서울</option>
-                <option value="인천">인천</option>
-                <option value="충청도">충청도</option>
-                <option value="전라도">전라도</option>
-                <option value="부산">부산</option>
-                <option value="경상도">경상도</option>
+                <option selected disabled>지역을 선택하세요.</option>
+                <option>서울</option>
+				<option>경기</option>
+				<option>인천</option>
+				<option>강원</option>
+				<option>충북</option>
+				<option>충남</option>
+				<option>대전</option>
+				<option>전북</option>
+				<option>전남</option>
+				<option>광주</option>
+				<option>경북</option>
+				<option>경남</option>
+				<option>대구</option>
+				<option>부산</option>
+				<option>울산</option>
+				<option>제주</option>
             </select>
             <div id="areaError" class="error"></div>
         </div><br>
 		<div>
 		<b style="font-style:italic; color:#776BCC;">Gender</b>
-			<input type = "radio" name = "gender" value="남"><span style="font-style:italic; color:#776BCC;">남자</span>
-			<input type = "radio" name = "gender" value="여"><span style="font-style:italic; color:#776BCC;">여자</span>
+			<input type = "radio" name = "gender" value="남"><span style="font-style:italic; color:#776BCC;">Man</span>
+			<input type = "radio" name = "gender" value="여"><span style="font-style:italic; color:#776BCC;">Woman</span>
 		</div>
 				
 		<b style="font-style:italic; color:#776BCC;">User-Email</b>
