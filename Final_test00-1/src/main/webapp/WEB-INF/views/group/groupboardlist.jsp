@@ -18,7 +18,7 @@ a{text-decoration:none; color:black}
 <style>
 input{border:1px solid black}
 b{font-size:0.9em}
-
+a{text-decoration:none !important}
 .btn-secondary {
     --bs-btn-color: #fff;
     --bs-btn-bg: #776bcc;
@@ -71,6 +71,10 @@ b{font-size:0.9em}
     list-style: none;
 }
 .cat{float:right;}
+.table-active {
+    --bs-table-accent-bg: #776bcc !important;
+    color: white !important;
+}
 
 </style>
 <title>모임 자유게시판</title>
@@ -117,7 +121,7 @@ b{font-size:0.9em}
                      <option value='1'>작성자</option>
                   </select>
                    <input id="search" name="search_word" type="text"  placeholder="제목을 입력하세요" value="${search_word }">
-                  <button class="btn btn-secondary" class="search" type="submit">검색</button>
+                  <button class="btn btn-secondary" class="search" type="submit" style="background-color:#776bcc">검색</button>
                </div>
          </form>
  
@@ -244,7 +248,7 @@ b{font-size:0.9em}
 	<br><br>
 	
 	<button type="button" class="btn btn-secondary float-right" 
-			onclick="location.href='groupboardwrite?group_no=${group_no}'">글쓰기</button>      
+			onclick="location.href='groupboardwrite?group_no=${group_no}'" style="background-color:#776bcc">글쓰기</button>      
      
 <br>
 <br>
