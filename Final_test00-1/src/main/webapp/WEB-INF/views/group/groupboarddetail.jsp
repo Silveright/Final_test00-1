@@ -57,9 +57,7 @@ td:nth-child(1) {
 	width: 20%
 }
 
-a {
-	color: white
-}
+a{text-decoration:none !important}
 
 body > div > table > tbody tr:last-child {
 	text-align: center;
@@ -236,24 +234,24 @@ b {
 
 					<tr>
 						<td colspan="2" class="center">
-							<button class="btn btn-primary">댓글</button> <span id="count">${count}</span>
+							<button class="btn btn-primary" style="background-color:#776bcc; border-color:#776bcc">댓글</button> <span id="count">${count}</span>
 							<sec:authorize access="isAuthenticated()">
 								<sec:authentication property="principal" var="pinfo" />
 								<c:if
 									test="${boarddata.BOARD_NAME == pinfo.username || pinfo.username == 'admin'}">
 									<a href="groupboardmodifyView?num=${boarddata.BOARD_NUM}&group_no=${group_no}">
-										<button class="btn btn-warning">수정</button>
+										<button class="btn btn-primary" style="background-color:#776bcc; border-color:#776bcc">수정</button>
 									</a>
 									<%-- href의 주소를 #으로 설정합니다. --%>
 									<a href="#">
 										<button class="btn btn-danger" data-toggle="modal"
-											data-target="#myModal">삭제</button>
+											data-target="#myModal" style="background-color:#776bcc; border-color:#776bcc">삭제</button>
 									</a>
 								</c:if>
 							</sec:authorize> <a href="replyView?num=${boarddata.BOARD_NUM}">
 								
 						</a> <a href="groupboardlist?group_no=${group_no}">
-								<button class="btn btn-success">목록</button>
+								<button class="btn btn-success" style="background-color:#776bcc; border-color:#776bcc">목록</button>
 						</a>
 						</td>
 					</tr>
@@ -293,8 +291,8 @@ b {
 				</div>
 				<%-- id="myModal" end --%>
 				<div id="comment">
-					<button class="btn btn-info float-left">총 50자까지 가능합니다.</button>
-					<button id="write" class="btn btn-info float-right">등록</button><br><br>
+					<button class="btn btn-primary float-left" style="background-color:#776bcc; border-color:#776bcc">총 50자까지 가능합니다.</button>
+					<button id="write" class="btn btn-primary float-right" style="background-color:#776bcc; border-color:#776bcc">등록</button><br><br>
 					<textarea rows="3" class="form-control" id="content" maxlength="50"></textarea><br>
 					<table class="table table striped">
 						<thead>
