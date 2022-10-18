@@ -411,7 +411,8 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            <footer class="sticky-footer bg-white">
+            
+           <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
                         <span>Copyright &copy; 3355 2022</span>
@@ -424,6 +425,7 @@
         <!-- End of Content Wrapper -->
 
     </div>
+    <%-- <jsp:include page="../include/footer.jsp"></jsp:include> --%> 
     <!-- End of Page Wrapper -->
 
     <!-- Scroll to Top Button-->
