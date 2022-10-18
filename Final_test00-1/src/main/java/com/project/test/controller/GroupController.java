@@ -368,9 +368,9 @@ public class GroupController {
 									  @RequestParam(value = "search_word", defaultValue = "", required = false)
 									  String search_word) {
 
-			int listcount = groupservice.getSearchListCount(index, search_word); //총 리스트 수를 받아옵니다.
+			int listcount = groupservice.getSearchListCount(index, search_word, group_no); //총 리스트 수를 받아옵니다.
 
-			List<Search> list = groupservice.getSearchList(index, search_word, page, limit);
+			List<Search> list = groupservice.getSearchList(index, search_word, page, limit, group_no);
 
 			//총 페이지 수
 			int maxpage = (listcount + limit - 1) / limit;

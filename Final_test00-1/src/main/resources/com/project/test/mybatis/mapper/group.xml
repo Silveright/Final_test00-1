@@ -120,7 +120,8 @@
                   on Group_Board.board_num = c.board_num
                   <include refid="search_"/>
                   order by Group_Board.board_num desc) b 
-	           where rownum &lt;=  #{end}    
+	           where rownum &lt;=  #{end}
+	           and group_no = #{group_no}    
 	        ) 
 	  where rnum &gt;= #{start} and rnum  &lt;=  #{end} 
 	</select>
@@ -130,6 +131,7 @@
 		from Group_Board
 		
 		<include refid ="search_"/>
+		and group_no = #{group_no}   
 	</select>
 	
 	<sql id="search_">
