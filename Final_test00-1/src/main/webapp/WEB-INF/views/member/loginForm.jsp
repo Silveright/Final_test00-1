@@ -189,65 +189,6 @@ body {
 </style>
 <script>
 
-Kakao.init('b0aef16567d7b964e3834d1a650e2ba5'); //발급받은 키 중 javascript키를 사용해준다.
-console.log(Kakao.isInitialized()); // sdk초기화여부판단
-//카카오로그인
-function kakaoLogin() {
-	
-	
-	// ajax로 테이블 조회
-	
-	
-    Kakao.Auth.login({
-      success: function (response) {
-        Kakao.API.request({
-          url: '/v2/user/me',
-          data: {
-      	    property_keys: ['kakao_account.email', 'kakao_account.gender'],
-      	  },
-          success: function (response) {
-        	  console.log(response)
-          },
-          fail: function (error) {
-            console.log(error)
-          },
-        })
-      },
-      fail: function (error) {
-        console.log(error)
-      },
-    })
-  }
-
-//카카오로그아웃  
-function kakaoLogout() {
-    if (Kakao.Auth.getAccessToken()) {
-      Kakao.API.request({
-        url: '/v1/user/unlink',
-        success: function (response) {
-        	console.log(response)
-        },
-        fail: function (error) {
-          console.log(error)
-        },
-      })
-      Kakao.Auth.setAccessToken(undefined)
-    }
-  }  
-//처음 실행하는 함수
-function init() {
-	gapi.load('auth2', function() {
-		gapi.auth2.init();
-		options = new gapi.auth2.SigninOptionsBuilder();
-		options.setPrompt('select_account');
-        // 추가는 Oauth 승인 권한 추가 후 띄어쓰기 기준으로 추가
-		options.setScope('email profile openid https://www.googleapis.com/auth/user.birthday.read');
-        // 인스턴스의 함수 호출 - element에 로그인 기능 추가
-        // GgCustomLogin은 li태그안에 있는 ID, 위에 설정한 options와 아래 성공,실패시 실행하는 함수들
-		gapi.auth2.getAuthInstance().attachClickHandler('GgCustomLogin', options, onSignIn, onSignInFailure);
-	})
-}
-
 if ("${result}" == 'joinSuccess') {
 	alert("회원가입을 축하합니다.")
 } else if ("${loginfail}" == 'loginFailMsg') {
@@ -273,16 +214,9 @@ $(function() {
           <input type="text" class="login__input" name="userid" placeholder="User name / Email">
         </div>
         <div class="login__field">
-          <i class="login__icon fas fa-lock"></i>
-          <input type="password" class="login__input" name="password" placeholder="Password">
-          <button class="button login__submit">
-          <span class="button__text"onclick="kakaoLogin();">kakao login</span>
-          
-        </button> 
-       
-        <button class="button login__submit">
-          <span class="button__text"onclick="kakaoLogout();">kakao logout</span>
-        </button>
+        <i class="login__icon fas fa-lock"></i>
+        <input type="password" class="login__input" name="password" placeholder="Password">
+        <br><br>
         <button type="submit" class="button login__submit submitbtn">로그인</button>
 		<button type="button" class="join button login__submit">회원가입</button>
 		</div>

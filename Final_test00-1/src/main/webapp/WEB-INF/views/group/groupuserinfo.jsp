@@ -13,12 +13,12 @@ a{text-decoration:none; color:black}
     --bs-table-accent-bg: #776bcc !important;
     color: white !important;
 }
+footer {
+position : fixed;
+bottom : 0;
+width : 100%;
+}
 </style>
-<!-- <script src="js/jquery-3.6.0.js"></script> -->
- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.js"></script>
 <script>
 $(document).ready(function() { 
    //console.log($("body > div > div > div.col-sm-9 > table > tbody > tr:nth-child(1) > td:nth-child(2)").text())
@@ -184,7 +184,7 @@ b{font-size:0.9em}
          -->
          
          <br>
-         <c:if test="${listcount > 0 }">
+         <c:if test="${listcount > 1 }">
          <form action="groupuserinfo" method="get">
                <div class="input-group center-block">
                <input type="hidden" name="group_no" value="${param.group_no}"
@@ -296,10 +296,10 @@ b{font-size:0.9em}
 <br>
 <br>
 </c:if> 
-<c:if test="${listcount==0 }"> 
+<c:if test="${listcount==1 }"> 
       <section class="py-5">
        <font size=5>회원이 존재하지 않습니다.</font><br><br>
-       <a href="main.net"><button type="button" class="btn btn-secondary float-left back">메인으로</button></a>
+       <a href="/test/main/list"><button type="button" class="btn btn-secondary float-left back">메인으로</button></a>
        </section>
   </c:if> 
          </div>
