@@ -97,6 +97,8 @@ public interface GroupService {
 
 	void grouproleupdate(String userid, String manager, int group_no);
 
+	int disagree(List<String> requestList, int group_no, String userid);
+
 
 	
 

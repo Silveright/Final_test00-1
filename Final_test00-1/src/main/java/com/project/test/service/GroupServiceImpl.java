@@ -357,6 +357,19 @@ public class GroupServiceImpl implements GroupService {
 			
 		}
 
+		@Override
+		public int disagree(List<String> requestList, int group_no, String userid) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("requestid", requestList);
+			map.put("group_no", group_no);
+			map.put("userid", userid);
+			dao.disagreeMember(map);
+	
+
+			return 1;
+		}
+
+
 		
 
 }

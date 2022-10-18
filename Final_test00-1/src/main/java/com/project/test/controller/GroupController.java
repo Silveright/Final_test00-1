@@ -841,4 +841,14 @@ public class GroupController {
 			
 		}
 		
+		@ResponseBody
+		@GetMapping(value = "/DisAgree")
+		public int DisAgree(@RequestParam("group_no") int group_no, String userid,
+		@RequestParam("requestList[]") List<String> requestList) {
+		      
+		int result=groupservice.disagree(requestList, group_no, userid);
+		return result;	
+			
+		}
+		
 }

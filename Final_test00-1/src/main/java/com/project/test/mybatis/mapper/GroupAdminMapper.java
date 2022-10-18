@@ -28,6 +28,12 @@ int getUserSearchListCount(Map<String, Object> map);
 
 List<GroupUser> getUserSearchList(Map<String, Object> map);
 
+void groupjoindisagree(Map<String, Object> map);
+
+void disagreeMember(Map<String, Object> map);
+
+
+
 
 
 
