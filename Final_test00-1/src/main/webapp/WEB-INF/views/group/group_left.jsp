@@ -6,6 +6,10 @@ body {
   font-family: "Lato", sans-serif;
 }
 
+.active{
+ color: #064579 !important;
+}
+
 .sidenav {
   background-color : rgb(137, 138, 197);
   width: 150px;
@@ -44,7 +48,7 @@ body {
 <div class="sidenav">
  
 <a href="${pageContext.request.contextPath}/group/group_detail?num=${group_no}" class="nav-link">모임 메인</a>
-<a href="${pageContext.request.contextPath}/group/groupboardlist?group_no=${group_no}" class="nav-link">게시판</a>
+<a href="${pageContext.request.contextPath}/group/groupboardlist?group_no=${group_no}" class="nav-link" id="board">게시판</a>
 <a href="${pageContext.request.contextPath}/calendar/view2?group_no=${group_no}" class="nav-link">일정</a>
 <a href="${pageContext.request.contextPath}/group/chatt?group_no=${group_no}" class="nav-link">채팅</a>
 <%-- <a href="${pageContext.request.contextPath}/group/groupuserinfo?group_no=${groupdata.group_no}" class="nav-link">회원관리</a> --%>
@@ -54,6 +58,23 @@ body {
 
 
 <script>
+$(".sidenav>a").each(function() {
+    var navItem = $(this);
+	console.log("사이드바 "+navItem.attr("href").split('?')[0])
+	console.log("경로는"+location.pathname+location.search.split('?')[0])
+	console.log("경로는2"+location.pathname+location.search.split('?')[0])
+	
+	//console.log("포함?"+(location.pathname+location.search.split('?')[0].includes("groupboard"))
+	console.log("3"+location.pathname);
+	
+    if (navItem.attr("href").split('?')[0] == (location.pathname+location.search.split('?')[0])) {
+      navItem.addClass("active");
+    }else  if(location.pathname=='/test/group/groupboardmodifyView' || location.pathname=='/test/group/groupboardwrite'|| location.pathname=='/test/group/groupboarddetail'){
+    	$("#board").addClass("active");
+    }
+});
+
+
 
 $.ajax({
     url: "../group/main",
