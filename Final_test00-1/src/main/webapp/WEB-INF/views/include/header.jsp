@@ -21,12 +21,16 @@
     <link href="${pageContext.request.contextPath}/resources/css/nice-select.css" rel="stylesheet"/>
     <!-- Sweetalert2 CSS -->
     <link href="${pageContext.request.contextPath}/resources/css/sweetalert2.css" rel="stylesheet"/>
-   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-   <!-- jQuery -->
-   <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.js"></script>
-   <script src="${pageContext.request.contextPath}/resources/js/bootstrap.js"></script>
-   <meta name="_csrf" content="${_csrf.token }">
-<meta name="_csrf_header" content="${_csrf.headerName }">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- jQuery -->
+    <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/bootstrap.js"></script>
+    <!-- underscore.js -->
+    <script src="https://cdn.jsdelivr.net/npm/underscore@1.13.1/underscore-umd-min.js"></script>
+    <%--  Font awesome  --%>
+    <script src="https://kit.fontawesome.com/c5fd5902bb.js" crossorigin="anonymous"></script>
+    <meta name="_csrf" content="${_csrf.token }">
+	<meta name="_csrf_header" content="${_csrf.headerName }">
 </head>
 <!-- Header -->
 <nav id="main_nav" class="navbar navbar-expand-lg navbar-light bg-white shadow">
