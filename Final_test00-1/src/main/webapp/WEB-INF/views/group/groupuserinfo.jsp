@@ -44,7 +44,7 @@ $(document).ready(function() {
 
    
    //body > div > div > div > table > tbody > tr:nth-child(2) > td:nth-child(6) > button
-	$("body > div > div > div.col-sm-9 > table > tbody > tr:nth-child(1) > td:nth-child(6) > a > input").click(function(event){
+	$("body > div > div > div.col-sm-9 > table > tbody > tr > td:nth-child(6) > a > input").click(function(event){
 		var answer = confirm("정말 강퇴하시겠습니까?");
 		console.log(answer);
 		if(!answer){

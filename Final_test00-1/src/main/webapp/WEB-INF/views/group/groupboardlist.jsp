@@ -16,6 +16,10 @@ a{text-decoration:none; color:black}
 
 </head>
 <style>
+.subjectname{text-decoration: none;
+			 color:inherit}
+.subjectname:hover{color:black};
+
 input{border:1px solid black}
 b{font-size:0.9em}
 a{text-decoration:none !important}
@@ -161,11 +165,15 @@ a{text-decoration:none !important}
 							<c:set var="num" value="${num - 1}"/><%-- num = num - 1; 의미 --%>
 						</td>
 						<td><%-- 제목 --%>
-							<div>
-								
-								 
-								 <a href="groupboarddetail?num=${b.BOARD_NUM}&group_no=${group_no}">
-							 		<c:out value="${b.BOARD_SUBJECT}" escapeXml="true"/>
+							<div>									 
+								 <a href="groupboarddetail?num=${b.BOARD_NUM}&group_no=${group_no}" class="subjectname">
+								 	
+								 	<c:if test="${b.BOARD_SUBJECT.length()>=20}">
+							 			<c:out value="${b.BOARD_SUBJECT.substring(0,20)}..."/>
+							 		</c:if>
+							 		<c:if test="${b.BOARD_SUBJECT.length()<20}">
+							 			<c:out value="${b.BOARD_SUBJECT}"/>
+							 		</c:if>
 							 		<span class="gray small">[<c:out value="${b.CNT}"/>]</span>
 								 </a>
 							</div>

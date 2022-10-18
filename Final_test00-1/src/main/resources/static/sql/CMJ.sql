@@ -43,6 +43,8 @@ create table user_info (
    primary key(userid)
 );
 
+insert into USER_INFO
+
 --그룹 내 게시판
 drop table Group_Board CASCADE CONSTRAINTS;
 CREATE TABLE Group_Board(
@@ -257,3 +259,22 @@ select *
 	           where rownum <=  1   
 	        ) 
 	  where rnum <= 1 and rnum  >=  1
+	  
+	  select * 
+	  from ( select rownum rnum, b.*
+	          from  (select * 
+	                 from Group_Board                
+	                  left outer join (select board_num, count(*) cnt
+                                            from COMMENTS
+                                            group by board_num) c
+                  on Group_Board.board_num = c.board_num
+                  where BOARD_SUBJECT like '%테%'
+                  order by Group_Board.board_num desc) b 
+	           where rownum <=  10 
+	           and group_no = 1 
+	        ) 
+	  where rnum >= 1 and rnum  <=  10
+	  
+select * from group_join_request
+
+delete from group_join_request where userid='test3'

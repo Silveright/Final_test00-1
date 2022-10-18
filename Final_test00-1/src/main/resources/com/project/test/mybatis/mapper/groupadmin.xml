@@ -83,5 +83,17 @@
       where rnum&gt;=#{start} and rnum&lt;= #{end}
       
    </select>
+   
+   <delete id="disagreeMember">
+      delete
+        from group_join_request
+        where userid in
+         <foreach collection="requestid" item="item" index="i" open="(" separator="," close=")">
+        #{item}
+    	</foreach>
+   	  and group_no=#{group_no}
+   </delete>
+   
+   
 
 </mapper>

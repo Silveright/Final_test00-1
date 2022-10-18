@@ -139,7 +139,7 @@ b{font-size:0.9em}
             
             <div class="col-sm-12 text-sm-end">
                <input type="button" class="btn btn-primary" id="accept" value="가입 승인">         
-               <input type="button" class="btn btn-danger" value="가입 거절">         
+               <input type="button" class="btn btn-danger" id="disagree" value="가입 거절">         
             </div>   
             
             <div class="center-block">
@@ -332,6 +332,38 @@ var group_no="${group_no}"
             }
         }) 
       }
+   })
+   
+   $('#disagree').click(function (event) {
+    	     
+          //$('tbody').children().remove();
+            event.preventDefault();
+            var requests = [];
+            $('input[name=selectAgreement]:checked').each(function () { //체크한 정보 담기
+                var chk = $(this).val();
+                requests.push(chk);
+            });
+            console.log(requests);
+            var answer = confirm("가입을 거절하시겠습니까?");
+          console.log(answer);
+          if(answer){
+             console.log("거절")
+           $.ajax({
+                url: "../group/DisAgree",
+                dataType: "json",
+                data: {
+                    requestList: requests,
+                    group_no: group_no//임의로 값 넣었음 나중에 바꾸기
+                },
+                success: function (data) {
+                   console.log("가입거절 성공")
+                   loadRequest(1);//새로고침
+                },
+                error: function (request, status, error) {
+                    console.log(error)
+                }
+           }) 
+        }
    })
    
    
