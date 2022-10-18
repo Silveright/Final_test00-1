@@ -78,9 +78,9 @@ public interface GroupService {
 
 	void groupuserdelete(String userid, int group_no);
 
-	int getSearchListCount(String index, String search_keyword);
+	int getSearchListCount(String index, String search_keyword, int group_no);
 
-	List<Search> getSearchList(String index, String search_keyword, int page, int limit);
+	List<Search> getSearchList(String index, String search_keyword, int page, int limit, int group_no);
 
 	//모임 수정처리 
 	boolean isGroupWriter(int group_no);

@@ -318,18 +318,19 @@ public class GroupServiceImpl implements GroupService {
 		}
 
 		@Override
-		public int getSearchListCount(String index, String search_keyword) {
+		public int getSearchListCount(String index, String search_keyword, int group_no) {
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			if(!index.equals("")) {
 				map.put("search_field", index);
 				map.put("search_word", "%" + search_keyword + "%");
+				map.put("group_no", group_no);
 			}
 			logger.info(map.get("search_field") + "");
 			return gdao.getSearchListCount(map);
 		}
 
 		@Override
-		public List<Search> getSearchList(String index, String search_keyword, int page, int limit) {
+		public List<Search> getSearchList(String index, String search_keyword, int page, int limit, int group_no) {
 			Map<String, Object> map = new HashMap<String, Object>();
 			//http://localhost:8088/myhome4/member/list로 접속하는 경우
 			//select를 선택하지 않아 index는 "-1"의 값을 갖습니다.
@@ -338,6 +339,7 @@ public class GroupServiceImpl implements GroupService {
 			if(!index.equals("")) {
 				map.put("search_field", index);
 				map.put("search_word", "%" + search_keyword + "%");
+				map.put("group_no", group_no);
 			}
 			int startrow = (page - 1) * limit + 1;
 			int endrow = startrow + limit - 1;
