@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
@@ -43,6 +42,7 @@ a {
 		})
 	})
 </script>
+<script src="${pageContext.request.contextPath}/resources/js/modifyform.js"></script>
 </head>
 
 
@@ -194,7 +194,7 @@ b {
 			<h1>게시판 수정</h1>
 			<div class="form-group">
 				<label for="board_name">글쓴이</label>
-				<input type="text" name="BOARD_NAME"
+				<input type="text" name="BOARD_NAME" 
 					   class="form-control"  value="${boarddata.BOARD_NAME}" readOnly>
 			</div>
 			<div class="form-group">
@@ -217,7 +217,6 @@ b {
 				</label>
 				<input type="file" id="upfile" name="uploadfile" >
 				<span id="filevalue">${boarddata.BOARD_ORIGINAL}</span>
-				<img alt="파일삭제" src="../resources/image/remove.png" width="10px" class="remove">
 			</div>
 			
 			<br>
@@ -229,8 +228,8 @@ b {
 			</div>
 			<br>
 			<div class="form-group">
-				<button type=submit class="btn btn-primary">수정</button>
-				<button type=reset class="btn btn-danger" onClick="history.go(-1)">취소</button>
+				<button type=submit class="btn btn-primary" style="color: #212529; background-color: #e5e3f8; border-color: #4232c2;">수정</button>
+				<button type=reset class="btn btn-danger" style = "color: #000; background-color: #f8dbde; border-color: #dc3545;" onClick="history.go(-1)">취소</button>
 			</div>
 			<input type="hidden" name="group_no" value="${group_no}">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">

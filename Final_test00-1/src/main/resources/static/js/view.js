@@ -135,7 +135,7 @@ $(function() {
 		
 		//이미 취소 버튼이 만들어진 상태에서 또 수정을 클릭하면 취소가 계속 추가됩니다.
 		if(!$("#write").prev().is(".cancel"))
-		$("#write").before('<button class="btn btn-danger float-right cancel">취소</button>');	
+		$("#write").before('<button class="btn btn-danger float-right cancel" style = "color: #000; background-color: #f8dbde; border-color: #dc3545;">취소</button>&nbsp;');	
 		
 		//$("#comment .update").parent().parent()
 		//#comment영역의 update클래스를 가진 엘리먼트의 부모의 부모 => <tr>

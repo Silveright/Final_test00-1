@@ -11,6 +11,10 @@ a {
 	text-decoration: none;
 	color: black
 }
+footer {
+bottom : 0;
+width : 100%;
+}
 </style>
 <!-- <script src="js/jquery-3.6.0.js"></script> -->
 <link rel="stylesheet"
@@ -63,9 +67,6 @@ body > div > table > tbody tr:last-child {
 	text-align: center;
 }
 
-.btn-primary {
-	background-color: #4f97e5
-}
 
 #myModal {
 	display: none
@@ -168,6 +169,7 @@ b {
 .cat {
 	float: right;
 }
+
 </style>
 <title>모임 자유게시판</title>
 </head>
@@ -176,6 +178,7 @@ b {
 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
 	<script src="${pageContext.request.contextPath}/resources/js/view.js"></script>
 	<!-- <input type="hidden" id="loginid" value="${id}" name="loginid"> -->
+	<br><br>
 	<div class="container">
 
 		<div class="row align-items-center justify-content-center">
@@ -185,9 +188,9 @@ b {
 					<jsp:include page="group_left.jsp" />
 				</aside>
 			</div>
-
+			
 			<div class="col-sm-9 ">
-				<table class="table table-striped">
+				<table class="table">
 					<tr>
 						<th colspan="2">게시판 상세페이지</th>
 					</tr>
@@ -202,8 +205,8 @@ b {
 
 					<tr>
 						<td><div>내용</div></td>
-						<td style="padding-right: 0px"><textarea class="form-control"
-								rows="5" readOnly>${boarddata.BOARD_CONTENT}</textarea></td>
+						<td style="padding-right: 0px;"><textarea class="form-control"
+								rows="5" readOnly style ="background-color: white; opacity: 1;">${boarddata.BOARD_CONTENT}</textarea></td>
 					</tr>
 
 					<%-- 원문글인 경우에만 첨부파일을 추가 할 수 있습니다. --%>
@@ -234,25 +237,25 @@ b {
 
 					<tr>
 						<td colspan="2" class="center">
-							<button class="btn btn-primary" style="background-color:#776bcc; border-color:#776bcc">댓글</button> <span id="count">${count}</span>
+							<button class="btn btn-primary" style="color: #212529; background-color: #e5e3f8; border-color: #4232c2;">댓글</button> <span id="count">${count}</span>
 							<sec:authorize access="isAuthenticated()">
 								<sec:authentication property="principal" var="pinfo" />
+								<a href="groupboardlist?group_no=${group_no}">
+									<button class="btn btn-primary" style="color: #212529; background-color: #e5e3f8; border-color: #4232c2;">목록</button>
+								</a>
 								<c:if
 									test="${boarddata.BOARD_NAME == pinfo.username || pinfo.username == 'admin'}">
 									<a href="groupboardmodifyView?num=${boarddata.BOARD_NUM}&group_no=${group_no}">
-										<button class="btn btn-primary" style="background-color:#776bcc; border-color:#776bcc">수정</button>
+										<button class="btn btn-primary" style="color: #212529; background-color: #e5e3f8; border-color: #4232c2;">수정</button>
 									</a>
 									<%-- href의 주소를 #으로 설정합니다. --%>
 									<a href="#">
 										<button class="btn btn-danger" data-toggle="modal"
-											data-target="#myModal" style="background-color:#776bcc; border-color:#776bcc">삭제</button>
+											data-target="#myModal" style = "color: #000; background-color: #f8dbde; border-color: #dc3545;">삭제</button>
 									</a>
 								</c:if>
 							</sec:authorize> <a href="replyView?num=${boarddata.BOARD_NUM}">
-								
-						</a> <a href="groupboardlist?group_no=${group_no}">
-								<button class="btn btn-success" style="background-color:#776bcc; border-color:#776bcc">목록</button>
-						</a>
+						</a> 
 						</td>
 					</tr>
 				</table>
@@ -281,7 +284,7 @@ b {
 									</div>
 									<button type="submit" class="btn btn-primary">전송</button>
 									<button type="button" class="btn btn-danger"
-										data-dismiss="modal">취소</button>
+										data-dismiss="modal" >취소</button>
 									<input type="hidden" name="${_csrf.parameterName}"
 										value="${_csrf.token}">
 								</form>
@@ -291,10 +294,10 @@ b {
 				</div>
 				<%-- id="myModal" end --%>
 				<div id="comment">
-					<button class="btn btn-primary float-left" style="background-color:#776bcc; border-color:#776bcc">총 50자까지 가능합니다.</button>
-					<button id="write" class="btn btn-primary float-right" style="background-color:#776bcc; border-color:#776bcc">등록</button><br><br>
+					&nbsp;<button class="btn btn-primary float-left" style ="background-color : lightblue; color : black">총 50자까지 가능합니다.</button>
+					<button id="write" class="btn btn-primary float-right" style ="background-color : lightgreen; color : black">등록</button><br><br>
 					<textarea rows="3" class="form-control" id="content" maxlength="50"></textarea><br>
-					<table class="table table striped">
+					<table class="table">
 						<thead>
 							<tr>
 								<td>아이디</td>
@@ -312,6 +315,7 @@ b {
 		</div>
 		<%--comment-area end --%>
 	</div>
+	<br>
 	<%--class="container" end --%>
 	<jsp:include page="../include/footer.jsp"></jsp:include>
 </body>

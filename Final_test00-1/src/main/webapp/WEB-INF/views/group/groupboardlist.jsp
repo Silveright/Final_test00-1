@@ -16,6 +16,11 @@ a{text-decoration:none; color:black}
 
 </head>
 <style>
+footer {
+position : fixed;
+bottom : 0;
+width : 100%;
+}
 .subjectname{text-decoration: none;
 			 color:inherit}
 .subjectname:hover{color:black};
@@ -75,8 +80,8 @@ a{text-decoration:none !important}
     list-style: none;
 }
 .cat{float:right;}
-.table-active {
-    --bs-table-accent-bg: #776bcc !important;
+.table-active{
+	background-color :#6266ea8a!important; 
     color: white !important;
 }
 
@@ -124,14 +129,13 @@ a{text-decoration:none !important}
                      <option value='0' selected>제목</option>
                      <option value='1'>작성자</option>
                   </select>
-                   <input id="search" name="search_word" type="text"  placeholder="제목을 입력하세요" value="${search_word }">
-                  <button class="btn btn-secondary" class="search" type="submit" style="background-color:#776bcc">검색</button>
+                  <input id="search" name="search_word" type="text"  placeholder="제목을 입력하세요" value="${search_word }">
+                  <button class="btn btn-sm btn-outline-secondary search" type="submit"><i class="bx bx-search bx-sm"></i></button>
+               	  <button type="button" class="btn btn-secondary float-right" style="margin-left : 570px;" onclick="location.href='groupboardwrite?group_no=${group_no}'">글쓰기</button>
                </div>
          </form>
- 
+ 		
             <table class="table table-bordered text-center">
-               
-               
                <colgroup>
                   <col width="10%"/>
                   <col width="40%"/>
@@ -147,14 +151,13 @@ a{text-decoration:none !important}
 						<font size="3">글 개수 : ${listcount}</font>
 					</th>
 			   </tr>
-                      
-                  <tr class="table-active">
-                     <th>번호</th>
-                     <th>제목</th>
-                     <th>작성자</th>
-                     <th>날짜</th>
-                     <th>조회수</th>
-                  </tr>
+               <tr class="table-active">
+                  	<th>번호</th>
+                  	<th>제목</th>
+                    <th>작성자</th>
+                    <th>날짜</th>
+                    <th>조회수</th>
+               </tr>
                </thead>
                <tbody>
 				<c:set var="num" value="${listcount - (page - 1) * limit}"/>
@@ -247,25 +250,11 @@ a{text-decoration:none !important}
     </c:if>
     <%-- 게시글이 없는 경우 --%>
 	<c:if test="${listcount == 0}">
-		<font size=5>등록된 글이 없습니다.</font>
+	<section class="py-5"><br><br>
+		<font size=5>등록된 글이 없습니다.</font><br><br>
+		<button type="button" class="btn btn-secondary float-right" onclick="location.href='groupboardwrite?group_no=${group_no}'">글쓰기</button>
+	</section>
 	</c:if>
-	<br>
-	<br>
-	<br>
-	
-	<br><br>
-	
-	<button type="button" class="btn btn-secondary float-right" 
-			onclick="location.href='groupboardwrite?group_no=${group_no}'" style="background-color:#776bcc">글쓰기</button>      
-     
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
          </div>
       </div>
       <!-- <section class="py-5">

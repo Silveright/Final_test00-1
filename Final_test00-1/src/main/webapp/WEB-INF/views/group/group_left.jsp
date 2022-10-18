@@ -7,11 +7,11 @@ body {
 }
 
 .sidenav {
+  background-color : rgb(137, 138, 197);
   width: 150px;
   z-index: 1;
   top: 200px;
   left: 10px;
-  background: rgb(119, 107, 204);
   overflow-x: hidden;
   padding: 8px 0;
   text-align:center
@@ -69,7 +69,7 @@ $.ajax({
         console.log($("#loginid").text())
         if (response.role == '0') { //모임장유저
             str='<a href="${pageContext.request.contextPath}/group/groupuserinfo?group_no=${group_no}" class="nav-link">회원관리</a>'
-            str+='<a href="${pageContext.request.contextPath}/group/groupjoinagree?group_no=${group_no}" class="nav-link">가입신청</a>'	
+            str+='<a href="${pageContext.request.contextPath}/group/groupjoinagree?group_no=${group_no}" class="nav-link">가입승인</a>'	
             		$('.sidenav').append(str);
         }
     },

@@ -61,7 +61,11 @@
 	background-color : #E8D9FF;
 	margin : 2px;
 }
-
+footer {
+position : fixed;
+bottom : 0;
+width : 100%;
+}
 </style>
 </head>
 <body>
@@ -71,7 +75,8 @@
 		<input type="hidden" id="active" value="${active }">
 		<jsp:include page="../group/group_left.jsp" />
 	</aside>
-		<h1><h1> 채팅방</h1></h1>
+	<br>
+		<h1>채팅방</h1>
 		<input type='hidden' id='mid' value='${userid}'>
 		
 		<br/> 
