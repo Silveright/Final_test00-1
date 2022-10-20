@@ -194,7 +194,7 @@ public class GroupController {
 	@RequestMapping(value="/groupuserinfo")
 	   public ModelAndView memberList(@RequestParam(value="group_no", defaultValue="1",required=false) int group_no,
 	                           @RequestParam(value="page", defaultValue="1",required=false) int page,
-	                           @RequestParam(value="limit", defaultValue="3", required=false) int limit,
+	                           @RequestParam(value="limit", defaultValue="10", required=false) int limit,
 	                           ModelAndView mv,
 	                           @RequestParam(value="search_field", defaultValue="-1", required=false) int index,
 	                           @RequestParam(value="search_word", defaultValue="", required=false) String search_word) {
@@ -227,7 +227,7 @@ public class GroupController {
     public Map<String,Object> boardListAjax(
           @RequestParam(value="group_no", defaultValue="1",required=false) int group_no,//모임 기능 구현되면 group_no는 파라미터로 넘어온 값으로 변경해야함(현재: 임의값 1로setting)
           @RequestParam(value="page", defaultValue="1", required=false)   int page,
-          @RequestParam(value="limit", defaultValue="3", required=false)   int limit
+          @RequestParam(value="limit", defaultValue="5", required=false)   int limit
           ) {
        
        int listcount=groupservice.getJoinListCount(group_no); //총 리스트 수를 받아옴

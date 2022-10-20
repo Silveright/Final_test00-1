@@ -12,6 +12,7 @@ a {
 	color: black
 }
 footer {
+position : fixed;
 bottom : 0;
 width : 100%;
 }
