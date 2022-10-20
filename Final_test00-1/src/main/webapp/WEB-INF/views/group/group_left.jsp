@@ -58,6 +58,9 @@ body {
 
 
 <script>
+$(function(){
+	
+
 $(".sidenav>a").each(function() {
     var navItem = $(this);
 	console.log("사이드바 "+navItem.attr("href").split('?')[0])
@@ -71,8 +74,14 @@ $(".sidenav>a").each(function() {
       navItem.addClass("active");
     }else  if(location.pathname=='/test/group/groupboardmodifyView' || location.pathname=='/test/group/groupboardwrite'|| location.pathname=='/test/group/groupboarddetail'){
     	$("#board").addClass("active");
+    }else if(location.pathname=='/test/group/groupuserinfo'){
+    	$("#userinfo").addClass("active");
+    }else if(location.pathname=='/test/group/groupjoinagree'){
+    	$("#groupjoin").addClass("active");
     }
-});
+    
+ });
+})
 
 
 
@@ -89,8 +98,8 @@ $.ajax({
         console.log(response);
         console.log($("#loginid").text())
         if (response.role == '0') { //모임장유저
-            str='<a href="${pageContext.request.contextPath}/group/groupuserinfo?group_no=${group_no}" class="nav-link">회원관리</a>'
-            str+='<a href="${pageContext.request.contextPath}/group/groupjoinagree?group_no=${group_no}" class="nav-link">가입승인</a>'	
+            str='<a href="${pageContext.request.contextPath}/group/groupuserinfo?group_no=${group_no}" class="nav-link" id="userinfo">회원관리</a>'
+            str+='<a href="${pageContext.request.contextPath}/group/groupjoinagree?group_no=${group_no}" class="nav-link" id="groupjoin">가입승인</a>'	
             		$('.sidenav').append(str);
         }
     },
