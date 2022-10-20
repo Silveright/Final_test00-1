@@ -195,7 +195,7 @@ b{font-size:0.9em}
                      <option value="2">성별</option>
                   </select>
                   <input id="search" name="search_word" type="text" placeholder="아이디를 입력하세요" value="${search_word }">
-                  <button class="btn btn-primary" class="search" type="submit">검색</button>
+                  <button class="btn btn-sm btn-outline-secondary search" type="submit"><i class="bx bx-search bx-sm"></i></button>                  
                </div>
          </form>
             <br>
@@ -228,17 +228,17 @@ b{font-size:0.9em}
                   <c:if test="${m.userid != pinfo.username}">
                   <tr>
                      <td>
-                        <c:out value="${m.rnum }"/>
+                        <c:out value="${m.rnum -1}"/>
                      </td>
                      <td>${m.userid }</td>
                      <td>${m.area_name}</td>
                      <td>${m.gender }</td>
 
-                     <td><a href='grouproleupdate?userid=${m.userid}&group_no=${group_no}&manager=${pinfo.username }'><input type="button" class="btn btn-secondary btn-sm" id="roleupdate" value="모임장 위임"></a></td>
-
+                     <td><a href='grouproleupdate?userid=${m.userid}&group_no=${group_no}&manager=${pinfo.username }'>
+                     	 <input type="button" class="btn btn-secondary btn-sm" id="roleupdate" style="color:white" value="모임장 위임"></a></td>
                      <td><a href='groupuserdelete?userid=${m.userid}&group_no=${group_no}'>
                          <input type="button" class="btn btn-danger btn-sm" 
-                     			value="회원 강퇴"></a></td>
+                     			style="color:white" value="회원 강퇴"></a></td>
                   </tr>
                   </c:if>
                   </c:forEach>
@@ -299,7 +299,7 @@ b{font-size:0.9em}
 <c:if test="${listcount==1 }"> 
       <section class="py-5">
        <font size=5>회원이 존재하지 않습니다.</font><br><br>
-       <a href="/test/main/list"><button type="button" class="btn btn-secondary float-left back">메인으로</button></a>
+       <a href="/test/main/list"><button type="button" class="btn btn-secondary float-left back" style="color:white">메인으로</button></a>
        </section>
   </c:if> 
          </div>
