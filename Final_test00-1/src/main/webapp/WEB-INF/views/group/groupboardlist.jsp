@@ -252,7 +252,7 @@ a{text-decoration:none !important}
 	<c:if test="${listcount == 0}">
 	<section class="py-5"><br><br>
 		<font size=5>등록된 글이 없습니다.</font><br><br>
-		<button type="button" class="btn btn-secondary float-right" onclick="location.href='groupboardwrite?group_no=${group_no}'">글쓰기</button>
+		<button type="button" class="btn btn-secondary float-right" style="color:white" onclick="location.href='groupboardwrite?group_no=${group_no}'">글쓰기</button>
 	</section>
 	</c:if>
          </div>
