@@ -72,7 +72,7 @@ $(".sidenav>a").each(function() {
 	
     if (navItem.attr("href").split('?')[0] == (location.pathname+location.search.split('?')[0])) {
       navItem.addClass("active");
-    }else  if(location.pathname=='/test/group/groupboardmodifyView' || location.pathname=='/test/group/groupboardwrite'|| location.pathname=='/test/group/groupboarddetail'){
+    }else  if(location.pathname=='/test/group/groupboardmodifyView' || location.pathname=='/test/group/groupboardwrite'|| location.pathname=='/test/group/groupboarddetail' || location.pathname=='/test/group/groupboardlistsearch'){
     	$("#board").addClass("active");
     }else if(location.pathname=='/test/group/groupuserinfo'){
     	$("#userinfo").addClass("active");
