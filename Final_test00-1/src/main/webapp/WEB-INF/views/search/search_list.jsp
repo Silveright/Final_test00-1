@@ -10,7 +10,6 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 <style>
 footer {
-position : fixed;
 bottom : 0;
 width : 100%;
 }
@@ -70,8 +69,9 @@ width : 100%;
    </c:forEach>   
    </div>
 </section>
-<c:if test="${listcount == 0 && !empty search_keyword}">
-	<h1>검색 결과가 없습니다.</h1>
+<c:if test="${listcount == 0 && empty search_keyword}">
+	<div><h1>검색 결과가 없습니다.</h1></div>
+	<br><br><br><br><br><br><br><br><br><br>
 </c:if>
 <c:if test="${listcount > 0 }">
 	<div class="center-block">

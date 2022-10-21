@@ -14,7 +14,6 @@ a{text-decoration:none; color:black}
     color: white !important;
 }
 footer {
-position : fixed;
 bottom : 0;
 width : 100%;
 }
@@ -158,7 +157,7 @@ b{font-size:0.9em}
 <body>
 <br>
 
-   <div class="container">
+   <div class="container" style="height:700px;">
 
       <div class="row align-items-center justify-content-center">
       <div class="col-sm-2 text-center">
