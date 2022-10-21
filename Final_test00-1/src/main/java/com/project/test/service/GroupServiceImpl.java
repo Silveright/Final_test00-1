@@ -60,9 +60,10 @@ public class GroupServiceImpl implements GroupService {
 	}
 
 	@Override
-	public int getUserSearchListCount(int index, String search_word, int group_no) {
+	public int getUserSearchListCount(int index, String search_word, int group_no, String userid) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("group_no", group_no);
+		map.put("userid", userid);
 		if (index != -1) {
 			String[] search_field = new String[] {"userid", "area_name", "gender"};
 			map.put("search_field", search_field[index]);
@@ -72,9 +73,10 @@ public class GroupServiceImpl implements GroupService {
 	}
 
 	@Override
-	public List<GroupUser> getUserSearchList(int index, String search_word, int page, int limit, int group_no) {
+	public List<GroupUser> getUserSearchList(int index, String search_word, int page, int limit, int group_no, String userid) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("group_no", group_no);
+		map.put("userid", userid);
 		if (index != -1) {
 			String[] search_field = new String[] {"userid", "area_name", "gender"};
 			map.put("search_field", search_field[index]);

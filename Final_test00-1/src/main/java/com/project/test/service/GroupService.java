@@ -91,9 +91,9 @@ public interface GroupService {
 	//모임 삭제
 	public int groupDelete(int num);
 
-	int getUserSearchListCount(int index, String search_word, int group_no);
+	int getUserSearchListCount(int index, String search_word, int group_no, String userid);
 
-	List<GroupUser> getUserSearchList(int index, String search_word, int page, int limit, int group_no);
+	List<GroupUser> getUserSearchList(int index, String search_word, int page, int limit, int group_no, String userid);
 
 	void grouproleupdate(String userid, String manager, int group_no);
 

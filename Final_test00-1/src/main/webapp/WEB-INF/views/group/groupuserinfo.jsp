@@ -184,7 +184,7 @@ b{font-size:0.9em}
          -->
          
          <br>
-         <c:if test="${listcount > 1 }">
+         <c:if test="${listcount != 0 }">
          <form action="groupuserinfo" method="get">
                <div class="input-group center-block">
                <input type="hidden" name="group_no" value="${param.group_no}"
@@ -195,6 +195,8 @@ b{font-size:0.9em}
                      <option value="2">성별</option>
                   </select>
                   <input id="search" name="search_word" type="text" placeholder="아이디를 입력하세요" value="${search_word }">
+                 <se:authentication property="principal" var="pinfo"/>
+                  <input type="hidden" name="userid" value=${pinfo.username }>
                   <button class="btn btn-sm btn-outline-secondary search" type="submit"><i class="bx bx-search bx-sm"></i></button>                  
                </div>
          </form>
@@ -224,11 +226,13 @@ b{font-size:0.9em}
                <se:authentication property="principal" var="pinfo"/>
                <tbody>
                   <c:set var="num" value="${listcount-(page-1)*limit }"/>
+                  <c:set var="num2" value="1"/>
                   <c:forEach var="m" items="${memberlist }">
                   <c:if test="${m.userid != pinfo.username}">
                   <tr>
                      <td>
-                        <c:out value="${m.rnum -1}"/>
+                        <c:out value="${num2}"/>
+		                  <c:set var="num2" value="${num2+1 }"/>
                      </td>
                      <td>${m.userid }</td>
                      <td>${m.area_name}</td>
@@ -296,7 +300,7 @@ b{font-size:0.9em}
 <br>
 <br>
 </c:if> 
-<c:if test="${listcount==1 }"> 
+<c:if test="${listcount==0 }"> 
       <section class="py-5">
        <font size=5>회원이 존재하지 않습니다.</font><br><br>
        <a href="/test/main/list"><button type="button" class="btn btn-secondary float-left back" style="color:white">메인으로</button></a>
