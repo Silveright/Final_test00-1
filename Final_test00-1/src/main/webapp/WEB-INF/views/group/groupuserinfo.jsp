@@ -52,7 +52,12 @@ $(document).ready(function() {
 	})
 	
 	$("body").on("click", "#roleupdate" , function(event){
-		
+		var answer = confirm("정말 위임하시겠습니까?");
+		console.log(answer);
+		if(!answer){
+			event.preventDefault();
+		}else{
+			
 		var a=0;
 		var userid=$(this).parent().parent().prev().prev().prev().text();
 		console.log("위임 대상은 "+userid)
@@ -84,6 +89,8 @@ $(document).ready(function() {
 		if(a==1){
 			alert("해당 회원은 더이상 모임을 가질 수 없습니다.")
 			event.preventDefault();
+		}
+			
 		}
 		
 	})

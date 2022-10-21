@@ -73,12 +73,16 @@ $(".sidenav>a").each(function() {
 	
     if (navItem.attr("href").split('?')[0] == (location.pathname+location.search.split('?')[0])) {
       navItem.addClass("active");
+      console.log(navItem.attr("href").split('?')[0]);
     }else  if(location.pathname=='/test/group/groupboardmodifyView' || location.pathname=='/test/group/groupboardwrite'|| location.pathname=='/test/group/groupboarddetail' || location.pathname=='/test/group/groupboardlistsearch'){
     	$("#board").addClass("active");
+    	console.log("modifyView")
     }else if(location.pathname=='/test/group/groupuserinfo'){
     	$("#userinfo").addClass("active");
+    	console.log("info")
     }else if(location.pathname=='/test/group/groupjoinagree'){
     	$("#groupjoin").addClass("active");
+    	console.log("joinagree")
     }
     
  });
@@ -93,6 +97,7 @@ $.ajax({
         group_no: '${group_no}'
     },
     type: "get",
+    async:false,
     success: function (response) {
         authority = response;
         var loginid = $('#loginid').text();
