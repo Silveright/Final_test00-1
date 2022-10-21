@@ -46,7 +46,7 @@
       			 join (select userid as id, gender, email, area_name
       				   from user_info) 
       			 on id=userid
-      			 where group_no=#{group_no}
+      			 where group_no=#{group_no} and userid != #{userid}
                  <if test='search_field !=null'>
 			      and 
 			      <choose>
@@ -68,6 +68,7 @@
       				   from user_info) 
       			 on id=userid
       			 where group_no=#{group_no}
+      			 and userid != #{userid}
                  <if test='search_field !=null'>
 			      and 
 			      <choose>

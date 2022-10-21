@@ -99,7 +99,7 @@ $.ajax({
         console.log(response);
         console.log($("#loginid").text())
         if (response.role == '0') { //모임장유저
-            str='<a href="${pageContext.request.contextPath}/group/groupuserinfo?group_no=${group_no}" class="nav-link" id="userinfo">회원관리</a>'
+            str='<a href="${pageContext.request.contextPath}/group/groupuserinfo?group_no=${group_no}&userid='+loginid+'"class="nav-link" id="userinfo">회원관리</a>'
             str+='<a href="${pageContext.request.contextPath}/group/groupjoinagree?group_no=${group_no}" class="nav-link" id="groupjoin">가입승인</a>'	
             		$('.sidenav').append(str);
         }
