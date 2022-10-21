@@ -10,7 +10,6 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 <style>
 footer {
-position : fixed;
 bottom : 0;
 width : 100%;
 }
@@ -22,33 +21,33 @@ width : 100%;
 
 <!-- Start Banner Hero -->
 <div id="work_banner" class="banner-wrapper bg-light w-100 py-0">
-	<div class="banner-vertical-center-work container text-light d-flex justify-content-center align-items-center py-5 p-0">
-		<div class="banner-content col-lg-8 col-12 m-lg-auto text-center">
-			<h1 class="banner-heading h2 display-3 pb-1 semi-bold-600">Search</h1>
-			<c:choose>
-				<c:when test="${not empty search_keyword}">
-					<c:choose>
-						<c:when test="${search_field != '전체'}">
-							<h3 class="h4 pb-0 regular-400">"${search_field}"지역의 "${search_keyword}"검색 결과 입니다.</h3>
-						</c:when>
-						<c:otherwise>
-							<h3 class="h4 pb-0 regular-400">"전체"지역의 "${search_keyword}"검색 결과 입니다.</h3>
-						</c:otherwise>
-					</c:choose>
-				</c:when>
-				<c:otherwise><!-- search_keyword 입력 안했을 때 -->
-					<c:choose>
-						<c:when test="${search_field != '전체'}">
-							<h3 class="h4 pb-0 regular-400">"${search_field}"지역의 "전체"검색 결과 입니다.</h3>
-						</c:when>
-						<c:otherwise>
-							<h3 class="h4 pb-0 regular-400">"전체"지역의 "전체"검색 결과 입니다.</h3>
-						</c:otherwise>
-					</c:choose>
-				</c:otherwise>
-			</c:choose>
-		</div>
-	</div>
+   <div class="banner-vertical-center-work container text-light d-flex justify-content-center align-items-center py-5 p-0">
+      <div class="banner-content col-lg-8 col-12 m-lg-auto text-center">
+         <h1 class="banner-heading h2 display-3 pb-1 semi-bold-600">Search</h1>
+         <c:choose>
+            <c:when test="${not empty search_keyword}">
+               <c:choose>
+                  <c:when test="${search_field != '전체'}">
+                     <h3 class="h4 pb-0 regular-400">"${search_field}"지역의 "${search_keyword}"검색 결과 입니다.</h3>
+                  </c:when>
+                  <c:otherwise>
+                     <h3 class="h4 pb-0 regular-400">"전체"지역의 "${search_keyword}"검색 결과 입니다.</h3>
+                  </c:otherwise>
+               </c:choose>
+            </c:when>
+            <c:otherwise><!-- search_keyword 입력 안했을 때 -->
+               <c:choose>
+                  <c:when test="${search_field != '전체'}">
+                     <h3 class="h4 pb-0 regular-400">"${search_field}"지역의 "전체"검색 결과 입니다.</h3>
+                  </c:when>
+                  <c:otherwise>
+                     <h3 class="h4 pb-0 regular-400">"전체"지역의 "전체"검색 결과 입니다.</h3>
+                  </c:otherwise>
+               </c:choose>
+            </c:otherwise>
+         </c:choose>
+      </div>
+   </div>
 </div>
 <section class="container overflow-hidden py-5">
 <div class="row gx-5 gx-sm-3 gx-lg-5 gy-lg-5 gy-3 pb-3 projects">
@@ -70,51 +69,52 @@ width : 100%;
    </c:forEach>   
    </div>
 </section>
-<c:if test="${listcount == 0 && !empty search_keyword}">
-	<h1>검색 결과가 없습니다.</h1>
+<c:if test="${listcount == 0 && empty search_keyword}">
+   <div><h1>검색 결과가 없습니다.</h1></div>
+   <br><br><br><br><br><br><br><br><br><br>
 </c:if>
 <c:if test="${listcount > 0 }">
-	<div class="center-block">
-		<ul class="pagination justify-content-center">
-			<c:if test="${page <= 1}">
-				<li class="page-item">
-					<a class="page-link gray">이전&nbsp;</a>
-				</li>
-			</c:if>
-			<c:if test="${page > 1}">
-				<li class="page-item">
-					<a href="list?page=${page - 1}&search_field=${search_field}&search_keyword=${search_keyword}" 
-					   class="page-link">이전&nbsp;</a>
-				</li>
-			</c:if>
-				
-			<c:forEach var="a" begin="${startpage}" end="${endpage}">
-				<c:if test="${a == page}">
-					<li class="page-item active">
-						<a class="page-link">${a}</a>
-					</li>
-				</c:if>
-				<c:if test="${a != page}">
-					<li class="page-item">
-						<a href="list?page=${a}&search_field=${search_field}&search_keyword=${search_keyword}" 
-						   class="page-link">${a}</a>
-					</li>
-				</c:if>
-			</c:forEach>
-			
-			<c:if test="${page >= maxpage}">
-				<li class="page-item">
-					<a class="page-link gray">&nbsp;다음</a>
-				</li>
-			</c:if>
-			<c:if test="${page < maxpage}">
-				<li class="page-item">
-					<a href="list?page=${page + 1}&search_field=${search_field}&search_keyword=${search_keyword}" 
-					   class="page-link">&nbsp;다음</a>
-				</li>
-			</c:if>
-		</ul>
-	</div>
+   <div class="center-block">
+      <ul class="pagination justify-content-center">
+         <c:if test="${page <= 1}">
+            <li class="page-item">
+               <a class="page-link gray">이전&nbsp;</a>
+            </li>
+         </c:if>
+         <c:if test="${page > 1}">
+            <li class="page-item">
+               <a href="list?page=${page - 1}&search_field=${search_field}&search_keyword=${search_keyword}" 
+                  class="page-link">이전&nbsp;</a>
+            </li>
+         </c:if>
+            
+         <c:forEach var="a" begin="${startpage}" end="${endpage}">
+            <c:if test="${a == page}">
+               <li class="page-item active">
+                  <a class="page-link">${a}</a>
+               </li>
+            </c:if>
+            <c:if test="${a != page}">
+               <li class="page-item">
+                  <a href="list?page=${a}&search_field=${search_field}&search_keyword=${search_keyword}" 
+                     class="page-link">${a}</a>
+               </li>
+            </c:if>
+         </c:forEach>
+         
+         <c:if test="${page >= maxpage}">
+            <li class="page-item">
+               <a class="page-link gray">&nbsp;다음</a>
+            </li>
+         </c:if>
+         <c:if test="${page < maxpage}">
+            <li class="page-item">
+               <a href="list?page=${page + 1}&search_field=${search_field}&search_keyword=${search_keyword}" 
+                  class="page-link">&nbsp;다음</a>
+            </li>
+         </c:if>
+      </ul>
+   </div>
 </c:if><%-- <c:if test=${listcount > 0}" > end--%>
 <!-- End Banner Hero -->
 
@@ -133,27 +133,27 @@ width : 100%;
 <script src="${pageContext.request.contextPath}/resources/js/isotope.pkgd.js"></script>
 <!-- Page Script -->
 <script>
-	$(window).load(function() {
-		// init Isotope
-		var $projects = $('.projects').isotope({
-			itemSelector: '.project',
-			layoutMode: 'fitRows'
-		});
-	
-		$(".filter-btn").click(function() {
-			var data_filter = $(this).attr("data-filter");
-	
-			$projects.isotope({
-				filter: data_filter
-		});
+   $(window).load(function() {
+      // init Isotope
+      var $projects = $('.projects').isotope({
+         itemSelector: '.project',
+         layoutMode: 'fitRows'
+      });
+   
+      $(".filter-btn").click(function() {
+         var data_filter = $(this).attr("data-filter");
+   
+         $projects.isotope({
+            filter: data_filter
+      });
 
-			$(".filter-btn").removeClass("active");
-			$(".filter-btn").removeClass("shadow");
-			$(this).addClass("active");
-			$(this).addClass("shadow");
-		return false;
-		});
-	});
+         $(".filter-btn").removeClass("active");
+         $(".filter-btn").removeClass("shadow");
+         $(this).addClass("active");
+         $(this).addClass("shadow");
+      return false;
+      });
+   });
 </script>
 
 <!-- Templatemo -->
