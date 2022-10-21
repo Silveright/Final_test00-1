@@ -194,13 +194,13 @@ public class GroupController {
 	@RequestMapping(value="/groupuserinfo")
 	   public ModelAndView memberList(@RequestParam(value="group_no", defaultValue="1",required=false) int group_no,
 	                           @RequestParam(value="page", defaultValue="1",required=false) int page,
-	                           @RequestParam(value="limit", defaultValue="10", required=false) int limit,
+	                           @RequestParam(value="limit", defaultValue="10", required=false) int limit, String userid,
 	                           ModelAndView mv,
 	                           @RequestParam(value="search_field", defaultValue="-1", required=false) int index,
 	                           @RequestParam(value="search_word", defaultValue="", required=false) String search_word) {
 	      
-	      int listcount=groupservice.getUserSearchListCount(index, search_word, group_no);//총 리스트 수를 받아옴
-	      List<GroupUser> list = groupservice.getUserSearchList(index, search_word, page, limit, group_no);
+	      int listcount=groupservice.getUserSearchListCount(index, search_word, group_no,userid);//총 리스트 수를 받아옴
+	      List<GroupUser> list = groupservice.getUserSearchList(index, search_word, page, limit, group_no,userid);
 	      
 	      int maxpage = (listcount + limit -1)/limit;
 	      int startpage = ((page-1)/10) *10 +1;
