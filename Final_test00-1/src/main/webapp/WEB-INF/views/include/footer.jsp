@@ -1,11 +1,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<style>
+footer {
+width : 100%;
+margin-top:100px;
+}
+</style>
 <!-- Start Footer -->
-<footer class="bg-secondary pt-4">
+<footer class="bg pt-4" style="background-color:#adb5bd;">
     <div class="container">
         <div class="row py-4">
 
             <div class="col-lg-3 col-12 align-left">
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="#">
                     <p class="text-light h3 text-wrap">3.3.5.5</p>
                 </a>
                 <p class="text-light my-lg-4 my-2">
@@ -46,10 +52,6 @@
                     <li class="pb-2">
                         <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light"
                                                                            href="/test/main/list">Home</a>
-                    </li>
-                    <li class="pb-2">
-                        <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1"
-                                                                           href="/test/member/update">My page</a>
                     </li>
                     <li class="pb-2">
                         <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1"

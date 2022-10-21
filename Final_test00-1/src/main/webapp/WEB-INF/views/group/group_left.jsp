@@ -14,11 +14,12 @@ body {
   background-color : rgb(137, 138, 197);
   width: 150px;
   z-index: 1;
-  top: 200px;
-  left: 10px;
+  top: 100px;
+  left: 330px;
   overflow-x: hidden;
   padding: 8px 0;
-  text-align:center
+  text-align:center;
+  position : absolute;
 }
 
 .sidenav a {

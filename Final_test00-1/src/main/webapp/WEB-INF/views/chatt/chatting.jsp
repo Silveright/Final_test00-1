@@ -62,13 +62,12 @@
 	margin : 2px;
 }
 footer {
-position : fixed;
 bottom : 0;
 width : 100%;
 }
 </style>
 </head>
-<body>
+<body style="height:800px;">
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
 	<div id='chatt'>
 	<aside>

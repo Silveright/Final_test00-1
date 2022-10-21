@@ -20,15 +20,15 @@ a{
 <!-- Start Board SideBar -->
 
 <!-- End Board SideBar -->
-<section class="container">
+<section class="container" style="height:1000px;">
 
     <%-- 모임 이름 --%>
     
     <div class="row pt-5">
     
-        <div class="worksingle-content col-sm-9 m-auto text-left justify-content-center">
+        <div class="worksingle-content col-sm-9 m-auto text-center justify-content-center">
         
-            <h2 class="worksingle-heading h3 pb-3 light-300 typo-space-line mb-4">
+            <h2 class="worksingle-heading h3 pb-3 light-300 typo-space-line-center mb-4">
             
                 <c:choose>
                     <c:when test="${groupdata.group_no == adminGroup.group_no}">

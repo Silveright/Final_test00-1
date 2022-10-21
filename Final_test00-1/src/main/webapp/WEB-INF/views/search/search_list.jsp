@@ -70,8 +70,8 @@ width : 100%;
    </div>
 </section>
 <c:if test="${listcount == 0 && empty search_keyword}">
-   <div><h1>검색 결과가 없습니다.</h1></div>
-   <br><br><br><br><br><br><br><br><br><br>
+	<div><h1>검색 결과가 없습니다.</h1></div>
+	<br><br><br><br><br><br><br><br><br><br>
 </c:if>
 <c:if test="${listcount > 0 }">
    <div class="center-block">
