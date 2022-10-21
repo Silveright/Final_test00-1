@@ -142,8 +142,12 @@ width : 100%;
             </table>
             
             <div class="col-sm-12 text-sm-end">
-               <input type="button" class="btn btn-primary" id="accept" value="가입 승인">         
-               <input type="button" class="btn btn-danger" style="color:white;" id="disagree" value="가입 거절">         
+               <input type="button" class="btn btn-primary" 
+               		  style="color: #212529; background-color: #e5e3f8; 
+               		  border-color: #4232c2;" id="accept" value="가입 승인">         
+               <input type="button" class="btn btn-danger" 
+                      style = "color: #000; background-color: #f8dbde; 
+                      border-color: #dc3545;" id="disagree" value="가입 거절">         
             </div>   
             
             <div class="center-block">

@@ -238,10 +238,13 @@ b{font-size:0.9em}
                      <td>${m.gender }</td>
 
                      <td><a href='grouproleupdate?userid=${m.userid}&group_no=${group_no}&manager=${pinfo.username }'>
-                     	 <input type="button" class="btn btn-secondary btn-sm" id="roleupdate" style="color:white" value="모임장 위임"></a></td>
+                     	 <input type="button" class="btn btn-secondary btn-sm" id="roleupdate"
+                     	 		style="color: #212529; background-color: #e5e3f8; 
+                     	 		border-color: #4232c2;" value="모임장 위임"></a></td>
                      <td><a href='groupuserdelete?userid=${m.userid}&group_no=${group_no}'>
                          <input type="button" class="btn btn-danger btn-sm" 
-                     			style="color:white" value="회원 강퇴"></a></td>
+                     			style = "color: #000; background-color: #f8dbde; 
+                                border-color: #dc3545;" value="회원 강퇴"></a></td>
                   </tr>
                   </c:if>
                   </c:forEach>
@@ -302,7 +305,9 @@ b{font-size:0.9em}
 <c:if test="${listcount==0 }"> 
       <section class="py-5">
        <font size=5>회원이 존재하지 않습니다.</font><br><br>
-       <a href="/test/main/list"><button type="button" class="btn btn-secondary float-left back" style="color:white">메인으로</button></a>
+       <a href="/test/main/list"><button type="button" class="btn btn-secondary float-left back" 
+       	  style="color: #212529; background-color: #e5e3f8; 
+		  border-color: #4232c2;">메인으로</button></a>
        </section>
   </c:if> 
          </div>

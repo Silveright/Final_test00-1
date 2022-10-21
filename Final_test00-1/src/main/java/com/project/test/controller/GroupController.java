@@ -284,6 +284,7 @@ public class GroupController {
 			groupservice.groupuserdelete(userid, group_no);
 			
 			rattr.addAttribute("group_no",group_no);
+			rattr.addAttribute("userid",userid);
 						
 			return "redirect:groupuserinfo";
 		}

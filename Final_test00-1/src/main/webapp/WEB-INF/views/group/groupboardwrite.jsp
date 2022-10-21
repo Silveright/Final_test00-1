@@ -98,23 +98,25 @@ b{font-size:0.9em}
 		<form action="boardadd" method="post" enctype="multipart/form-data" name="boardform">
 			<legend style="text-align:center">게시판 작성 </legend>
 			<div class="form-group">
-				<label for="board_name">글쓴이</label>
+				<label for="board_name">작성자</label>
 				<input name="BOARD_NAME" id="board_name" value="${pinfo.username}" readonly
 						type="text" class="form-control" placeholder="Enter board_name">
-			</div>
+			</div><br>
 			<div class="form-group">
 				<label for="board_pass">비밀번호</label>
 				<input name="BOARD_PASS" id="board_pass" type="password" maxlength="30"
 						class="form-control" placeholder="Enter board_pass">			
-			</div>
+			</div><br>
 			<div class="form-group">
 				<label for="board_subject">제목</label>
 				<input name="BOARD_SUBJECT" id="board_subject" type="text" maxlength="100"
 						class="form-control" placeholder="Enter board_subject">
-			</div>
+			</div><br>
 			<div class="form-group">
 				<label for="board_content">내용</label>
-				<textarea name="BOARD_CONTENT" id="board_content" rows="10" class="form-control"></textarea>
+				<textarea name="BOARD_CONTENT" id="board_content" rows="10" class="form-control"
+					      style="resize: none;">
+				</textarea>
 			</div><br>
 			
 			<div class="input-group">
@@ -126,9 +128,13 @@ b{font-size:0.9em}
 			<input type="hidden" name="GROUP_NO" value="${group_no }">			
 			</div>
 			<br>
-			<div class="form-group">
-				<button type="submit" class="btn btn-primary">등록</button>
-				<button type="reset" class="btn btn-danger" onclick="history.back()">취소</button>
+			<div class="form-group" style="float:right;">
+				<button type="submit" class="btn btn-primary"
+				        style="color: #212529; background-color: #e5e3f8; 
+						border-color: #4232c2;">등록</button>
+				<button type="reset" class="btn btn-danger" onclick="history.back()" 
+				        style = "color: #000; background-color: #f8dbde; 
+						border-color: #dc3545;">취소</button>
 			</div>
 			<br>
 			<br>
