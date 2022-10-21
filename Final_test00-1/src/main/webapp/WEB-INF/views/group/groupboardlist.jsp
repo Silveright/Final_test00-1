@@ -126,7 +126,7 @@ a{text-decoration:none !important}
                   </select>
                   <input id="search" name="search_word" type="text"  placeholder="제목을 입력하세요" value="${search_word }">
                   <button class="btn btn-sm btn-outline-secondary search" type="submit"><i class="bx bx-search bx-sm"></i></button>
-               	  <button type="button" class="btn btn-secondary float-right" style="margin-left : 570px; color:white;" onclick="location.href='groupboardwrite?group_no=${group_no}'">글쓰기</button>
+               	  
                </div>
          </form>
  		
@@ -241,13 +241,21 @@ a{text-decoration:none !important}
              </c:if>
        </ul>
     </div>
-    
+    <button type="button" class="btn btn-secondary" 
+    		style="float:right; color: #212529; 
+    		background-color: #e5e3f8; 
+			border-color: #4232c2;" 
+    		onclick="location.href='groupboardwrite?group_no=${group_no}'">글쓰기</button>
     </c:if>
     <%-- 게시글이 없는 경우 --%>
 	<c:if test="${listcount == 0}">
 	<section class="py-5"><br><br>
 		<font size=5>등록된 글이 없습니다.</font><br><br>
-		<button type="button" class="btn btn-secondary float-right" style="color:white" onclick="location.href='groupboardwrite?group_no=${group_no}'">글쓰기</button>
+		<button type="button" class="btn btn-secondary float-right" 
+				style="color: #212529; 
+    			background-color: #e5e3f8; 
+				border-color: #4232c2;" 
+				onclick="location.href='groupboardwrite?group_no=${group_no}'">글쓰기</button>
 	</section>
 	</c:if>
          </div>

@@ -279,13 +279,17 @@ b {
 									<input type="hidden" name="group_no" value="${param.group_no}"
 										id="group_no">
 									<div class="form-group">
-										<label for="pwd">비밀번호</label> <input type="password"
+										<label for="pwd">비밀번호</label><br><br> <input type="password"
 											class="form-control" placeholder="Enter password"
 											name="BOARD_PASS" id="board_pass">
-									</div>
-									<button type="submit" class="btn btn-primary">전송</button>
+									</div><br>
+									<button type="submit" class="btn btn-primary" 
+											style="color: #212529; background-color: #e5e3f8; 
+											border-color: #4232c2;">전송</button>
 									<button type="button" class="btn btn-danger"
-										data-dismiss="modal" >취소</button>
+										    data-dismiss="modal" 
+										    style = "color: #000; background-color: #f8dbde; 
+										    border-color: #dc3545;" >취소</button>
 									<input type="hidden" name="${_csrf.parameterName}"
 										value="${_csrf.token}">
 								</form>

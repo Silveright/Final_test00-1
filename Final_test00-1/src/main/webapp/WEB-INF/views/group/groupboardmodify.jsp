@@ -193,22 +193,23 @@ b {
 			<input type="hidden" name="BOARD_FILE" value="${boarddata.BOARD_FILE}">
 			<h1>게시판 수정</h1>
 			<div class="form-group">
-				<label for="board_name">글쓴이</label>
+				<label for="board_name">작성자</label>
 				<input type="text" name="BOARD_NAME" 
 					   class="form-control"  value="${boarddata.BOARD_NAME}" readOnly>
-			</div>
+			</div><br>
 			<div class="form-group">
 				<label for="board_subject">제목</label>
 				<textarea name="BOARD_SUBJECT" id="board_subject" rows="1" 
-					      maxlength="100" class="form-control" >${boarddata.BOARD_SUBJECT}</textarea>
-				
-			</div>
+					      maxlength="100" class="form-control" 
+					      style="resize:none;">${boarddata.BOARD_SUBJECT}</textarea>		
+			</div><br>
+			
 			<div class="form-group">
 				<label for="board_content">내용</label>
 				<textarea name="BOARD_CONTENT" id="board_content" 
-					      class="form-control" rows="15">${boarddata.BOARD_CONTENT}</textarea>
+					      class="form-control" rows="15" style="resize:none;">${boarddata.BOARD_CONTENT}</textarea>
 					  
-			</div>
+			</div><br>
 			<%--원문글인 경우에만 파일 첨부 수정 가능합니다. --%>
 			<div class="form-group">
 				<label for="board_file">파일 첨부</label>
@@ -227,7 +228,7 @@ b {
 					   class="form-control" placeholder="Enter board_pass" value="">
 			</div>
 			<br>
-			<div class="form-group">
+			<div class="form-group" style="float:right";>
 				<button type=submit class="btn btn-primary" style="color: #212529; background-color: #e5e3f8; border-color: #4232c2;">수정</button>
 				<button type=reset class="btn btn-danger" style = "color: #000; background-color: #f8dbde; border-color: #dc3545;" onClick="history.go(-1)">취소</button>
 			</div>
