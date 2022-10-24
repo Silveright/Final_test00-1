@@ -193,7 +193,7 @@
 	$('#area_name').val('${groupdata.area_name}');
     
     
-$(function () {
+$(function () { 
     //모임 대표 이미지 프리뷰
     let file = document.querySelector('#upfile');
 
