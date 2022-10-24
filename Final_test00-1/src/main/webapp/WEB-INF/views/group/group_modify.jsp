@@ -26,6 +26,7 @@
     <form id="groupModifyFrm" method="POST" action='groupmodifyAction' enctype="multipart/form-data">
         <input type="hidden" name="group_no" value="${groupdata.group_no}">
         <input type="hidden" name="group_img" value="${groupdata.group_img}">
+        <input type="hidden" name="group_original" value="${groupdata.group_original}">
 
         <div class="service-wrapper py-3">
             <%-- 모임 대표 사진 --%>
@@ -43,7 +44,7 @@
                                              style="width:250px; height:250px; margin-bottom: 10px;">
                                 <div class="input-group">
                                     <input type="file" class="form-control" id="upfile" name="uploadfile">
-                                          <span id="filevalue">${groupdata.group_original}</span> 
+                                          <span id="filevalue"></span> 
                                           
                                           
                                 </div>
@@ -194,7 +195,7 @@
     
 $(function () {
     //모임 대표 이미지 프리뷰
-    let file = document.querySelector('#fileName');
+    let file = document.querySelector('#upfile');
 
     file.onchange = function () {
         let fileList = file.files;
@@ -247,7 +248,7 @@ var check = 0;
 $("#upfile").change(function() {
 	check++;
 	var inputfile = $(this).val().split('\\');
-	$('#filevalue').text(inputfile[inputfile.length - 1]);
+	//$('#filevalue').text(inputfile[inputfile.length - 1]);
 	show();
 	console.log(check);
 });
@@ -280,7 +281,7 @@ function confirm() {
     	//파일첨부를 변경하지 않으면 $('#filevalue').text()의 파일명을
     	//파라미터 'check'라는 이름으로 form에 추가하여 전송합니다.
     	if(check == 0) {
-    		value = $('#filevalue').text();
+    		value = $('input[name=group_original]').val();
     		html = "<input type='hidden' value='" + value + "' name='check'>";
     		
     		$("#groupModifyFrm").append(html);
